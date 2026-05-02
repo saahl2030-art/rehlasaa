@@ -1036,6 +1036,7 @@ html[dir="ltr"] .settle-amount{margin-right:0;margin-left:auto}
 
 <div id="toast"></div>
 
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 /* ════════════════════════════════════════
    DATA
@@ -1612,32 +1613,5 @@ renderAll();
 document.getElementById('mExpDate').value=new Date().toISOString().split('T')[0];
 </script>
 
-<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script>
-// ════ SUPABASE AUTH GUARD ════
-const SURL = 'https://pokpdwvqecwjfxoraqjd.supabase.co';
-const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
-const { createClient } = supabase;
-const sb = createClient(SURL, SKEY);
-
-(async () => {
-  const { data: { session } } = await sb.auth.getSession();
-  if (!session) {
-    window.location.href = 'rehla-auth.html';
-    return;
-  }
-  // Set user name in sidebar
-  const user = session.user;
-  const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'المستخدم';
-  const nameEl = document.querySelector('.user-name');
-  if (nameEl) nameEl.textContent = name;
-  
-  // Sign out function
-  window.signOut = async () => {
-    await sb.auth.signOut();
-    window.location.href = 'rehla-auth.html';
-  };
-})();
-</script>
 </body>
 </html>
