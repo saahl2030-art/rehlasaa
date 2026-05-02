@@ -861,90 +861,150 @@ footer{
 </div>
 
 <!-- ════════════════ PRICING ════════════════ -->
-<div id="pricing" style="padding:80px 6%">
-  <div style="max-width:1200px;margin:0 auto;text-align:center">
-    <div class="s-tag">💰 الباقات</div>
-    <h2 class="s-title">اختر الباقة المناسبة</h2>
-    <p class="s-sub" style="margin:0 auto 8px">ابدأ مجاناً وطوّر باقتك عند الحاجة. لا رسوم خفية.</p>
-    <div class="price-toggle">
-      <button class="price-toggle-btn">📅 اشتراك سنوي — ادفع مرة واحدة كل سنة</button>
+<!-- ════ PRICING — PAY PER TRIP ════ -->
+<div id="pricing" style="padding:80px 6%;background:linear-gradient(180deg,transparent,rgba(37,99,235,.06),transparent)">
+<div style="max-width:960px;margin:0 auto">
+
+  <!-- Header -->
+  <div style="text-align:center;margin-bottom:52px">
+    <div class="s-tag">💳 السعر</div>
+    <h2 class="s-title" style="font-size:clamp(2rem,5vw,3rem)">ادفع للرحلة — مش للاشتراك</h2>
+    <p class="s-sub" style="margin:0 auto;font-size:1rem">سعر ثابت واحد للرحلة الكاملة — بغض النظر عن عدد المرافقين أو طول الرحلة.</p>
+  </div>
+
+  <!-- Main Price Card -->
+  <div class="reveal" style="
+    background:linear-gradient(135deg,rgba(37,99,235,.15) 0%,rgba(30,58,138,.2) 100%);
+    border:1.5px solid rgba(37,99,235,.4);
+    border-radius:24px;overflow:hidden;
+    box-shadow:0 32px 80px rgba(37,99,235,.15);
+  ">
+    <!-- Top bar -->
+    <div style="
+      background:linear-gradient(135deg,rgba(37,99,235,.25),rgba(30,58,138,.35));
+      padding:clamp(24px,4vw,44px);
+      display:flex;align-items:center;justify-content:space-between;
+      gap:24px;flex-wrap:wrap;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    ">
+      <div>
+        <div style="
+          display:inline-flex;align-items:center;gap:6px;
+          background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.35);
+          color:#fcd34d;font-size:.78rem;font-weight:800;
+          padding:5px 14px;border-radius:100px;margin-bottom:14px;
+        ">✈ رحلة كاملة — كل المزايا</div>
+        <h3 style="font-family:'Tajawal',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:10px;line-height:1.2">
+          كل شيء — رحلة واحدة
+        </h3>
+        <p style="font-size:clamp(.85rem,2vw,.95rem);color:var(--white-70);line-height:1.7;max-width:420px">
+          ادفع مرة واحدة وافتح كل المزايا لهذه الرحلة — من أول مصروف حتى تحميل التقرير النهائي.
+        </p>
+      </div>
+      <!-- Price -->
+      <div style="text-align:center;flex-shrink:0">
+        <div style="font-size:.88rem;color:var(--white-40);margin-bottom:4px">إجمالي الدفع</div>
+        <div style="
+          font-family:'Tajawal',sans-serif;
+          font-size:clamp(4rem,10vw,6rem);font-weight:900;line-height:1;
+          background:linear-gradient(135deg,#fff,#fcd34d);
+          -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+        ">249</div>
+        <div style="font-size:.9rem;color:var(--white-50);margin-top:4px">درهم إماراتي</div>
+        <div style="
+          display:inline-flex;align-items:center;gap:5px;
+          background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);
+          color:#4ade80;font-size:.75rem;font-weight:700;
+          padding:4px 12px;border-radius:100px;margin-top:10px;
+        ">✓ دفعة واحدة فقط</div>
+      </div>
     </div>
-    <div class="pricing-grid">
-      <!-- Free -->
-      <div class="price-card reveal">
-        <div class="price-plan">Free</div>
-        <div class="price-for">مثالية للبداية والتجربة</div>
-        <div class="free-tag">مجاناً للأبد 🎁</div>
-        <div class="price-amount">0 <span>درهم</span></div>
-        <div class="price-period">&nbsp;</div>
-        <div class="price-divider"></div>
-        <ul class="price-feats">
-          <li><span class="ck">✓</span> 1 جمعية</li>
-          <li><span class="ck">✓</span> حتى 4 أعضاء</li>
-          <li><span class="ck">✓</span> رابط انضمام</li>
-          <li><span class="ck">✓</span> تتبع الدفعات</li>
-          <li><span class="no">✗</span> رفع الإيصالات</li>
-          <li><span class="no">✗</span> جدول الدفعات</li>
-        </ul>
-        <button class="btn-price btn-price-ghost" onclick="window.location.href='rehla-auth.html'">ابدأ مجاناً</button>
+
+    <!-- Features Grid -->
+    <div style="padding:clamp(22px,4vw,40px)">
+      <div style="font-size:.8rem;font-weight:800;color:var(--white-40);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;display:flex;align-items:center;gap:8px">
+        ماذا تحصل عليه؟
+        <span style="flex:1;height:1px;background:rgba(255,255,255,.08)"></span>
       </div>
-      <!-- Basic -->
-      <div class="price-card reveal d1">
-        <div class="price-plan">Basic</div>
-        <div class="price-for">للجمعيات الصغيرة النشطة</div>
-        <div class="price-daily">سنوياً · 0.16 درهم / يوم</div>
-        <div class="price-amount">59 <span>درهم</span></div>
-        <div class="price-period">/ سنة</div>
-        <div class="price-divider"></div>
-        <ul class="price-feats">
-          <li><span class="ck">✓</span> 3 جمعيات</li>
-          <li><span class="ck">✓</span> حتى 10 أعضاء</li>
-          <li><span class="ck">✓</span> رفع الإيصالات</li>
-          <li><span class="ck">✓</span> جدول الدفعات</li>
-          <li><span class="no">✗</span> جميع المميزات</li>
-          <li><span class="no">✗</span> تقارير متقدمة</li>
-        </ul>
-        <button class="btn-price btn-price-ghost" onclick="window.location.href='rehla-auth.html'">اشترك الآن</button>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px">
+
+        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+          <div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🧮</div>
+          <div><strong style="display:block;font-size:.85rem;margin-bottom:3px">تصفية الحساب الذكية</strong><span style="font-size:.75rem;color:var(--white-50)">أقل عدد تحويلات ممكنة بخوارزمية متقدمة</span></div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+          <div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">📄</div>
+          <div><strong style="display:block;font-size:.85rem;margin-bottom:3px">تقرير PDF احترافي</strong><span style="font-size:.75rem;color:var(--white-50)">تقرير كامل قابل للتحميل والمشاركة</span></div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+          <div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">📸</div>
+          <div><strong style="display:block;font-size:.85rem;margin-bottom:3px">رفع الإيصالات</strong><span style="font-size:.75rem;color:var(--white-50)">صور الفواتير مرتبطة بكل مصروف</span></div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+          <div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">💬</div>
+          <div><strong style="display:block;font-size:.85rem;margin-bottom:3px">إشعارات واتساب</strong><span style="font-size:.75rem;color:var(--white-50)">كل مرافق يستلم ملخصه تلقائياً</span></div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+          <div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🔗</div>
+          <div><strong style="display:block;font-size:.85rem;margin-bottom:3px">رابط مشاركة + QR Code</strong><span style="font-size:.75rem;color:var(--white-50)">رابط خاص لكل مرافق لمتابعة الرحلة</span></div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+          <div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">📊</div>
+          <div><strong style="display:block;font-size:.85rem;margin-bottom:3px">رسوم بيانية تفاعلية</strong><span style="font-size:.75rem;color:var(--white-50)">توزيع المصاريف بالفئات والأشخاص</span></div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+          <div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">👥</div>
+          <div><strong style="display:block;font-size:.85rem;margin-bottom:3px">مرافقون غير محدودين</strong><span style="font-size:.75rem;color:var(--white-50)">أضف كل أفراد الرحلة بدون قيود</span></div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+          <div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🗄</div>
+          <div><strong style="display:block;font-size:.85rem;margin-bottom:3px">أرشيف مدى الحياة</strong><span style="font-size:.75nm;color:var(--white-50)">رحلتك محفوظة للأبد في حسابك</span></div>
+        </div>
+
       </div>
-      <!-- Pro -->
-      <div class="price-card popular reveal d2">
-        <div class="pop-badge">⭐ الأكثر استخداماً</div>
-        <div class="price-plan">Pro</div>
-        <div class="price-for">للمدراء المحترفين</div>
-        <div class="price-daily">سنوياً · 0.27 درهم / يوم</div>
-        <div class="price-amount">99 <span>درهم</span></div>
-        <div class="price-period">/ سنة</div>
-        <div class="price-divider"></div>
-        <ul class="price-feats">
-          <li><span class="ck">✓</span> 6 جمعيات</li>
-          <li><span class="ck">✓</span> حتى 15 عضو</li>
-          <li><span class="ck">✓</span> جميع المميزات</li>
-          <li><span class="ck">✓</span> دعم أولوي</li>
-          <li><span class="ck">✓</span> تقارير PDF</li>
-          <li><span class="ck">✓</span> إشعارات واتساب</li>
-        </ul>
-        <button class="btn-price btn-price-solid" onclick="window.location.href='rehla-auth.html'">اشترك الآن</button>
-      </div>
-      <!-- Business -->
-      <div class="price-card reveal d3">
-        <div class="price-plan">Business</div>
-        <div class="price-for">للمؤسسات والشركات</div>
-        <div class="price-daily">سنوياً · 0.49 درهم / يوم</div>
-        <div class="price-amount">179 <span>درهم</span></div>
-        <div class="price-period">/ سنة</div>
-        <div class="price-divider"></div>
-        <ul class="price-feats">
-          <li><span class="ck">✓</span> 10 جمعيات</li>
-          <li><span class="ck">✓</span> حتى 25 عضو</li>
-          <li><span class="ck">✓</span> جميع المميزات</li>
-          <li><span class="ck">✓</span> تقارير متقدمة</li>
-          <li><span class="ck">✓</span> مدير حساب مخصص</li>
-          <li><span class="ck">✓</span> دعم 24/7</li>
-        </ul>
-        <button class="btn-price btn-price-ghost" onclick="window.location.href='rehla-auth.html'">اشترك الآن</button>
+
+      <!-- CTA -->
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.08)">
+        <button onclick="window.location.href='rehla-auth.html'" style="
+          display:inline-flex;align-items:center;gap:10px;
+          padding:16px 40px;border-radius:12px;
+          background:linear-gradient(135deg,#2563eb,#1d4ed8);
+          color:#fff;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;
+          box-shadow:0 8px 32px rgba(37,99,235,.4);
+          transition:all .25s;border:none;cursor:pointer;flex:1;justify-content:center;
+        " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 16px 48px rgba(37,99,235,.55)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 8px 32px rgba(37,99,235,.4)'">
+          🚀 ابدأ رحلتك الآن — ٢٤٩ درهم
+        </button>
+        <div style="font-size:.78rem;color:var(--white-40);line-height:1.6">
+          <strong style="color:var(--white-70);display:block;margin-bottom:2px">🔒 دفع آمن بـ Stripe</strong>
+          سجّل وأضف المرافقين مجاناً — الدفع عند تأكيد إنشاء الرحلة.
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Comparison note -->
+  <div style="display:flex;justify-content:center;gap:clamp(20px,4vw,48px);margin-top:32px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--white-50)">
+      <span style="color:#4ade80;font-size:1rem">✓</span> بدون اشتراك شهري أو سنوي
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--white-50)">
+      <span style="color:#4ade80;font-size:1rem">✓</span> ادفع مرة واحدة فقط للرحلة
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--white-50)">
+      <span style="color:#4ade80;font-size:1rem">✓</span> يعمل على الهاتف مباشرة بدون تطبيق
+    </div>
+  </div>
+
+</div>
 </div>
 
 <!-- ════════════════ TESTIMONIALS ════════════════ -->
