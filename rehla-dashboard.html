@@ -1051,29 +1051,94 @@ const CAT_STYLES={
   'أخرى':{icon:'📦',bg:'rgba(148,163,184,.15)',color:'#94a3b8'},
 };
 
-let members=[
-  {id:1,name:'محمد',phone:'+971507474731',role:'مسؤول الرحلة',roleIcon:'👑',roleColor:'#38bdf8',color:COLORS[0],isOrg:true},
-  {id:2,name:'أحمد',phone:'',role:'مرافق',roleIcon:'👤',roleColor:'#94a3b8',color:COLORS[1]},
-  {id:3,name:'سارة',phone:'',role:'مسؤول المطاعم',roleIcon:'🍽',roleColor:'#fb923c',color:COLORS[2]},
-  {id:4,name:'خالد',phone:'',role:'مسؤول التنقل',roleIcon:'🚗',roleColor:'#34d399',color:COLORS[3]},
-  {id:5,name:'يوسف',phone:'',role:'مرافق',roleIcon:'👤',roleColor:'#94a3b8',color:COLORS[4]},
-];
+// ══ SUPABASE ══
+const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
+const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
+const sb=window.supabase.createClient(SURL,SKEY);
 
-let expenses=[
-  {id:1,title:'فندق ليلتين',amount:800,paidBy:1,cat:'فندق',date:'2026-05-02',note:'',distAll:true,participants:[]},
-  {id:2,title:'تذاكر الطيران',amount:1200,paidBy:2,cat:'طيران',date:'2026-05-02',note:'',distAll:true,participants:[]},
-  {id:3,title:'عشاء – اليوم الأول',amount:250,paidBy:3,cat:'مطاعم',date:'2026-05-02',note:'',distAll:true,participants:[]},
-  {id:4,title:'مواصلات المطار',amount:120,paidBy:4,cat:'مواصلات',date:'2026-05-02',note:'',distAll:false,participants:[1,4]},
-  {id:5,title:'رحلة المارينا',amount:350,paidBy:1,cat:'ترفيه',date:'2026-05-03',note:'',distAll:true,participants:[]},
-  {id:6,title:'مشتريات السوق',amount:180,paidBy:2,cat:'مشتريات',date:'2026-05-03',note:'',distAll:false,participants:[2,3,5]},
-];
+let currentUser=null;
+let currentTrip=null;
+let members=[];
+let expenses=[];
+let activities=[];
 
-let activities=[
-  {icon:'💳',bg:CAT_STYLES['فندق'].bg,text:'<strong>محمد</strong> أضاف مصروف "فندق ليلتين" بمبلغ <strong>٨٠٠ د</strong>',time:'منذ ساعتين'},
-  {icon:'👤',bg:'rgba(56,189,248,.15)',text:'<strong>أحمد</strong> انضم للرحلة عبر رابط المشاركة',time:'منذ ٤ ساعات'},
-  {icon:'💳',bg:CAT_STYLES['طيران'].bg,text:'<strong>أحمد</strong> أضاف "تذاكر الطيران" بمبلغ <strong>١,٢٠٠ د</strong>',time:'أمس'},
-  {icon:'✅',bg:'rgba(34,197,94,.15)',text:'تم إنشاء الرحلة بنجاح وسداد مبلغ ١٩٩ درهم',time:'٢ مايو ٢٠٢٦'},
-];
+// ══ AUTH GUARD ══
+(async()=>{
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){location.href='rehla-auth.html';return;}
+  currentUser=session.user;
+  const name=currentUser.user_metadata?.full_name||currentUser.email?.split('@')[0]||'المستخدم';
+  document.querySelector('.user-name').textContent=name;
+  document.getElementById('userAv').textContent=name.charAt(0).toUpperCase();
+  await loadUserTrips();
+})();
+
+// ══ LOAD TRIPS ══
+async function loadUserTrips(){
+  showLoading(true);
+  const {data:trips,error}=await sb.from('trips').select('*').eq('owner_id',currentUser.id).order('created_at',{ascending:false});
+  showLoading(false);
+  if(error||!trips||trips.length===0){
+    showNoTrips();return;
+  }
+  currentTrip=trips[0];
+  updateSidebarTrips(trips);
+  await loadTripData(currentTrip.id);
+}
+
+function showLoading(v){
+  // show/hide loading state
+}
+
+function showNoTrips(){
+  // Replace dashboard content with empty state
+  document.getElementById('page-dashboard').innerHTML=`
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;gap:16px">
+      <div style="font-size:4rem">✈️</div>
+      <div style="font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900">لا توجد رحلات بعد!</div>
+      <div style="font-size:.88rem;color:var(--w50);max-width:320px;line-height:1.7">أنشئ رحلتك الأولى وابدأ بتتبع المصاريف مع رفاقك</div>
+      <button onclick="location.href='rehla-create.html'" style="padding:14px 32px;border-radius:var(--rsm);background:var(--cyan);color:var(--bg2);font-size:.95rem;font-weight:900;cursor:pointer;box-shadow:0 4px 16px var(--cyan-dim);transition:all .2s;border:none">
+        + إنشاء رحلة جديدة
+      </button>
+    </div>`;
+}
+
+function updateSidebarTrips(trips){
+  if(!trips||!trips.length)return;
+  const t=trips[0];
+  document.querySelector('.sidebar-trip-name').innerHTML=`✈ ${t.name} <span style="color:var(--cyan);font-size:.7rem">▾</span>`;
+  document.querySelector('.sidebar-trip-meta').textContent=`${t.start_date||'—'} — ${t.end_date||'—'} · ${t.currency||'AED'}`;
+}
+
+async function loadTripData(tripId){
+  // Load members
+  const {data:mems}=await sb.from('trip_members').select('*').eq('trip_id',tripId).order('created_at');
+  members=mems||[];
+
+  // Load expenses
+  const {data:exps}=await sb.from('expenses').select('*').eq('trip_id',tripId).order('created_at',{ascending:false});
+  expenses=(exps||[]).map(e=>({
+    id:e.id,title:e.title,amount:Number(e.amount),
+    paidBy:e.paid_by,cat:e.category,date:e.expense_date,
+    note:e.note||'',distAll:e.dist_all,participants:[]
+  }));
+
+  // Update trip header
+  updateTripHeader();
+  renderAll();
+}
+
+function updateTripHeader(){
+  if(!currentTrip)return;
+  document.querySelector('.trip-name').textContent=currentTrip.name||'رحلتي';
+  document.querySelector('.trip-thumb').textContent=currentTrip.destination?'✈':'🌍';
+  document.querySelectorAll('.trip-meta-item')[0].innerHTML=`📍 <strong>${currentTrip.destination||'—'}</strong>`;
+  document.querySelectorAll('.trip-meta-item')[1].innerHTML=`📅 <strong>${currentTrip.start_date||'—'} — ${currentTrip.end_date||'—'}</strong>`;
+  document.querySelectorAll('.trip-meta-item')[2].innerHTML=`💱 <strong>${currentTrip.currency||'AED'}</strong>`;
+  document.querySelectorAll('.trip-meta-item')[3].innerHTML=`👥 <strong>${members.length} أعضاء</strong>`;
+}
+
+window.signOut=async()=>{await sb.auth.signOut();location.href='rehla-auth.html';};
 
 let selectedCat='فندق';
 let distMode='all';
@@ -1185,35 +1250,35 @@ function setModalDist(mode){
   if(participantsWrap)participantsWrap.style.display=mode==='select'?'flex':'none';
 }
 
-function saveExpense(){
+async function saveExpense(){
   const title=document.getElementById('mExpTitle').value.trim();
   const amount=parseFloat(document.getElementById('mExpAmount').value);
-  const paidBy=+document.getElementById('mExpPayer').value;
+  const paidBy=document.getElementById('mExpPayer').value;
   if(!title||!amount||!paidBy){toast('يرجى ملء الحقول المطلوبة','err');return}
-  if(amount<=0){toast('المبلغ يجب أن يكون أكبر من صفر','err');return}
-  const participants=mDistMode==='all'?[]:
-    [...document.querySelectorAll('.m-participant-cb:checked')].map(c=>+c.dataset.id);
-  if(mDistMode==='select'&&!participants.length){toast('اختر عضو واحد على الأقل','err');return}
-  const exp={
-    id:editingExpId||nextId++,
-    title,amount,paidBy,
-    cat:document.getElementById('mExpCat').value,
-    date:document.getElementById('mExpDate').value||new Date().toISOString().split('T')[0],
+  if(!currentTrip){toast('لا توجد رحلة محددة','err');return}
+
+  const expData={
+    trip_id:currentTrip.id,
+    title,amount,
+    paid_by:paidBy,
+    category:document.getElementById('mExpCat').value,
+    expense_date:document.getElementById('mExpDate').value||new Date().toISOString().split('T')[0],
     note:document.getElementById('mExpNote').value.trim(),
-    distAll:mDistMode==='all',
-    participants,
+    dist_all:mDistMode==='all',
+    created_by:currentUser.id,
   };
+
   if(editingExpId){
-    const idx=expenses.findIndex(e=>e.id===editingExpId);expenses[idx]=exp;
-    activities.unshift({icon:'✏',bg:'rgba(56,189,248,.15)',text:`<strong>محمد</strong> عدّل مصروف "${title}"`,time:'الآن'});
+    const {error}=await sb.from('expenses').update(expData).eq('id',editingExpId);
+    if(error){toast('❌ خطأ في التعديل','err');return;}
     toast('✓ تم تعديل المصروف','ok');
   } else {
-    expenses.push(exp);
-    const payer=members.find(m=>m.id===paidBy);
-    activities.unshift({icon:CAT_STYLES[exp.cat]?.icon||'💳',bg:CAT_STYLES[exp.cat]?.bg,text:`<strong>${payer?.name}</strong> أضاف "${title}" بمبلغ <strong>${fmt(amount)} د</strong>`,time:'الآن'});
+    const {error}=await sb.from('expenses').insert(expData);
+    if(error){toast('❌ خطأ في الحفظ','err');return;}
     toast('✓ تم إضافة المصروف','ok');
   }
-  closeModal('addExpModal');renderAll();
+  closeModal('addExpModal');
+  await loadTripData(currentTrip.id);
 }
 
 function deleteExpense(id){
@@ -1547,7 +1612,7 @@ renderAll();
 document.getElementById('mExpDate').value=new Date().toISOString().split('T')[0];
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 // ════ SUPABASE AUTH GUARD ════
 const SURL = 'https://pokpdwvqecwjfxoraqjd.supabase.co';
