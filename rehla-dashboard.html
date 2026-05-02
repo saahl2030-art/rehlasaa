@@ -532,12 +532,13 @@ html[dir="ltr"] .settle-amount{margin-right:0;margin-left:auto}
   </nav>
 
   <div class="sidebar-footer">
-    <div class="sidebar-user">
-      <div class="user-av">م</div>
-      <div>
-        <div class="user-name">محمد العامري</div>
+    <div class="sidebar-user" onclick="if(confirm('هل تريد تسجيل الخروج؟'))signOut()">
+      <div class="user-av" id="userAv">م</div>
+      <div style="flex:1">
+        <div class="user-name">جاري التحميل...</div>
         <div class="user-role">👑 مسؤول الرحلة</div>
       </div>
+      <span style="font-size:.7rem;color:var(--w30)" title="تسجيل الخروج">⏻</span>
     </div>
   </div>
 </aside>
@@ -867,7 +868,7 @@ html[dir="ltr"] .settle-amount{margin-right:0;margin-left:auto}
           <div class="section-body">
             <p style="font-size:.78rem;color:var(--w60);margin-bottom:12px;line-height:1.6">شارك هذا الرابط مع أعضاء الرحلة — كل عضو سيرى مصاريفه الخاصة ورصيده.</p>
             <div class="share-link-box">
-              <span class="share-link-txt">https://rehlaplus.app/trip/dubai-2025-abc123</span>
+              <span class="share-link-txt">https://rehlasaa.com/trip/dubai-2025-abc123</span>
               <button class="share-copy-btn" onclick="copyLink()">نسخ</button>
             </div>
             <div style="display:flex;align-items:center;gap:16px;margin-top:14px">
@@ -1529,7 +1530,7 @@ function renderShare(){
 }
 
 function copyLink(){
-  navigator.clipboard.writeText('https://rehlaplus.app/trip/dubai-2025-abc123').catch(()=>{});
+  navigator.clipboard.writeText('https://rehlasaa.com/trip/dubai-2025-abc123').catch(()=>{});
   toast('✓ تم نسخ الرابط','ok');
 }
 
@@ -1544,6 +1545,34 @@ function toast(msg,type='ok'){
 populatePayerSelects();
 renderAll();
 document.getElementById('mExpDate').value=new Date().toISOString().split('T')[0];
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ════ SUPABASE AUTH GUARD ════
+const SURL = 'https://pokpdwvqecwjfxoraqjd.supabase.co';
+const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
+const { createClient } = supabase;
+const sb = createClient(SURL, SKEY);
+
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) {
+    window.location.href = 'rehla-auth.html';
+    return;
+  }
+  // Set user name in sidebar
+  const user = session.user;
+  const name = user.user_metadata?.full_name || user.email?.split('@')[0] || 'المستخدم';
+  const nameEl = document.querySelector('.user-name');
+  if (nameEl) nameEl.textContent = name;
+  
+  // Sign out function
+  window.signOut = async () => {
+    await sb.auth.signOut();
+    window.location.href = 'rehla-auth.html';
+  };
+})();
 </script>
 </body>
 </html>
