@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test Supabase</title>
+</head>
+<body style="font-family:Arial;padding:30px;background:#1a1a2e;color:#fff">
+
+<h2>🔬 اختبار Supabase</h2>
+<div id="status" style="padding:15px;margin:10px 0;border-radius:8px;background:#333">جاري الاختبار...</div>
+
+<hr style="border-color:#444;margin:20px 0">
+<h3>إنشاء حساب تجريبي</h3>
+<input id="email" type="email" value="test@test.com" 
+  style="padding:10px;width:250px;margin:5px;border-radius:5px;border:1px solid #555;background:#222;color:#fff"><br>
+<input id="pass" type="password" value="test12345678" 
+  style="padding:10px;width:250px;margin:5px;border-radius:5px;border:1px solid #555;background:#222;color:#fff"><br>
+<button onclick="testSignUp()" 
+  style="padding:10px 20px;margin:5px;background:#2563eb;color:#fff;border:none;border-radius:5px;cursor:pointer">
+  اختبار التسجيل
+</button>
+<button onclick="testSignIn()" 
+  style="padding:10px 20px;margin:5px;background:#059669;color:#fff;border:none;border-radius:5px;cursor:pointer">
+  اختبار الدخول
+</button>
+
+<div id="result" style="padding:15px;margin:10px 0;border-radius:8px;background:#222;white-space:pre-wrap;font-size:12px;direction:ltr"></div>
+
+<script>
+const SURL = 'https://akkpbujjoijnpyukukki.supabase.co';
+const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFra3BianVqb2lqbnB5dWt1Z2tpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MTc0ODUsImV4cCI6MjA5MzI5MzQ4NX0.mCgcx1qlilLttjofLzElaiNDPRufvo8NKO8odkim4e4';
+
+// Test 1: هل Supabase URL يستجيب؟
+async function testConnection() {
+  const el = document.getElementById('status');
+  try {
+    const res = await fetch(SURL + '/auth/v1/health');
+    const data = await res.json();
+    el.style.background = '#064e3b';
+    el.innerHTML = '✅ Supabase يستجيب — Status: ' + res.status + '<br>' + JSON.stringify(data);
+  } catch(e) {
+    el.style.background = '#7f1d1d';
+    el.innerHTML = '❌ خطأ في الاتصال: ' + e.message;
+  }
+}
+
+async function testSignUp() {
+  const res = document.getElementById('result');
+  const email = document.getElementById('email').value;
+  const pass = document.getElementById('pass').value;
+  res.textContent = 'جاري إنشاء الحساب...';
+  
+  try {
+    const response = await fetch(SURL + '/auth/v1/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SKEY,
+        'Authorization': 'Bearer ' + SKEY
+      },
+      body: JSON.stringify({ email, password: pass })
+    });
+    const data = await response.json();
+    res.style.background = response.ok ? '#064e3b' : '#7f1d1d';
+    res.textContent = 'Status: ' + response.status + '\n' + JSON.stringify(data, null, 2);
+  } catch(e) {
+    res.style.background = '#7f1d1d';
+    res.textContent = 'خطأ: ' + e.message + '\n\nنوع الخطأ: ' + e.name;
+  }
+}
+
+async function testSignIn() {
+  const res = document.getElementById('result');
+  const email = document.getElementById('email').value;
+  const pass = document.getElementById('pass').value;
+  res.textContent = 'جاري تسجيل الدخول...';
+
+  try {
+    const response = await fetch(SURL + '/auth/v1/token?grant_type=password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SKEY,
+        'Authorization': 'Bearer ' + SKEY
+      },
+      body: JSON.stringify({ email, password: pass })
+    });
+    const data = await response.json();
+    res.style.background = response.ok ? '#064e3b' : '#7f1d1d';
+    res.textContent = 'Status: ' + response.status + '\n' + JSON.stringify(data, null, 2);
+  } catch(e) {
+    res.style.background = '#7f1d1d';
+    res.textContent = 'خطأ: ' + e.message + '\n\nنوع الخطأ: ' + e.name;
+  }
+}
+
+// شغّل اختبار الاتصال تلقائياً
+testConnection();
+</script>
+</body>
+</html>
