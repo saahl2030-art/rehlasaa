@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>رحلة+ — تسجيل الدخول</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --bg:#1230a0;--bg2:#1a3a8c;--bg3:#162e78;
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.12);
+  --red:#f87171;--red-dim:rgba(248,113,113,.12);
+  --white:#fff;
+  --w90:rgba(255,255,255,.9);--w70:rgba(255,255,255,.7);
+  --w50:rgba(255,255,255,.5);--w30:rgba(255,255,255,.3);
+  --w15:rgba(255,255,255,.15);--w10:rgba(255,255,255,.10);
+  --w06:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.08);
+  --r:14px;--rsm:10px;--rxs:7px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Cairo',sans-serif;
+  min-height:100vh;
+  background:linear-gradient(160deg,#1230a0 0%,#1a3a8c 50%,#162e78 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  position:relative;overflow:hidden;
+}
+/* BG decoration */
+.bg-blob{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.blob1{width:400px;height:400px;background:rgba(56,189,248,.1);top:-100px;right:-100px}
+.blob2{width:300px;height:300px;background:rgba(30,58,138,.2);bottom:-50px;left:-50px}
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+
+/* AUTH CARD */
+.auth-card{
+  position:relative;z-index:1;
+  background:rgba(255,255,255,.09);
+  border:1px solid var(--border);
+  border-radius:20px;
+  width:100%;max-width:420px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+
+/* HEADER */
+.auth-header{
+  background:rgba(255,255,255,.06);
+  border-bottom:1px solid var(--border2);
+  padding:24px 24px 20px;
+  text-align:center;
+}
+.auth-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;cursor:pointer}
+.logo-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:var(--cyan);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:var(--bg2);font-weight:900;
+}
+.logo-name{font-family:'Tajawal',sans-serif;font-size:1.5rem;font-weight:900}
+.logo-name em{color:var(--cyan);font-style:normal}
+.auth-tagline{font-size:.78rem;color:var(--w50)}
+
+/* TABS */
+.auth-tabs{
+  display:flex;
+  border-bottom:1px solid var(--border2);
+  background:rgba(0,0,0,.1);
+}
+.auth-tab{
+  flex:1;padding:13px;background:none;border:none;
+  font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;
+  color:var(--w50);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .2s;
+}
+.auth-tab.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+
+/* BODY */
+.auth-body{padding:22px 24px 24px}
+
+/* FORM */
+.f-group{margin-bottom:14px}
+.f-label{
+  display:flex;align-items:center;gap:5px;
+  font-size:.78rem;font-weight:700;color:var(--w70);margin-bottom:6px;
+}
+.f-input{
+  width:100%;padding:11px 13px;
+  background:var(--w06);border:1.5px solid var(--border2);
+  border-radius:var(--rsm);color:var(--white);
+  font-family:'Cairo',sans-serif;font-size:.88rem;
+  transition:all .2s;-webkit-appearance:none;
+}
+.f-input::placeholder{color:var(--w30)}
+.f-input:focus{
+  border-color:var(--cyan);background:var(--w10);
+  box-shadow:0 0 0 3px var(--cyan-dim);outline:none;
+}
+.f-input.error{border-color:var(--red);background:var(--red-dim)}
+
+/* password toggle */
+.f-pass-wrap{position:relative}
+.f-pass-wrap .f-input{padding-left:40px}
+.f-pass-toggle{
+  position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--w40);cursor:pointer;
+  font-size:.9rem;padding:2px;
+}
+.f-pass-toggle:hover{color:var(--w70)}
+
+/* Forgot password */
+.forgot-link{
+  display:block;text-align:left;
+  font-size:.75rem;color:var(--cyan);cursor:pointer;
+  margin-top:4px;transition:opacity .2s;
+}
+.forgot-link:hover{opacity:.8}
+
+/* SUBMIT BTN */
+.btn-submit{
+  width:100%;padding:13px;border-radius:var(--rsm);
+  background:var(--cyan);color:var(--bg2);
+  font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:900;
+  box-shadow:0 4px 16px var(--cyan-dim);
+  transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:4px;position:relative;overflow:hidden;
+}
+.btn-submit:hover{background:#7dd3fc;transform:translateY(-1px)}
+.btn-submit:active{transform:translateY(0)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-submit .spinner{
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid rgba(26,58,140,.3);
+  border-top-color:var(--bg2);
+  animation:spin .7s linear infinite;display:none;
+}
+.btn-submit.loading .spinner{display:block}
+.btn-submit.loading .btn-text{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Divider */
+.auth-divider{
+  display:flex;align-items:center;gap:10px;
+  margin:16px 0;font-size:.75rem;color:var(--w30);
+}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border2)}
+
+/* Google btn */
+.btn-google{
+  width:100%;padding:11px;border-radius:var(--rsm);
+  background:var(--w06);border:1.5px solid var(--border);
+  color:var(--w70);font-family:'Cairo',sans-serif;
+  font-size:.88rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .2s;cursor:pointer;
+}
+.btn-google:hover{background:var(--w10);color:var(--white);border-color:var(--border)}
+
+/* Terms */
+.auth-terms{
+  font-size:.72rem;color:var(--w40);
+  text-align:center;margin-top:14px;line-height:1.6;
+}
+.auth-terms a{color:var(--cyan);cursor:pointer}
+
+/* Switch tab link */
+.auth-switch{
+  text-align:center;font-size:.78rem;
+  color:var(--w50);margin-top:14px;
+}
+.auth-switch a{color:var(--cyan);cursor:pointer;font-weight:700}
+
+/* PANES */
+.auth-pane{display:none}
+.auth-pane.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ALERT */
+.auth-alert{
+  padding:10px 13px;border-radius:var(--rxs);
+  font-size:.78rem;font-weight:600;
+  display:flex;align-items:flex-start;gap:8px;
+  margin-bottom:14px;line-height:1.5;
+  display:none;
+}
+.auth-alert.show{display:flex}
+.auth-alert.error{background:var(--red-dim);border:1px solid rgba(248,113,113,.25);color:var(--red)}
+.auth-alert.success{background:var(--green-dim);border:1px solid rgba(34,197,94,.25);color:var(--green)}
+.auth-alert.info{background:var(--cyan-dim);border:1px solid var(--cyan-bright);color:var(--cyan)}
+
+/* Reset password pane */
+.back-link{
+  display:flex;align-items:center;gap:5px;
+  color:var(--w50);font-size:.78rem;cursor:pointer;
+  margin-bottom:14px;transition:color .2s;width:fit-content;
+}
+.back-link:hover{color:var(--white)}
+
+/* Success state */
+.auth-success{
+  text-align:center;padding:20px 0;
+}
+.success-icon-wrap{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--green-dim);border:2px solid rgba(34,197,94,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;margin:0 auto 14px;
+  animation:pop .5s cubic-bezier(.34,1.5,.64,1);
+}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.success-title{font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:6px}
+.success-sub{font-size:.8rem;color:var(--w60);line-height:1.7}
+
+/* Footer */
+.auth-footer{
+  text-align:center;margin-top:20px;
+  font-size:.72rem;color:var(--w30);
+  position:relative;z-index:1;
+}
+.auth-footer a{color:var(--w50);cursor:pointer}
+
+/* Responsive */
+@media(max-width:480px){
+  body{padding:12px}
+  .auth-card{border-radius:16px}
+  .auth-body{padding:18px 18px 20px}
+  .auth-header{padding:18px 18px 14px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-blob blob1"></div>
+<div class="bg-blob blob2"></div>
+<div class="bg-grid"></div>
+
+<div class="auth-card">
+
+  <!-- HEADER -->
+  <div class="auth-header">
+    <div class="auth-logo" onclick="window.location.href='index.html'">
+      <div class="logo-icon">✈</div>
+      <div class="logo-name">رحلة<em>+</em></div>
+    </div>
+    <div class="auth-tagline">إدارة مصاريف السفر الجماعي</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="auth-tabs" id="authTabs">
+    <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">تسجيل الدخول</button>
+    <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">حساب جديد</button>
+  </div>
+
+  <!-- BODY -->
+  <div class="auth-body">
+
+    <!-- ── LOGIN PANE ── -->
+    <div class="auth-pane active" id="paneLogin">
+      <div class="auth-alert" id="loginAlert"></div>
+
+      <div class="f-group">
+        <label class="f-label">📧 البريد الإلكتروني</label>
+        <input class="f-input" type="email" id="loginEmail"
+          placeholder="example@email.com" autocomplete="email" inputmode="email">
+      </div>
+
+      <div class="f-group">
+        <label class="f-label">🔒 كلمة المرور</label>
+        <div class="f-pass-wrap">
+          <input class="f-input" type="password" id="loginPass"
+            placeholder="••••••••" autocomplete="current-password">
+          <button class="f-pass-toggle" onclick="togglePass('loginPass',this)">👁</button>
+        </div>
+        <span class="forgot-link" onclick="switchTab('reset')">نسيت كلمة المرور؟</span>
+      </div>
+
+      <button class="btn-submit" id="btnLogin" onclick="handleLogin()">
+        <div class="spinner"></div>
+        <span class="btn-text">دخول ←</span>
+      </button>
+
+      <div class="auth-divider">أو</div>
+
+      <button class="btn-google" onclick="handleGoogle()">
+        <svg width="16" height="16" viewBox="0 0 18 18">
+          <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/>
+          <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/>
+          <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/>
+          <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/>
+        </svg>
+        الدخول بـ Google
+      </button>
+
+      <div class="auth-switch">ليس لديك حساب؟ <a onclick="switchTab('register')">سجّل الآن</a></div>
+    </div>
+
+    <!-- ── REGISTER PANE ── -->
+    <div class="auth-pane" id="paneRegister">
+      <div class="auth-alert" id="registerAlert"></div>
+
+      <div class="f-group">
+        <label class="f-label">👤 الاسم الكامل</label>
+        <input class="f-input" type="text" id="regName"
+          placeholder="محمد العامري" autocomplete="name">
+      </div>
+
+      <div class="f-group">
+        <label class="f-label">📱 رقم الواتساب</label>
+        <input class="f-input" type="tel" id="regPhone"
+          placeholder="+971 50 000 0000" autocomplete="tel" inputmode="tel">
+      </div>
+
+      <div class="f-group">
+        <label class="f-label">📧 البريد الإلكتروني</label>
+        <input class="f-input" type="email" id="regEmail"
+          placeholder="example@email.com" autocomplete="email" inputmode="email">
+      </div>
+
+      <div class="f-group">
+        <label class="f-label">🔒 كلمة المرور</label>
+        <div class="f-pass-wrap">
+          <input class="f-input" type="password" id="regPass"
+            placeholder="٨ أحرف على الأقل" autocomplete="new-password">
+          <button class="f-pass-toggle" onclick="togglePass('regPass',this)">👁</button>
+        </div>
+      </div>
+
+      <button class="btn-submit" id="btnRegister" onclick="handleRegister()">
+        <div class="spinner"></div>
+        <span class="btn-text">إنشاء الحساب ←</span>
+      </button>
+
+      <div class="auth-divider">أو</div>
+
+      <button class="btn-google" onclick="handleGoogle()">
+        <svg width="16" height="16" viewBox="0 0 18 18">
+          <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/>
+          <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/>
+          <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/>
+          <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/>
+        </svg>
+        التسجيل بـ Google
+      </button>
+
+      <div class="auth-terms">
+        بالتسجيل أنت توافق على
+        <a>شروط الخدمة</a> و<a>سياسة الخصوصية</a>
+      </div>
+
+      <div class="auth-switch">لديك حساب؟ <a onclick="switchTab('login')">سجّل دخولك</a></div>
+    </div>
+
+    <!-- ── RESET PASSWORD PANE ── -->
+    <div class="auth-pane" id="paneReset">
+      <div class="back-link" onclick="switchTab('login')">← العودة لتسجيل الدخول</div>
+      <div class="auth-alert" id="resetAlert"></div>
+
+      <div id="resetForm">
+        <p style="font-size:.82rem;color:var(--w60);margin-bottom:16px;line-height:1.6">
+          أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة تعيين كلمة المرور.
+        </p>
+        <div class="f-group">
+          <label class="f-label">📧 البريد الإلكتروني</label>
+          <input class="f-input" type="email" id="resetEmail"
+            placeholder="example@email.com" inputmode="email">
+        </div>
+        <button class="btn-submit" id="btnReset" onclick="handleReset()">
+          <div class="spinner"></div>
+          <span class="btn-text">إرسال رابط الاستعادة</span>
+        </button>
+      </div>
+
+      <div class="auth-success" id="resetSuccess" style="display:none">
+        <div class="success-icon-wrap">📬</div>
+        <div class="success-title">تم الإرسال!</div>
+        <div class="success-sub">راجع بريدك الإلكتروني وافتح الرابط لإعادة تعيين كلمة المرور.</div>
+      </div>
+    </div>
+
+    <!-- ── EMAIL CONFIRM PANE ── -->
+    <div class="auth-pane" id="paneConfirm">
+      <div class="auth-success">
+        <div class="success-icon-wrap">✉️</div>
+        <div class="success-title">تحقق من بريدك!</div>
+        <div class="success-sub">
+          أرسلنا لك رابط تأكيد على بريدك الإلكتروني.<br>
+          افتحه للدخول للتطبيق.
+        </div>
+        <button class="btn-submit" style="margin-top:20px" onclick="switchTab('login')">
+          <span class="btn-text">العودة لتسجيل الدخول</span>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /auth-body -->
+</div><!-- /auth-card -->
+
+<div class="auth-footer">
+  © ٢٠٢٦ رحلة+ · <a onclick="window.location.href='index.html'">الصفحة الرئيسية</a>
+</div>
+
+<script>
+/* ════════════════════════════════
+   SUPABASE INIT
+════════════════════════════════ */
+const SUPABASE_URL = 'https://akkpbujjoijnpyukukki.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFra3BianVqb2lqbnB5dWt1Z2tpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MTc0ODUsImV4cCI6MjA5MzI5MzQ4NX0.mCgcx1qlilLttjofLzElaiNDPRufvo8NKO8odkim4e4';
+
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+/* ════════════════════════════════
+   CHECK EXISTING SESSION
+════════════════════════════════ */
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    // المستخدم مسجل دخوله مسبقاً — انقله للـ dashboard
+    window.location.href = 'rehla-dashboard.html';
+  }
+})();
+
+/* ════════════════════════════════
+   TAB SWITCHING
+════════════════════════════════ */
+function switchTab(tab) {
+  // إخفاء كل الـ panes
+  document.querySelectorAll('.auth-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+
+  // إظهار tabs bar أو إخفائه
+  const tabsBar = document.getElementById('authTabs');
+  tabsBar.style.display = (tab === 'reset' || tab === 'confirm') ? 'none' : 'flex';
+
+  if (tab === 'login') {
+    document.getElementById('paneLogin').classList.add('active');
+    document.getElementById('tabLogin').classList.add('active');
+  } else if (tab === 'register') {
+    document.getElementById('paneRegister').classList.add('active');
+    document.getElementById('tabRegister').classList.add('active');
+  } else if (tab === 'reset') {
+    document.getElementById('paneReset').classList.add('active');
+  } else if (tab === 'confirm') {
+    document.getElementById('paneConfirm').classList.add('active');
+  }
+  clearAlerts();
+}
+
+/* ════════════════════════════════
+   ALERTS
+════════════════════════════════ */
+function showAlert(id, msg, type = 'error') {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = `auth-alert show ${type}`;
+}
+function clearAlerts() {
+  document.querySelectorAll('.auth-alert').forEach(a => a.classList.remove('show'));
+}
+
+/* ════════════════════════════════
+   LOADING STATE
+════════════════════════════════ */
+function setLoading(btnId, loading) {
+  const btn = document.getElementById(btnId);
+  btn.classList.toggle('loading', loading);
+  btn.disabled = loading;
+}
+
+/* ════════════════════════════════
+   PASSWORD TOGGLE
+════════════════════════════════ */
+function togglePass(inputId, btn) {
+  const inp = document.getElementById(inputId);
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁'; }
+}
+
+/* ════════════════════════════════
+   VALIDATION
+════════════════════════════════ */
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/* ════════════════════════════════
+   LOGIN
+════════════════════════════════ */
+async function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPass').value;
+
+  if (!email || !pass) { showAlert('loginAlert', '⚠️ يرجى ملء جميع الحقول'); return; }
+  if (!validateEmail(email)) { showAlert('loginAlert', '⚠️ البريد الإلكتروني غير صحيح'); return; }
+
+  setLoading('btnLogin', true);
+  clearAlerts();
+
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+
+  setLoading('btnLogin', false);
+
+  if (error) {
+    const msg = error.message.includes('Invalid login') || error.message.includes('invalid')
+      ? '❌ البريد الإلكتروني أو كلمة المرور غير صحيحة'
+      : error.message.includes('Email not confirmed')
+      ? '📧 يرجى تأكيد بريدك الإلكتروني أولاً'
+      : '❌ ' + error.message;
+    showAlert('loginAlert', msg);
+    return;
+  }
+
+  // نجح الدخول
+  showAlert('loginAlert', '✅ تم تسجيل الدخول — جاري التحويل...', 'success');
+  setTimeout(() => { window.location.href = 'rehla-dashboard.html'; }, 800);
+}
+
+/* ════════════════════════════════
+   REGISTER
+════════════════════════════════ */
+async function handleRegister() {
+  const name  = document.getElementById('regName').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass  = document.getElementById('regPass').value;
+
+  if (!name || !email || !pass) { showAlert('registerAlert', '⚠️ يرجى ملء الحقول المطلوبة'); return; }
+  if (!validateEmail(email)) { showAlert('registerAlert', '⚠️ البريد الإلكتروني غير صحيح'); return; }
+  if (pass.length < 8) { showAlert('registerAlert', '⚠️ كلمة المرور يجب أن تكون ٨ أحرف على الأقل'); return; }
+
+  setLoading('btnRegister', true);
+  clearAlerts();
+
+  const { data, error } = await sb.auth.signUp({
+    email,
+    password: pass,
+    options: {
+      data: { full_name: name, phone },
+      emailRedirectTo: window.location.origin + '/rehla-auth.html'
+    }
+  });
+
+  setLoading('btnRegister', false);
+
+  if (error) {
+    const msg = error.message.includes('already registered') || error.message.includes('already been registered')
+      ? '⚠️ هذا البريد الإلكتروني مسجل بالفعل — جرّب تسجيل الدخول'
+      : '❌ ' + error.message;
+    showAlert('registerAlert', msg);
+    return;
+  }
+
+  // إذا كان التأكيد مطلوباً
+  if (data.user && !data.session) {
+    switchTab('confirm');
+  } else {
+    // تأكيد تلقائي (في حالة disabled email confirmation)
+    showAlert('registerAlert', '✅ تم إنشاء الحساب — جاري التحويل...', 'success');
+    setTimeout(() => { window.location.href = 'rehla-dashboard.html'; }, 800);
+  }
+}
+
+/* ════════════════════════════════
+   GOOGLE AUTH
+════════════════════════════════ */
+async function handleGoogle() {
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin + '/rehla-dashboard.html'
+    }
+  });
+  if (error) showAlert('loginAlert', '❌ ' + error.message);
+}
+
+/* ════════════════════════════════
+   RESET PASSWORD
+════════════════════════════════ */
+async function handleReset() {
+  const email = document.getElementById('resetEmail').value.trim();
+  if (!email) { showAlert('resetAlert', '⚠️ يرجى إدخال بريدك الإلكتروني'); return; }
+  if (!validateEmail(email)) { showAlert('resetAlert', '⚠️ البريد الإلكتروني غير صحيح'); return; }
+
+  setLoading('btnReset', true);
+  clearAlerts();
+
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin + '/rehla-reset.html'
+  });
+
+  setLoading('btnReset', false);
+
+  if (error) { showAlert('resetAlert', '❌ ' + error.message); return; }
+
+  document.getElementById('resetForm').style.display = 'none';
+  document.getElementById('resetSuccess').style.display = 'block';
+}
+
+/* ════════════════════════════════
+   ENTER KEY SUPPORT
+════════════════════════════════ */
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleLogin();
+});
+document.getElementById('regPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleRegister();
+});
+</script>
+</body>
+</html>
