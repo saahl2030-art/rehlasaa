@@ -682,6 +682,7 @@ async function initApp(){
   }
   const langBtn=document.getElementById('langBtn');
   if(langBtn) langBtn.textContent=isEn?'ع':'EN';
+  applyDashLang();
 
   // AUTH CHECK
   const {data:{session}}=await sb.auth.getSession();
@@ -772,12 +773,12 @@ function showEmptyState(){
   document.getElementById('page-dashboard').innerHTML=`
     <div class="empty-state">
       <div class="empty-icon">✈️</div>
-      <div class="empty-title">لا توجد رحلات بعد!</div>
-      <div class="empty-sub">أنشئ رحلتك الأولى وابدأ بتتبع المصاريف مع رفاقك بكل سهولة</div>
+      <div class="empty-title">${t('لا توجد رحلات بعد!')}</div>
+      <div class="empty-sub">${t('أنشئ رحلتك الأولى وابدأ بتتبع المصاريف مع رفاقك بكل سهولة')}</div>
       <button class="empty-btn" onclick="location.href='rehla-create.html'">
-        ✈ إنشاء رحلة جديدة
+        ${t('✈ إنشاء رحلة جديدة')}
       </button>
-      <div style="font-size:.76rem;color:var(--w30);margin-top:8px">٢٤٩ درهم فقط — دفعة واحدة للرحلة الكاملة</div>
+      <div style="font-size:.76rem;color:var(--w30);margin-top:8px">${t('٢٤٩ درهم فقط — دفعة واحدة للرحلة الكاملة')}</div>
     </div>`;
 }
 
@@ -812,10 +813,10 @@ function buildDashboard(){
 
     <!-- KPIs -->
     <div class="kpi-row">
-      <div class="kpi-card"><div class="kpi-icon" style="background:var(--cyan-dim);color:var(--cyan)">💳</div><div><div class="kpi-label">إجمالي المصاريف</div><div class="kpi-value" style="color:var(--cyan)" id="kpiTotal">٠</div><div class="kpi-sub" id="kpiTotalSub">درهم · ٠ مصاريف</div></div></div>
-      <div class="kpi-card"><div class="kpi-icon" style="background:var(--purple-dim);color:var(--purple)">👤</div><div><div class="kpi-label">نصيب كل شخص</div><div class="kpi-value" style="color:var(--purple)" id="kpiPer">٠</div><div class="kpi-sub">درهم تقريباً</div></div></div>
-      <div class="kpi-card"><div class="kpi-icon" style="background:var(--green-dim);color:var(--green)">✅</div><div><div class="kpi-label">الأكثر دفعاً</div><div class="kpi-value" style="color:var(--green);font-size:1rem" id="kpiTop">—</div><div class="kpi-sub" id="kpiTopAmt">٠ درهم</div></div></div>
-      <div class="kpi-card"><div class="kpi-icon" style="background:var(--orange-dim);color:var(--orange)">👥</div><div><div class="kpi-label">عدد الأعضاء</div><div class="kpi-value" style="color:var(--orange)" id="kpiMembers">${toAr(members.length)}</div><div class="kpi-sub">مشارك في الرحلة</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon" style="background:var(--cyan-dim);color:var(--cyan)">💳</div><div><div class="kpi-label">${t('إجمالي المصاريف')}</div><div class="kpi-value" style="color:var(--cyan)" id="kpiTotal">٠</div><div class="kpi-sub" id="kpiTotalSub">${currentTrip?.currency||'AED'} · ٠</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon" style="background:var(--purple-dim);color:var(--purple)">👤</div><div><div class="kpi-label">${t('نصيب كل شخص')}</div><div class="kpi-value" style="color:var(--purple)" id="kpiPer">٠</div><div class="kpi-sub">${t('درهم تقريباً')}</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon" style="background:var(--green-dim);color:var(--green)">✅</div><div><div class="kpi-label">${t('الأكثر دفعاً')}</div><div class="kpi-value" style="color:var(--green);font-size:1rem" id="kpiTop">—</div><div class="kpi-sub" id="kpiTopAmt">٠</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon" style="background:var(--orange-dim);color:var(--orange)">👥</div><div><div class="kpi-label">${t('عدد الأعضاء')}</div><div class="kpi-value" style="color:var(--orange)" id="kpiMembers">${toAr(members.length)}</div><div class="kpi-sub">${t('مشارك في الرحلة')}</div></div></div>
     </div>
 
     <!-- Grid: Members + Quick Add -->
@@ -1311,7 +1312,8 @@ function showPage(page){
   const nav=document.getElementById('nav-'+page);
   if(pg)pg.classList.add('active');
   if(nav)nav.classList.add('active');
-  document.getElementById('topbarTitle').textContent=PAGE_TITLES[page]||'';
+  const t=PAGE_TITLES_LANG[page];
+  document.getElementById('topbarTitle').textContent=t?(isEn?t.en:t.ar):'';
   if(page==='summary')renderSummaryFull();
   if(page==='settle')renderSettle();
   if(page==='expenses')renderExpensesFull();
@@ -1349,13 +1351,155 @@ function openModal(id){document.getElementById(id).classList.add('show')}
 function closeModal(id){document.getElementById(id).classList.remove('show')}
 document.querySelectorAll('.modal-ov').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('show')}));
 
+/* ══════════════════════════════════
+   LANGUAGE TEXTS
+══════════════════════════════════ */
+const DASH_TEXTS={
+  // SIDEBAR NAV
+  'nav-dashboard':{ar:'🏠 لوحة الرحلة',en:'🏠 Dashboard'},
+  'nav-expenses':{ar:'💳 المصاريف',en:'💳 Expenses'},
+  'nav-receipts':{ar:'📸 الإيصالات',en:'📸 Receipts'},
+  'nav-summary':{ar:'📊 الملخص المالي',en:'📊 Financial Summary'},
+  'nav-settle':{ar:'🧮 تصفية الحساب',en:'🧮 Settlement'},
+  'nav-report':{ar:'📄 التقرير',en:'📄 Report'},
+  'nav-members':{ar:'👥 الأعضاء والأدوار',en:'👥 Members & Roles'},
+  'nav-share':{ar:'🔗 مشاركة الرحلة',en:'🔗 Share Trip'},
+  'nav-settings':{ar:'⚙ الإعدادات',en:'⚙ Settings'},
+  // TOPBAR
+  'topbarTitle':{ar:'لوحة الرحلة',en:'Dashboard'},
+  'topbarShare':{ar:'🔗 مشاركة',en:'🔗 Share'},
+  'topbarAdd':{ar:'+ إضافة مصروف',en:'+ Add Expense'},
+  // USER
+  'userRole':{ar:'👑 مسؤول الرحلة',en:'👑 Trip Organizer'},
+};
+
+const PAGE_TITLES_LANG={
+  dashboard:{ar:'لوحة الرحلة',en:'Dashboard'},
+  expenses:{ar:'المصاريف',en:'Expenses'},
+  summary:{ar:'الملخص المالي',en:'Financial Summary'},
+  settle:{ar:'تصفية الحساب',en:'Settlement'},
+  report:{ar:'التقرير',en:'Report'},
+  members:{ar:'الأعضاء والأدوار',en:'Members & Roles'},
+  share:{ar:'مشاركة الرحلة',en:'Share Trip'},
+  settings:{ar:'الإعدادات',en:'Settings'},
+  receipts:{ar:'الإيصالات',en:'Receipts'},
+};
+
+/* مساعد الترجمة السريع */
+const TR={
+  'إجمالي المصاريف':'Total Expenses',
+  'نصيب كل شخص':'Per Person',
+  'الأكثر دفعاً':'Top Payer',
+  'عدد الأعضاء':'Members',
+  'مشارك في الرحلة':'trip members',
+  'درهم تقريباً':'approx.',
+  'أعضاء':'members',
+  'إضافة مصروف':'Add Expense',
+  'إضافة':'Add',
+  'إضافة مصروف جديد':'Add New Expense',
+  'توسيع':'Expand',
+  'اسم المصروف *':'Expense Name *',
+  'المبلغ *':'Amount *',
+  'من دفع؟ *':'Paid by *',
+  'التاريخ':'Date',
+  'التصنيف':'Category',
+  'ملاحظة (اختياري)':'Note (optional)',
+  'التوزيع على':'Split for',
+  'حفظ المصروف':'Save Expense',
+  'الجميع':'Everyone',
+  'أشخاص محددين':'Specific people',
+  'إلغاء':'Cancel',
+  'إضافة عضو':'Add Member',
+  'اسم العضو':'Member Name',
+  'رقم الواتساب':'WhatsApp',
+  'الدور':'Role',
+  'الأعضاء':'Members',
+  'إضافة عضو جديد':'Add New Member',
+  'لا يوجد أعضاء بعد':'No members yet',
+  'أضف أعضاء أولاً':'Add members first',
+  'الحسابات متوازنة!':'All settled!',
+  'لا توجد مبالغ متبقية بين الأعضاء':'No outstanding balances between members',
+  'لا توجد مصاريف بعد — أضف أول مصروف!':'No expenses yet — add your first!',
+  'لا توجد رحلات بعد!':'No trips yet!',
+  'أنشئ رحلتك الأولى وابدأ بتتبع المصاريف مع رفاقك بكل سهولة':'Create your first trip and start tracking expenses with your companions',
+  '✈ إنشاء رحلة جديدة':'✈ Create New Trip',
+  '٢٤٩ درهم فقط — دفعة واحدة للرحلة الكاملة':'249 AED only — one-time payment',
+  'نشطة':'Active',
+  'دفع:':'Paid:',
+  'عليه:':'Owes:',
+  'له ':'Gets back ',
+  'عليه ':'Owes ',
+  'متوازن':'Settled',
+  'مشارك في الرحلة':'trip participant',
+  'تم حفظ الإعدادات ✓':'Settings saved ✓',
+  'تم نسخ الرابط':'Link copied',
+  'تم إضافة المصروف':'Expense added',
+  'تم تعديل المصروف':'Expense updated',
+  'تم إضافة العضو':'Member added',
+  'خطأ في الحذف':'Delete error',
+  'خطأ في الإضافة':'Add error',
+  'خطأ في التعديل':'Edit error',
+  'خطأ في الحفظ':'Save error',
+  'يرجى ملء الحقول المطلوبة':'Please fill required fields',
+  'لا توجد رحلة محددة':'No trip selected',
+  'يرجى إدخال الاسم':'Please enter name',
+  'لوحة الرحلة':'Dashboard',
+  'آخر تحديث: الآن':'Last updated: now',
+};
+
+function t(ar){
+  if(!isEn)return ar;
+  return TR[ar]||ar;
+}
+
+function applyDashLang(){
+  const root=document.documentElement;
+  root.setAttribute('lang',isEn?'en':'ar');
+  root.setAttribute('dir',isEn?'ltr':'rtl');
+  const langBtn=document.getElementById('langBtn');
+  if(langBtn)langBtn.textContent=isEn?'ع':'EN';
+
+  // تطبيق نصوص الـ nav
+  Object.keys(DASH_TEXTS).forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const txt=isEn?DASH_TEXTS[id].en:DASH_TEXTS[id].ar;
+    const badge=el.querySelector('.nav-badge');
+    el.textContent=txt;
+    if(badge)el.appendChild(badge);
+  });
+
+  // topbar buttons
+  const shareBtn=document.querySelector('[onclick="showPage(\'share\')"].topbar-btn-ghost');
+  if(shareBtn)shareBtn.textContent=isEn?'🔗 Share':'🔗 مشاركة';
+  const addBtn=document.querySelector('.topbar-btn-primary');
+  if(addBtn)addBtn.innerHTML=`<span>+</span> <span>${isEn?'Add Expense':'إضافة مصروف'}</span>`;
+
+  // userRole
+  const userRoleEl=document.querySelector('.user-role');
+  if(userRoleEl)userRoleEl.textContent=isEn?'👑 Trip Organizer':'👑 مسؤول الرحلة';
+
+  // nav section labels
+  const navLabels=document.querySelectorAll('.nav-section-label');
+  const navLabelMap=[
+    {ar:'الرئيسية',en:'Main'},
+    {ar:'المصاريف',en:'Expenses'},
+    {ar:'التحليل',en:'Analysis'},
+    {ar:'الأعضاء',en:'Members'},
+  ];
+  navLabels.forEach((el,i)=>{
+    if(navLabelMap[i])el.textContent=isEn?navLabelMap[i].en:navLabelMap[i].ar;
+  });
+}
+
 function toggleLang(){
   isEn=!isEn;
-  document.documentElement.setAttribute('lang',isEn?'en':'ar');
-  document.documentElement.setAttribute('dir',isEn?'ltr':'rtl');
-  document.getElementById('langBtn').textContent=isEn?'ع':'EN';
   localStorage.setItem('rehla_lang',isEn?'en':'ar');
   sessionStorage.setItem('rehla_lang',isEn?'en':'ar');
+  applyDashLang();
+  // أعد رسم الصفحة الحالية
+  const activePage=document.querySelector('.nav-item.active')?.id?.replace('nav-','');
+  if(activePage)showPage(activePage);
 }
 
 function confirmSignOut(){
