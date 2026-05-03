@@ -317,7 +317,7 @@ button{cursor:pointer}
 /* ════ RESPONSIVE ════ */
 @media(max-width:900px){
   .sidebar{transform:translateX(220px);box-shadow:none}
-  .sidebar.open{transform:translateX(0)}
+  .sidebar.open{transform:translateX(0);box-shadow:-8px 0 32px rgba(0,0,0,.4)}
   .sidebar-overlay.show{display:block}
   .main{margin-right:0}
   .hamburger{display:flex}
@@ -326,10 +326,33 @@ button{cursor:pointer}
 }
 @media(max-width:580px){
   .kpi-row{grid-template-columns:1fr 1fr}
-  .content{padding:12px}
-  .trip-header-card{flex-direction:column;align-items:flex-start}
-  .trip-stat{margin-top:10px}
+  .content{padding:10px}
+  .trip-header-card{flex-direction:column;align-items:flex-start;gap:10px;padding:14px}
+  .trip-thumb{width:56px;height:56px;font-size:1.4rem}
+  .trip-name{font-size:1.1rem}
+  .trip-stat{width:100%;display:flex;align-items:center;justify-content:space-between}
+  .trip-total-val{font-size:1.4rem}
+  .topbar{padding:0 12px;height:50px}
+  .topbar-title{font-size:.95rem}
+  .topbar-btn span:last-child{display:none}
+  .topbar-actions{gap:6px}
+  .topbar-btn{padding:6px 10px;font-size:.72rem}
   .form-row{grid-template-columns:1fr}
+  .section-head{padding:10px 12px}
+  .section-body{padding:10px 12px}
+  .kpi-card{padding:10px 12px;gap:8px}
+  .kpi-icon{width:34px;height:34px;font-size:.95rem}
+  .kpi-value{font-size:1.1rem}
+  .kpi-label{font-size:.65rem}
+  .exp-table{min-width:460px}
+  .grid-main{gap:12px;margin-bottom:12px}
+  .section-card{border-radius:10px}
+  .modal-box{max-height:95vh;border-radius:14px 14px 0 0}
+  .modal-ov{align-items:flex-end;padding:0}
+}
+@media(max-width:380px){
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .topbar-btn-primary span:first-child{display:none}
 }
 </style>
 </head>
@@ -604,29 +627,11 @@ button{cursor:pointer}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 /* ═══════════════════════════════════
-   CONFIG
+   GLOBALS
 ═══════════════════════════════════ */
 const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
 const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
 let sb;
-
-/* انتظر تحميل المكتبة بشكل موثوق */
-function waitForSupabase(n){
-  if(n>50){
-    document.getElementById('fsLoader').innerHTML=
-      '<div style="color:#f87171;font-size:.88rem;text-align:center;padding:20px">❌ تعذر تحميل المكتبة<br><small style="color:rgba(255,255,255,.4);font-size:.75rem">تحقق من الاتصال بالإنترنت</small></div>';
-    return;
-  }
-  if(window.supabase && window.supabase.createClient){
-    initApp();
-  } else {
-    setTimeout(()=>waitForSupabase(n+1), 100);
-  }
-}
-document.addEventListener('DOMContentLoaded',()=>waitForSupabase(0));
-
-function initApp(){
-  sb=window.supabase.createClient(SURL,SKEY);
 
 const COLORS=['#3b63d4','#7c3aed','#0891b2','#be185d','#b45309','#16a34a','#ea580c','#0d9488'];
 const CAT_STYLES={
@@ -649,12 +654,36 @@ let expenses=[];
 let activities=[];
 let mDistMode='all';
 let editingExpId=null;
-let isEn=sessionStorage.getItem('rehla_lang')==='en';
+let isEn=localStorage.getItem('rehla_lang')==='en'||sessionStorage.getItem('rehla_lang')==='en';
+let selectedCat='فندق';
 
-/* ═══════════════════════════════════
-   INIT — AUTH GUARD
-═══════════════════════════════════ */
-(async()=>{
+/* انتظر تحميل المكتبة بشكل موثوق */
+function waitForSupabase(n){
+  if(n>50){
+    document.getElementById('fsLoader').innerHTML=
+      '<div style="color:#f87171;font-size:.88rem;text-align:center;padding:20px">❌ تعذر تحميل المكتبة<br><small style="color:rgba(255,255,255,.4);font-size:.75rem">تحقق من الاتصال بالإنترنت</small></div>';
+    return;
+  }
+  if(window.supabase&&window.supabase.createClient){
+    initApp();
+  } else {
+    setTimeout(()=>waitForSupabase(n+1),100);
+  }
+}
+document.addEventListener('DOMContentLoaded',()=>waitForSupabase(0));
+
+async function initApp(){
+  sb=window.supabase.createClient(SURL,SKEY);
+
+  // تطبيق اللغة فوراً
+  if(isEn){
+    document.documentElement.setAttribute('lang','en');
+    document.documentElement.setAttribute('dir','ltr');
+  }
+  const langBtn=document.getElementById('langBtn');
+  if(langBtn) langBtn.textContent=isEn?'ع':'EN';
+
+  // AUTH CHECK
   const {data:{session}}=await sb.auth.getSession();
   if(!session){
     location.href='rehla-auth.html';
@@ -665,16 +694,9 @@ let isEn=sessionStorage.getItem('rehla_lang')==='en';
   document.getElementById('userName').textContent=name;
   document.getElementById('userAv').textContent=name.charAt(0).toUpperCase();
 
-  // تطبيق اللغة المحفوظة
-  if(isEn){
-    document.documentElement.setAttribute('lang','en');
-    document.documentElement.setAttribute('dir','ltr');
-    document.getElementById('langBtn').textContent='ع';
-  }
-
   await loadUserTrips();
   hideLoader();
-})();
+}
 
 function hideLoader(){
   document.getElementById('fsLoader').classList.add('hidden');
@@ -1127,8 +1149,6 @@ function renderShare(){
 /* ═══════════════════════════════════
    EXPENSE — ADD / EDIT / DELETE
 ═══════════════════════════════════ */
-let selectedCat='فندق';
-
 function selectCat(el,cat){
   selectedCat=cat;
   document.querySelectorAll('#qCatPills .cat-pill').forEach(p=>p.classList.remove('selected'));
@@ -1334,6 +1354,7 @@ function toggleLang(){
   document.documentElement.setAttribute('lang',isEn?'en':'ar');
   document.documentElement.setAttribute('dir',isEn?'ltr':'rtl');
   document.getElementById('langBtn').textContent=isEn?'ع':'EN';
+  localStorage.setItem('rehla_lang',isEn?'en':'ar');
   sessionStorage.setItem('rehla_lang',isEn?'en':'ar');
 }
 
@@ -1364,7 +1385,6 @@ function toast(msg,type='ok'){
 
 // Init modal date
 document.getElementById('mExpDate').value=new Date().toISOString().split('T')[0];
-} // end initApp
 </script>
 </body>
 </html>
