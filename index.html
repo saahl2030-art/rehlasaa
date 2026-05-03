@@ -390,6 +390,7 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
     <button class="nav-a" onclick="smoothScroll('#how')">كيف يعمل؟</button>
     <button class="nav-a" onclick="smoothScroll('#pricing')">الأسعار</button>
     <button class="nav-a" onclick="smoothScroll('#contact')">تواصل معنا</button>
+    <button class="nav-btn-outline" id="indexLangBtn" onclick="toggleIndexLang()">EN</button>
     <button class="nav-btn-outline" onclick="window.location.href='rehla-auth.html'">تسجيل الدخول</button>
     <button class="nav-btn-solid" onclick="window.location.href='rehla-auth.html'">ابدأ رحلة جديدة</button>
   </div>
@@ -657,6 +658,20 @@ function swapWord(){
   },500);
 }
 setInterval(swapWord,2800);
+
+// ════ LANGUAGE TOGGLE ════
+let indexLang=localStorage.getItem('rehla_lang')||'ar';
+(function(){
+  if(indexLang==='en'){
+    document.getElementById('indexLangBtn').textContent='ع';
+  }
+})();
+function toggleIndexLang(){
+  indexLang=indexLang==='ar'?'en':'ar';
+  localStorage.setItem('rehla_lang',indexLang);
+  sessionStorage.setItem('rehla_lang',indexLang);
+  document.getElementById('indexLangBtn').textContent=indexLang==='ar'?'EN':'ع';
+}
 </script>
 </body>
 </html>
