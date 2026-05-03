@@ -500,7 +500,7 @@ button{cursor:pointer}
           <div class="section-body">
             <p style="font-size:.78rem;color:var(--w60);margin-bottom:12px;line-height:1.6">شارك هذا الرابط مع أعضاء الرحلة.</p>
             <div class="share-link-box">
-              <span class="share-link-txt" id="shareLink">https://rehlasaa.com/trip/...</span>
+              <span class="share-link-txt" id="shareLink">https://rehlasaa.netlify.app/rehla-companion.html?trip=...</span>
               <button class="share-copy-btn" onclick="copyLink()">نسخ</button>
             </div>
             <div style="display:flex;align-items:center;gap:16px;margin-top:14px">
@@ -890,7 +890,7 @@ function buildDashboard(){
   document.getElementById('settingEnd').value=currentTrip.end_date||'';
 
   // share link
-  document.getElementById('shareLink').textContent=`https://rehlasaa.com/trip/${currentTrip.id}`;
+  document.getElementById('shareLink').textContent=`https://rehlasaa.netlify.app/rehla-companion.html?trip=${currentTrip.id}`;
   populatePayerSelects();
 }
 
@@ -1137,14 +1137,25 @@ function renderMembersPage(){
 function renderShare(){
   const el=document.getElementById('shareMembers');
   if(!el)return;
-  if(!members.length){el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">أضف أعضاء أولاً</div>`;return}
-  el.innerHTML=members.map((m,i)=>`
-    <div class="share-member-row">
+  if(!members.length){
+    el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">${isEn?'Add members first':'أضف أعضاء أولاً'}</div>`;
+    return;
+  }
+  const tripLink=`https://rehlasaa.netlify.app/rehla-companion.html?trip=${currentTrip?.id||''}`;
+  el.innerHTML=members.map((m,i)=>{
+    const waMsg=encodeURIComponent(
+      `مرحباً ${m.name} 👋\nتمت دعوتك لمتابعة رحلة "${currentTrip?.name||''}"\n\nاضغط الرابط لمشاهدة المصاريف وحسابك:\n${tripLink}\n\nرحلة+ ✈`
+    );
+    const waLink=m.phone?`https://wa.me/${m.phone.replace(/\D/g,'')}?text=${waMsg}`:'';
+    return `<div class="share-member-row">
       <div class="shr-av" style="background:${m.color}">${m.name.charAt(0)}</div>
       <div><div class="shr-name">${m.name}</div><div style="font-size:.64rem;color:var(--w40)">${m.phone||'بدون رقم'}</div></div>
-      <span class="shr-status ${i===0?'shr-sent':'shr-pending'}">${i===0?'✓ أُرسل':'لم يُرسل'}</span>
-      <button class="shr-btn" onclick="toast('تم الإرسال لـ ${m.name}','ok')">💬 إرسال</button>
-    </div>`).join('');
+      <span class="shr-status ${m.phone?'shr-pending':'shr-pending'}">${m.phone?'لم يُرسل':'بدون رقم'}</span>
+      <button class="shr-btn" onclick="${waLink?`window.open('${waLink}','_blank');toast('تم فتح واتساب','ok')`:`toast('${isEn?'No phone number':'لا يوجد رقم واتساب'}','err')`}">
+        💬 ${isEn?'Send':'إرسال'}
+      </button>
+    </div>`;
+  }).join('');
 }
 
 /* ═══════════════════════════════════
@@ -1516,7 +1527,7 @@ function sendWA(phone,from,to,amount){
 }
 
 function copyLink(){
-  const link=`https://rehlasaa.com/trip/${currentTrip?.id||'...'}`;
+  const link=`https://rehlasaa.netlify.app/rehla-companion.html?trip=${currentTrip?.id||''}`;
   navigator.clipboard.writeText(link).catch(()=>{});
   toast('✓ تم نسخ الرابط','ok');
 }
