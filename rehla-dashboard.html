@@ -555,6 +555,7 @@ html[dir="ltr"] .settle-amount{margin-right:0;margin-left:auto}
       <div class="topbar-title" id="topbarTitle">لوحة الرحلة</div>
     </div>
     <div class="topbar-actions">
+      <button class="topbar-btn topbar-btn-ghost" onclick="toggleLang()" id="langBtn">EN</button>
       <button class="topbar-btn topbar-btn-ghost" onclick="showPage('share')">🔗 مشاركة</button>
       <button class="topbar-btn topbar-btn-primary" onclick="openAddExpModal()">
         <span>+</span> <span>إضافة مصروف</span>
@@ -1149,6 +1150,23 @@ let nextId=7;
 const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(Math.round(n)).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
 const fmt=n=>Number(n).toLocaleString('ar-AE',{minimumFractionDigits:0,maximumFractionDigits:2});
+
+/* ════ LANGUAGE ════ */
+let isEn=(sessionStorage.getItem('rehla_lang')==='en');
+(function(){
+  if(isEn){
+    document.documentElement.setAttribute('lang','en');
+    document.documentElement.setAttribute('dir','ltr');
+    document.getElementById('langBtn').textContent='ع';
+  }
+})();
+function toggleLang(){
+  isEn=!isEn;
+  document.documentElement.setAttribute('lang',isEn?'en':'ar');
+  document.documentElement.setAttribute('dir',isEn?'ltr':'rtl');
+  document.getElementById('langBtn').textContent=isEn?'ع':'EN';
+  sessionStorage.setItem('rehla_lang',isEn?'en':'ar');
+}
 
 /* ════ NAVIGATION ════ */
 function showPage(page){
