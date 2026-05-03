@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>رحلة+ — عرض الرحلة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.12);
+  --red:#f87171;--red-dim:rgba(248,113,113,.12);
+  --orange:#fb923c;
+  --white:#fff;
+  --w70:rgba(255,255,255,.7);--w50:rgba(255,255,255,.5);
+  --w30:rgba(255,255,255,.3);--w10:rgba(255,255,255,.1);--w06:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.08);
+  --card:rgba(255,255,255,.09);
+  --r:12px;--rsm:9px;--rxs:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Cairo',sans-serif;
+  background:linear-gradient(160deg,#1230a0 0%,#1a3a8c 50%,#162e78 100%);
+  min-height:100vh;color:var(--white);
+  -webkit-font-smoothing:antialiased;
+}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:2px}
+
+/* NAV */
+nav{
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 4%;background:rgba(18,48,160,.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:100;
+}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo-icon{width:34px;height:34px;border-radius:9px;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:900;color:#1a3a8c;flex-shrink:0}
+.nav-logo-name{font-family:'Tajawal',sans-serif;font-size:1.15rem;font-weight:900}
+.nav-logo-name em{color:var(--cyan);font-style:normal}
+.nav-tag{background:var(--cyan-dim);border:1px solid var(--cyan-bright);color:var(--cyan);font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:100px}
+.btn-lang{padding:6px 12px;border-radius:var(--rxs);background:var(--w10);border:1px solid var(--border);color:var(--w70);font-size:.78rem;font-weight:700;transition:all .2s}
+.btn-lang:hover{background:rgba(255,255,255,.15);color:var(--white)}
+
+/* PAGE */
+.page{max-width:720px;margin:0 auto;padding:20px 4% 60px;width:100%}
+
+/* LOADING */
+.loader{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:16px}
+.spinner{width:44px;height:44px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:var(--cyan);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-txt{font-size:.88rem;color:var(--w50);font-weight:600}
+
+/* ERROR */
+.error-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;gap:12px;padding:20px}
+.error-icon{font-size:3.5rem}
+.error-title{font-family:'Tajawal',sans-serif;font-size:1.5rem;font-weight:900;color:var(--red)}
+.error-sub{font-size:.85rem;color:var(--w50);line-height:1.7;max-width:320px}
+
+/* TRIP HEADER */
+.trip-header{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:18px;margin-bottom:16px;
+  display:flex;align-items:center;gap:14px;
+}
+.trip-emoji{width:64px;height:64px;border-radius:10px;background:var(--cyan-dim);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.trip-info{flex:1}
+.trip-name{font-family:'Tajawal',sans-serif;font-size:1.25rem;font-weight:900;margin-bottom:6px}
+.trip-meta{display:flex;flex-wrap:wrap;gap:10px}
+.trip-meta-item{font-size:.75rem;color:var(--w60);display:flex;align-items:center;gap:4px}
+.trip-meta-item strong{color:var(--w90)}
+.trip-status{padding:3px 10px;border-radius:100px;font-size:.68rem;font-weight:800;flex-shrink:0;align-self:flex-start}
+.status-active{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.25)}
+.status-archived{background:var(--w10);color:var(--w50);border:1px solid var(--border2)}
+
+/* KPI ROW */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:14px;text-align:center}
+.kpi-val{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;line-height:1;margin-bottom:4px}
+.kpi-lbl{font-size:.68rem;color:var(--w50);font-weight:600}
+
+/* MY BALANCE CARD */
+.my-balance{
+  border-radius:var(--r);padding:18px;margin-bottom:16px;
+  border:1.5px solid;
+  display:flex;align-items:center;gap:14px;
+}
+.my-balance.pos{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.3)}
+.my-balance.neg{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.3)}
+.my-balance.zero{background:var(--w06);border-color:var(--border2)}
+.mb-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.mb-icon.pos{background:var(--green-dim)}
+.mb-icon.neg{background:var(--red-dim)}
+.mb-icon.zero{background:var(--w10)}
+.mb-info{flex:1}
+.mb-label{font-size:.78rem;color:var(--w60);margin-bottom:4px;font-weight:600}
+.mb-amount{font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900;line-height:1}
+.mb-amount.pos{color:var(--green)}
+.mb-amount.neg{color:var(--red)}
+.mb-amount.zero{color:var(--w50)}
+.mb-note{font-size:.72rem;color:var(--w50);margin-top:4px}
+
+/* SETTLEMENT */
+.settle-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.section-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--border2);background:rgba(255,255,255,.04)}
+.section-title{font-size:.85rem;font-weight:800;display:flex;align-items:center;gap:6px}
+.section-body{padding:12px 14px}
+.settle-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--w06);border:1px solid var(--border2);border-radius:var(--rsm);margin-bottom:7px}
+.settle-item:last-child{margin-bottom:0}
+.settle-item.highlight{background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.25)}
+.settle-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;flex-shrink:0;color:#fff}
+.settle-from{font-size:.82rem;font-weight:800;color:var(--red)}
+.settle-arrow{color:var(--w30);font-size:1rem;flex-shrink:0}
+.settle-to{font-size:.82rem;font-weight:800;color:var(--green)}
+.settle-amount{margin-right:auto;font-family:'Tajawal',sans-serif;font-size:.95rem;font-weight:900;color:var(--cyan)}
+.wa-btn{padding:5px 12px;border-radius:100px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:var(--green);font-size:.7rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px;flex-shrink:0}
+.wa-btn:hover{background:rgba(34,197,94,.25)}
+.settled-msg{text-align:center;padding:24px;color:var(--w50)}
+.settled-msg .big{font-size:2rem;margin-bottom:6px}
+.settled-msg .txt{font-size:.85rem;font-weight:700;color:var(--green)}
+
+/* MEMBERS */
+.members-list{display:flex;flex-direction:column;gap:8px}
+.member-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--w06);border:1px solid var(--border2);border-radius:var(--rsm);transition:background .15s}
+.member-row.me{background:var(--cyan-dim);border-color:var(--cyan-bright)}
+.member-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;flex-shrink:0;color:#fff}
+.member-info{flex:1}
+.member-name{font-size:.82rem;font-weight:800}
+.member-role{font-size:.66rem;color:var(--w50);margin-top:1px}
+.member-bal{text-align:left;font-family:'Tajawal',sans-serif;font-size:.85rem;font-weight:800}
+.bal-pos{color:var(--green)}
+.bal-neg{color:var(--red)}
+.bal-zero{color:var(--w40)}
+.me-badge{background:var(--cyan-dim);border:1px solid var(--cyan-bright);color:var(--cyan);font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:100px}
+
+/* EXPENSES */
+.exp-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.exp-table{width:100%;border-collapse:collapse;min-width:460px}
+.exp-table th{font-size:.66rem;font-weight:800;color:var(--w40);text-align:right;padding:8px 10px;border-bottom:1px solid var(--border2);background:rgba(255,255,255,.03);white-space:nowrap}
+.exp-table td{font-size:.78rem;padding:9px 10px;border-bottom:1px solid var(--border2);vertical-align:middle}
+.exp-table tr:last-child td{border-bottom:none}
+.exp-table tr:hover td{background:rgba(255,255,255,.02)}
+.exp-name{font-weight:700}
+.exp-note{font-size:.66rem;color:var(--w40);margin-top:1px}
+.cat-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:100px;font-size:.68rem;font-weight:700;white-space:nowrap}
+.payer-chip{display:flex;align-items:center;gap:5px}
+.payer-av{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:900;flex-shrink:0;color:#fff}
+.exp-amt{font-family:'Tajawal',sans-serif;font-size:.88rem;font-weight:900}
+.empty-exp{text-align:center;padding:28px;color:var(--w40);font-size:.82rem}
+
+/* FOOTER NOTE */
+.footer-note{text-align:center;margin-top:24px;font-size:.74rem;color:var(--w30);line-height:1.7}
+.footer-note a{color:var(--cyan);text-decoration:none;font-weight:700}
+
+/* MOBILE */
+@media(max-width:540px){
+  .kpi-row{grid-template-columns:1fr 1fr 1fr}
+  .trip-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .trip-emoji{width:52px;height:52px;font-size:1.4rem}
+  .my-balance{flex-direction:column;align-items:flex-start;gap:10px}
+  .page{padding:16px 3.5% 50px}
+}
+@media(max-width:380px){
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .settle-amount{font-size:.85rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">✈</div>
+    <div><div class="nav-logo-name">رحلة<em>+</em></div></div>
+  </a>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="nav-tag" id="navTag">عرض الرحلة</span>
+    <button class="btn-lang" id="langBtn" onclick="toggleLang()">🌐 EN</button>
+  </div>
+</nav>
+
+<div class="page">
+  <!-- LOADING -->
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <div class="loader-txt" id="loaderTxt">جاري تحميل بيانات الرحلة...</div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-state" id="errorState" style="display:none">
+    <div class="error-icon">🔍</div>
+    <div class="error-title" id="errorTitle">الرحلة غير موجودة</div>
+    <div class="error-sub" id="errorSub">تأكد من الرابط أو تواصل مع مسؤول الرحلة</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content" style="display:none">
+
+    <!-- TRIP HEADER -->
+    <div class="trip-header">
+      <div class="trip-emoji" id="tripEmoji">✈</div>
+      <div class="trip-info">
+        <div class="trip-name" id="tripName">—</div>
+        <div class="trip-meta">
+          <div class="trip-meta-item">📍 <strong id="tripDest">—</strong></div>
+          <div class="trip-meta-item">📅 <strong id="tripDates">—</strong></div>
+          <div class="trip-meta-item">💱 <strong id="tripCurr">—</strong></div>
+          <div class="trip-meta-item">👥 <strong id="tripMembers">—</strong></div>
+        </div>
+      </div>
+      <div class="trip-status status-active" id="tripStatus">● نشطة</div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-val" style="color:var(--cyan)" id="kpiTotal">٠</div>
+        <div class="kpi-lbl" id="kpiTotalLbl">إجمالي المصاريف</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val" style="color:var(--orange)" id="kpiCount">٠</div>
+        <div class="kpi-lbl" id="kpiCountLbl">عدد المصاريف</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val" style="color:var(--green)" id="kpiPer">٠</div>
+        <div class="kpi-lbl" id="kpiPerLbl">نصيب كل شخص</div>
+      </div>
+    </div>
+
+    <!-- MY BALANCE -->
+    <div class="my-balance zero" id="myBalance">
+      <div class="mb-icon zero" id="myBalIcon">💰</div>
+      <div class="mb-info">
+        <div class="mb-label" id="myBalLabel">رصيدك في الرحلة</div>
+        <div class="mb-amount zero" id="myBalAmount">—</div>
+        <div class="mb-note" id="myBalNote">جاري الحساب...</div>
+      </div>
+    </div>
+
+    <!-- SETTLEMENT -->
+    <div class="settle-card">
+      <div class="section-head">
+        <div class="section-title">🧮 <span id="settleTtl">تصفية الحساب</span></div>
+        <div style="font-size:.7rem;color:var(--cyan)" id="settleNote">أقل عدد تحويلات</div>
+      </div>
+      <div class="section-body" id="settleBody">
+        <div class="loader" style="min-height:80px"><div class="spinner" style="width:28px;height:28px"></div></div>
+      </div>
+    </div>
+
+    <!-- MEMBERS -->
+    <div class="settle-card">
+      <div class="section-head">
+        <div class="section-title">👥 <span id="membersTtl">الأعضاء</span></div>
+        <div style="font-size:.7rem;color:var(--w50)" id="membersCount">—</div>
+      </div>
+      <div class="section-body">
+        <div class="members-list" id="membersList"></div>
+      </div>
+    </div>
+
+    <!-- EXPENSES -->
+    <div class="settle-card">
+      <div class="section-head">
+        <div class="section-title">💳 <span id="expTtl">قائمة المصاريف</span></div>
+        <div style="font-size:.7rem;color:var(--w50)" id="expCount">—</div>
+      </div>
+      <div class="exp-table-wrap">
+        <table class="exp-table">
+          <thead><tr>
+            <th id="thName">اسم المصروف</th>
+            <th id="thCat">التصنيف</th>
+            <th id="thPayer">من دفع</th>
+            <th id="thDate">التاريخ</th>
+            <th id="thAmount">المبلغ</th>
+          </tr></thead>
+          <tbody id="expBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-note">
+      <span id="footerTxt">تم إنشاء هذا الرابط بواسطة مسؤول الرحلة عبر</span>
+      <a href="index.html">رحلة+</a><br>
+      <span id="footerTxt2">لإنشاء رحلتك الخاصة وتتبع المصاريف</span>
+      <a href="rehla-auth.html" id="footerLink">سجّل مجاناً</a>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /page -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* ══════════════════════
+   CONFIG
+══════════════════════ */
+const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
+const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
+let sb;
+
+const COLORS=['#3b63d4','#7c3aed','#0891b2','#be185d','#b45309','#16a34a','#ea580c','#0d9488'];
+const CAT_STYLES={
+  'فندق':{icon:'🏨',bg:'rgba(88,166,255,.15)',color:'#60a5fa'},
+  'طيران':{icon:'✈',bg:'rgba(167,139,250,.15)',color:'#a78bfa'},
+  'مطاعم':{icon:'🍽',bg:'rgba(251,146,60,.15)',color:'#fb923c'},
+  'مواصلات':{icon:'🚗',bg:'rgba(56,189,248,.15)',color:'#38bdf8'},
+  'ترفيه':{icon:'🎡',bg:'rgba(244,114,182,.15)',color:'#f472b6'},
+  'مشتريات':{icon:'🛍',bg:'rgba(45,212,191,.15)',color:'#2dd4bf'},
+  'أخرى':{icon:'📦',bg:'rgba(148,163,184,.15)',color:'#94a3b8'},
+};
+const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+const toAr=n=>String(Math.round(n)).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
+const fmt=n=>Number(n).toLocaleString('ar-AE',{minimumFractionDigits:0,maximumFractionDigits:2});
+
+let trip=null, members=[], expenses=[], isEn=localStorage.getItem('rehla_lang')==='en';
+
+/* ══════════════════════
+   LANGUAGE
+══════════════════════ */
+const TEXTS={
+  navTag:{ar:'عرض الرحلة',en:'Trip View'},
+  loaderTxt:{ar:'جاري تحميل بيانات الرحلة...',en:'Loading trip data...'},
+  errorTitle:{ar:'الرحلة غير موجودة',en:'Trip Not Found'},
+  errorSub:{ar:'تأكد من الرابط أو تواصل مع مسؤول الرحلة',en:'Check the link or contact the trip organizer'},
+  kpiTotalLbl:{ar:'إجمالي المصاريف',en:'Total Expenses'},
+  kpiCountLbl:{ar:'عدد المصاريف',en:'Expenses Count'},
+  kpiPerLbl:{ar:'نصيب كل شخص',en:'Per Person'},
+  myBalLabel:{ar:'رصيدك في الرحلة',en:'Your Balance'},
+  settleTtl:{ar:'تصفية الحساب',en:'Settlement'},
+  settleNote:{ar:'أقل عدد تحويلات',en:'Minimum transfers'},
+  membersTtl:{ar:'الأعضاء',en:'Members'},
+  expTtl:{ar:'قائمة المصاريف',en:'Expenses List'},
+  thName:{ar:'اسم المصروف',en:'Expense'},
+  thCat:{ar:'التصنيف',en:'Category'},
+  thPayer:{ar:'من دفع',en:'Paid by'},
+  thDate:{ar:'التاريخ',en:'Date'},
+  thAmount:{ar:'المبلغ',en:'Amount'},
+  footerTxt:{ar:'تم إنشاء هذا الرابط بواسطة مسؤول الرحلة عبر',en:'This link was created by the trip organizer via'},
+  footerTxt2:{ar:'لإنشاء رحلتك الخاصة وتتبع المصاريف',en:'To create your own trip and track expenses'},
+  footerLink:{ar:'سجّل مجاناً',en:'Sign up free'},
+  statusActive:{ar:'● نشطة',en:'● Active'},
+  statusArchived:{ar:'● مؤرشفة',en:'● Archived'},
+};
+
+function applyLang(){
+  const root=document.getElementById('htmlRoot');
+  root.setAttribute('lang',isEn?'en':'ar');
+  root.setAttribute('dir',isEn?'ltr':'rtl');
+  document.getElementById('langBtn').textContent=isEn?'🌐 ع':'🌐 EN';
+  Object.keys(TEXTS).forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.textContent=isEn?TEXTS[id].en:TEXTS[id].ar;
+  });
+  localStorage.setItem('rehla_lang',isEn?'en':'ar');
+  sessionStorage.setItem('rehla_lang',isEn?'en':'ar');
+}
+
+function toggleLang(){
+  isEn=!isEn;
+  applyLang();
+  if(trip)renderAll();
+}
+
+/* ══════════════════════
+   INIT
+══════════════════════ */
+function waitForSB(n){
+  if(n>60){showError(isEn?'Connection error':'خطأ في الاتصال');return}
+  if(window.supabase&&window.supabase.createClient)initApp();
+  else setTimeout(()=>waitForSB(n+1),100);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  applyLang();
+  waitForSB(0);
+});
+
+async function initApp(){
+  sb=window.supabase.createClient(SURL,SKEY);
+  // جلب الـ trip ID من الرابط
+  const params=new URLSearchParams(window.location.search);
+  const tripId=params.get('trip')||params.get('id');
+  if(!tripId){showError(isEn?'No trip ID in link':'لا يوجد معرّف رحلة في الرابط');return}
+  await loadTrip(tripId);
+}
+
+/* ══════════════════════
+   LOAD DATA
+══════════════════════ */
+async function loadTrip(tripId){
+  try{
+    // جلب الرحلة
+    const {data:t,error:tErr}=await sb.from('trips').select('*').eq('id',tripId).single();
+    if(tErr||!t){showError(isEn?'Trip not found':'الرحلة غير موجودة');return}
+    trip=t;
+
+    // جلب الأعضاء
+    const {data:m}=await sb.from('trip_members').select('*').eq('trip_id',tripId).order('created_at');
+    members=(m||[]).map((mem,i)=>({...mem,color:COLORS[i%COLORS.length]}));
+
+    // جلب المصاريف
+    const {data:e}=await sb.from('expenses').select('*').eq('trip_id',tripId).order('created_at',{ascending:false});
+    expenses=(e||[]).map(exp=>({
+      ...exp,
+      amount:Number(exp.amount),
+      paidBy:exp.paid_by,
+      cat:exp.category||'أخرى',
+      distAll:exp.dist_all!==false,
+    }));
+
+    // عرض المحتوى
+    document.getElementById('loader').style.display='none';
+    document.getElementById('content').style.display='block';
+    renderAll();
+
+  }catch(err){
+    showError(err.message||'خطأ في التحميل');
+  }
+}
+
+/* ══════════════════════
+   RENDER
+══════════════════════ */
+function renderAll(){
+  renderHeader();
+  renderKPIs();
+  renderMyBalance();
+  renderSettle();
+  renderMembers();
+  renderExpenses();
+}
+
+function renderHeader(){
+  document.getElementById('tripName').textContent=trip.name||'—';
+  document.getElementById('tripDest').textContent=trip.destination||'—';
+  const s=trip.start_date?fmtDate(trip.start_date):'—';
+  const e=trip.end_date?fmtDate(trip.end_date):'—';
+  document.getElementById('tripDates').textContent=s+' — '+e;
+  document.getElementById('tripCurr').textContent=trip.currency||'AED';
+  document.getElementById('tripMembers').textContent=toAr(members.length)+(isEn?' members':' أعضاء');
+  document.getElementById('tripEmoji').textContent=getEmoji(trip.destination);
+  const isArchived=trip.status==='archived';
+  const statusEl=document.getElementById('tripStatus');
+  statusEl.textContent=isArchived?(isEn?'● Archived':'● مؤرشفة'):(isEn?'● Active':'● نشطة');
+  statusEl.className='trip-status '+(isArchived?'status-archived':'status-active');
+}
+
+function renderKPIs(){
+  const total=expenses.reduce((s,e)=>s+e.amount,0);
+  document.getElementById('kpiTotal').textContent=fmt(total);
+  document.getElementById('kpiCount').textContent=toAr(expenses.length);
+  document.getElementById('kpiPer').textContent=members.length?fmt(Math.round(total/members.length)):0;
+}
+
+function renderMyBalance(){
+  const stats=calcStats();
+  // نحاول نعرف المستخدم الحالي من أول عضو (المنظم) أو نعرض الإجمالي
+  // في هذه الصفحة نعرض ملخص الكل
+  const total=expenses.reduce((s,e)=>s+e.amount,0);
+  const perPerson=members.length?Math.round(total/members.length):0;
+
+  const el=document.getElementById('myBalance');
+  const iconEl=document.getElementById('myBalIcon');
+  const amtEl=document.getElementById('myBalAmount');
+  const noteEl=document.getElementById('myBalNote');
+  const lblEl=document.getElementById('myBalLabel');
+
+  lblEl.textContent=isEn?'Trip Summary':'ملخص الرحلة';
+  amtEl.textContent=fmt(total)+' '+(trip.currency||'AED');
+  amtEl.className='mb-amount';
+  amtEl.style.color='var(--cyan)';
+  iconEl.className='mb-icon';
+  iconEl.style.background='var(--cyan-dim)';
+  iconEl.textContent='💰';
+  el.className='my-balance';
+  el.style.background='rgba(56,189,248,.08)';
+  el.style.borderColor='rgba(56,189,248,.3)';
+  noteEl.textContent=(isEn?'Per person: ':'نصيب كل شخص: ')+fmt(perPerson)+' '+(trip.currency||'AED');
+}
+
+function calcStats(){
+  const stats={};
+  members.forEach(m=>{stats[m.id]={paid:0,owe:0,name:m.name,color:m.color,phone:m.phone}});
+  expenses.forEach(e=>{
+    if(stats[e.paidBy]!==undefined)stats[e.paidBy].paid+=e.amount;
+    const pp=e.distAll?members.map(m=>m.id):(e.participants||[]);
+    const share=e.amount/(pp.length||members.length||1);
+    (pp.length?pp:members.map(m=>m.id)).forEach(pid=>{
+      if(stats[pid]!==undefined)stats[pid].owe+=share;
+    });
+  });
+  return stats;
+}
+
+function minimize(stats){
+  const cred=members.map(m=>({...m,bal:stats[m.id].paid-stats[m.id].owe})).filter(m=>m.bal>0.01).sort((a,b)=>b.bal-a.bal);
+  const debt=members.map(m=>({...m,bal:stats[m.id].paid-stats[m.id].owe})).filter(m=>m.bal<-0.01).sort((a,b)=>a.bal-b.bal);
+  const txns=[];let ci=0,di=0;
+  while(ci<cred.length&&di<debt.length){
+    const amt=Math.min(cred[ci].bal,-debt[di].bal);
+    if(amt>0.01)txns.push({from:debt[di],to:cred[ci],amount:Math.round(amt*100)/100});
+    cred[ci].bal-=amt;debt[di].bal+=amt;
+    if(Math.abs(cred[ci].bal)<0.01)ci++;
+    if(Math.abs(debt[di].bal)<0.01)di++;
+  }
+  return txns;
+}
+
+function renderSettle(){
+  const stats=calcStats();
+  const txns=minimize(stats);
+  const el=document.getElementById('settleBody');
+  if(!txns.length){
+    el.innerHTML=`<div class="settled-msg"><div class="big">🎉</div><div class="txt">${isEn?'All settled! No outstanding balances.':'الحسابات متوازنة! لا توجد مبالغ متبقية.'}</div></div>`;
+    return;
+  }
+  el.innerHTML=txns.map(t=>`
+    <div class="settle-item">
+      <div class="settle-av" style="background:${t.from.color}">${t.from.name.charAt(0)}</div>
+      <div class="settle-from">${t.from.name}</div>
+      <div class="settle-arrow">⟵</div>
+      <div class="settle-av" style="background:${t.to.color}">${t.to.name.charAt(0)}</div>
+      <div class="settle-to">${t.to.name}</div>
+      <div class="settle-amount">${fmt(t.amount)} ${trip.currency||'د'}</div>
+      ${t.from.phone?`<button class="wa-btn" onclick="sendWA('${t.from.phone}','${t.from.name}','${t.to.name}','${fmt(t.amount)}')">💬 ${isEn?'WhatsApp':'واتساب'}</button>`:''}
+    </div>`).join('');
+}
+
+function renderMembers(){
+  const stats=calcStats();
+  document.getElementById('membersCount').textContent=toAr(members.length)+(isEn?' members':' أعضاء');
+  document.getElementById('membersList').innerHTML=members.map(m=>{
+    const s=stats[m.id]||{paid:0,owe:0};
+    const net=(s.paid||0)-(s.owe||0);
+    const balClass=net>0.01?'bal-pos':net<-0.01?'bal-neg':'bal-zero';
+    const balText=net>0.01?`+${fmt(net)}`:net<-0.01?`-${fmt(-net)}`:'٠';
+    return `<div class="member-row ${m.is_organizer?'me':''}">
+      <div class="member-av" style="background:${m.color}">${m.name.charAt(0)}</div>
+      <div class="member-info">
+        <div class="member-name">${m.name} ${m.is_organizer?`<span class="me-badge">👑 ${isEn?'Organizer':'مسؤول'}</span>`:''}</div>
+        <div class="member-role">${m.role_icon||'👤'} ${m.role||'مرافق'}</div>
+      </div>
+      <div style="font-size:.68rem;color:var(--w40);text-align:left">
+        <div>${isEn?'Paid':'دفع'}: <span style="color:var(--w70);font-family:'Tajawal',sans-serif;font-weight:700">${fmt(s.paid||0)}</span></div>
+        <div>${isEn?'Owes':'عليه'}: <span style="color:var(--w70);font-family:'Tajawal',sans-serif;font-weight:700">${fmt(s.owe||0)}</span></div>
+      </div>
+      <div class="member-bal ${balClass}">${balText}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderExpenses(){
+  document.getElementById('expCount').textContent=toAr(expenses.length)+(isEn?' expenses':' مصروف');
+  const body=document.getElementById('expBody');
+  if(!expenses.length){
+    body.innerHTML=`<tr><td colspan="5" class="empty-exp">${isEn?'No expenses yet':'لا توجد مصاريف بعد'}</td></tr>`;
+    return;
+  }
+  body.innerHTML=expenses.map(e=>{
+    const payer=members.find(m=>m.id===e.paidBy);
+    const cs=CAT_STYLES[e.cat]||CAT_STYLES['أخرى'];
+    return `<tr>
+      <td><div class="exp-name">${e.title}</div>${e.note?`<div class="exp-note">${e.note}</div>`:''}</td>
+      <td><span class="cat-badge" style="background:${cs.bg};color:${cs.color}">${cs.icon} ${e.cat}</span></td>
+      <td><div class="payer-chip">
+        <div class="payer-av" style="background:${payer?.color||'#666'}">${payer?.name?.charAt(0)||'؟'}</div>
+        <span style="font-size:.75rem">${payer?.name||'—'}</span>
+      </div></td>
+      <td style="color:var(--w50);font-size:.72rem">${e.expense_date||e.date||'—'}</td>
+      <td><span class="exp-amt" style="color:${cs.color}">${fmt(e.amount)}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+/* ══════════════════════
+   UTILS
+══════════════════════ */
+function getEmoji(dest){
+  if(!dest)return'✈';
+  const d=dest.toLowerCase();
+  if(d.includes('دبي')||d.includes('dubai'))return'🌴';
+  if(d.includes('تركيا')||d.includes('turkey'))return'🕌';
+  if(d.includes('مصر')||d.includes('egypt'))return'🏺';
+  if(d.includes('فرنسا')||d.includes('france')||d.includes('باريس'))return'🗼';
+  if(d.includes('يابان')||d.includes('japan'))return'🗾';
+  if(d.includes('تايلاند')||d.includes('thailand'))return'🌺';
+  if(d.includes('لندن')||d.includes('london')||d.includes('بريطانيا'))return'🎡';
+  return'✈';
+}
+
+function fmtDate(d){
+  if(!d)return'—';
+  const p=d.split('-');
+  return p[2]+'/'+p[1]+'/'+p[0];
+}
+
+function sendWA(phone,from,to,amount){
+  const msg=encodeURIComponent(
+    `مرحباً ${from} 👋\nيرجى تحويل ${amount} ${trip?.currency||'درهم'} إلى ${to} لتسوية حسابات رحلة "${trip?.name||''}"\n\nرحلة+ 🌍`
+  );
+  window.open(`https://wa.me/${phone.replace(/\D/g,'')}?text=${msg}`,'_blank');
+}
+
+function showError(msg){
+  document.getElementById('loader').style.display='none';
+  document.getElementById('errorState').style.display='flex';
+  document.getElementById('errorTitle').textContent=msg;
+}
+</script>
+</body>
+</html>
