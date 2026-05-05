@@ -63,7 +63,7 @@ button{cursor:pointer}
 /* ════ FULL SCREEN LOADER ════ */
 .fs-loader{
   position:fixed;inset:0;z-index:9999;
-  background:linear-gradient(160deg,#060e2e,#0a1628);
+  background:linear-gradient(160deg,var(--bg),var(--bg2));
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:20px;transition:opacity .4s;
 }
@@ -136,7 +136,7 @@ button{cursor:pointer}
 .main{flex:1;margin-right:var(--sidebar-w);display:flex;flex-direction:column;min-height:100vh}
 
 /* ════ TOPBAR ════ */
-.topbar{height:56px;background:rgba(18,48,160,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:50}
+.topbar{height:56px;background:var(--sidebar2);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:50}
 .topbar-title{font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:900}
 .topbar-actions{display:flex;align-items:center;gap:8px}
 .topbar-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--rxs);font-size:.78rem;font-weight:700;transition:all .2s}
@@ -208,7 +208,7 @@ button{cursor:pointer}
 .f-inp::placeholder{color:var(--w30)}
 .f-inp:focus,.f-sel:focus{border-color:var(--cyan);background:var(--w10);box-shadow:0 0 0 3px var(--cyan-dim)}
 .f-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='rgba(255,255,255,.4)' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 10px center;padding-left:28px;cursor:pointer}
-.f-sel option{background:#1a3a8c}
+.f-sel option{background:var(--bg2)}
 
 .cat-pills{display:flex;flex-wrap:wrap;gap:5px}
 .cat-pill{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:100px;border:1px solid var(--border2);background:var(--w06);color:var(--w60);font-size:.72rem;font-weight:700;cursor:pointer;transition:all .2s}
@@ -310,7 +310,7 @@ button{cursor:pointer}
 /* ════ MODAL ════ */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
 .modal-ov.show{opacity:1;pointer-events:all}
-.modal-box{background:linear-gradient(160deg,#1a3a8c,#162e78);border:1px solid var(--border);border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:scale(.95) translateY(10px);transition:transform .25s cubic-bezier(.34,1.4,.64,1)}
+.modal-box{background:linear-gradient(160deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:scale(.95) translateY(10px);transition:transform .25s cubic-bezier(.34,1.4,.64,1)}
 .modal-ov.show .modal-box{transform:scale(1) translateY(0)}
 .modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border2)}
 .modal-title{font-size:.95rem;font-weight:800}
