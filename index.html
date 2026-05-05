@@ -4,403 +4,406 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>رحلة+ — إدارة مصاريف السفر</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script src="rehla-lang.js"></script>
 <style>
-:root {
-  --blue: #2563eb;
-  --blue-dark: #1d4ed8;
-  --blue-deeper: #1e3a8a;
-  --blue-navy: #0f1f5c;
-  --blue-bg: #060e2e;
-  --gold: #f59e0b;
-  --gold-light: #fcd34d;
-  --white: #ffffff;
-  --white-90: rgba(255,255,255,0.9);
-  --white-70: rgba(255,255,255,0.7);
-  --white-40: rgba(255,255,255,0.4);
-  --white-15: rgba(255,255,255,0.15);
-  --white-08: rgba(255,255,255,0.08);
-  --white-05: rgba(255,255,255,0.05);
-  --border-light: rgba(255,255,255,0.12);
-  --shadow-blue: 0 8px 32px rgba(37,99,235,0.35);
-  --shadow-card: 0 20px 60px rgba(0,0,0,0.25);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-xs: 8px;
+:root{
+  --teal:#0891b2;
+  --teal-dark:#0e7490;
+  --teal-darker:#164e63;
+  --teal-light:#ecfeff;
+  --teal-mid:#a5f3fc;
+  --teal-shadow:0 8px 32px rgba(8,145,178,0.25);
+  --white:#ffffff;
+  --gray-50:#f8fafc;
+  --gray-100:#f1f5f9;
+  --gray-200:#e2e8f0;
+  --gray-400:#94a3b8;
+  --gray-600:#475569;
+  --gray-800:#1e293b;
+  --gray-900:#0f172a;
+  --green:#059669;
+  --red:#dc2626;
+  --radius:16px;
+  --radius-sm:10px;
+  --radius-xs:8px;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   font-family:'Cairo',sans-serif;
-  background:var(--blue-bg);
-  color:var(--white);
+  background:#fff;
+  color:var(--gray-900);
   overflow-x:hidden;
   line-height:1.6;
 }
 
-/* ═══════════════════ TICKER BANNER ═══════════════════ */
+/* ══ TICKER ══ */
 .ticker-wrap{
-  position:fixed;
-  top:0;left:0;right:0;
-  z-index:1000;
-  height:36px;
-  background:linear-gradient(90deg,#0a1628,#0d2040,#0a1628);
-  border-bottom:1px solid rgba(37,99,235,0.4);
-  overflow:hidden;
-  display:flex;align-items:center;
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:36px;background:var(--teal-dark);
+  overflow:hidden;display:flex;align-items:center;
 }
 .ticker-inner{
-  display:flex;
-  align-items:center;
-  white-space:nowrap;
+  display:flex;align-items:center;white-space:nowrap;
   animation:tickerScroll 35s linear infinite;
-  will-change:transform;
 }
 .ticker-wrap:hover .ticker-inner{animation-play-state:paused}
-@keyframes tickerScroll{
-  0%{transform:translateX(-50%)}
-  100%{transform:translateX(0%)}
-}
-.ticker-item{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:0 28px;
-  font-size:0.75rem;font-weight:700;
-  color:rgba(255,255,255,0.75);
-  letter-spacing:0.3px;
-}
-.ticker-item .ti-icon{
-  font-size:0.85rem;
-  background:linear-gradient(135deg,var(--blue),#38bdf8);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.ticker-item strong{color:#fbbf24}
-.ticker-sep{color:rgba(37,99,235,0.6);padding:0 8px;font-size:1rem}
+@keyframes tickerScroll{0%{transform:translateX(-50%)}100%{transform:translateX(0%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 24px;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.85)}
+.ticker-item strong{color:#fff}
+.ticker-sep{color:rgba(255,255,255,.35);padding:0 6px}
 .ticker-cta{
   display:inline-flex;align-items:center;gap:5px;
-  background:linear-gradient(135deg,var(--blue),var(--blue-dark));
-  color:#fff;font-size:0.7rem;font-weight:800;
-  padding:3px 10px;border-radius:100px;
-  margin-right:8px;cursor:pointer;
-  transition:opacity .2s;
-  text-decoration:none;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  color:#fff;font-size:.7rem;font-weight:800;
+  padding:3px 10px;border-radius:100px;margin-right:8px;text-decoration:none;
+  transition:background .2s;
 }
-.ticker-cta:hover{opacity:0.85}
+.ticker-cta:hover{background:rgba(255,255,255,.3)}
 
-/* ═══════════════════ NAV ═══════════════════ */
+/* ══ NAV ══ */
 nav{
   position:fixed;top:36px;left:0;right:0;z-index:900;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 6%;height:70px;
-  background:rgba(6,14,46,0.85);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border-light);
-  transition:all 0.3s;
+  padding:0 6%;height:66px;
+  background:#fff;
+  border-bottom:1px solid var(--gray-200);
+  transition:box-shadow .3s;
 }
-nav.scrolled{background:rgba(6,14,46,0.98);box-shadow:0 4px 30px rgba(0,0,0,0.4)}
-
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
-.logo-icon{
-  width:42px;height:42px;
-  background:linear-gradient(135deg,var(--blue),var(--blue-dark));
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;
-  box-shadow:var(--shadow-blue);
-}
-.logo-name{font-family:'Tajawal',sans-serif;font-size:1.5rem;font-weight:900;color:var(--white)}
-.logo-sub{font-size:0.68rem;color:var(--white-40);margin-top:-4px;font-weight:400}
+.logo-icon{width:40px;height:40px;background:var(--teal);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:var(--teal-shadow)}
+.logo-name{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:var(--teal-dark)}
+.logo-name em{color:var(--teal);font-style:normal}
+.logo-sub{font-size:.62rem;color:var(--gray-400);margin-top:-4px}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-a{padding:7px 14px;border-radius:8px;font-size:.85rem;font-weight:600;color:var(--gray-600);cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif;transition:all .2s;text-decoration:none}
+.nav-a:hover{color:var(--teal);background:var(--teal-light)}
+.nav-btn-outline{padding:8px 18px;border-radius:8px;border:1.5px solid var(--gray-200);color:var(--gray-800);font-weight:700;font-size:.85rem;background:#fff;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s}
+.nav-btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+.nav-btn-solid{padding:9px 20px;border-radius:8px;background:var(--teal);color:#fff;font-weight:800;font-size:.88rem;border:none;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:var(--teal-shadow);transition:all .25s}
+.nav-btn-solid:hover{background:var(--teal-dark);transform:translateY(-1px)}
 
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-a{padding:8px 16px;border-radius:8px;font-size:0.88rem;font-weight:600;color:var(--white-70);cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif;transition:all 0.2s;text-decoration:none}
-.nav-a:hover{color:var(--white);background:var(--white-08)}
-.nav-btn-outline{padding:9px 20px;border-radius:8px;border:1.5px solid var(--border-light);color:var(--white);font-weight:700;font-size:0.88rem;background:none;cursor:pointer;font-family:'Cairo',sans-serif;transition:all 0.2s}
-.nav-btn-outline:hover{border-color:var(--blue);background:var(--white-08)}
-.nav-btn-solid{padding:10px 22px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:var(--white);font-weight:800;font-size:0.9rem;border:none;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:var(--shadow-blue);transition:all 0.25s}
-.nav-btn-solid:hover{transform:translateY(-1px);box-shadow:0 12px 40px rgba(37,99,235,0.45)}
-
-/* ═══════════════════ HERO ═══════════════════ */
+/* ══ HERO ══ */
 .hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;
+  min-height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  padding:130px 6% 60px;
+  padding:120px 6% 60px;
+  background:#fff;
   position:relative;overflow:hidden;
+}
+/* خلفية هادئة */
+.hero::before{
+  content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 50%,rgba(37,99,235,0.25) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%,rgba(37,99,235,0.12) 0%,transparent 60%),
-    var(--blue-bg);
+    radial-gradient(ellipse 70% 50% at 15% 40%,rgba(8,145,178,.06) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 40% at 85% 70%,rgba(8,145,178,.04) 0%,transparent 70%);
+  pointer-events:none;
 }
 .hero-dots{
   position:absolute;inset:0;
-  background-image:radial-gradient(circle,rgba(255,255,255,0.08) 1px,transparent 1px);
+  background-image:radial-gradient(circle,rgba(8,145,178,.08) 1px,transparent 1px);
   background-size:40px 40px;
   mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
   pointer-events:none;
 }
-.hero-blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:blobPulse 6s ease-in-out infinite}
-.blob-1{width:500px;height:500px;background:rgba(37,99,235,0.18);top:-100px;right:-100px}
-.blob-2{width:400px;height:400px;background:rgba(30,58,138,0.2);bottom:-50px;left:-80px;animation-delay:3s}
-@keyframes blobPulse{0%,100%{transform:scale(1) translate(0,0)}50%{transform:scale(1.08) translate(10px,-10px)}}
 
 .hero-tag{
   display:inline-flex;align-items:center;gap:8px;
-  background:var(--white-08);border:1px solid var(--border-light);
-  color:var(--white-70);padding:8px 20px;border-radius:100px;
-  font-size:0.82rem;font-weight:600;margin-bottom:28px;backdrop-filter:blur(10px);
+  background:var(--teal-light);border:1px solid var(--teal-mid);
+  color:var(--teal-dark);padding:7px 18px;border-radius:100px;
+  font-size:.8rem;font-weight:700;margin-bottom:24px;
 }
 
-/* ═══ HERO TITLE — with animated word ═══ */
 .hero-title{
   font-family:'Tajawal',sans-serif;
-  font-size:clamp(2.8rem,6vw,5rem);
+  font-size:clamp(2.6rem,6vw,4.5rem);
   font-weight:900;line-height:1.15;
-  text-align:center;margin-bottom:24px;letter-spacing:-0.5px;
+  text-align:center;margin-bottom:20px;
+  color:var(--gray-900);
 }
-.hero-title .line2{
-  display:block;
-  position:relative;
-  min-height:1.2em;
-}
-/* Animated swapping word */
-.word-swap{
-  display:inline-block;
-  color:var(--gold);
-  position:relative;
-}
-.word-swap .word{
-  display:inline-block;
-  position:absolute;
-  right:0;
-  opacity:0;
-  transform:translateY(10px);
-  transition:opacity 0.5s ease, transform 0.5s ease;
-  white-space:nowrap;
-}
-.word-swap .word.visible{
-  opacity:1;
-  transform:translateY(0);
-  position:relative;
-}
+.hero-title .line2{display:block;color:var(--teal)}
 
-.hero-sub{font-size:1.05rem;color:var(--white-70);text-align:center;max-width:540px;line-height:1.85;margin-bottom:44px}
+/* Word swap */
+.word-swap{display:inline-block;position:relative;min-width:120px;text-align:center}
+.word-swap .word{display:inline-block;position:absolute;right:0;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;white-space:nowrap}
+.word-swap .word.visible{opacity:1;transform:translateY(0);position:relative}
 
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+.hero-sub{font-size:1rem;color:var(--gray-600);text-align:center;max-width:500px;line-height:1.85;margin-bottom:40px}
 
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
 .btn-primary{
   display:inline-flex;align-items:center;gap:8px;
-  padding:15px 34px;border-radius:var(--radius-sm);
-  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);
-  color:var(--white);font-family:'Cairo',sans-serif;
-  font-size:1rem;font-weight:800;border:none;cursor:pointer;
-  box-shadow:var(--shadow-blue);transition:all 0.25s;
+  padding:14px 32px;border-radius:var(--radius-sm);
+  background:var(--teal);color:#fff;
+  font-family:'Cairo',sans-serif;font-size:.98rem;font-weight:800;
+  border:none;cursor:pointer;box-shadow:var(--teal-shadow);transition:all .25s;
 }
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(37,99,235,0.5)}
-
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 12px 36px rgba(8,145,178,.35)}
 .btn-secondary{
   display:inline-flex;align-items:center;gap:8px;
-  padding:14px 30px;border-radius:var(--radius-sm);
-  background:var(--white-08);border:1.5px solid var(--border-light);
-  color:var(--white);font-family:'Cairo',sans-serif;
-  font-size:1rem;font-weight:700;cursor:pointer;
-  backdrop-filter:blur(10px);transition:all 0.2s;
+  padding:13px 28px;border-radius:var(--radius-sm);
+  background:#fff;border:1.5px solid var(--gray-200);
+  color:var(--gray-700);font-family:'Cairo',sans-serif;
+  font-size:.98rem;font-weight:700;cursor:pointer;transition:all .2s;
 }
-.btn-secondary:hover{background:var(--white-15);border-color:var(--white-40)}
+.btn-secondary:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-light)}
 
 .hero-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.chip{display:flex;align-items:center;gap:8px;background:var(--white-08);border:1px solid var(--border-light);padding:10px 18px;border-radius:12px;font-size:0.82rem;font-weight:600;color:var(--white-70);backdrop-filter:blur(8px)}
-.chip-icon{font-size:1.1rem}
-.chip strong{color:var(--white)}
-.chip small{color:var(--white-40);font-size:0.72rem;display:block;line-height:1.2}
+.chip{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--gray-200);
+  padding:9px 16px;border-radius:12px;
+  font-size:.8rem;font-weight:600;color:var(--gray-600);
+  box-shadow:0 1px 4px rgba(0,0,0,.05);
+}
+.chip strong{color:var(--gray-900)}
+.chip small{color:var(--gray-400);font-size:.7rem;display:block;line-height:1.2}
 
-/* ═══════════════════ MOCK UI ═══════════════════ */
-.hero-visual{position:relative;margin-top:60px;width:100%;max-width:950px}
-.mock-laptop{background:rgba(255,255,255,0.04);border:1px solid var(--border-light);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-card);backdrop-filter:blur(10px)}
-.mock-bar{background:rgba(255,255,255,0.06);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border-light)}
+/* ══ MOCK UI ══ */
+.hero-visual{position:relative;margin-top:56px;width:100%;max-width:960px}
+.mock-laptop{
+  background:#fff;border:1px solid var(--gray-200);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.1);
+}
+.mock-bar{background:var(--gray-50);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--gray-200)}
 .mock-dots{display:flex;gap:5px}
 .mock-dot{width:10px;height:10px;border-radius:50%}
-.mock-content{padding:20px;display:grid;grid-template-columns:200px 1fr 220px;gap:16px;min-height:320px}
-.mock-sidebar{background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px}
-.mock-logo-sm{display:flex;align-items:center;gap:6px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-light)}
-.mock-logo-sm span{font-size:0.82rem;font-weight:800;color:var(--white)}
-.mock-nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-size:0.72rem;font-weight:600;color:var(--white-40);margin-bottom:4px}
-.mock-nav-item.active{background:rgba(37,99,235,0.25);color:var(--white);border:1px solid rgba(37,99,235,0.4)}
-.mock-trip-header{background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.mock-trip-thumb{width:52px;height:52px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#1e3a8a);flex-shrink:0;font-size:1.8rem;display:flex;align-items:center;justify-content:center}
-.mock-trip-name{font-size:0.9rem;font-weight:800;margin-bottom:3px}
-.mock-trip-meta{display:flex;gap:14px}
-.mock-meta-item{font-size:0.68rem;color:var(--white-40)}
-.mock-meta-item b{color:var(--white-70);display:block}
-.mock-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
-.mock-stat{background:var(--white-05);border:1px solid var(--border-light);border-radius:8px;padding:10px 12px}
-.mock-stat-val{font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;color:var(--gold)}
-.mock-stat-lbl{font-size:0.65rem;color:var(--white-40)}
-.mock-exp-row{background:var(--white-05);border:1px solid var(--border-light);border-radius:8px;padding:9px 12px;display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.mock-exp-cat{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.85rem;background:rgba(37,99,235,0.25);flex-shrink:0}
-.mock-exp-name{font-size:0.72rem;font-weight:700;flex:1}
-.mock-exp-who{font-size:0.63rem;color:var(--white-40)}
-.mock-exp-amt{font-family:'Tajawal',sans-serif;font-size:0.82rem;font-weight:800}
-.mock-summary{background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px}
-.mock-sum-title{font-size:0.75rem;font-weight:800;margin-bottom:12px;color:var(--white-70)}
-.mock-sum-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border-light);font-size:0.7rem}
+.mock-content{padding:16px;display:grid;grid-template-columns:180px 1fr 210px;gap:14px;min-height:300px}
+.mock-sidebar{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:12px}
+.mock-logo-sm{display:flex;align-items:center;gap:6px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--gray-200)}
+.mock-logo-sm .ico{width:24px;height:24px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#fff}
+.mock-logo-sm span{font-size:.8rem;font-weight:800;color:var(--teal-dark)}
+.mock-trip-badge{background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:7px;padding:7px 9px;margin-bottom:10px}
+.mock-trip-name{font-size:.72rem;font-weight:800;color:var(--teal-dark)}
+.mock-trip-meta{font-size:.6rem;color:var(--gray-400);margin-top:2px}
+.mock-nav-item{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:7px;font-size:.7rem;font-weight:600;color:var(--gray-500);margin-bottom:3px}
+.mock-nav-item.active{background:var(--teal);color:#fff}
+.mock-main{}
+.mock-trip-hd{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:12px;display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.mock-trip-thumb{width:44px;height:44px;border-radius:9px;background:var(--teal-light);border:1px solid var(--teal-mid);font-size:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mock-trip-nm{font-size:.85rem;font-weight:800;color:var(--gray-900);margin-bottom:3px}
+.mock-trip-mt{display:flex;gap:10px}
+.mock-mt-item{font-size:.62rem;color:var(--gray-400)}
+.mock-mt-item b{color:var(--gray-600);display:block}
+.mock-total{margin-right:auto;text-align:left}
+.mock-total-lbl{font-size:.6rem;color:var(--gray-400)}
+.mock-total-val{font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;color:var(--teal)}
+.mock-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:10px}
+.mock-stat{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:7px;padding:8px}
+.mock-stat-val{font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;color:var(--teal)}
+.mock-stat-lbl{font-size:.6rem;color:var(--gray-400)}
+.mock-exp-row{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:7px;padding:8px 10px;display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.mock-exp-cat{width:26px;height:26px;border-radius:6px;background:var(--teal-light);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.mock-exp-nm{font-size:.7rem;font-weight:700;color:var(--gray-800);flex:1}
+.mock-exp-who{font-size:.6rem;color:var(--gray-400)}
+.mock-exp-amt{font-family:'Tajawal',sans-serif;font-size:.82rem;font-weight:800;color:var(--gray-900)}
+.mock-summary{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:12px}
+.mock-sum-ttl{font-size:.72rem;font-weight:800;color:var(--gray-600);margin-bottom:10px}
+.mock-sum-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--gray-100);font-size:.68rem}
 .mock-sum-row:last-of-type{border-bottom:none}
-.mock-name{color:var(--white-70);font-weight:600}
-.pos{color:#4ade80;font-weight:800;font-family:'Tajawal',sans-serif}
-.neg{color:#f87171;font-weight:800;font-family:'Tajawal',sans-serif}
-.mock-settle-btn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;padding:9px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));font-size:0.72rem;font-weight:800;color:var(--white);box-shadow:0 4px 16px rgba(37,99,235,0.4)}
+.mock-nm{color:var(--gray-600);font-weight:600}
+.pos{color:var(--green);font-weight:800;font-family:'Tajawal',sans-serif}
+.neg{color:var(--red);font-weight:800;font-family:'Tajawal',sans-serif}
+.mock-settle-btn{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:10px;padding:8px;border-radius:7px;background:var(--teal);color:#fff;font-size:.7rem;font-weight:800}
 
-/* ═══════════════════ SECTIONS ═══════════════════ */
+/* ══ SECTIONS ══ */
 .section{padding:90px 6%;max-width:1200px;margin:0 auto}
 .section-center{text-align:center}
-.s-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;font-size:0.78rem;font-weight:700;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.35);color:#93c5fd;margin-bottom:18px}
-.s-title{font-family:'Tajawal',sans-serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;color:var(--white);margin-bottom:14px;line-height:1.3}
-.s-sub{font-size:0.95rem;color:var(--white-70);max-width:500px;line-height:1.85}
+.s-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;font-size:.76rem;font-weight:700;background:var(--teal-light);border:1px solid var(--teal-mid);color:var(--teal-dark);margin-bottom:16px}
+.s-title{font-family:'Tajawal',sans-serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:900;color:var(--gray-900);margin-bottom:12px;line-height:1.3}
+.s-sub{font-size:.95rem;color:var(--gray-600);max-width:500px;line-height:1.85}
 .section-center .s-sub{margin:0 auto}
 
-/* FEATURES */
-.features-wrap{background:rgba(255,255,255,0.02);border-top:1px solid var(--border-light)}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
-.feat-card{background:var(--white-05);border:1px solid var(--border-light);border-radius:var(--radius);padding:28px;transition:all 0.3s;position:relative;overflow:hidden}
-.feat-card::after{content:'';position:absolute;top:0;right:0;left:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--blue-dark));transform:scaleX(0);transform-origin:right;transition:transform 0.35s}
-.feat-card:hover{background:var(--white-08);border-color:rgba(37,99,235,0.4);transform:translateY(-5px)}
+/* ══ FEATURES ══ */
+.features-wrap{background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
+.feat-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:26px;transition:all .3s;position:relative;overflow:hidden}
+.feat-card::after{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:var(--teal);transform:scaleX(0);transform-origin:right;transition:transform .35s}
+.feat-card:hover{border-color:var(--teal-mid);transform:translateY(-4px);box-shadow:0 12px 32px rgba(8,145,178,.12)}
 .feat-card:hover::after{transform:scaleX(1)}
-.feat-icon{width:54px;height:54px;border-radius:14px;background:rgba(37,99,235,0.2);border:1px solid rgba(37,99,235,0.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:18px}
-.feat-card h3{font-size:1rem;font-weight:800;margin-bottom:8px}
-.feat-card p{font-size:0.84rem;color:var(--white-70);line-height:1.7}
+.feat-icon{width:52px;height:52px;border-radius:13px;background:var(--teal-light);border:1px solid var(--teal-mid);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px}
+.feat-card h3{font-size:.98rem;font-weight:800;margin-bottom:8px;color:var(--gray-900)}
+.feat-card p{font-size:.83rem;color:var(--gray-600);line-height:1.7}
 
-/* HOW IT WORKS */
-.how-wrap{background:linear-gradient(135deg,rgba(37,99,235,0.08) 0%,transparent 100%);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px;position:relative}
-.steps-grid::before{content:'';position:absolute;top:38px;right:12%;left:12%;height:2px;background:linear-gradient(90deg,var(--blue),rgba(37,99,235,0.15));z-index:0}
-.step{background:var(--white-05);border:1px solid var(--border-light);border-radius:var(--radius);padding:26px 18px;text-align:center;position:relative;z-index:1;transition:all 0.3s}
-.step:hover{background:var(--white-08);border-color:rgba(37,99,235,0.5);transform:translateY(-4px)}
-.step-num{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-dark));display:flex;align-items:center;justify-content:center;font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;margin:0 auto 12px;box-shadow:var(--shadow-blue)}
-.step-icon{font-size:1.5rem;margin-bottom:10px}
-.step h3{font-size:0.92rem;font-weight:800;margin-bottom:6px}
-.step p{font-size:0.8rem;color:var(--white-40);line-height:1.6}
+/* ══ HOW IT WORKS ══ */
+.how-wrap{background:#fff;border-top:1px solid var(--gray-200)}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:50px;position:relative}
+.steps-grid::before{content:'';position:absolute;top:36px;right:12%;left:12%;height:2px;background:linear-gradient(90deg,var(--teal),var(--teal-mid));z-index:0;opacity:.4}
+.step{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:24px 16px;text-align:center;position:relative;z-index:1;transition:all .3s}
+.step:hover{border-color:var(--teal-mid);transform:translateY(-4px);box-shadow:0 12px 32px rgba(8,145,178,.1)}
+.step-num{width:52px;height:52px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;margin:0 auto 10px;color:#fff;box-shadow:var(--teal-shadow)}
+.step-icon{font-size:1.4rem;margin-bottom:8px}
+.step h3{font-size:.9rem;font-weight:800;margin-bottom:5px;color:var(--gray-900)}
+.step p{font-size:.78rem;color:var(--gray-500);line-height:1.6}
 
-/* TESTIMONIALS */
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
-.test-card{background:var(--white-05);border:1px solid var(--border-light);border-radius:var(--radius);padding:26px;transition:all 0.3s}
-.test-card:hover{background:var(--white-08);border-color:rgba(37,99,235,0.35);transform:translateY(-3px)}
-.test-stars{color:var(--gold);font-size:0.88rem;margin-bottom:12px}
-.test-text{font-size:0.88rem;color:var(--white-70);line-height:1.8;margin-bottom:18px;font-style:italic}
+/* ══ PRICING ══ */
+.pricing-wrap{background:var(--gray-50);border-top:1px solid var(--gray-200);padding:80px 6%}
+.price-card-main{
+  max-width:860px;margin:0 auto;
+  background:#fff;border:1.5px solid var(--teal-mid);
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(8,145,178,.12);
+}
+.price-top{
+  background:linear-gradient(135deg,var(--teal-light) 0%,#fff 100%);
+  padding:clamp(22px,4vw,40px);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  border-bottom:1px solid var(--gray-200);
+}
+.price-badge-top{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;font-size:.75rem;font-weight:800;padding:5px 14px;border-radius:100px;margin-bottom:12px}
+.price-title{font-family:'Tajawal',sans-serif;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:var(--gray-900);margin-bottom:8px}
+.price-desc{font-size:.88rem;color:var(--gray-600);line-height:1.7;max-width:400px}
+.price-amount{font-family:'Tajawal',sans-serif;font-size:clamp(4rem,9vw,5.5rem);font-weight:900;color:var(--teal);line-height:1}
+.price-curr{font-size:.9rem;color:var(--gray-500);margin-top:4px}
+.price-once{display:inline-flex;align-items:center;gap:5px;background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.25);color:var(--green);font-size:.73rem;font-weight:700;padding:4px 12px;border-radius:100px;margin-top:8px}
+.price-body{padding:clamp(20px,4vw,36px)}
+.price-feats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px}
+.price-feat{display:flex;align-items:flex-start;gap:10px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:12px 14px;transition:all .2s}
+.price-feat:hover{border-color:var(--teal-mid);background:var(--teal-light)}
+.price-feat-ico{width:28px;height:28px;border-radius:7px;background:rgba(5,150,105,.1);border:1px solid rgba(5,150,105,.2);display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0}
+.price-feat strong{display:block;font-size:.83rem;margin-bottom:2px;color:var(--gray-900)}
+.price-feat span{font-size:.73rem;color:var(--gray-500)}
+.price-cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--gray-200)}
+.btn-price-main{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 36px;border-radius:11px;
+  background:var(--teal);color:#fff;
+  font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:800;
+  box-shadow:var(--teal-shadow);border:none;cursor:pointer;flex:1;justify-content:center;
+  transition:all .25s;
+}
+.btn-price-main:hover{background:var(--teal-dark);transform:translateY(-2px)}
+.price-note{font-size:.75rem;color:var(--gray-500);line-height:1.6}
+.price-checks{display:flex;justify-content:center;gap:clamp(16px,3vw,40px);margin-top:24px;flex-wrap:wrap}
+.price-check{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--gray-600)}
+.price-check .ck{color:var(--green);font-size:.9rem}
+
+/* ══ TESTIMONIALS ══ */
+.test-wrap{background:#fff;border-top:1px solid var(--gray-200);padding:80px 6%}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;max-width:1100px;margin-left:auto;margin-right:auto}
+.test-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:24px;transition:all .3s}
+.test-card:hover{border-color:var(--teal-mid);transform:translateY(-3px);box-shadow:0 12px 32px rgba(8,145,178,.1)}
+.test-stars{color:var(--teal);font-size:.85rem;margin-bottom:10px}
+.test-text{font-size:.86rem;color:var(--gray-600);line-height:1.8;margin-bottom:16px;font-style:italic}
 .test-author{display:flex;align-items:center;gap:10px}
-.test-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.88rem;font-weight:800;color:var(--white);flex-shrink:0}
-.test-name{font-size:0.85rem;font-weight:800}
-.test-role{font-size:0.72rem;color:var(--white-40)}
+.test-av{width:38px;height:38px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;color:#fff;flex-shrink:0}
+.test-name{font-size:.84rem;font-weight:800;color:var(--gray-900)}
+.test-role{font-size:.7rem;color:var(--gray-400)}
 
-/* CTA */
-.cta-wrap{background:linear-gradient(135deg,var(--blue-deeper) 0%,var(--blue-navy) 100%);border-top:1px solid rgba(37,99,235,0.3);padding:80px 6%;text-align:center;position:relative;overflow:hidden}
-.cta-wrap::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:rgba(37,99,235,0.15);top:-300px;right:-200px}
-.cta-wrap::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(37,99,235,0.1);bottom:-200px;left:50px}
+/* ══ CTA ══ */
+.cta-wrap{background:var(--teal);padding:80px 6%;text-align:center;position:relative;overflow:hidden}
+.cta-wrap::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,.06);top:-250px;right:-150px;pointer-events:none}
+.cta-wrap::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.06);bottom:-150px;left:50px;pointer-events:none}
 .cta-inner{position:relative;z-index:1}
-.cta-title{font-family:'Tajawal',sans-serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;margin-bottom:14px}
-.cta-sub{color:var(--white-70);font-size:1rem;margin-bottom:36px}
-.cta-note{color:var(--white-40);font-size:0.8rem;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:6px}
+.cta-title{font-family:'Tajawal',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;margin-bottom:12px}
+.cta-sub{color:rgba(255,255,255,.8);font-size:.98rem;margin-bottom:32px}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:15px 36px;border-radius:var(--radius-sm);background:#fff;color:var(--teal-dark);font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:all .25s}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(0,0,0,.2)}
+.cta-note{color:rgba(255,255,255,.6);font-size:.78rem;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:6px}
 
-/* FOOTER */
-footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);padding:60px 6% 28px}
+/* ══ FOOTER ══ */
+footer{background:var(--gray-900);padding:60px 6% 28px;color:#fff}
 .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.ft-brand .logo-name{font-size:1.3rem}
-.ft-brand p{font-size:0.83rem;color:var(--white-40);margin-top:10px;line-height:1.7}
-.ft-col h4{font-size:0.85rem;font-weight:800;margin-bottom:16px;color:var(--white)}
+.ft-brand .logo-name{font-size:1.3rem;color:#fff}
+.ft-brand .logo-name em{color:var(--teal-mid)}
+.ft-brand p{font-size:.82rem;color:var(--gray-400);margin-top:10px;line-height:1.7}
+.ft-col h4{font-size:.85rem;font-weight:800;margin-bottom:14px;color:#fff}
 .ft-col ul{list-style:none}
 .ft-col ul li{margin-bottom:10px}
-.ft-col ul li a{color:var(--white-40);font-size:0.83rem;text-decoration:none;transition:color 0.2s}
-.ft-col ul li a:hover{color:var(--white)}
-.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border-light);padding-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:var(--white-40)}
+.ft-col ul li a{color:var(--gray-400);font-size:.82rem;text-decoration:none;transition:color .2s}
+.ft-col ul li a:hover{color:var(--teal-mid)}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:.76rem;color:var(--gray-400)}
 
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.65s ease,transform 0.65s ease}
+/* ══ REVEAL ══ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 
-/* RESPONSIVE */
+/* ══ RESPONSIVE ══ */
 @media(max-width:1024px){
   .mock-content{grid-template-columns:1fr 1fr}
   .mock-sidebar{display:none}
   .features-grid{grid-template-columns:1fr 1fr}
   .steps-grid{grid-template-columns:1fr 1fr}
   .steps-grid::before{display:none}
+  .price-feats-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
-  nav{padding:0 4%}
-  .nav-a{display:none}
-  .hero{padding:110px 4% 50px}
+  nav{padding:0 4%}.nav-a{display:none}
+  .hero{padding:100px 4% 50px}
   .test-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
-  .mock-content{display:block;padding:14px}
+  .mock-content{display:block;padding:12px}
 }
 @media(max-width:540px){
   .features-grid,.steps-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
+  .price-feats-grid{grid-template-columns:1fr}
   .hero-title{font-size:2.2rem}
-  .ticker-item{font-size:0.7rem;padding:0 16px}
 }
-
 ::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--blue-bg)}
-::-webkit-scrollbar-thumb{background:rgba(37,99,235,0.4);border-radius:3px}
+::-webkit-scrollbar-track{background:#f1f5f9}
+::-webkit-scrollbar-thumb{background:var(--teal-mid);border-radius:3px}
 </style>
 </head>
 <body>
 
-<!-- ════ TICKER BANNER ════ -->
+<!-- TICKER -->
 <div class="ticker-wrap" id="ticker">
   <div class="ticker-inner" id="tickerInner">
-    <!-- يتكرر مرتين لحركة سلسة -->
-    <span class="ticker-item"><span class="ti-icon">✈</span> وكالات السفر — <strong>نظّم رحلات عملائك</strong> ببضع نقرات</span>
+    <span class="ticker-item">✈ وكالات السفر — <strong>نظّم رحلات عملائك</strong> ببضع نقرات</span>
     <span class="ticker-sep">◆</span>
-    <span class="ticker-item"><span class="ti-icon">🏨</span> شركات السياحة — <strong>تتبع مصاريف الرحلات الجماعية</strong> بسهولة تامة</span>
+    <span class="ticker-item">🏨 شركات السياحة — <strong>تتبع مصاريف الرحلات الجماعية</strong> بسهولة تامة</span>
     <span class="ticker-sep">◆</span>
-    <span class="ticker-item"><span class="ti-icon">💼</span> مكاتب رحلات العمل — <strong>تقارير PDF احترافية</strong> جاهزة للمحاسبة</span>
+    <span class="ticker-item">💼 مكاتب رحلات العمل — <strong>تقارير PDF احترافية</strong> جاهزة للمحاسبة</span>
     <span class="ticker-sep">◆</span>
-    <span class="ticker-item"><span class="ti-icon">🌍</span> منظمو الرحلات الجماعية — <strong>مرافقون غير محدودين</strong> بسعر واحد</span>
+    <span class="ticker-item">🌍 منظمو الرحلات الجماعية — <strong>مرافقون غير محدودين</strong> بسعر واحد</span>
     <span class="ticker-sep">◆</span>
-    <span class="ticker-item"><span class="ti-icon">🎯</span> <strong>٢٤٩ درهم فقط</strong> للرحلة الكاملة — بدون اشتراك شهري</span>
+    <span class="ticker-item">🎯 <strong>٢٤٩ درهم فقط</strong> للرحلة الكاملة — بدون اشتراك شهري</span>
     <span class="ticker-sep">◆</span>
     <a class="ticker-cta" href="rehla-auth.html">ابدأ الآن ←</a>
-    <!-- نسخة ثانية لضمان اللوب السلس -->
-    <span class="ticker-item"><span class="ti-icon">✈</span> وكالات السفر — <strong>نظّم رحلات عملائك</strong> ببضع نقرات</span>
+    <span class="ticker-item">✈ وكالات السفر — <strong>نظّم رحلات عملائك</strong> ببضع نقرات</span>
     <span class="ticker-sep">◆</span>
-    <span class="ticker-item"><span class="ti-icon">🏨</span> شركات السياحة — <strong>تتبع مصاريف الرحلات الجماعية</strong> بسهولة تامة</span>
+    <span class="ticker-item">🏨 شركات السياحة — <strong>تتبع مصاريف الرحلات الجماعية</strong> بسهولة تامة</span>
     <span class="ticker-sep">◆</span>
-    <span class="ticker-item"><span class="ti-icon">💼</span> مكاتب رحلات العمل — <strong>تقارير PDF احترافية</strong> جاهزة للمحاسبة</span>
+    <span class="ticker-item">💼 مكاتب رحلات العمل — <strong>تقارير PDF احترافية</strong> جاهزة للمحاسبة</span>
     <span class="ticker-sep">◆</span>
-    <span class="ticker-item"><span class="ti-icon">🌍</span> منظمو الرحلات الجماعية — <strong>مرافقون غير محدودين</strong> بسعر واحد</span>
+    <span class="ticker-item">🌍 منظمو الرحلات الجماعية — <strong>مرافقون غير محدودين</strong> بسعر واحد</span>
     <span class="ticker-sep">◆</span>
-    <span class="ticker-item"><span class="ti-icon">🎯</span> <strong>٢٤٩ درهم فقط</strong> للرحلة الكاملة — بدون اشتراك شهري</span>
+    <span class="ticker-item">🎯 <strong>٢٤٩ درهم فقط</strong> للرحلة الكاملة — بدون اشتراك شهري</span>
     <span class="ticker-sep">◆</span>
     <a class="ticker-cta" href="rehla-auth.html">ابدأ الآن ←</a>
   </div>
 </div>
 
-<!-- ════ NAV ════ -->
+<!-- NAV -->
 <nav id="nav">
   <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
     <div class="logo-icon">✈</div>
     <div>
-      <div class="logo-name">رحلة+</div>
+      <div class="logo-name">رحلة<em>+</em></div>
       <div class="logo-sub">إدارة مصاريف السفر</div>
     </div>
   </div>
   <div class="nav-links">
-    <button class="nav-a" onclick="smoothScroll('#features')">المزايا</button>
-    <button class="nav-a" onclick="smoothScroll('#how')">كيف يعمل؟</button>
-    <button class="nav-a" onclick="smoothScroll('#pricing')">الأسعار</button>
-    <button class="nav-a" onclick="smoothScroll('#contact')">تواصل معنا</button>
-    <button class="nav-btn-outline" id="indexLangBtn" onclick="toggleIndexLang()">EN</button>
-    <button class="nav-btn-outline" onclick="window.location.href='rehla-auth.html'">تسجيل الدخول</button>
-    <button class="nav-btn-solid" onclick="window.location.href='rehla-auth.html'">ابدأ رحلة جديدة</button>
+    <button class="nav-a" onclick="smoothScroll('#features')" data-lang="nav_features">المزايا</button>
+    <button class="nav-a" onclick="smoothScroll('#how')" data-lang="nav_how">كيف يعمل؟</button>
+    <button class="nav-a" onclick="smoothScroll('#pricing')" data-lang="nav_pricing">الأسعار</button>
+    <button class="nav-a" onclick="smoothScroll('#contact')" data-lang="nav_contact">تواصل معنا</button>
+    <div id="langBtnWrap"></div>
+    <button class="nav-btn-outline" onclick="window.location.href='rehla-auth.html'" data-lang="nav_login">تسجيل الدخول</button>
+    <button class="nav-btn-solid" onclick="window.location.href='rehla-auth.html'" data-lang="nav_start">ابدأ رحلة جديدة</button>
   </div>
 </nav>
 
-<!-- ════ HERO ════ -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-dots"></div>
-  <div class="hero-blob blob-1"></div>
-  <div class="hero-blob blob-2"></div>
 
   <div class="hero-tag">✈ منصة إدارة مصاريف السفر</div>
 
@@ -418,9 +421,7 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
     </span>
   </h1>
 
-  <p class="hero-sub">
-    أضف أصحابك، سجّل المصاريف، وشوف كل شخص كم دفع وكم عليه — بكل سهولة وشفافية.
-  </p>
+  <p class="hero-sub">أضف أصحابك، سجّل المصاريف، وشوف كل شخص كم دفع وكم عليه — بكل سهولة وشفافية.</p>
 
   <div class="hero-btns">
     <button class="btn-primary" onclick="window.location.href='rehla-auth.html'">+ ابدأ رحلة جديدة مجاناً</button>
@@ -428,13 +429,13 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
   </div>
 
   <div class="hero-chips">
-    <div class="chip"><span class="chip-icon">📱</span><div><strong>متوافق</strong><small>جميع الأجهزة</small></div></div>
-    <div class="chip"><span class="chip-icon">⚡</span><div><strong>فوري</strong><small>تتبع لحظي</small></div></div>
-    <div class="chip"><span class="chip-icon">🔒</span><div><strong>آمن</strong><small>صلاحيات محكمة</small></div></div>
-    <div class="chip"><span class="chip-icon">🏛</span><div><strong>100%</strong><small>رقمي بالكامل</small></div></div>
+    <div class="chip"><span>📱</span><div><strong>متوافق</strong><small>جميع الأجهزة</small></div></div>
+    <div class="chip"><span>⚡</span><div><strong>فوري</strong><small>تتبع لحظي</small></div></div>
+    <div class="chip"><span>🔒</span><div><strong>آمن</strong><small>صلاحيات محكمة</small></div></div>
+    <div class="chip"><span>🏛</span><div><strong>100%</strong><small>رقمي بالكامل</small></div></div>
   </div>
 
-  <!-- MOCK UI -->
+  <!-- MOCK -->
   <div class="hero-visual reveal">
     <div class="mock-laptop">
       <div class="mock-bar">
@@ -443,13 +444,17 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
           <div class="mock-dot" style="background:#febc2e"></div>
           <div class="mock-dot" style="background:#28c840"></div>
         </div>
-        <div style="flex:1;background:rgba(255,255,255,0.06);border-radius:6px;height:22px;margin:0 12px;display:flex;align-items:center;padding:0 10px">
-          <span style="font-size:0.65rem;color:rgba(255,255,255,0.3)">🔒 rehlasaa.com/trip/dubai-2025</span>
+        <div style="flex:1;background:var(--gray-100);border-radius:5px;height:20px;margin:0 12px;display:flex;align-items:center;padding:0 10px">
+          <span style="font-size:.62rem;color:var(--gray-400)">🔒 rehlasaa.com/dashboard</span>
         </div>
       </div>
       <div class="mock-content">
         <div class="mock-sidebar">
-          <div class="mock-logo-sm"><span>✈</span><span>رحلة+</span></div>
+          <div class="mock-logo-sm"><div class="ico">✈</div><span>رحلة+</span></div>
+          <div class="mock-trip-badge">
+            <div class="mock-trip-name">🌴 رحلة دبي ▾</div>
+            <div class="mock-trip-meta">٢ مايو — ١٢ مايو · AED</div>
+          </div>
           <div class="mock-nav-item active">🏠 لوحة الرحلة</div>
           <div class="mock-nav-item">💳 المصاريف</div>
           <div class="mock-nav-item">📊 الملخص المالي</div>
@@ -458,49 +463,34 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
           <div class="mock-nav-item">🔗 مشاركة الرحلة</div>
         </div>
         <div class="mock-main">
-          <div class="mock-trip-header">
+          <div class="mock-trip-hd">
             <div class="mock-trip-thumb">🌴</div>
             <div>
-              <div class="mock-trip-name">رحلة دبي</div>
-              <div class="mock-trip-meta">
-                <div class="mock-meta-item"><b>الوجهة</b>دبي</div>
-                <div class="mock-meta-item"><b>التاريخ</b>2025/06/15</div>
-                <div class="mock-meta-item"><b>الأعضاء</b>5</div>
+              <div class="mock-trip-nm">رحلة دبي صيف ٢٠٢٥</div>
+              <div class="mock-trip-mt">
+                <div class="mock-mt-item"><b>الوجهة</b>دبي</div>
+                <div class="mock-mt-item"><b>التاريخ</b>2025/06/15</div>
+                <div class="mock-mt-item"><b>الأعضاء</b>5</div>
               </div>
             </div>
-            <div style="margin-right:auto;text-align:left">
-              <div style="font-size:0.65rem;color:rgba(255,255,255,0.4)">إجمالي</div>
-              <div style="font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:900;color:var(--gold)">2,450 د</div>
-            </div>
+            <div class="mock-total"><div class="mock-total-lbl">إجمالي</div><div class="mock-total-val">2,450</div></div>
           </div>
           <div class="mock-stats">
             <div class="mock-stat"><div class="mock-stat-val">2,450</div><div class="mock-stat-lbl">إجمالي</div></div>
-            <div class="mock-stat"><div class="mock-stat-val" style="color:#60a5fa">5</div><div class="mock-stat-lbl">أعضاء</div></div>
-            <div class="mock-stat"><div class="mock-stat-val" style="color:#a78bfa">490</div><div class="mock-stat-lbl">للشخص</div></div>
+            <div class="mock-stat"><div class="mock-stat-val" style="color:var(--gray-600)">5</div><div class="mock-stat-lbl">أعضاء</div></div>
+            <div class="mock-stat"><div class="mock-stat-val" style="color:var(--gray-600)">490</div><div class="mock-stat-lbl">للشخص</div></div>
           </div>
-          <div class="mock-exp-row">
-            <div class="mock-exp-cat">🏨</div>
-            <div style="flex:1"><div class="mock-exp-name">فندق ليلتين</div><div class="mock-exp-who">دفع: محمد</div></div>
-            <div class="mock-exp-amt">800</div>
-          </div>
-          <div class="mock-exp-row">
-            <div class="mock-exp-cat">✈</div>
-            <div style="flex:1"><div class="mock-exp-name">تذاكر الطيران</div><div class="mock-exp-who">دفع: أحمد</div></div>
-            <div class="mock-exp-amt">1,200</div>
-          </div>
-          <div class="mock-exp-row">
-            <div class="mock-exp-cat">🍽</div>
-            <div style="flex:1"><div class="mock-exp-name">عشاء اليوم الأول</div><div class="mock-exp-who">دفع: سارة</div></div>
-            <div class="mock-exp-amt">250</div>
-          </div>
+          <div class="mock-exp-row"><div class="mock-exp-cat">🏨</div><div style="flex:1"><div class="mock-exp-nm">فندق ليلتين</div><div class="mock-exp-who">دفع: محمد</div></div><div class="mock-exp-amt">800</div></div>
+          <div class="mock-exp-row"><div class="mock-exp-cat">✈</div><div style="flex:1"><div class="mock-exp-nm">تذاكر الطيران</div><div class="mock-exp-who">دفع: أحمد</div></div><div class="mock-exp-amt">1,200</div></div>
+          <div class="mock-exp-row"><div class="mock-exp-cat">🍽</div><div style="flex:1"><div class="mock-exp-nm">عشاء اليوم الأول</div><div class="mock-exp-who">دفع: سارة</div></div><div class="mock-exp-amt">250</div></div>
         </div>
         <div class="mock-summary">
-          <div class="mock-sum-title">📊 الملخص</div>
-          <div class="mock-sum-row"><span class="mock-name">محمد</span><span class="pos">+310</span></div>
-          <div class="mock-sum-row"><span class="mock-name">أحمد</span><span class="pos">+710</span></div>
-          <div class="mock-sum-row"><span class="mock-name">سارة</span><span class="neg">-240</span></div>
-          <div class="mock-sum-row"><span class="mock-name">خالد</span><span class="neg">-290</span></div>
-          <div class="mock-sum-row"><span class="mock-name">يوسف</span><span class="neg">-490</span></div>
+          <div class="mock-sum-ttl">📊 الملخص المالي</div>
+          <div class="mock-sum-row"><span class="mock-nm">محمد</span><span class="pos">+310</span></div>
+          <div class="mock-sum-row"><span class="mock-nm">أحمد</span><span class="pos">+710</span></div>
+          <div class="mock-sum-row"><span class="mock-nm">سارة</span><span class="neg">-240</span></div>
+          <div class="mock-sum-row"><span class="mock-nm">خالد</span><span class="neg">-290</span></div>
+          <div class="mock-sum-row"><span class="mock-nm">يوسف</span><span class="neg">-490</span></div>
           <div class="mock-settle-btn">🧮 تصفية الحساب</div>
         </div>
       </div>
@@ -508,7 +498,7 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
   </div>
 </section>
 
-<!-- ════ FEATURES ════ -->
+<!-- FEATURES -->
 <div class="features-wrap" id="features">
   <div class="section section-center">
     <div class="s-tag">⚡ المزايا</div>
@@ -525,7 +515,7 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
   </div>
 </div>
 
-<!-- ════ HOW IT WORKS ════ -->
+<!-- HOW IT WORKS -->
 <div class="how-wrap" id="how">
   <div class="section section-center">
     <div class="s-tag">📖 خطوات بسيطة</div>
@@ -540,82 +530,84 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
   </div>
 </div>
 
-<!-- ════ PRICING ════ -->
-<div id="pricing" style="padding:80px 6%;background:linear-gradient(180deg,transparent,rgba(37,99,235,.06),transparent)">
-<div style="max-width:960px;margin:0 auto">
-  <div style="text-align:center;margin-bottom:52px">
-    <div class="s-tag">💳 السعر</div>
-    <h2 class="s-title" style="font-size:clamp(2rem,5vw,3rem)">ادفع للرحلة — مش للاشتراك</h2>
-    <p class="s-sub" style="margin:0 auto;font-size:1rem">سعر ثابت واحد للرحلة الكاملة — بغض النظر عن عدد المرافقين أو طول الرحلة.</p>
-  </div>
-  <div class="reveal" style="background:linear-gradient(135deg,rgba(37,99,235,.15) 0%,rgba(30,58,138,.2) 100%);border:1.5px solid rgba(37,99,235,.4);border-radius:24px;overflow:hidden;box-shadow:0 32px 80px rgba(37,99,235,.15)">
-    <div style="background:linear-gradient(135deg,rgba(37,99,235,.25),rgba(30,58,138,.35));padding:clamp(24px,4vw,44px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.08)">
-      <div>
-        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.35);color:#fcd34d;font-size:.78rem;font-weight:800;padding:5px 14px;border-radius:100px;margin-bottom:14px">✈ رحلة كاملة — كل المزايا</div>
-        <h3 style="font-family:'Tajawal',sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:10px;line-height:1.2">كل شيء — رحلة واحدة</h3>
-        <p style="font-size:clamp(.85rem,2vw,.95rem);color:var(--white-70);line-height:1.7;max-width:420px">ادفع مرة واحدة وافتح كل المزايا لهذه الرحلة — من أول مصروف حتى تحميل التقرير النهائي.</p>
+<!-- PRICING -->
+<div class="pricing-wrap" id="pricing">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="s-tag">💳 السعر</div>
+      <h2 class="s-title">ادفع للرحلة — مش للاشتراك</h2>
+      <p class="s-sub" style="margin:0 auto">سعر ثابت واحد للرحلة الكاملة بغض النظر عن عدد المرافقين.</p>
+    </div>
+    <div class="price-card-main reveal">
+      <div class="price-top">
+        <div>
+          <div class="price-badge-top">✈ رحلة كاملة — كل المزايا</div>
+          <div class="price-title">كل شيء — رحلة واحدة</div>
+          <div class="price-desc">ادفع مرة واحدة وافتح كل المزايا — من أول مصروف حتى تحميل التقرير النهائي.</div>
+        </div>
+        <div style="text-align:center;flex-shrink:0">
+          <div style="font-size:.85rem;color:var(--gray-400);margin-bottom:4px">إجمالي الدفع</div>
+          <div class="price-amount">249</div>
+          <div class="price-curr">درهم إماراتي</div>
+          <div class="price-once">✓ دفعة واحدة فقط</div>
+        </div>
       </div>
-      <div style="text-align:center;flex-shrink:0">
-        <div style="font-size:.88rem;color:var(--white-40);margin-bottom:4px">إجمالي الدفع</div>
-        <div style="font-family:'Tajawal',sans-serif;font-size:clamp(4rem,10vw,6rem);font-weight:900;line-height:1;background:linear-gradient(135deg,#fff,#fcd34d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">249</div>
-        <div style="font-size:.9rem;color:var(--white-70);margin-top:4px">درهم إماراتي</div>
-        <div style="display:inline-flex;align-items:center;gap:5px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#4ade80;font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:100px;margin-top:10px">✓ دفعة واحدة فقط</div>
+      <div class="price-body">
+        <div style="font-size:.75rem;font-weight:800;color:var(--gray-400);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px">ماذا تحصل عليه؟</div>
+        <div class="price-feats-grid">
+          <div class="price-feat"><div class="price-feat-ico">🧮</div><div><strong>تصفية الحساب الذكية</strong><span>أقل عدد تحويلات ممكنة</span></div></div>
+          <div class="price-feat"><div class="price-feat-ico">📄</div><div><strong>تقرير PDF احترافي</strong><span>قابل للتحميل والمشاركة</span></div></div>
+          <div class="price-feat"><div class="price-feat-ico">📸</div><div><strong>رفع الإيصالات</strong><span>مرتبطة بكل مصروف</span></div></div>
+          <div class="price-feat"><div class="price-feat-ico">💬</div><div><strong>إشعارات واتساب</strong><span>لكل مرافق تلقائياً</span></div></div>
+          <div class="price-feat"><div class="price-feat-ico">🔗</div><div><strong>رابط مشاركة + QR</strong><span>رابط خاص لكل مرافق</span></div></div>
+          <div class="price-feat"><div class="price-feat-ico">👥</div><div><strong>مرافقون غير محدودين</strong><span>بدون قيود على العدد</span></div></div>
+          <div class="price-feat"><div class="price-feat-ico">📊</div><div><strong>رسوم بيانية تفاعلية</strong><span>توزيع المصاريف بالفئات</span></div></div>
+          <div class="price-feat"><div class="price-feat-ico">🗄</div><div><strong>أرشيف مدى الحياة</strong><span>رحلتك محفوظة للأبد</span></div></div>
+        </div>
+        <div class="price-cta-row">
+          <button class="btn-price-main" onclick="window.location.href='rehla-auth.html'">🚀 ابدأ رحلتك الآن — ٢٤٩ درهم</button>
+          <div class="price-note"><strong style="color:var(--gray-700);display:block;margin-bottom:2px">🔒 دفع آمن بـ Stripe</strong>سجّل وأضف المرافقين مجاناً — الدفع عند تأكيد الرحلة.</div>
+        </div>
       </div>
     </div>
-    <div style="padding:clamp(22px,4vw,40px)">
-      <div style="font-size:.8rem;font-weight:800;color:var(--white-40);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;display:flex;align-items:center;gap:8px">ماذا تحصل عليه؟<span style="flex:1;height:1px;background:rgba(255,255,255,.08)"></span></div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px">
-        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px"><div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🧮</div><div><strong style="display:block;font-size:.85rem;margin-bottom:3px">تصفية الحساب الذكية</strong><span style="font-size:.75rem;color:var(--white-70)">أقل عدد تحويلات ممكنة</span></div></div>
-        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px"><div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">📄</div><div><strong style="display:block;font-size:.85rem;margin-bottom:3px">تقرير PDF احترافي</strong><span style="font-size:.75rem;color:var(--white-70)">قابل للتحميل والمشاركة</span></div></div>
-        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px"><div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">📸</div><div><strong style="display:block;font-size:.85rem;margin-bottom:3px">رفع الإيصالات</strong><span style="font-size:.75rem;color:var(--white-70)">مرتبطة بكل مصروف</span></div></div>
-        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px"><div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">💬</div><div><strong style="display:block;font-size:.85rem;margin-bottom:3px">إشعارات واتساب</strong><span style="font-size:.75rem;color:var(--white-70)">تلقائياً لكل مرافق</span></div></div>
-        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px"><div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">🔗</div><div><strong style="display:block;font-size:.85rem;margin-bottom:3px">رابط مشاركة + QR Code</strong><span style="font-size:.75rem;color:var(--white-70)">رابط خاص لكل مرافق</span></div></div>
-        <div style="display:flex;align-items:flex-start;gap:10px;background:var(--white-05);border:1px solid var(--border-light);border-radius:12px;padding:14px 16px"><div style="width:30px;height:30px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0">👥</div><div><strong style="display:block;font-size:.85rem;margin-bottom:3px">مرافقون غير محدودين</strong><span style="font-size:.75rem;color:var(--white-70)">بدون قيود على العدد</span></div></div>
-      </div>
-      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.08)">
-        <button onclick="window.location.href='rehla-auth.html'" style="display:inline-flex;align-items:center;gap:10px;padding:16px 40px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;box-shadow:0 8px 32px rgba(37,99,235,.4);transition:all .25s;border:none;cursor:pointer;flex:1;justify-content:center">🚀 ابدأ رحلتك الآن — ٢٤٩ درهم</button>
-        <div style="font-size:.78rem;color:var(--white-40);line-height:1.6"><strong style="color:var(--white-70);display:block;margin-bottom:2px">🔒 دفع آمن بـ Stripe</strong>سجّل وأضف المرافقين مجاناً — الدفع عند تأكيد الرحلة.</div>
-      </div>
+    <div class="price-checks">
+      <div class="price-check"><span class="ck">✓</span> بدون اشتراك شهري</div>
+      <div class="price-check"><span class="ck">✓</span> ادفع مرة واحدة فقط</div>
+      <div class="price-check"><span class="ck">✓</span> يعمل على الهاتف بدون تطبيق</div>
     </div>
   </div>
-  <div style="display:flex;justify-content:center;gap:clamp(20px,4vw,48px);margin-top:32px;flex-wrap:wrap">
-    <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--white-70)"><span style="color:#4ade80">✓</span> بدون اشتراك شهري</div>
-    <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--white-70)"><span style="color:#4ade80">✓</span> ادفع مرة واحدة فقط</div>
-    <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--white-70)"><span style="color:#4ade80">✓</span> يعمل على الهاتف بدون تطبيق</div>
-  </div>
-</div>
 </div>
 
-<!-- ════ TESTIMONIALS ════ -->
-<div style="border-top:1px solid var(--border-light);padding:80px 6%">
+<!-- TESTIMONIALS -->
+<div class="test-wrap">
   <div style="max-width:1100px;margin:0 auto;text-align:center">
     <div class="s-tag">💬 آراء المستخدمين</div>
     <h2 class="s-title">ماذا يقولون عن رحلة+؟</h2>
     <div class="test-grid">
-      <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"كنا ندور على ورقة وقلم في كل رحلة — رحلة+ حل المشكلة من أول يوم."</p><div class="test-author"><div class="test-av" style="background:#2563eb">م</div><div><div class="test-name">محمد العامري</div><div class="test-role">مسافر متكرر — دبي</div></div></div></div>
-      <div class="test-card reveal d1"><div class="test-stars">★★★★★</div><p class="test-text">"استخدمناه في رحلة ٨ أشخاص لتركيا. أفضل أداة لإدارة المصاريف الجماعية."</p><div class="test-author"><div class="test-av" style="background:#7c3aed">س</div><div><div class="test-name">سارة الزهراني</div><div class="test-role">مدونة سفر — الرياض</div></div></div></div>
-      <div class="test-card reveal d2"><div class="test-stars">★★★★★</div><p class="test-text">"ميزة التصفية رهيبة — بدل ما كل شخص يحوّل لكل شخص، يعطيك ٣ تحويلات بس!"</p><div class="test-author"><div class="test-av" style="background:#0891b2">خ</div><div><div class="test-name">خالد المطيري</div><div class="test-role">مهندس — الكويت</div></div></div></div>
+      <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"كنا ندور على ورقة وقلم في كل رحلة — رحلة+ حل المشكلة من أول يوم. الحساب واضح وما فيه أي لخبطة."</p><div class="test-author"><div class="test-av">م</div><div><div class="test-name">محمد العامري</div><div class="test-role">مسافر متكرر — دبي</div></div></div></div>
+      <div class="test-card reveal d1"><div class="test-stars">★★★★★</div><p class="test-text">"استخدمناه في رحلة ٨ أشخاص لتركيا. أفضل أداة جربتها لإدارة المصاريف الجماعية بدون أي توتر."</p><div class="test-author"><div class="test-av">س</div><div><div class="test-name">سارة الزهراني</div><div class="test-role">مدونة سفر — الرياض</div></div></div></div>
+      <div class="test-card reveal d2"><div class="test-stars">★★★★★</div><p class="test-text">"ميزة التصفية رهيبة — بدل ما كل شخص يحوّل لكل شخص، يعطيك ٣ تحويلات بس وخلاص!"</p><div class="test-author"><div class="test-av">خ</div><div><div class="test-name">خالد المطيري</div><div class="test-role">مهندس — الكويت</div></div></div></div>
     </div>
   </div>
 </div>
 
-<!-- ════ CTA ════ -->
+<!-- CTA -->
 <div class="cta-wrap" id="contact">
   <div class="cta-inner">
     <h2 class="cta-title">جاهز تنطلق؟</h2>
     <p class="cta-sub">أنشئ رحلتك الأولى في أقل من دقيقة</p>
-    <button class="btn-primary" style="font-size:1.05rem;padding:16px 40px" onclick="window.location.href='rehla-auth.html'">+ ابدأ الآن ←</button>
+    <button class="btn-cta" onclick="window.location.href='rehla-auth.html'">+ ابدأ الآن ←</button>
     <div class="cta-note">✓ بدون تسجيل دخول معقد &nbsp;•&nbsp; ✓ مجاني للتجربة</div>
   </div>
 </div>
 
-<!-- ════ FOOTER ════ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="ft-brand">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <div class="logo-icon" style="width:34px;height:34px;font-size:1rem">✈</div>
-        <span class="logo-name">رحلة+</span>
+        <div class="logo-icon" style="width:32px;height:32px;font-size:.9rem">✈</div>
+        <span class="logo-name">رحلة<em>+</em></span>
       </div>
       <p>أفضل طريقة لإدارة مصاريف السفر الجماعي — بدون توتر، بدون لخبطة.</p>
     </div>
@@ -630,48 +622,26 @@ footer{background:rgba(0,0,0,0.4);border-top:1px solid var(--border-light);paddi
 </footer>
 
 <script>
-// NAV SCROLL
-window.addEventListener('scroll',()=>{
-  const n=document.getElementById('nav');
-  n.classList.toggle('scrolled',scrollY>30);
-});
-
-// SMOOTH SCROLL
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>30));
 function smoothScroll(sel){document.querySelector(sel)?.scrollIntoView({behavior:'smooth'})}
-
-// REVEAL
 const obs=new IntersectionObserver(en=>en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// ════ WORD SWAP ANIMATION ════
+// Word swap
 const words=['الحساب','الأرقام','التقارير','التفاصيل'];
 let wIdx=0;
 function swapWord(){
-  const prev=document.getElementById('w'+wIdx);
+  document.getElementById('w'+wIdx).classList.remove('visible');
   wIdx=(wIdx+1)%words.length;
-  const next=document.getElementById('w'+wIdx);
-  // fade out current
-  prev.classList.remove('visible');
-  // fade in next
-  setTimeout(()=>{
-    next.classList.add('visible');
-  },500);
+  setTimeout(()=>document.getElementById('w'+wIdx).classList.add('visible'),500);
 }
 setInterval(swapWord,2800);
 
-// ════ LANGUAGE TOGGLE ════
-let indexLang=localStorage.getItem('rehla_lang')||'ar';
-(function(){
-  if(indexLang==='en'){
-    document.getElementById('indexLangBtn').textContent='ع';
-  }
-})();
-function toggleIndexLang(){
-  indexLang=indexLang==='ar'?'en':'ar';
-  localStorage.setItem('rehla_lang',indexLang);
-  sessionStorage.setItem('rehla_lang',indexLang);
-  document.getElementById('indexLangBtn').textContent=indexLang==='ar'?'EN':'ع';
-}
+// زر اللغة
+document.addEventListener('DOMContentLoaded',()=>{
+  buildLangBtn('langBtnWrap');
+  applyLang();
+});
 </script>
 </body>
 </html>
