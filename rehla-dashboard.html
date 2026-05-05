@@ -7,27 +7,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#1230a0;--bg2:#1a3a8c;--bg3:#162e78;
-  --sidebar:#0e2070;--sidebar2:#122480;
-  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25);
+  --bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;
+  --sidebar:#050c24;--sidebar2:#080f2a;
+  --cyan:#2563eb;--cyan-dim:rgba(37,99,235,.15);--cyan-bright:rgba(37,99,235,.25);
   --green:#22c55e;--green-dim:rgba(34,197,94,.12);
   --red:#f87171;--red-dim:rgba(248,113,113,.12);
   --orange:#fb923c;--orange-dim:rgba(251,146,60,.12);
   --purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);
-  --yellow:#fbbf24;--yellow-dim:rgba(251,191,36,.12);
+  --yellow:#f59e0b;--yellow-dim:rgba(245,158,11,.12);
   --white:#fff;
   --w90:rgba(255,255,255,.9);--w70:rgba(255,255,255,.7);--w50:rgba(255,255,255,.5);
   --w30:rgba(255,255,255,.3);--w15:rgba(255,255,255,.15);--w10:rgba(255,255,255,.1);
   --w06:rgba(255,255,255,.06);--w03:rgba(255,255,255,.03);
-  --border:rgba(255,255,255,.15);--border2:rgba(255,255,255,.08);
-  --card:rgba(255,255,255,.09);--card2:rgba(255,255,255,.06);
-  --shadow:0 4px 24px rgba(0,0,0,.25);--shadow-lg:0 12px 40px rgba(0,0,0,.35);
+  --border:rgba(255,255,255,.12);--border2:rgba(255,255,255,.08);
+  --card:rgba(255,255,255,.07);--card2:rgba(255,255,255,.04);
+  --shadow:0 4px 24px rgba(0,0,0,.4);--shadow-lg:0 12px 40px rgba(0,0,0,.5);
   --r:12px;--rsm:9px;--rxs:6px;
   --sidebar-w:220px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-tap-highlight-color:transparent}
-body{font-family:'Cairo',sans-serif;background:linear-gradient(160deg,#1230a0 0%,#1a3a8c 50%,#162e78 100%);min-height:100vh;color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(160deg,#060e2e 0%,#0a1628 50%,#0d1f4e 100%);min-height:100vh;color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 input,select,textarea,button{font-family:inherit;border:none;outline:none;-webkit-appearance:none;appearance:none}
 button{cursor:pointer}
 ::-webkit-scrollbar{width:4px;height:4px}
@@ -37,7 +37,7 @@ button{cursor:pointer}
 /* ════ FULL SCREEN LOADER ════ */
 .fs-loader{
   position:fixed;inset:0;z-index:9999;
-  background:linear-gradient(160deg,#1230a0,#1a3a8c);
+  background:linear-gradient(160deg,#060e2e,#0a1628);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:20px;transition:opacity .4s;
 }
@@ -500,7 +500,7 @@ button{cursor:pointer}
           <div class="section-body">
             <p style="font-size:.78rem;color:var(--w60);margin-bottom:12px;line-height:1.6">شارك هذا الرابط مع أعضاء الرحلة.</p>
             <div class="share-link-box">
-              <span class="share-link-txt" id="shareLink">https://rehlasaa.netlify.app/rehla-companion.html?trip=...</span>
+              <span class="share-link-txt" id="shareLink">https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=...</span>
               <button class="share-copy-btn" onclick="copyLink()">نسخ</button>
             </div>
             <div style="display:flex;align-items:center;gap:16px;margin-top:14px">
@@ -890,7 +890,7 @@ function buildDashboard(){
   document.getElementById('settingEnd').value=currentTrip.end_date||'';
 
   // share link
-  document.getElementById('shareLink').textContent=`https://rehlasaa.netlify.app/rehla-companion.html?trip=${currentTrip.id}`;
+  document.getElementById('shareLink').textContent=`https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip.id}`;
   populatePayerSelects();
 }
 
@@ -1141,7 +1141,7 @@ function renderShare(){
     el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">${isEn?'Add members first':'أضف أعضاء أولاً'}</div>`;
     return;
   }
-  const tripLink=`https://rehlasaa.netlify.app/rehla-companion.html?trip=${currentTrip?.id||''}`;
+  const tripLink=`https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip?.id||''}`;
   el.innerHTML=members.map((m,i)=>{
     const waMsg=encodeURIComponent(
       `مرحباً ${m.name} 👋\nتمت دعوتك لمتابعة رحلة "${currentTrip?.name||''}"\n\nاضغط الرابط لمشاهدة المصاريف وحسابك:\n${tripLink}\n\nرحلة+ ✈`
@@ -1527,7 +1527,7 @@ function sendWA(phone,from,to,amount){
 }
 
 function copyLink(){
-  const link=`https://rehlasaa.netlify.app/rehla-companion.html?trip=${currentTrip?.id||''}`;
+  const link=`https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip?.id||''}`;
   navigator.clipboard.writeText(link).catch(()=>{});
   toast('✓ تم نسخ الرابط','ok');
 }
