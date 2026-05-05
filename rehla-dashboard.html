@@ -25,12 +25,38 @@
   --r:12px;--rsm:9px;--rxs:6px;
   --sidebar-w:220px;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* ════ THEMES ════ */
+[data-theme="navy"]{--bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;--sidebar:#050c24;--sidebar2:#080f2a;--cyan:#2563eb;--cyan-dim:rgba(37,99,235,.15);--cyan-bright:rgba(37,99,235,.25)}
+[data-theme="midnight"]{--bg:#0a0f1e;--bg2:#111827;--bg3:#1a2540;--sidebar:#060810;--sidebar2:#090d18;--cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25)}
+[data-theme="ocean"]{--bg:#042f4b;--bg2:#0c4a6e;--bg3:#0e5a85;--sidebar:#021d2e;--sidebar2:#032540;--cyan:#0ea5e9;--cyan-dim:rgba(14,165,233,.15);--cyan-bright:rgba(14,165,233,.25)}
+[data-theme="rose"]{--bg:#1e0a14;--bg2:#3b0f20;--bg3:#4c1028;--sidebar:#12060c;--sidebar2:#1a0810;--cyan:#f43f5e;--cyan-dim:rgba(244,63,94,.15);--cyan-bright:rgba(244,63,94,.25)}
+[data-theme="lavender"]{--bg:#1a0a2e;--bg2:#2d1b4e;--bg3:#3a2460;--sidebar:#10061c;--sidebar2:#160830;--cyan:#a78bfa;--cyan-dim:rgba(167,139,250,.15);--cyan-bright:rgba(167,139,250,.25)}
+[data-theme="blush"]{--bg:#1c0f0a;--bg2:#2e1a10;--bg3:#3a2015;--sidebar:#110905;--sidebar2:#180c08;--cyan:#f59e0b;--cyan-dim:rgba(245,158,11,.15);--cyan-bright:rgba(245,158,11,.25)}
+[data-theme="sky"]{--bg:#0c1f3f;--bg2:#1a3a5c;--bg3:#2a5a8c;--sidebar:#081428;--sidebar2:#0c1c38;--cyan:#60a5fa;--cyan-dim:rgba(96,165,250,.15);--cyan-bright:rgba(96,165,250,.25)}
+[data-theme="desert"]{--bg:#1a0e00;--bg2:#2e1c00;--bg3:#3d2600;--sidebar:#0f0800;--sidebar2:#160c00;--cyan:#d97706;--cyan-dim:rgba(217,119,6,.15);--cyan-bright:rgba(217,119,6,.25)}
+[data-theme="forest"]{--bg:#062010;--bg2:#0d3520;--bg3:#124528;--sidebar:#031408;--sidebar2:#051b0e;--cyan:#10b981;--cyan-dim:rgba(16,185,129,.15);--cyan-bright:rgba(16,185,129,.25)}
 html{-webkit-tap-highlight-color:transparent}
-body{font-family:'Cairo',sans-serif;background:linear-gradient(160deg,#060e2e 0%,#0a1628 50%,#0d1f4e 100%);min-height:100vh;color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 50%,var(--bg3) 100%);min-height:100vh;color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 input,select,textarea,button{font-family:inherit;border:none;outline:none;-webkit-appearance:none;appearance:none}
 button{cursor:pointer}
 ::-webkit-scrollbar{width:4px;height:4px}
+/* ════ THEME PICKER ════ */
+.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.theme-opt{border-radius:10px;overflow:hidden;border:2px solid var(--border2);cursor:pointer;transition:all .25s;background:var(--card)}
+.theme-opt:hover{border-color:var(--border);transform:translateY(-2px)}
+.theme-opt.selected{border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan-dim)}
+.theme-preview{height:60px;position:relative;overflow:hidden}
+.tp-sidebar{position:absolute;top:0;right:0;width:28%;height:100%}
+.tp-content{position:absolute;top:8px;left:8px;right:35%;display:flex;flex-direction:column;gap:4px}
+.tp-line{height:5px;border-radius:3px;background:rgba(255,255,255,.22)}
+.tp-btn{height:8px;border-radius:3px;width:55%}
+.tp-check{position:absolute;top:5px;left:5px;width:17px;height:17px;border-radius:50%;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:.55rem;color:#fff;opacity:0;transition:opacity .2s}
+.theme-opt.selected .tp-check{opacity:1}
+.tp-info{padding:7px 9px}
+.tp-name{font-size:.74rem;font-weight:800;margin-bottom:1px}
+.tp-desc{font-size:.63rem;color:var(--w40);line-height:1.3}
+.theme-cat{font-size:.68rem;font-weight:800;color:var(--w40);letter-spacing:.7px;margin:14px 0 8px;display:flex;align-items:center;gap:6px}
+.theme-cat::after{content:'';flex:1;height:1px;background:var(--border2)}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:2px}
 
@@ -531,7 +557,8 @@ button{cursor:pointer}
 
     <!-- PAGE: SETTINGS -->
     <div class="page-section" id="page-settings">
-      <div class="section-card">
+      <!-- إعدادات الرحلة -->
+      <div class="section-card" style="margin-bottom:14px">
         <div class="section-head"><div class="section-title">⚙ إعدادات الرحلة</div></div>
         <div class="section-body">
           <div class="form-row" style="margin-bottom:12px">
@@ -540,7 +567,102 @@ button{cursor:pointer}
             <div><span class="f-lbl">تاريخ البداية</span><input class="f-inp" type="date" id="settingStart"></div>
             <div><span class="f-lbl">تاريخ النهاية</span><input class="f-inp" type="date" id="settingEnd"></div>
           </div>
-          <button onclick="toast('تم حفظ الإعدادات ✓','ok')" style="padding:11px 24px;border-radius:var(--rsm);background:var(--cyan);color:var(--bg2);font-size:.88rem;font-weight:900;cursor:pointer">حفظ التغييرات</button>
+          <button onclick="saveSettings()" style="padding:11px 24px;border-radius:var(--rsm);background:var(--cyan);color:#fff;font-size:.88rem;font-weight:900;cursor:pointer">حفظ التغييرات</button>
+        </div>
+      </div>
+
+      <!-- اختيار الثيم -->
+      <div class="section-card">
+        <div class="section-head">
+          <div class="section-title">🎨 ثيم الصفحة</div>
+          <div style="font-size:.7rem;color:var(--w50)">يُحفظ تلقائياً</div>
+        </div>
+        <div class="section-body">
+          <div style="font-size:.8rem;color:var(--w60);margin-bottom:4px">اختر اللون الذي يعجبك — يتغير كل شيء فوراً</div>
+
+          <div class="theme-cat">🔵 رجالية — قوية وعميقة</div>
+          <div class="theme-grid">
+            <div class="theme-opt selected" id="th-navy" onclick="setTheme('navy')">
+              <div class="theme-preview" style="background:linear-gradient(135deg,#060e2e,#0d1f4e)">
+                <div class="tp-sidebar" style="background:#050c24"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#2563eb"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Navy Classic</div><div class="tp-desc">الأزرق الداكن — أنيق ومحترف ⭐</div></div>
+            </div>
+            <div class="theme-opt" id="th-midnight" onclick="setTheme('midnight')">
+              <div class="theme-preview" style="background:linear-gradient(135deg,#0a0f1e,#111827)">
+                <div class="tp-sidebar" style="background:#060810"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#38bdf8"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Midnight Steel</div><div class="tp-desc">أسود فولاذي + سماوي 🌙</div></div>
+            </div>
+            <div class="theme-opt" id="th-ocean" onclick="setTheme('ocean')">
+              <div class="theme-preview" style="background:linear-gradient(135deg,#042f4b,#0c4a6e)">
+                <div class="tp-sidebar" style="background:#021d2e"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#0ea5e9"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Deep Ocean</div><div class="tp-desc">أزرق المحيط العميق 🌊</div></div>
+            </div>
+          </div>
+
+          <div class="theme-cat">🌸 أنثوية — ناعمة وراقية</div>
+          <div class="theme-grid">
+            <div class="theme-opt" id="th-rose" onclick="setTheme('rose')">
+              <div class="theme-preview" style="background:linear-gradient(135deg,#1e0a14,#3b0f20)">
+                <div class="tp-sidebar" style="background:#12060c"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#f43f5e"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Rose Dusk</div><div class="tp-desc">وردي غامق + أحمر دافئ 🌹</div></div>
+            </div>
+            <div class="theme-opt" id="th-lavender" onclick="setTheme('lavender')">
+              <div class="theme-preview" style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e)">
+                <div class="tp-sidebar" style="background:#10061c"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#a78bfa"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Lavender Night</div><div class="tp-desc">بنفسجي عميق + ذهبي 💜</div></div>
+            </div>
+            <div class="theme-opt" id="th-blush" onclick="setTheme('blush')">
+              <div class="theme-preview" style="background:linear-gradient(135deg,#1c0f0a,#2e1a10)">
+                <div class="tp-sidebar" style="background:#110905"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#f59e0b"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Blush Gold</div><div class="tp-desc">بني دافئ + ذهبي ✨</div></div>
+            </div>
+          </div>
+
+          <div class="theme-cat">🌍 الطبيعة والسفر</div>
+          <div class="theme-grid">
+            <div class="theme-opt" id="th-sky" onclick="setTheme('sky')">
+              <div class="theme-preview" style="background:linear-gradient(180deg,#0c1f3f,#2a5a8c)">
+                <div class="tp-sidebar" style="background:#081428"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#60a5fa"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Sky Horizon</div><div class="tp-desc">تدرج السماء من الليل للفجر ☁️</div></div>
+            </div>
+            <div class="theme-opt" id="th-desert" onclick="setTheme('desert')">
+              <div class="theme-preview" style="background:linear-gradient(135deg,#1a0e00,#2e1c00)">
+                <div class="tp-sidebar" style="background:#0f0800"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#d97706"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Desert Gold</div><div class="tp-desc">ذهب الصحراء — خليجي أصيل 🏜</div></div>
+            </div>
+            <div class="theme-opt" id="th-forest" onclick="setTheme('forest')">
+              <div class="theme-preview" style="background:linear-gradient(135deg,#062010,#0d3520)">
+                <div class="tp-sidebar" style="background:#031408"></div>
+                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#10b981"></div></div>
+                <div class="tp-check">✓</div>
+              </div>
+              <div class="tp-info"><div class="tp-name">Alpine Forest</div><div class="tp-desc">أخضر الجبال والغابات 🏔</div></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -658,6 +780,25 @@ let isEn=localStorage.getItem('rehla_lang')==='en'||sessionStorage.getItem('rehl
 let selectedCat='فندق';
 
 /* انتظر تحميل المكتبة بشكل موثوق */
+/* ════ THEME SYSTEM ════ */
+function setTheme(theme){
+  document.documentElement.setAttribute('data-theme',theme);
+  localStorage.setItem('rehla_theme',theme);
+  document.querySelectorAll('.theme-opt').forEach(el=>el.classList.remove('selected'));
+  const sel=document.getElementById('th-'+theme);
+  if(sel)sel.classList.add('selected');
+  toast('✓ تم تغيير الثيم','ok');
+}
+
+function applyThemeOnLoad(){
+  const saved=localStorage.getItem('rehla_theme')||'navy';
+  document.documentElement.setAttribute('data-theme',saved);
+}
+
+function saveSettings(){
+  toast(t('تم حفظ الإعدادات ✓'),'ok');
+}
+
 function waitForSupabase(n){
   if(n>50){
     document.getElementById('fsLoader').innerHTML=
@@ -670,7 +811,10 @@ function waitForSupabase(n){
     setTimeout(()=>waitForSupabase(n+1),100);
   }
 }
-document.addEventListener('DOMContentLoaded',()=>waitForSupabase(0));
+document.addEventListener('DOMContentLoaded',()=>{
+  applyThemeOnLoad();
+  waitForSupabase(0);
+});
 
 async function initApp(){
   sb=window.supabase.createClient(SURL,SKEY);
@@ -697,6 +841,11 @@ async function initApp(){
 
   await loadUserTrips();
   hideLoader();
+  // تطبيق الثيم المحفوظ على الأزرار
+  const savedTheme=localStorage.getItem('rehla_theme')||'navy';
+  document.querySelectorAll('.theme-opt').forEach(el=>el.classList.remove('selected'));
+  const thEl=document.getElementById('th-'+savedTheme);
+  if(thEl)thEl.classList.add('selected');
 }
 
 function hideLoader(){
