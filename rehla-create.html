@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>رحلة+ — إنشاء رحلة جديدة</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;700;800;900&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script src="rehla-lang.js"></script>
 <style>
 :root{
   --gold:#2563eb;--gold-dim:rgba(37,99,235,.15);--gold-bright:rgba(37,99,235,.3);
@@ -238,8 +239,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
     <div><div class="nav-logo-name">رحلة<em>+</em></div></div>
   </a>
   <div class="nav-right">
-    <button class="btn-nav" id="langBtn" onclick="toggleLang()">🌐 EN</button>
-    <button class="btn-nav" id="backBtn" onclick="navBack()">← <span id="backTxt">الرئيسية</span></button>
+    <div id="langBtnWrap"></div>
+    <button class="btn-nav" id="backBtn" onclick="navBack()">← <span id="backTxt" data-lang="home">الرئيسية</span></button>
   </div>
 </nav>
 
@@ -725,6 +726,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 async function initApp(){
   sb=window.supabase.createClient(SURL,SKEY);
+  buildLangBtn('langBtnWrap');
+  applyLang();
   const {data:{session}}=await sb.auth.getSession();
   if(!session){location.href='rehla-auth.html';return}
   currentUser=session.user;
