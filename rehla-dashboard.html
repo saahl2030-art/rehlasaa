@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>رحلة+ — لوحة التحكم</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;700;800;900&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script src="rehla-lang.js"></script>
 <style>
 :root{
   --bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;
@@ -417,19 +418,19 @@ button{cursor:pointer}
   </div>
 
   <nav class="sidebar-nav">
-    <div class="nav-section-label">الرئيسية</div>
-    <div class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard')"><span class="nav-icon">🏠</span> لوحة الرحلة</div>
-    <div class="nav-section-label">المصاريف</div>
-    <div class="nav-item" id="nav-expenses" onclick="showPage('expenses')"><span class="nav-icon">💳</span> المصاريف<span class="nav-badge" id="exp-badge">٠</span></div>
-    <div class="nav-item" id="nav-receipts" onclick="showPage('receipts')"><span class="nav-icon">📸</span> الإيصالات</div>
-    <div class="nav-section-label">التحليل</div>
-    <div class="nav-item" id="nav-summary" onclick="showPage('summary')"><span class="nav-icon">📊</span> الملخص المالي</div>
-    <div class="nav-item" id="nav-settle" onclick="showPage('settle')"><span class="nav-icon">🧮</span> تصفية الحساب</div>
-    <div class="nav-item" id="nav-report" onclick="showPage('report')"><span class="nav-icon">📄</span> التقرير</div>
-    <div class="nav-section-label">الأعضاء</div>
-    <div class="nav-item" id="nav-members" onclick="showPage('members')"><span class="nav-icon">👥</span> الأعضاء والأدوار</div>
-    <div class="nav-item" id="nav-share" onclick="showPage('share')"><span class="nav-icon">🔗</span> مشاركة الرحلة</div>
-    <div class="nav-item" id="nav-settings" onclick="showPage('settings')"><span class="nav-icon">⚙</span> الإعدادات</div>
+    <div class="nav-section-label" data-lang="sec_main">الرئيسية</div>
+    <div class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard')"><span class="nav-icon">🏠</span> <span data-lang="page_dashboard">لوحة الرحلة</span></div>
+    <div class="nav-section-label" data-lang="sec_expenses">المصاريف</div>
+    <div class="nav-item" id="nav-expenses" onclick="showPage('expenses')"><span class="nav-icon">💳</span> <span data-lang="page_expenses">المصاريف</span><span class="nav-badge lang-keep" id="exp-badge">٠</span></div>
+    <div class="nav-item" id="nav-receipts" onclick="showPage('receipts')"><span class="nav-icon">📸</span> <span data-lang="page_receipts">الإيصالات</span></div>
+    <div class="nav-section-label" data-lang="sec_analysis">التحليل</div>
+    <div class="nav-item" id="nav-summary" onclick="showPage('summary')"><span class="nav-icon">📊</span> <span data-lang="page_summary">الملخص المالي</span></div>
+    <div class="nav-item" id="nav-settle" onclick="showPage('settle')"><span class="nav-icon">🧮</span> <span data-lang="page_settle">تصفية الحساب</span></div>
+    <div class="nav-item" id="nav-report" onclick="showPage('report')"><span class="nav-icon">📄</span> <span data-lang="page_report">التقرير</span></div>
+    <div class="nav-section-label" data-lang="sec_members">الأعضاء</div>
+    <div class="nav-item" id="nav-members" onclick="showPage('members')"><span class="nav-icon">👥</span> <span data-lang="page_members">الأعضاء والأدوار</span></div>
+    <div class="nav-item" id="nav-share" onclick="showPage('share')"><span class="nav-icon">🔗</span> <span data-lang="page_share">مشاركة الرحلة</span></div>
+    <div class="nav-item" id="nav-settings" onclick="showPage('settings')"><span class="nav-icon">⚙</span> <span data-lang="page_settings">الإعدادات</span></div>
   </nav>
 
   <div class="sidebar-footer">
@@ -451,13 +452,13 @@ button{cursor:pointer}
       <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
         <span></span><span></span><span></span>
       </button>
-      <div class="topbar-title" id="topbarTitle">لوحة الرحلة</div>
+      <div class="topbar-title" id="topbarTitle" data-lang="page_dashboard">لوحة الرحلة</div>
     </div>
     <div class="topbar-actions">
-      <button class="topbar-btn topbar-btn-ghost" onclick="toggleLang()" id="langBtn">EN</button>
-      <button class="topbar-btn topbar-btn-ghost" onclick="showPage('share')">🔗 مشاركة</button>
+      <div id="langBtnWrap"></div>
+      <button class="topbar-btn topbar-btn-ghost" onclick="showPage('share')"><span data-lang="topbar_share">🔗 مشاركة</span></button>
       <button class="topbar-btn topbar-btn-primary" onclick="openAddExpModal()">
-        <span>+</span> <span>إضافة مصروف</span>
+        <span>+</span> <span data-lang="topbar_add">إضافة مصروف</span>
       </button>
     </div>
   </div>
@@ -819,14 +820,9 @@ document.addEventListener('DOMContentLoaded',()=>{
 async function initApp(){
   sb=window.supabase.createClient(SURL,SKEY);
 
-  // تطبيق اللغة فوراً
-  if(isEn){
-    document.documentElement.setAttribute('lang','en');
-    document.documentElement.setAttribute('dir','ltr');
-  }
-  const langBtn=document.getElementById('langBtn');
-  if(langBtn) langBtn.textContent=isEn?'ع':'EN';
-  applyDashLang();
+  // تهيئة زر اللغة
+  buildLangBtn('langBtnWrap');
+  applyLang();
 
   // AUTH CHECK
   const {data:{session}}=await sb.auth.getSession();
@@ -1472,8 +1468,8 @@ function showPage(page){
   const nav=document.getElementById('nav-'+page);
   if(pg)pg.classList.add('active');
   if(nav)nav.classList.add('active');
-  const t=PAGE_TITLES_LANG[page];
-  document.getElementById('topbarTitle').textContent=t?(isEn?t.en:t.ar):'';
+  const titleKey='page_'+page;
+  document.getElementById('topbarTitle').textContent=t(titleKey)||page;
   if(page==='summary')renderSummaryFull();
   if(page==='settle')renderSettle();
   if(page==='expenses')renderExpensesFull();
