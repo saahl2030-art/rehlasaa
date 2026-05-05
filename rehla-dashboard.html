@@ -4,38 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>رحلة+ — لوحة التحكم</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;700;800;900&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-<script src="rehla-lang.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;
   --sidebar:#050c24;--sidebar2:#080f2a;
-  --cyan:#2563eb;--cyan-dim:rgba(37,99,235,.15);--cyan-bright:rgba(37,99,235,.25);
-  --green:#22c55e;--green-dim:rgba(34,197,94,.12);
-  --red:#f87171;--red-dim:rgba(248,113,113,.12);
-  --orange:#fb923c;--orange-dim:rgba(251,146,60,.12);
-  --purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);
-  --yellow:#f59e0b;--yellow-dim:rgba(245,158,11,.12);
-  --white:#fff;
-  --w90:rgba(255,255,255,.9);--w70:rgba(255,255,255,.7);--w50:rgba(255,255,255,.5);
-  --w30:rgba(255,255,255,.3);--w15:rgba(255,255,255,.15);--w10:rgba(255,255,255,.1);
-  --w06:rgba(255,255,255,.06);--w03:rgba(255,255,255,.03);
-  --border:rgba(255,255,255,.12);--border2:rgba(255,255,255,.08);
-  --card:rgba(255,255,255,.07);--card2:rgba(255,255,255,.04);
-  --shadow:0 4px 24px rgba(0,0,0,.4);--shadow-lg:0 12px 40px rgba(0,0,0,.5);
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.15);
+  --red:#f87171;--red-dim:rgba(248,113,113,.15);
+  --orange:#fb923c;--orange-dim:rgba(251,146,60,.15);
+  --purple:#a78bfa;--purple-dim:rgba(167,139,250,.15);
+  --yellow:#f59e0b;--yellow-dim:rgba(245,158,11,.15);
+  --white:#ffffff;
+  --w90:rgba(255,255,255,.92);
+  --w80:rgba(255,255,255,.80);
+  --w70:rgba(255,255,255,.70);
+  --w60:rgba(255,255,255,.60);
+  --w50:rgba(255,255,255,.50);
+  --w40:rgba(255,255,255,.40);
+  --w30:rgba(255,255,255,.30);
+  --w20:rgba(255,255,255,.20);
+  --w15:rgba(255,255,255,.15);
+  --w10:rgba(255,255,255,.10);
+  --w06:rgba(255,255,255,.06);
+  --w03:rgba(255,255,255,.03);
+  --border:rgba(255,255,255,.14);
+  --border2:rgba(255,255,255,.08);
+  --card:rgba(255,255,255,.08);
+  --card2:rgba(255,255,255,.05);
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.5);
   --r:12px;--rsm:9px;--rxs:6px;
   --sidebar-w:220px;
 }
 /* ════ THEMES ════ */
-[data-theme="navy"]{--bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;--sidebar:#050c24;--sidebar2:#080f2a;--cyan:#2563eb;--cyan-dim:rgba(37,99,235,.15);--cyan-bright:rgba(37,99,235,.25)}
+[data-theme="navy"]{--bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;--sidebar:#050c24;--sidebar2:#080f2a;--cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25)}
 [data-theme="midnight"]{--bg:#0a0f1e;--bg2:#111827;--bg3:#1a2540;--sidebar:#060810;--sidebar2:#090d18;--cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25)}
-[data-theme="ocean"]{--bg:#042f4b;--bg2:#0c4a6e;--bg3:#0e5a85;--sidebar:#021d2e;--sidebar2:#032540;--cyan:#0ea5e9;--cyan-dim:rgba(14,165,233,.15);--cyan-bright:rgba(14,165,233,.25)}
-[data-theme="rose"]{--bg:#1e0a14;--bg2:#3b0f20;--bg3:#4c1028;--sidebar:#12060c;--sidebar2:#1a0810;--cyan:#f43f5e;--cyan-dim:rgba(244,63,94,.15);--cyan-bright:rgba(244,63,94,.25)}
-[data-theme="lavender"]{--bg:#1a0a2e;--bg2:#2d1b4e;--bg3:#3a2460;--sidebar:#10061c;--sidebar2:#160830;--cyan:#a78bfa;--cyan-dim:rgba(167,139,250,.15);--cyan-bright:rgba(167,139,250,.25)}
-[data-theme="blush"]{--bg:#1c0f0a;--bg2:#2e1a10;--bg3:#3a2015;--sidebar:#110905;--sidebar2:#180c08;--cyan:#f59e0b;--cyan-dim:rgba(245,158,11,.15);--cyan-bright:rgba(245,158,11,.25)}
-[data-theme="sky"]{--bg:#0c1f3f;--bg2:#1a3a5c;--bg3:#2a5a8c;--sidebar:#081428;--sidebar2:#0c1c38;--cyan:#60a5fa;--cyan-dim:rgba(96,165,250,.15);--cyan-bright:rgba(96,165,250,.25)}
-[data-theme="desert"]{--bg:#1a0e00;--bg2:#2e1c00;--bg3:#3d2600;--sidebar:#0f0800;--sidebar2:#160c00;--cyan:#d97706;--cyan-dim:rgba(217,119,6,.15);--cyan-bright:rgba(217,119,6,.25)}
-[data-theme="forest"]{--bg:#062010;--bg2:#0d3520;--bg3:#124528;--sidebar:#031408;--sidebar2:#051b0e;--cyan:#10b981;--cyan-dim:rgba(16,185,129,.15);--cyan-bright:rgba(16,185,129,.25)}
+[data-theme="ocean"]{--bg:#042f4b;--bg2:#0c4a6e;--bg3:#0e5a85;--sidebar:#021d2e;--sidebar2:#032540;--cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25)}
+[data-theme="rose"]{--bg:#1e0a14;--bg2:#3b0f20;--bg3:#4c1028;--sidebar:#12060c;--sidebar2:#1a0810;--cyan:#fb7185;--cyan-dim:rgba(251,113,133,.15);--cyan-bright:rgba(251,113,133,.25)}
+[data-theme="lavender"]{--bg:#1a0a2e;--bg2:#2d1b4e;--bg3:#3a2460;--sidebar:#10061c;--sidebar2:#160830;--cyan:#c4b5fd;--cyan-dim:rgba(196,181,253,.15);--cyan-bright:rgba(196,181,253,.25)}
+[data-theme="blush"]{--bg:#1c0f0a;--bg2:#2e1a10;--bg3:#3a2015;--sidebar:#110905;--sidebar2:#180c08;--cyan:#fcd34d;--cyan-dim:rgba(252,211,77,.15);--cyan-bright:rgba(252,211,77,.25)}
+[data-theme="sky"]{--bg:#0c1f3f;--bg2:#1a3a5c;--bg3:#2a5a8c;--sidebar:#081428;--sidebar2:#0c1c38;--cyan:#93c5fd;--cyan-dim:rgba(147,197,253,.15);--cyan-bright:rgba(147,197,253,.25)}
+[data-theme="desert"]{--bg:#1a0e00;--bg2:#2e1c00;--bg3:#3d2600;--sidebar:#0f0800;--sidebar2:#160c00;--cyan:#fcd34d;--cyan-dim:rgba(252,211,77,.15);--cyan-bright:rgba(252,211,77,.25)}
+[data-theme="forest"]{--bg:#062010;--bg2:#0d3520;--bg3:#124528;--sidebar:#031408;--sidebar2:#051b0e;--cyan:#6ee7b7;--cyan-dim:rgba(110,231,183,.15);--cyan-bright:rgba(110,231,183,.25)}
 html{-webkit-tap-highlight-color:transparent}
 body{font-family:'Cairo',sans-serif;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 50%,var(--bg3) 100%);min-height:100vh;color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 input,select,textarea,button{font-family:inherit;border:none;outline:none;-webkit-appearance:none;appearance:none}
@@ -418,19 +429,19 @@ button{cursor:pointer}
   </div>
 
   <nav class="sidebar-nav">
-    <div class="nav-section-label" data-lang="sec_main">الرئيسية</div>
-    <div class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard')"><span class="nav-icon">🏠</span> <span data-lang="page_dashboard">لوحة الرحلة</span></div>
-    <div class="nav-section-label" data-lang="sec_expenses">المصاريف</div>
-    <div class="nav-item" id="nav-expenses" onclick="showPage('expenses')"><span class="nav-icon">💳</span> <span data-lang="page_expenses">المصاريف</span><span class="nav-badge lang-keep" id="exp-badge">٠</span></div>
-    <div class="nav-item" id="nav-receipts" onclick="showPage('receipts')"><span class="nav-icon">📸</span> <span data-lang="page_receipts">الإيصالات</span></div>
-    <div class="nav-section-label" data-lang="sec_analysis">التحليل</div>
-    <div class="nav-item" id="nav-summary" onclick="showPage('summary')"><span class="nav-icon">📊</span> <span data-lang="page_summary">الملخص المالي</span></div>
-    <div class="nav-item" id="nav-settle" onclick="showPage('settle')"><span class="nav-icon">🧮</span> <span data-lang="page_settle">تصفية الحساب</span></div>
-    <div class="nav-item" id="nav-report" onclick="showPage('report')"><span class="nav-icon">📄</span> <span data-lang="page_report">التقرير</span></div>
-    <div class="nav-section-label" data-lang="sec_members">الأعضاء</div>
-    <div class="nav-item" id="nav-members" onclick="showPage('members')"><span class="nav-icon">👥</span> <span data-lang="page_members">الأعضاء والأدوار</span></div>
-    <div class="nav-item" id="nav-share" onclick="showPage('share')"><span class="nav-icon">🔗</span> <span data-lang="page_share">مشاركة الرحلة</span></div>
-    <div class="nav-item" id="nav-settings" onclick="showPage('settings')"><span class="nav-icon">⚙</span> <span data-lang="page_settings">الإعدادات</span></div>
+    <div class="nav-section-label">الرئيسية</div>
+    <div class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard')"><span class="nav-icon">🏠</span> لوحة الرحلة</div>
+    <div class="nav-section-label">المصاريف</div>
+    <div class="nav-item" id="nav-expenses" onclick="showPage('expenses')"><span class="nav-icon">💳</span> المصاريف<span class="nav-badge lang-keep" id="exp-badge">٠</span></div>
+    <div class="nav-item" id="nav-receipts" onclick="showPage('receipts')"><span class="nav-icon">📸</span> الإيصالات</div>
+    <div class="nav-section-label">التحليل</div>
+    <div class="nav-item" id="nav-summary" onclick="showPage('summary')"><span class="nav-icon">📊</span> الملخص المالي</div>
+    <div class="nav-item" id="nav-settle" onclick="showPage('settle')"><span class="nav-icon">🧮</span> تصفية الحساب</div>
+    <div class="nav-item" id="nav-report" onclick="showPage('report')"><span class="nav-icon">📄</span> التقرير</div>
+    <div class="nav-section-label">الأعضاء</div>
+    <div class="nav-item" id="nav-members" onclick="showPage('members')"><span class="nav-icon">👥</span> الأعضاء والأدوار</div>
+    <div class="nav-item" id="nav-share" onclick="showPage('share')"><span class="nav-icon">🔗</span> مشاركة الرحلة</div>
+    <div class="nav-item" id="nav-settings" onclick="showPage('settings')"><span class="nav-icon">⚙</span> الإعدادات</div>
   </nav>
 
   <div class="sidebar-footer">
@@ -452,13 +463,13 @@ button{cursor:pointer}
       <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
         <span></span><span></span><span></span>
       </button>
-      <div class="topbar-title" id="topbarTitle" data-lang="page_dashboard">لوحة الرحلة</div>
+      <div class="topbar-title" id="topbarTitle">لوحة الرحلة</div>
     </div>
     <div class="topbar-actions">
-      <div id="langBtnWrap"></div>
-      <button class="topbar-btn topbar-btn-ghost" onclick="showPage('share')"><span data-lang="topbar_share">🔗 مشاركة</span></button>
+      <button class="topbar-btn topbar-btn-ghost" id="langBtn" onclick="toggleLang()" style="font-weight:800;min-width:42px">EN</button>
+      <button class="topbar-btn topbar-btn-ghost" onclick="showPage('share')">🔗 مشاركة</button>
       <button class="topbar-btn topbar-btn-primary" onclick="openAddExpModal()">
-        <span>+</span> <span data-lang="topbar_add">إضافة مصروف</span>
+        <span>+</span> <span>إضافة مصروف</span>
       </button>
     </div>
   </div>
@@ -777,7 +788,6 @@ let expenses=[];
 let activities=[];
 let mDistMode='all';
 let editingExpId=null;
-let isEn=localStorage.getItem('rehla_lang')==='en'||sessionStorage.getItem('rehla_lang')==='en';
 let selectedCat='فندق';
 
 /* انتظر تحميل المكتبة بشكل موثوق */
@@ -820,10 +830,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 async function initApp(){
   sb=window.supabase.createClient(SURL,SKEY);
 
-  // تهيئة زر اللغة
-  buildLangBtn('langBtnWrap');
-  applyLang();
-
+  // تطبيق اللغة
+  applyDashLang();
   // AUTH CHECK
   const {data:{session}}=await sb.auth.getSession();
   if(!session){
@@ -1456,11 +1464,6 @@ async function addMember(){
 /* ═══════════════════════════════════
    NAVIGATION
 ═══════════════════════════════════ */
-const PAGE_TITLES={
-  dashboard:'لوحة الرحلة',expenses:'المصاريف',summary:'الملخص المالي',
-  settle:'تصفية الحساب',report:'التقرير',members:'الأعضاء والأدوار',
-  share:'مشاركة الرحلة',settings:'الإعدادات',receipts:'الإيصالات'
-};
 function showPage(page){
   document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -1468,8 +1471,8 @@ function showPage(page){
   const nav=document.getElementById('nav-'+page);
   if(pg)pg.classList.add('active');
   if(nav)nav.classList.add('active');
-  const titleKey='page_'+page;
-  document.getElementById('topbarTitle').textContent=t(titleKey)||page;
+  const title=isEn?(PAGE_TITLES_EN[page]||page):(PAGE_TITLES[page]||page);
+  document.getElementById('topbarTitle').textContent=title;
   if(page==='summary')renderSummaryFull();
   if(page==='settle')renderSettle();
   if(page==='expenses')renderExpensesFull();
@@ -1510,142 +1513,31 @@ document.querySelectorAll('.modal-ov').forEach(el=>el.addEventListener('click',e
 /* ══════════════════════════════════
    LANGUAGE TEXTS
 ══════════════════════════════════ */
-const DASH_TEXTS={
-  // SIDEBAR NAV
-  'nav-dashboard':{ar:'🏠 لوحة الرحلة',en:'🏠 Dashboard'},
-  'nav-expenses':{ar:'💳 المصاريف',en:'💳 Expenses'},
-  'nav-receipts':{ar:'📸 الإيصالات',en:'📸 Receipts'},
-  'nav-summary':{ar:'📊 الملخص المالي',en:'📊 Financial Summary'},
-  'nav-settle':{ar:'🧮 تصفية الحساب',en:'🧮 Settlement'},
-  'nav-report':{ar:'📄 التقرير',en:'📄 Report'},
-  'nav-members':{ar:'👥 الأعضاء والأدوار',en:'👥 Members & Roles'},
-  'nav-share':{ar:'🔗 مشاركة الرحلة',en:'🔗 Share Trip'},
-  'nav-settings':{ar:'⚙ الإعدادات',en:'⚙ Settings'},
-  // TOPBAR
-  'topbarTitle':{ar:'لوحة الرحلة',en:'Dashboard'},
-  'topbarShare':{ar:'🔗 مشاركة',en:'🔗 Share'},
-  'topbarAdd':{ar:'+ إضافة مصروف',en:'+ Add Expense'},
-  // USER
-  'userRole':{ar:'👑 مسؤول الرحلة',en:'👑 Trip Organizer'},
+/* ════ LANGUAGE — بسيط ════ */
+let isEn=localStorage.getItem('rehla_lang')==='en';
+
+const PAGE_TITLES={
+  dashboard:'لوحة الرحلة',expenses:'المصاريف',summary:'الملخص المالي',
+  settle:'تصفية الحساب',report:'التقرير',members:'الأعضاء والأدوار',
+  share:'مشاركة الرحلة',settings:'الإعدادات',receipts:'الإيصالات',
 };
 
-const PAGE_TITLES_LANG={
-  dashboard:{ar:'لوحة الرحلة',en:'Dashboard'},
-  expenses:{ar:'المصاريف',en:'Expenses'},
-  summary:{ar:'الملخص المالي',en:'Financial Summary'},
-  settle:{ar:'تصفية الحساب',en:'Settlement'},
-  report:{ar:'التقرير',en:'Report'},
-  members:{ar:'الأعضاء والأدوار',en:'Members & Roles'},
-  share:{ar:'مشاركة الرحلة',en:'Share Trip'},
-  settings:{ar:'الإعدادات',en:'Settings'},
-  receipts:{ar:'الإيصالات',en:'Receipts'},
+const PAGE_TITLES_EN={
+  dashboard:'Dashboard',expenses:'Expenses',summary:'Financial Summary',
+  settle:'Settlement',report:'Report',members:'Members & Roles',
+  share:'Share Trip',settings:'Settings',receipts:'Receipts',
 };
 
-/* مساعد الترجمة السريع */
-const TR={
-  'إجمالي المصاريف':'Total Expenses',
-  'نصيب كل شخص':'Per Person',
-  'الأكثر دفعاً':'Top Payer',
-  'عدد الأعضاء':'Members',
-  'مشارك في الرحلة':'trip members',
-  'درهم تقريباً':'approx.',
-  'أعضاء':'members',
-  'إضافة مصروف':'Add Expense',
-  'إضافة':'Add',
-  'إضافة مصروف جديد':'Add New Expense',
-  'توسيع':'Expand',
-  'اسم المصروف *':'Expense Name *',
-  'المبلغ *':'Amount *',
-  'من دفع؟ *':'Paid by *',
-  'التاريخ':'Date',
-  'التصنيف':'Category',
-  'ملاحظة (اختياري)':'Note (optional)',
-  'التوزيع على':'Split for',
-  'حفظ المصروف':'Save Expense',
-  'الجميع':'Everyone',
-  'أشخاص محددين':'Specific people',
-  'إلغاء':'Cancel',
-  'إضافة عضو':'Add Member',
-  'اسم العضو':'Member Name',
-  'رقم الواتساب':'WhatsApp',
-  'الدور':'Role',
-  'الأعضاء':'Members',
-  'إضافة عضو جديد':'Add New Member',
-  'لا يوجد أعضاء بعد':'No members yet',
-  'أضف أعضاء أولاً':'Add members first',
-  'الحسابات متوازنة!':'All settled!',
-  'لا توجد مبالغ متبقية بين الأعضاء':'No outstanding balances between members',
-  'لا توجد مصاريف بعد — أضف أول مصروف!':'No expenses yet — add your first!',
-  'لا توجد رحلات بعد!':'No trips yet!',
-  'أنشئ رحلتك الأولى وابدأ بتتبع المصاريف مع رفاقك بكل سهولة':'Create your first trip and start tracking expenses with your companions',
-  '✈ إنشاء رحلة جديدة':'✈ Create New Trip',
-  '٢٤٩ درهم فقط — دفعة واحدة للرحلة الكاملة':'249 AED only — one-time payment',
-  'نشطة':'Active',
-  'دفع:':'Paid:',
-  'عليه:':'Owes:',
-  'له ':'Gets back ',
-  'عليه ':'Owes ',
-  'متوازن':'Settled',
-  'مشارك في الرحلة':'trip participant',
-  'تم حفظ الإعدادات ✓':'Settings saved ✓',
-  'تم نسخ الرابط':'Link copied',
-  'تم إضافة المصروف':'Expense added',
-  'تم تعديل المصروف':'Expense updated',
-  'تم إضافة العضو':'Member added',
-  'خطأ في الحذف':'Delete error',
-  'خطأ في الإضافة':'Add error',
-  'خطأ في التعديل':'Edit error',
-  'خطأ في الحفظ':'Save error',
-  'يرجى ملء الحقول المطلوبة':'Please fill required fields',
-  'لا توجد رحلة محددة':'No trip selected',
-  'يرجى إدخال الاسم':'Please enter name',
-  'لوحة الرحلة':'Dashboard',
-  'آخر تحديث: الآن':'Last updated: now',
-};
-
-function t(ar){
+function t(ar,en){
   if(!isEn)return ar;
-  return TR[ar]||ar;
+  return en||ar;
 }
 
 function applyDashLang(){
-  const root=document.documentElement;
-  root.setAttribute('lang',isEn?'en':'ar');
-  root.setAttribute('dir',isEn?'ltr':'rtl');
-  const langBtn=document.getElementById('langBtn');
-  if(langBtn)langBtn.textContent=isEn?'ع':'EN';
-
-  // تطبيق نصوص الـ nav
-  Object.keys(DASH_TEXTS).forEach(id=>{
-    const el=document.getElementById(id);
-    if(!el)return;
-    const txt=isEn?DASH_TEXTS[id].en:DASH_TEXTS[id].ar;
-    const badge=el.querySelector('.nav-badge');
-    el.textContent=txt;
-    if(badge)el.appendChild(badge);
-  });
-
-  // topbar buttons
-  const shareBtn=document.querySelector('[onclick="showPage(\'share\')"].topbar-btn-ghost');
-  if(shareBtn)shareBtn.textContent=isEn?'🔗 Share':'🔗 مشاركة';
-  const addBtn=document.querySelector('.topbar-btn-primary');
-  if(addBtn)addBtn.innerHTML=`<span>+</span> <span>${isEn?'Add Expense':'إضافة مصروف'}</span>`;
-
-  // userRole
-  const userRoleEl=document.querySelector('.user-role');
-  if(userRoleEl)userRoleEl.textContent=isEn?'👑 Trip Organizer':'👑 مسؤول الرحلة';
-
-  // nav section labels
-  const navLabels=document.querySelectorAll('.nav-section-label');
-  const navLabelMap=[
-    {ar:'الرئيسية',en:'Main'},
-    {ar:'المصاريف',en:'Expenses'},
-    {ar:'التحليل',en:'Analysis'},
-    {ar:'الأعضاء',en:'Members'},
-  ];
-  navLabels.forEach((el,i)=>{
-    if(navLabelMap[i])el.textContent=isEn?navLabelMap[i].en:navLabelMap[i].ar;
-  });
+  document.documentElement.setAttribute('lang',isEn?'en':'ar');
+  document.documentElement.setAttribute('dir',isEn?'ltr':'rtl');
+  const btn=document.getElementById('langBtn');
+  if(btn)btn.textContent=isEn?'ع':'EN';
 }
 
 function toggleLang(){
@@ -1653,13 +1545,12 @@ function toggleLang(){
   localStorage.setItem('rehla_lang',isEn?'en':'ar');
   sessionStorage.setItem('rehla_lang',isEn?'en':'ar');
   applyDashLang();
-  // أعد رسم الصفحة الحالية
   const activePage=document.querySelector('.nav-item.active')?.id?.replace('nav-','');
   if(activePage)showPage(activePage);
 }
 
 function confirmSignOut(){
-  if(confirm('هل تريد تسجيل الخروج؟'))signOut();
+  if(confirm(isEn?'Sign out?':'هل تريد تسجيل الخروج؟'))signOut();
 }
 async function signOut(){
   await sb.auth.signOut();
