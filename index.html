@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>رحلة+ — إدارة مصاريف السفر</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-<script src="rehla-lang.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --blue:#2563eb;
@@ -295,13 +294,13 @@ nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.4)}
 .test-role{font-size:.7rem;color:var(--w50)}
 
 /* ══ CTA ══ */
-.cta-wrap{background:var(--blue);padding:80px 6%;text-align:center;position:relative;overflow:hidden}
+.cta-wrap{background:linear-gradient(135deg,#060e2e,#0a1628);padding:80px 6%;text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.08)}
 .cta-wrap::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,.06);top:-250px;right:-150px;pointer-events:none}
 .cta-wrap::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.06);bottom:-150px;left:50px;pointer-events:none}
 .cta-inner{position:relative;z-index:1}
 .cta-title{font-family:'Tajawal',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;margin-bottom:12px}
 .cta-sub{color:rgba(255,255,255,.8);font-size:.98rem;margin-bottom:32px}
-.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:15px 36px;border-radius:var(--radius-sm);background:rgba(255,255,255,.06);color:var(--blue-dark);font-family:'Cairo',sans-serif;font-size:1rem;font-weight:800;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:all .25s}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:15px 36px;border-radius:var(--radius-sm);background:var(--blue);color:#fff;font-family:"Cairo",sans-serif;font-size:1rem;font-weight:800;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(37,99,235,.4);transition:all .25s}
 .btn-cta:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(0,0,0,.2)}
 .cta-note{color:rgba(255,255,255,.6);font-size:.78rem;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:6px}
 
@@ -390,13 +389,13 @@ footer{background:rgba(0,0,0,.3);padding:60px 6% 28px;color:#fff;border-top:1px 
     </div>
   </div>
   <div class="nav-links">
-    <button class="nav-a" onclick="smoothScroll('#features')" data-lang="nav_features">المزايا</button>
-    <button class="nav-a" onclick="smoothScroll('#how')" data-lang="nav_how">كيف يعمل؟</button>
-    <button class="nav-a" onclick="smoothScroll('#pricing')" data-lang="nav_pricing">الأسعار</button>
-    <button class="nav-a" onclick="smoothScroll('#contact')" data-lang="nav_contact">تواصل معنا</button>
-    <div id="langBtnWrap"></div>
-    <button class="nav-btn-outline" onclick="window.location.href='rehla-auth.html'" data-lang="nav_login">تسجيل الدخول</button>
-    <button class="nav-btn-solid" onclick="window.location.href='rehla-auth.html'" data-lang="nav_start">ابدأ رحلة جديدة</button>
+    <button class="nav-a" onclick="smoothScroll('#features')">المزايا</button>
+    <button class="nav-a" onclick="smoothScroll('#how')">كيف يعمل؟</button>
+    <button class="nav-a" onclick="smoothScroll('#pricing')">الأسعار</button>
+    <button class="nav-a" onclick="smoothScroll('#contact')">تواصل معنا</button>
+    <button class="nav-btn-outline" id="indexLangBtn" onclick="toggleIndexLang()">EN</button>
+    <button class="nav-btn-outline" onclick="window.location.href='rehla-auth.html'">تسجيل الدخول</button>
+    <button class="nav-btn-solid" onclick="window.location.href='rehla-auth.html'">ابدأ رحلة جديدة</button>
   </div>
 </nav>
 
@@ -637,10 +636,16 @@ function swapWord(){
 setInterval(swapWord,2800);
 
 // زر اللغة
+let indexLang=localStorage.getItem('rehla_lang')||'ar';
 document.addEventListener('DOMContentLoaded',()=>{
-  buildLangBtn('langBtnWrap');
-  applyLang();
+  if(indexLang==='en')document.getElementById('indexLangBtn').textContent='ع';
 });
+function toggleIndexLang(){
+  indexLang=indexLang==='ar'?'en':'ar';
+  localStorage.setItem('rehla_lang',indexLang);
+  sessionStorage.setItem('rehla_lang',indexLang);
+  document.getElementById('indexLangBtn').textContent=indexLang==='ar'?'EN':'ع';
+}
 </script>
 </body>
 </html>
