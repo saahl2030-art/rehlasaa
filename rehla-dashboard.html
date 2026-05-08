@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>رحلة+ — لوحة التحكم</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -353,43 +353,123 @@ button{cursor:pointer}
 
 /* ════ RESPONSIVE ════ */
 @media(max-width:900px){
-  .sidebar{transform:translateX(220px);box-shadow:none}
-  .sidebar.open{transform:translateX(0);box-shadow:-8px 0 32px rgba(0,0,0,.4)}
+  .sidebar{transform:translateX(220px);box-shadow:none;transition:transform .3s ease}
+  .sidebar.open{transform:translateX(0);box-shadow:-8px 0 32px rgba(0,0,0,.5)}
   .sidebar-overlay.show{display:block}
   .main{margin-right:0}
   .hamburger{display:flex}
   .kpi-row{grid-template-columns:1fr 1fr}
   .grid-main{grid-template-columns:1fr}
+  .topbar-btn-ghost{display:none}
+  .topbar-btn-primary span:last-child{display:none}
 }
-@media(max-width:580px){
-  .kpi-row{grid-template-columns:1fr 1fr}
-  .content{padding:10px}
-  .trip-header-card{flex-direction:column;align-items:flex-start;gap:10px;padding:14px}
-  .trip-thumb{width:56px;height:56px;font-size:1.4rem}
-  .trip-name{font-size:1.1rem}
-  .trip-stat{width:100%;display:flex;align-items:center;justify-content:space-between}
-  .trip-total-val{font-size:1.4rem}
-  .topbar{padding:0 12px;height:50px}
-  .topbar-title{font-size:.95rem}
-  .topbar-btn span:last-child{display:none}
-  .topbar-actions{gap:6px}
-  .topbar-btn{padding:6px 10px;font-size:.72rem}
-  .form-row{grid-template-columns:1fr}
-  .section-head{padding:10px 12px}
-  .section-body{padding:10px 12px}
-  .kpi-card{padding:10px 12px;gap:8px}
-  .kpi-icon{width:34px;height:34px;font-size:.95rem}
+@media(max-width:600px){
+  /* TOPBAR */
+  .topbar{padding:0 10px;height:52px}
+  .topbar-title{font-size:.92rem;font-weight:800}
+  .topbar-actions{gap:5px}
+  .topbar-btn{padding:7px 10px;font-size:.75rem;border-radius:7px}
+  .topbar-btn-ghost{display:none}
+
+  /* CONTENT */
+  .content{padding:10px 10px 80px}
+
+  /* TRIP HEADER */
+  .trip-header-card{padding:12px;gap:10px}
+  .trip-thumb{width:48px;height:48px;font-size:1.3rem;border-radius:10px;flex-shrink:0}
+  .trip-info{flex:1;min-width:0}
+  .trip-name{font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .trip-meta{flex-wrap:wrap;gap:4px}
+  .trip-meta-item{font-size:.68rem}
+  .trip-stats{flex-direction:row;gap:8px;margin-top:8px}
+  .trip-stat{flex:1;padding:8px;border-radius:7px}
+  .trip-total-lbl{font-size:.62rem}
+  .trip-total-val{font-size:1.3rem}
+
+  /* KPIs */
+  .kpi-row{grid-template-columns:1fr 1fr;gap:8px}
+  .kpi-card{padding:10px;gap:8px;border-radius:9px}
+  .kpi-icon{width:32px;height:32px;font-size:.85rem;border-radius:7px}
   .kpi-value{font-size:1.1rem}
-  .kpi-label{font-size:.65rem}
-  .exp-table{min-width:460px}
-  .grid-main{gap:12px;margin-bottom:12px}
+  .kpi-label{font-size:.62rem}
+  .kpi-sub{font-size:.6rem}
+
+  /* SECTIONS */
   .section-card{border-radius:10px}
-  .modal-box{max-height:95vh;border-radius:14px 14px 0 0}
+  .section-head{padding:10px 12px}
+  .section-title{font-size:.82rem}
+  .section-body{padding:10px 12px}
+  .grid-main{gap:10px}
+
+  /* EXPENSES TABLE */
+  .exp-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .exp-table{min-width:500px;font-size:.75rem}
+  .exp-table th{font-size:.62rem;padding:6px 8px}
+  .exp-table td{padding:7px 8px}
+
+  /* FORM */
+  .form-row{grid-template-columns:1fr;gap:8px}
+  .f-lbl{font-size:.75rem}
+  .f-inp,.f-sel,.f-ta{font-size:.85rem;padding:10px 11px}
+
+  /* MODAL — يفتح من الأسفل */
   .modal-ov{align-items:flex-end;padding:0}
+  .modal-box{max-height:92vh;border-radius:18px 18px 0 0;margin:0;width:100%;max-width:100%}
+  .modal-head{padding:14px 16px}
+  .modal-body{padding:14px 16px}
+  .cat-pills{gap:5px}
+  .cat-pill{padding:5px 10px;font-size:.72rem}
+
+  /* MEMBERS */
+  .member-row{padding:9px 10px;gap:8px}
+  .member-av{width:34px;height:34px;font-size:.8rem}
+  .member-name{font-size:.82rem}
+  .member-role-badge{font-size:.62rem;padding:2px 7px}
+
+  /* SETTLE */
+  .settle-item{padding:9px 10px;gap:7px;flex-wrap:wrap}
+  .settle-amount{font-size:.85rem}
+  .settle-wa-btn{padding:4px 9px;font-size:.68rem}
+
+  /* SHARE */
+  .share-link-box{flex-direction:column;gap:8px}
+  .share-link-txt{font-size:.72rem;word-break:break-all}
+  .share-copy-btn{width:100%;justify-content:center}
+  .share-member-row{padding:8px 10px;gap:8px}
+
+  /* SETTINGS / THEME */
+  .theme-grid{grid-template-columns:1fr 1fr}
+  .tp-name{font-size:.7rem}
+  .tp-desc{font-size:.6rem}
+
+  /* TRIP SELECTOR */
+  .trip-selector-item{padding:9px 11px}
+
+  /* EMPTY STATE */
+  .empty-state{padding:40px 20px}
+  .empty-icon{font-size:3rem}
+  .empty-title{font-size:1.1rem}
+  .empty-sub{font-size:.82rem}
+  .empty-btn{padding:11px 22px;font-size:.88rem}
+
+  /* FAB — زر إضافة عائم في أسفل الشاشة */
+  .fab-add{
+    display:flex;
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+    background:var(--cyan);color:var(--bg2);
+    padding:13px 28px;border-radius:100px;
+    font-size:.9rem;font-weight:900;
+    box-shadow:0 4px 20px rgba(56,189,248,.4);
+    z-index:90;border:none;font-family:'Cairo',sans-serif;
+    align-items:center;gap:6px;white-space:nowrap;
+  }
 }
-@media(max-width:380px){
+@media(max-width:400px){
   .kpi-row{grid-template-columns:1fr 1fr}
-  .topbar-btn-primary span:first-child{display:none}
+  .theme-grid{grid-template-columns:1fr 1fr}
+  .trip-name{font-size:.9rem}
+  .content{padding:8px 8px 80px}
+  .topbar-title{font-size:.85rem}
 }
 </style>
 </head>
@@ -754,6 +834,9 @@ button{cursor:pointer}
     </div>
   </div>
 </div>
+
+<!-- FAB — زر عائم للموبايل -->
+<button class="fab-add" id="fabAdd" onclick="openAddExpModal()">+ إضافة مصروف</button>
 
 <div id="toast"></div>
 
@@ -1576,8 +1659,22 @@ function toast(msg,type='ok'){
   clearTimeout(t._t);t._t=setTimeout(()=>t.className='',3200);
 }
 
-// Init modal date
-document.getElementById('mExpDate').value=new Date().toISOString().split('T')[0];
+// FAB — يظهر فقط على الموبايل
+function updateFAB(){
+  const fab=document.getElementById('fabAdd');
+  if(!fab)return;
+  if(window.innerWidth<=600){
+    fab.style.display='flex';
+    const addBtn=document.querySelector('.topbar-btn-primary');
+    if(addBtn)addBtn.style.display='none';
+  } else {
+    fab.style.display='none';
+    const addBtn=document.querySelector('.topbar-btn-primary');
+    if(addBtn)addBtn.style.display='';
+  }
+}
+window.addEventListener('resize',updateFAB);
+document.addEventListener('DOMContentLoaded',updateFAB);
 </script>
 </body>
 </html>
