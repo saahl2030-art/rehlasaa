@@ -803,6 +803,10 @@ function setTheme(theme){
 function applyThemeOnLoad(){
   const saved=localStorage.getItem('rehla_theme')||'navy';
   document.documentElement.setAttribute('data-theme',saved);
+  // تأكد أن navy هو الافتراضي دائماً إذا لم يكن محفوظ
+  if(!localStorage.getItem('rehla_theme')){
+    localStorage.setItem('rehla_theme','navy');
+  }
 }
 function saveSettings(){
   toast(t('تم حفظ الإعدادات ✓'),'ok');
