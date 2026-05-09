@@ -343,7 +343,67 @@ button{cursor:pointer}
 #toast.err{border-right:4px solid var(--red)}
 #toast.info{border-right:4px solid var(--cyan)}
 
-/* ════ NEW TRIP EMPTY STATE ════ */
+
+/* ════ PAYMENT BANNER ════ */
+.pay-banner{
+  background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.06));
+  border:1px solid rgba(245,158,11,.35);
+  border-radius:var(--r);padding:16px 20px;
+  margin-bottom:18px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.pay-banner-icon{font-size:2rem;flex-shrink:0}
+.pay-banner-info{flex:1}
+.pay-banner-title{font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:900;color:var(--gold);margin-bottom:4px}
+.pay-banner-sub{font-size:.8rem;color:var(--w60);line-height:1.6}
+.btn-pay-now{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:var(--rsm);
+  background:var(--gold);color:#060e2e;
+  font-family:'Cairo',sans-serif;font-size:.92rem;font-weight:900;
+  border:none;cursor:pointer;
+  box-shadow:0 4px 20px rgba(245,158,11,.3);
+  transition:all .25s;flex-shrink:0;
+}
+.btn-pay-now:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,158,11,.4)}
+.btn-pay-now:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.pay-spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(6,14,46,.3);border-top-color:#060e2e;animation:spin .7s linear infinite;display:none}
+.btn-pay-now.loading .pay-spin{display:block}
+.btn-pay-now.loading .pay-txt{display:none}
+
+/* ════ PAYMENT GATE ════ */
+.pay-gate{
+  position:fixed;inset:0;z-index:9998;
+  background:linear-gradient(160deg,#060e2e,#0a1628,#0d1f4e);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.pay-gate-card{
+  background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);
+  border-radius:20px;max-width:480px;width:100%;padding:40px 32px;text-align:center;
+}
+.pay-gate-icon{font-size:3.5rem;margin-bottom:16px}
+.pay-gate-title{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold);margin-bottom:10px}
+.pay-gate-sub{font-size:.88rem;color:var(--w60);line-height:1.8;margin-bottom:24px}
+.pay-gate-features{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:16px;margin-bottom:24px;text-align:right}
+.pay-gate-feat{display:flex;align-items:center;gap:9px;font-size:.82rem;color:var(--w70);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.pay-gate-feat:last-child{border-bottom:none}
+.pay-gate-price{font-family:'Tajawal',sans-serif;font-size:2.8rem;font-weight:900;color:var(--gold);margin-bottom:4px}
+.pay-gate-price-sub{font-size:.78rem;color:var(--w40);margin-bottom:20px}
+.btn-pay-gate{
+  width:100%;padding:15px;border-radius:12px;
+  background:var(--gold);color:#060e2e;
+  font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;
+  border:none;cursor:pointer;
+  box-shadow:0 4px 20px rgba(245,158,11,.35);
+  transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-pay-gate:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-pay-gate:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.pay-gate-spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(6,14,46,.3);border-top-color:#060e2e;animation:spin .7s linear infinite;display:none}
+.btn-pay-gate.loading .pay-gate-spin{display:block}
+.btn-pay-gate.loading .pay-gate-txt{display:none}
+.btn-logout-gate{width:100%;margin-top:10px;padding:11px;border-radius:10px;background:transparent;border:1px solid var(--border);color:var(--w50);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-logout-gate:hover{background:var(--w06);color:var(--w70)}
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;gap:16px;padding:20px}
 .empty-icon{font-size:5rem;margin-bottom:8px;animation:float 3s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
@@ -475,6 +535,30 @@ button{cursor:pointer}
 </style>
 </head>
 <body>
+
+<!-- PAYMENT GATE -->
+<div class="pay-gate" id="payGate" style="display:none">
+  <div class="pay-gate-card">
+    <div class="pay-gate-icon">✈️</div>
+    <div class="pay-gate-title">فعّل رحلتك الآن</div>
+    <div class="pay-gate-sub">رحلتك جاهزة — خطوة واحدة لفتح جميع المزايا</div>
+    <div class="pay-gate-features">
+      <div class="pay-gate-feat">🧮 تصفية الحساب بأقل تحويلات ممكنة</div>
+      <div class="pay-gate-feat">📄 تقرير PDF احترافي قابل للتحميل</div>
+      <div class="pay-gate-feat">💬 إشعارات واتساب لجميع الأعضاء</div>
+      <div class="pay-gate-feat">👥 مرافقون غير محدودين — نفس السعر</div>
+      <div class="pay-gate-feat">🔗 رابط مشاركة + QR Code للرحلة</div>
+      <div class="pay-gate-feat">🗄 أرشيف الرحلة محفوظ مدى الحياة</div>
+    </div>
+    <div class="pay-gate-price">٢٤٩ <span style="font-size:1.2rem">د</span></div>
+    <div class="pay-gate-price-sub">درهم إماراتي — دفعة واحدة فقط · بدون اشتراك</div>
+    <button class="btn-pay-gate" id="btnPayGate" onclick="payNow()">
+      <div class="pay-gate-spin"></div>
+      <span class="pay-gate-txt">💳 ادفع الآن وفعّل الرحلة</span>
+    </button>
+    <button class="btn-logout-gate" onclick="confirmSignOut()">⏻ تسجيل الخروج</button>
+  </div>
+</div>
 
 <!-- FULL SCREEN LOADER -->
 <div class="fs-loader" id="fsLoader">
@@ -929,6 +1013,8 @@ async function initApp(){
   document.getElementById('userName').textContent=name;
   document.getElementById('userAv').textContent=name.charAt(0).toUpperCase();
 
+  checkPaymentReturn();
+  await checkPaymentReturn();
   await loadUserTrips();
   hideLoader();
   // تطبيق الثيم المحفوظ على الأزرار
@@ -958,8 +1044,73 @@ async function loadUserTrips(){
   }
 
   currentTrip=trips[0];
+
+  // ════ PAYMENT GATE ════
+  if(!currentTrip.is_paid){
+    showPayGate();
+    return;
+  }
+
   updateSidebarTrip(currentTrip);
   await loadTripData(currentTrip.id);
+}
+
+function showPayGate(){
+  document.getElementById('payGate').style.display='flex';
+  document.getElementById('fsLoader').classList.add('hidden');
+}
+
+function hidePayGate(){
+  document.getElementById('payGate').style.display='none';
+}
+
+const EDGE_URL='https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-checkout';
+
+async function payNow(){
+  if(!currentTrip||!currentUser)return;
+  const btn=document.getElementById('btnPayGate');
+  btn.classList.add('loading');btn.disabled=true;
+  try{
+    const {data:{session:authSession}}=await sb.auth.getSession();
+    const res=await fetch(EDGE_URL,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Bearer '+authSession.access_token,
+        'apikey':SKEY,
+      },
+      body:JSON.stringify({
+        trip_id:currentTrip.id,
+        user_id:currentUser.id,
+        trip_name:currentTrip.name,
+      })
+    });
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    if(data.url){
+      sessionStorage.setItem('pending_payment_trip',currentTrip.id);
+      window.location.href=data.url;
+    }
+  }catch(err){
+    toast('❌ '+err.message,'err');
+    btn.classList.remove('loading');btn.disabled=false;
+  }
+}
+
+async function checkPaymentReturn(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('paid')==='true'){
+    const tripId=params.get('trip')||sessionStorage.getItem('pending_payment_trip');
+    if(tripId){
+      await sb.from('trips').update({is_paid:true}).eq('id',tripId);
+      sessionStorage.removeItem('pending_payment_trip');
+      toast('🎉 تم الدفع بنجاح! رحلتك مفعّلة','ok');
+      window.history.replaceState({},'',window.location.pathname);
+    }
+  }else if(params.get('paid')==='false'){
+    toast('تم إلغاء الدفع — يمكنك الدفع في أي وقت','info');
+    window.history.replaceState({},'',window.location.pathname);
+  }
 }
 
 function updateSidebarTrip(trip){
@@ -1027,6 +1178,20 @@ function showEmptyState(){
 function buildDashboard(){
   if(!currentTrip)return;
   document.getElementById('page-dashboard').innerHTML=`
+    <!-- Payment Banner — يظهر فقط إذا الرحلة غير مدفوعة -->
+    ${!currentTrip.is_paid ? `
+    <div class="pay-banner">
+      <div class="pay-banner-icon">💳</div>
+      <div class="pay-banner-info">
+        <div class="pay-banner-title">فعّل رحلتك الآن</div>
+        <div class="pay-banner-sub">ادفع ٢٤٩ درهم مرة واحدة وافتح جميع المزايا — تصفية الحساب، PDF، واتساب، وأكثر.</div>
+      </div>
+      <button class="btn-pay-now" id="btnPayNow" onclick="startPayment()">
+        <div class="pay-spin"></div>
+        <span class="pay-txt">🚀 ادفع الآن — ٢٤٩ درهم</span>
+      </button>
+    </div>` : ''}
+
     <!-- Trip Header -->
     <div class="trip-header-card">
       <div class="trip-thumb" id="tripThumb">${getDestEmoji(currentTrip.destination)}</div>
@@ -1658,6 +1823,64 @@ function toast(msg,type='ok'){
   const t=document.getElementById('toast');
   t.textContent=msg;t.className=`show ${type}`;
   clearTimeout(t._t);t._t=setTimeout(()=>t.className='',3200);
+}
+
+
+/* ═══════════════════════════════════
+   STRIPE PAYMENT
+═══════════════════════════════════ */
+const STRIPE_PK='pk_live_51T0igO7KLniAPTryC4eJpV1YXxe20Whx5Y0Ml1sFQfj7cTrGycTcS8FcoHguV5aW75nPtT7RoOtAb10usCL19oci00eLrvkPhz';
+const EDGE_URL='https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-checkout';
+
+async function startPayment(){
+  if(!currentTrip||!currentUser){toast('خطأ في البيانات','err');return}
+  const btn=document.getElementById('btnPayNow');
+  if(btn){btn.classList.add('loading');btn.disabled=true}
+  toast('جاري الاتصال بـ Stripe...','info');
+  try{
+    const {data:{session:authSession}}=await sb.auth.getSession();
+    const res=await fetch(EDGE_URL,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Bearer '+authSession.access_token,
+        'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI',
+      },
+      body:JSON.stringify({
+        trip_id:currentTrip.id,
+        user_id:currentUser.id,
+        trip_name:currentTrip.name,
+      })
+    });
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    if(data.url){
+      // حفظ trip_id قبل التحويل
+      sessionStorage.setItem('pending_payment_trip',currentTrip.id);
+      window.location.href=data.url;
+    }
+  }catch(err){
+    toast('❌ '+err.message,'err');
+    if(btn){btn.classList.remove('loading');btn.disabled=false}
+  }
+}
+
+async function checkPaymentReturn(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('paid')==='true'){
+    const tripId=params.get('trip')||sessionStorage.getItem('pending_payment_trip');
+    if(tripId){
+      // تحديث is_paid في Supabase
+      await sb.from('trips').update({is_paid:true}).eq('id',tripId);
+      sessionStorage.removeItem('pending_payment_trip');
+      toast('🎉 تم الدفع بنجاح! رحلتك مفعّلة','ok');
+      // تنظيف الـ URL
+      window.history.replaceState({},'',window.location.pathname);
+    }
+  } else if(params.get('paid')==='false'){
+    toast('تم إلغاء الدفع','info');
+    window.history.replaceState({},'',window.location.pathname);
+  }
 }
 
 // FAB — يظهر فقط على الموبايل
