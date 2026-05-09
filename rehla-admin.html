@@ -8,54 +8,55 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
-  --bg:#020818;--bg2:#050f2a;--sidebar:#030d20;
-  --blue:#2563eb;--blue-md:#1d4ed8;--blue-dark:#1e3a8a;
+  --bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;--sidebar:#050c24;
+  --gold:#f59e0b;--gold-light:#fcd34d;
+  --gold-dim:rgba(245,158,11,.1);--gold-border:rgba(245,158,11,.25);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.12);
+  --red:#f87171;--red-dim:rgba(248,113,113,.12);
+  --orange:#fb923c;--orange-dim:rgba(251,146,60,.12);
   --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.12);
-  --green:#22c55e;--green-dim:rgba(34,197,94,.1);
-  --red:#f87171;--red-dim:rgba(248,113,113,.1);
-  --orange:#fb923c;--orange-dim:rgba(251,146,60,.1);
-  --yellow:#fbbf24;
-  --white:#fff;--w90:rgba(255,255,255,.9);--w70:rgba(255,255,255,.7);
-  --w50:rgba(255,255,255,.5);--w30:rgba(255,255,255,.3);
-  --w15:rgba(255,255,255,.15);--w10:rgba(255,255,255,.1);--w06:rgba(255,255,255,.06);
+  --purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);
+  --white:#fff;
+  --w90:rgba(255,255,255,.9);--w70:rgba(255,255,255,.7);
+  --w60:rgba(255,255,255,.6);--w50:rgba(255,255,255,.5);
+  --w40:rgba(255,255,255,.4);--w30:rgba(255,255,255,.3);
+  --w15:rgba(255,255,255,.15);--w10:rgba(255,255,255,.1);
+  --w06:rgba(255,255,255,.06);--w03:rgba(255,255,255,.03);
   --border:rgba(255,255,255,.12);--border2:rgba(255,255,255,.07);
-  --card:rgba(255,255,255,.07);--r:12px;--rsm:8px;
+  --card:rgba(255,255,255,.07);--r:12px;--rsm:8px;--rxs:6px;
   --sidebar-w:230px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-tap-highlight-color:transparent}
-body{font-family:'Cairo',sans-serif;background:var(--bg2);color:var(--white);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Cairo',sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2),var(--bg3));color:var(--white);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 input,select,button{font-family:inherit;border:none;outline:none}
 button{cursor:pointer}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--gold-border);border-radius:2px}
 
 /* LAYOUT */
 .layout{display:flex;min-height:100vh}
 
 /* SIDEBAR */
-.sidebar{
-  width:var(--sidebar-w);flex-shrink:0;
-  background:var(--sidebar);
-  border-left:1px solid var(--border2);
-  display:flex;flex-direction:column;
-  position:fixed;top:0;right:0;bottom:0;z-index:100;
-}
-.sb-logo{padding:18px 16px;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:9px}
-.sb-logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--red),#991b1b);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--sidebar);border-left:1px solid var(--border2);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:100;transition:transform .3s}
+.sb-logo{padding:18px 16px;border-bottom:1px solid var(--gold-border);display:flex;align-items:center;gap:9px}
+.sb-logo-icon{width:36px;height:36px;border-radius:10px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:1rem}
 .sb-logo-name{font-family:'Tajawal',sans-serif;font-size:1.15rem;font-weight:900}
-.sb-logo-name em{color:var(--red);font-style:normal}
-.sb-badge{background:rgba(248,113,113,.2);border:1px solid rgba(248,113,113,.3);color:var(--red);font-size:.58rem;font-weight:800;padding:2px 7px;border-radius:100px;margin-right:auto}
+.sb-logo-name em{color:var(--gold);font-style:normal}
+.sb-badge{background:rgba(245,158,11,.15);border:1px solid var(--gold-border);color:var(--gold);font-size:.58rem;font-weight:800;padding:2px 7px;border-radius:100px;margin-right:auto}
 .sb-nav{flex:1;padding:8px 0;overflow-y:auto}
 .sb-section{font-size:.58rem;font-weight:800;color:var(--w30);text-transform:uppercase;letter-spacing:.8px;padding:10px 16px 4px}
 .sb-item{display:flex;align-items:center;gap:9px;padding:9px 16px;margin:1px 8px;border-radius:var(--rsm);font-size:.82rem;font-weight:700;color:var(--w60);cursor:pointer;transition:all .2s;position:relative}
 .sb-item:hover{background:var(--w06);color:var(--white)}
-.sb-item.on{background:rgba(248,113,113,.12);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+.sb-item.on{background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold-border)}
+.sb-item.on::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--gold);border-radius:0 2px 2px 0}
 .sb-icon{font-size:.9rem;width:20px;text-align:center;flex-shrink:0}
-.sb-count{margin-right:auto;background:var(--red);color:#fff;font-size:.6rem;font-weight:900;padding:2px 6px;border-radius:100px;min-width:18px;text-align:center}
+.sb-count{margin-right:auto;background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold);font-size:.6rem;font-weight:900;padding:2px 6px;border-radius:100px;min-width:18px;text-align:center}
 .sb-footer{padding:12px;border-top:1px solid var(--border2)}
 .sb-user{display:flex;align-items:center;gap:9px;padding:8px;border-radius:var(--rsm);cursor:pointer;transition:background .2s}
 .sb-user:hover{background:var(--w06)}
-.sb-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--red),#991b1b);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;flex-shrink:0}
+.sb-av{width:32px;height:32px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:var(--gold);flex-shrink:0}
 .sb-uname{font-size:.78rem;font-weight:700}
 .sb-urole{font-size:.62rem;color:var(--w40)}
 
@@ -63,109 +64,147 @@ button{cursor:pointer}
 .main{flex:1;margin-right:var(--sidebar-w);display:flex;flex-direction:column;min-height:100vh}
 
 /* TOPBAR */
-.topbar{
-  height:56px;background:rgba(2,8,24,.9);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border2);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 20px;position:sticky;top:0;z-index:50;
-}
+.topbar{height:56px;background:rgba(5,12,36,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--gold-border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:50}
 .topbar-title{font-family:'Tajawal',sans-serif;font-size:1.05rem;font-weight:900}
 .topbar-right{display:flex;align-items:center;gap:8px}
 .tb-btn{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:var(--rsm);font-size:.76rem;font-weight:700;transition:all .2s}
 .tb-ghost{background:var(--w10);border:1px solid var(--border);color:var(--w70)}
 .tb-ghost:hover{background:var(--w15);color:var(--white)}
-.tb-danger{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.25);color:var(--red)}
+.tb-gold{background:var(--gold-dim);border:1px solid var(--gold-border);color:var(--gold)}
+.tb-gold:hover{background:rgba(245,158,11,.2);color:var(--gold-light)}
+.tb-danger{background:var(--red-dim);border:1px solid rgba(248,113,113,.25);color:var(--red)}
 .tb-danger:hover{background:var(--red);color:#fff}
 
 /* CONTENT */
 .content{padding:20px;flex:1}
-.page-sec{display:none}.page-sec.on{display:block}
+.page-sec{display:none}.page-sec.on{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* KPI */
+/* ══ KPI STRIP ══ */
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.kpi{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px;display:flex;align-items:center;gap:12px;transition:border-color .2s}
-.kpi:hover{border-color:var(--border)}
-.kpi-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.kpi-lbl{font-size:.7rem;color:var(--w50);margin-bottom:3px;font-weight:600}
-.kpi-val{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;line-height:1}
-.kpi-sub{font-size:.64rem;color:var(--w40);margin-top:2px}
+.kpi{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px;display:flex;align-items:center;gap:12px;transition:all .2s;position:relative;overflow:hidden}
+.kpi::after{content:'';position:absolute;top:0;right:0;left:0;height:2px;opacity:0;transition:opacity .3s}
+.kpi:hover{border-color:var(--border);transform:translateY(-2px)}
+.kpi:hover::after{opacity:1}
+.kpi-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.kpi-lbl{font-size:.68rem;color:var(--w50);margin-bottom:3px;font-weight:600}
+.kpi-val{font-family:'Tajawal',sans-serif;font-size:1.5rem;font-weight:900;line-height:1}
+.kpi-sub{font-size:.62rem;color:var(--w40);margin-top:3px;display:flex;align-items:center;gap:4px}
+.kpi-change{font-size:.62rem;font-weight:800;padding:1px 5px;border-radius:4px}
+.change-up{background:rgba(34,197,94,.15);color:var(--green)}
+.change-dn{background:rgba(248,113,113,.15);color:var(--red)}
 
-/* SECTION CARD */
+/* ══ SECTION CARD ══ */
 .sc{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
-.sc-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border2);background:rgba(255,255,255,.04)}
+.sc-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border2);background:var(--w03)}
 .sc-title{font-size:.85rem;font-weight:800;display:flex;align-items:center;gap:7px}
 .sc-body{padding:14px 16px}
+.sc-link{font-size:.72rem;color:var(--gold);cursor:pointer;font-weight:700;padding:4px 10px;border-radius:var(--rxs);background:var(--gold-dim);border:1px solid var(--gold-border);transition:all .2s}
+.sc-link:hover{background:rgba(245,158,11,.2)}
 
-/* TABLE */
+/* ══ TABLE ══ */
 .t-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;min-width:500px}
-th{font-size:.65rem;font-weight:800;color:var(--w40);text-align:right;padding:8px 10px;border-bottom:1px solid var(--border2);white-space:nowrap;background:rgba(255,255,255,.03)}
+table{width:100%;border-collapse:collapse;min-width:480px}
+th{font-size:.64rem;font-weight:800;color:var(--w40);text-align:right;padding:8px 10px;border-bottom:1px solid var(--border2);white-space:nowrap;background:var(--w03)}
 td{font-size:.78rem;padding:10px;border-bottom:1px solid var(--border2);vertical-align:middle}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(255,255,255,.02)}
+tr:hover td{background:var(--w03)}
 
-/* STATUS BADGES */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:.68rem;font-weight:700;white-space:nowrap}
+/* ══ BADGES ══ */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:.67rem;font-weight:700;white-space:nowrap}
 .badge-green{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.2)}
 .badge-red{background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,.2)}
 .badge-orange{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(251,146,60,.2)}
 .badge-cyan{background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(56,189,248,.2)}
+.badge-gold{background:var(--gold-dim);color:var(--gold);border:1px solid var(--gold-border)}
 .badge-gray{background:var(--w10);color:var(--w60);border:1px solid var(--border2)}
 
-/* ACTIONS */
-.act-btns{display:flex;gap:5px}
-.act-btn{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.72rem;cursor:pointer;transition:all .15s}
-.act-view{background:var(--cyan-dim);color:var(--cyan);border:1px solid rgba(56,189,248,.2)}
-.act-view:hover{background:rgba(56,189,248,.25)}
-.act-del{background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,.2)}
-.act-del:hover{background:var(--red);color:#fff}
-
-/* MINI STAT */
-.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.mini-stat{background:var(--card);border:1px solid var(--border2);border-radius:var(--rsm);padding:12px 14px;text-align:center}
-.ms-val{font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900}
-.ms-lbl{font-size:.7rem;color:var(--w50);margin-top:2px}
-
-/* REVENUE CHART */
-.rev-bars{display:flex;align-items:flex-end;gap:8px;height:120px;padding:0 4px}
-.rev-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
-.rev-bar{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(to top,var(--cyan),rgba(56,189,248,.4));transition:height .6s cubic-bezier(.34,1.4,.64,1)}
-.rev-bar-lbl{font-size:.6rem;color:var(--w40)}
-.rev-bar-val{font-size:.62rem;color:var(--cyan);font-weight:700;font-family:'Tajawal',sans-serif}
-
-/* USERS TABLE avatar */
-.u-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;flex-shrink:0;color:#fff}
-
-/* SEARCH */
-.search-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+/* ══ SEARCH ══ */
+.search-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
 .s-input{flex:1;min-width:180px;padding:9px 12px;background:var(--w06);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--white);font-family:'Cairo',sans-serif;font-size:.82rem;transition:border-color .2s}
 .s-input::placeholder{color:var(--w30)}
-.s-input:focus{border-color:var(--cyan);outline:none}
+.s-input:focus{border-color:var(--gold-border);outline:none;background:var(--w10)}
 .s-select{padding:9px 28px 9px 10px;background:var(--w06);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--white);font-family:'Cairo',sans-serif;font-size:.82rem;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='rgba(255,255,255,.4)' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 8px center;cursor:pointer}
-.s-select option{background:#050f2a}
+.s-select option{background:#0a1628}
+.s-label{font-size:.78rem;color:var(--w50);white-space:nowrap}
+.s-label span{color:var(--gold);font-weight:800;margin-right:3px}
 
-/* GRID */
+/* ══ GRID ══ */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
 
-/* TOAST */
-#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(2,8,24,.97);border:1px solid var(--border);box-shadow:0 16px 48px rgba(0,0,0,.5);color:var(--white);padding:10px 20px;border-radius:var(--rsm);font-size:.8rem;font-weight:600;z-index:9999;opacity:0;pointer-events:none;display:flex;align-items:center;gap:7px;transition:all .3s;min-width:180px;justify-content:center}
-#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-#toast.ok{border-right:4px solid var(--green)}
-#toast.err{border-right:4px solid var(--red)}
+/* ══ MINI STATS ══ */
+.mini-stat{background:var(--card);border:1px solid var(--border2);border-radius:var(--rsm);padding:14px;text-align:center}
+.ms-val{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900}
+.ms-lbl{font-size:.7rem;color:var(--w50);margin-top:4px}
 
-/* Access denied */
-.denied{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;gap:14px}
+/* ══ CHART ══ */
+.chart-wrap{padding:8px 0}
+.chart-bars{display:flex;align-items:flex-end;gap:8px;height:130px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar-val{font-size:.6rem;color:var(--gold);font-weight:700;font-family:'Tajawal',sans-serif;min-height:14px}
+.bar-body{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(to top,rgba(245,158,11,.8),rgba(245,158,11,.3));transition:height .6s cubic-bezier(.34,1.4,.64,1);min-height:3px}
+.bar-lbl{font-size:.6rem;color:var(--w40);margin-top:2px;white-space:nowrap}
+
+/* ══ ACTIVITY FEED ══ */
+.act-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border2)}
+.act-item:last-child{border-bottom:none}
+.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.act-text{font-size:.78rem;color:var(--w70);line-height:1.5;flex:1}
+.act-text strong{color:var(--white);font-weight:700}
+.act-time{font-size:.63rem;color:var(--w40);margin-top:2px}
+
+/* ══ USER AVATAR ══ */
+.u-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;flex-shrink:0;color:#fff}
+
+/* ══ PROGRESS BAR ══ */
+.prog-bar{height:4px;background:var(--border2);border-radius:100px;overflow:hidden;margin-top:4px}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),rgba(245,158,11,.4));border-radius:100px;transition:width .8s ease}
+
+/* ══ SETTINGS FORM ══ */
+.setting-group{margin-bottom:16px}
+.setting-lbl{font-size:.76rem;font-weight:700;color:var(--w60);display:block;margin-bottom:6px}
+.setting-inp{width:100%;padding:10px 12px;background:var(--w06);border:1px solid var(--border2);border-radius:var(--rsm);color:var(--white);font-family:'Cairo',sans-serif;font-size:.84rem;transition:border-color .2s}
+.setting-inp:focus{border-color:var(--gold-border);outline:none;background:var(--w10)}
+.setting-inp::placeholder{color:var(--w30)}
+.btn-save{padding:11px 24px;border-radius:var(--rsm);background:var(--w06);border:1px solid var(--gold-border);color:var(--w90);font-size:.88rem;font-weight:800;cursor:pointer;transition:all .2s}
+.btn-save:hover{background:var(--gold-dim);color:var(--gold-light)}
+
+/* ══ DENIED ══ */
+.denied{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;gap:14px;padding:20px}
 .denied-icon{font-size:4rem}
 .denied-title{font-family:'Tajawal',sans-serif;font-size:2rem;font-weight:900;color:var(--red)}
 .denied-sub{font-size:.88rem;color:var(--w50);max-width:360px;line-height:1.7}
 
+/* ══ LOADER ══ */
+.loader{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;gap:14px}
+.spin{width:36px;height:36px;border-radius:50%;border:3px solid var(--border2);border-top-color:var(--gold);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ══ ONLINE DOT ══ */
+.online-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-left:4px;box-shadow:0 0 6px var(--green)}
+
+/* ══ TOAST ══ */
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(6,14,46,.97);border:1px solid var(--border);box-shadow:0 16px 48px rgba(0,0,0,.5);color:var(--white);padding:10px 20px;border-radius:var(--rsm);font-size:.8rem;font-weight:600;z-index:9999;opacity:0;pointer-events:none;display:flex;align-items:center;gap:7px;transition:all .3s;min-width:180px;justify-content:center}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+#toast.ok{border-right:4px solid var(--green)}
+#toast.err{border-right:4px solid var(--red)}
+#toast.info{border-right:4px solid var(--gold)}
+
+/* ══ RESPONSIVE ══ */
 @media(max-width:900px){
-  .sidebar{transform:translateX(230px)}.sidebar.open{transform:translateX(0)}
+  .sidebar{transform:translateX(230px)}
+  .sidebar.open{transform:translateX(0);box-shadow:-8px 0 32px rgba(0,0,0,.5)}
   .main{margin-right:0}
   .kpi-row{grid-template-columns:1fr 1fr}
-  .grid-2{grid-template-columns:1fr}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .hamburger{display:flex!important}
 }
-@media(max-width:540px){.kpi-row{grid-template-columns:1fr 1fr}.content{padding:12px}}
+@media(max-width:540px){
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .content{padding:12px 10px}
+  .topbar{padding:0 12px}
+}
 </style>
 </head>
 <body>
@@ -183,9 +222,11 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <nav class="sb-nav">
     <div class="sb-section">الرئيسية</div>
     <div class="sb-item on" id="sn-overview" onclick="showSec('overview')"><span class="sb-icon">📊</span> نظرة عامة</div>
-    <div class="sb-section">إدارة المستخدمين</div>
-    <div class="sb-item" id="sn-users" onclick="showSec('users')"><span class="sb-icon">👥</span> المستخدمون <span class="sb-count" id="userCount">٠</span></div>
-    <div class="sb-item" id="sn-trips" onclick="showSec('trips')"><span class="sb-icon">✈</span> الرحلات <span class="sb-count" id="tripCount">٠</span></div>
+    <div class="sb-section">المستخدمون</div>
+    <div class="sb-item" id="sn-users" onclick="showSec('users')"><span class="sb-icon">👥</span> المستخدمون <span class="sb-count" id="userCount">—</span></div>
+    <div class="sb-item" id="sn-active" onclick="showSec('active')"><span class="sb-icon">🟢</span> الزوار الفعليون</div>
+    <div class="sb-section">الرحلات</div>
+    <div class="sb-item" id="sn-trips" onclick="showSec('trips')"><span class="sb-icon">✈</span> الرحلات <span class="sb-count" id="tripCount">—</span></div>
     <div class="sb-section">المالية</div>
     <div class="sb-item" id="sn-revenue" onclick="showSec('revenue')"><span class="sb-icon">💰</span> الإيرادات</div>
     <div class="sb-item" id="sn-payments" onclick="showSec('payments')"><span class="sb-icon">💳</span> المدفوعات</div>
@@ -194,9 +235,12 @@ tr:hover td{background:rgba(255,255,255,.02)}
   </nav>
   <div class="sb-footer">
     <div class="sb-user" onclick="doSignOut()">
-      <div class="sb-av">أ</div>
-      <div><div class="sb-uname" id="adminName">الآدمن</div><div class="sb-urole">🛡 مدير النظام</div></div>
-      <span style="font-size:.7rem;color:var(--w30);margin-right:auto">⏻</span>
+      <div class="sb-av" id="adminAv">أ</div>
+      <div style="flex:1">
+        <div class="sb-uname" id="adminName">الآدمن</div>
+        <div class="sb-urole">🛡 مدير النظام</div>
+      </div>
+      <span style="font-size:.7rem;color:var(--w30)">⏻</span>
     </div>
   </div>
 </aside>
@@ -204,110 +248,309 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <!-- MAIN -->
 <main class="main">
   <div class="topbar">
-    <div class="topbar-title" id="topTitle">نظرة عامة</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="tb-btn tb-ghost" id="hamburger" onclick="toggleSidebar()" style="display:none;padding:6px 10px">☰</button>
+      <div class="topbar-title" id="topTitle">نظرة عامة</div>
+    </div>
     <div class="topbar-right">
-      <span style="font-size:.72rem;color:var(--w40)" id="lastUpdate"></span>
-      <button class="tb-btn tb-ghost" onclick="loadAll()">🔄 تحديث</button>
+      <span style="font-size:.7rem;color:var(--w40)" id="lastUpdate"></span>
+      <button class="tb-btn tb-gold" onclick="loadAll()">🔄 تحديث</button>
       <button class="tb-btn tb-danger" onclick="doSignOut()">⏻ خروج</button>
     </div>
   </div>
 
   <div class="content">
 
-    <!-- ACCESS DENIED (shown if not admin) -->
+    <!-- ACCESS DENIED -->
     <div id="accessDenied" style="display:none">
       <div class="denied">
         <div class="denied-icon">🚫</div>
         <div class="denied-title">وصول مرفوض</div>
         <div class="denied-sub">هذه الصفحة مخصصة للمدير فقط. تأكد من تسجيل الدخول بحساب الآدمن.</div>
-        <button onclick="location.href='rehla-auth.html'" style="padding:11px 24px;border-radius:var(--rsm);background:var(--blue);color:#fff;font-size:.88rem;font-weight:800;cursor:pointer">← العودة لتسجيل الدخول</button>
+        <button onclick="location.href='rehla-auth.html'" style="padding:11px 24px;border-radius:var(--rsm);background:var(--w06);border:1px solid var(--gold-border);color:var(--w90);font-size:.88rem;font-weight:800;cursor:pointer;margin-top:8px">← العودة لتسجيل الدخول</button>
       </div>
     </div>
 
-    <!-- OVERVIEW -->
+    <!-- ══ OVERVIEW ══ -->
     <div class="page-sec on" id="sec-overview">
-      <div class="kpi-row" id="kpiRow">
-        <div class="kpi"><div class="kpi-icon" style="background:rgba(56,189,248,.15);color:var(--cyan)">👥</div><div><div class="kpi-lbl">إجمالي المستخدمين</div><div class="kpi-val" id="kUsers" style="color:var(--cyan)">—</div><div class="kpi-sub">مسجل</div></div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:rgba(34,197,94,.15);color:var(--green)">✈</div><div><div class="kpi-lbl">إجمالي الرحلات</div><div class="kpi-val" id="kTrips" style="color:var(--green)">—</div><div class="kpi-sub">رحلة</div></div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:rgba(251,191,36,.15);color:var(--yellow)">💰</div><div><div class="kpi-lbl">إجمالي الإيرادات</div><div class="kpi-val" id="kRevenue" style="color:var(--yellow)">—</div><div class="kpi-sub">درهم</div></div></div>
-        <div class="kpi"><div class="kpi-icon" style="background:rgba(251,146,60,.15);color:var(--orange)">💳</div><div><div class="kpi-lbl">المدفوعات</div><div class="kpi-val" id="kPaid" style="color:var(--orange)">—</div><div class="kpi-sub">معاملة</div></div></div>
+
+      <!-- KPIs Row 1 — الأساسية -->
+      <div class="kpi-row" style="margin-bottom:12px">
+        <div class="kpi" style="border-top:2px solid var(--cyan)">
+          <div class="kpi-icon" style="background:var(--cyan-dim);color:var(--cyan)">👥</div>
+          <div>
+            <div class="kpi-lbl">إجمالي المستخدمين</div>
+            <div class="kpi-val" id="kUsers" style="color:var(--cyan)">—</div>
+            <div class="kpi-sub">مسجل في المنصة</div>
+          </div>
+        </div>
+        <div class="kpi" style="border-top:2px solid var(--green)">
+          <div class="kpi-icon" style="background:var(--green-dim);color:var(--green)">🟢</div>
+          <div>
+            <div class="kpi-lbl">الزوار الفعليون</div>
+            <div class="kpi-val" id="kActive" style="color:var(--green)">—</div>
+            <div class="kpi-sub">آخر ٣٠ يوم</div>
+          </div>
+        </div>
+        <div class="kpi" style="border-top:2px solid var(--gold)">
+          <div class="kpi-icon" style="background:var(--gold-dim);color:var(--gold)">✈</div>
+          <div>
+            <div class="kpi-lbl">إجمالي الرحلات</div>
+            <div class="kpi-val" id="kTrips" style="color:var(--gold)">—</div>
+            <div class="kpi-sub" id="kTripsActive">— نشطة</div>
+          </div>
+        </div>
+        <div class="kpi" style="border-top:2px solid var(--purple)">
+          <div class="kpi-icon" style="background:var(--purple-dim);color:var(--purple)">👤</div>
+          <div>
+            <div class="kpi-lbl">متوسط أعضاء الرحلة</div>
+            <div class="kpi-val" id="kAvgMembers" style="color:var(--purple)">—</div>
+            <div class="kpi-sub">عضو لكل رحلة</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs Row 2 — المالية -->
+      <div class="kpi-row" style="margin-bottom:20px">
+        <div class="kpi" style="border-top:2px solid #f59e0b">
+          <div class="kpi-icon" style="background:rgba(245,158,11,.15);color:var(--gold)">💰</div>
+          <div>
+            <div class="kpi-lbl">إجمالي الإيرادات</div>
+            <div class="kpi-val" id="kRevenue" style="color:var(--gold)">—</div>
+            <div class="kpi-sub">درهم إماراتي</div>
+          </div>
+        </div>
+        <div class="kpi" style="border-top:2px solid var(--green)">
+          <div class="kpi-icon" style="background:var(--green-dim);color:var(--green)">💳</div>
+          <div>
+            <div class="kpi-lbl">المدفوعات المكتملة</div>
+            <div class="kpi-val" id="kPaid" style="color:var(--green)">—</div>
+            <div class="kpi-sub">معاملة ناجحة</div>
+          </div>
+        </div>
+        <div class="kpi" style="border-top:2px solid var(--orange)">
+          <div class="kpi-icon" style="background:var(--orange-dim);color:var(--orange)">⏳</div>
+          <div>
+            <div class="kpi-lbl">رحلات غير مدفوعة</div>
+            <div class="kpi-val" id="kUnpaid" style="color:var(--orange)">—</div>
+            <div class="kpi-sub">تحتاج متابعة</div>
+          </div>
+        </div>
+        <div class="kpi" style="border-top:2px solid var(--cyan)">
+          <div class="kpi-icon" style="background:var(--cyan-dim);color:var(--cyan)">📅</div>
+          <div>
+            <div class="kpi-lbl">رحلات هذا الشهر</div>
+            <div class="kpi-val" id="kThisMonth" style="color:var(--cyan)">—</div>
+            <div class="kpi-sub" id="kThisMonthLbl">—</div>
+          </div>
+        </div>
       </div>
 
       <div class="grid-2">
         <!-- Recent Users -->
         <div class="sc">
-          <div class="sc-head"><div class="sc-title">👥 آخر المستخدمين</div><div style="font-size:.72rem;color:var(--cyan);cursor:pointer" onclick="showSec('users')">عرض الكل</div></div>
-          <div class="sc-body" style="padding:0"><div class="t-wrap"><table><thead><tr><th>المستخدم</th><th>البريد</th><th>تاريخ التسجيل</th></tr></thead><tbody id="recentUsersBody"></tbody></table></div></div>
+          <div class="sc-head">
+            <div class="sc-title">👥 آخر المستخدمين</div>
+            <span class="sc-link" onclick="showSec('users')">عرض الكل ←</span>
+          </div>
+          <div class="sc-body" style="padding:0">
+            <div class="t-wrap">
+              <table><thead><tr><th>المستخدم</th><th>البريد</th><th>تاريخ التسجيل</th></tr></thead>
+              <tbody id="recentUsersBody"></tbody></table>
+            </div>
+          </div>
         </div>
-
         <!-- Recent Trips -->
         <div class="sc">
-          <div class="sc-head"><div class="sc-title">✈ آخر الرحلات</div><div style="font-size:.72rem;color:var(--cyan);cursor:pointer" onclick="showSec('trips')">عرض الكل</div></div>
-          <div class="sc-body" style="padding:0"><div class="t-wrap"><table><thead><tr><th>الرحلة</th><th>الوجهة</th><th>الحالة</th></tr></thead><tbody id="recentTripsBody"></tbody></table></div></div>
+          <div class="sc-head">
+            <div class="sc-title">✈ آخر الرحلات</div>
+            <span class="sc-link" onclick="showSec('trips')">عرض الكل ←</span>
+          </div>
+          <div class="sc-body" style="padding:0">
+            <div class="t-wrap">
+              <table><thead><tr><th>الرحلة</th><th>الوجهة</th><th>الحالة</th><th>مدفوعة</th></tr></thead>
+              <tbody id="recentTripsBody"></tbody></table>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Chart + Top Destinations -->
+      <div class="grid-2">
+        <div class="sc">
+          <div class="sc-head"><div class="sc-title">📈 الإيرادات الشهرية (آخر ٦ أشهر)</div></div>
+          <div class="sc-body">
+            <div class="chart-wrap">
+              <div class="chart-bars" id="revBars">
+                <div class="loader"><div class="spin"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-head"><div class="sc-title">🌍 أكثر الوجهات</div></div>
+          <div class="sc-body" id="topDestinations">
+            <div class="loader"><div class="spin"></div></div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- USERS -->
+    <!-- ══ USERS ══ -->
     <div class="page-sec" id="sec-users">
       <div class="search-row">
         <input class="s-input" type="text" id="userSearch" placeholder="🔍 بحث باسم أو بريد..." oninput="filterUsers()">
-        <span style="font-size:.8rem;color:var(--w50);display:flex;align-items:center">إجمالي: <span id="userTotal" style="color:var(--cyan);font-weight:800;margin-right:4px">٠</span> مستخدم</span>
+        <select class="s-select" id="userStatusFilter" onchange="filterUsers()">
+          <option value="">كل المستخدمين</option>
+          <option value="active">لديهم رحلات</option>
+          <option value="new">جدد (بدون رحلات)</option>
+        </select>
+        <span class="s-label">إجمالي:<span id="userTotal">٠</span> مستخدم</span>
       </div>
-      <div class="sc"><div class="sc-body" style="padding:0"><div class="t-wrap"><table><thead><tr><th>المستخدم</th><th>البريد الإلكتروني</th><th>الواتساب</th><th>تاريخ التسجيل</th><th>الحالة</th></tr></thead><tbody id="usersBody"></tbody></table></div></div></div>
+      <div class="sc">
+        <div class="sc-body" style="padding:0">
+          <div class="t-wrap">
+            <table><thead><tr><th>المستخدم</th><th>البريد الإلكتروني</th><th>الواتساب</th><th>عدد الرحلات</th><th>تاريخ التسجيل</th><th>الحالة</th></tr></thead>
+            <tbody id="usersBody"></tbody></table>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- TRIPS -->
+    <!-- ══ ACTIVE USERS ══ -->
+    <div class="page-sec" id="sec-active">
+      <div class="grid-3" style="margin-bottom:16px">
+        <div class="mini-stat"><div class="ms-val" id="activeTotal" style="color:var(--green)">—</div><div class="ms-lbl">زيارة آخر ٣٠ يوم</div></div>
+        <div class="mini-stat"><div class="ms-val" id="activeWeek" style="color:var(--cyan)">—</div><div class="ms-lbl">زيارة آخر ٧ أيام</div></div>
+        <div class="mini-stat"><div class="ms-val" id="activeToday" style="color:var(--gold)">—</div><div class="ms-lbl">زيارة اليوم</div></div>
+      </div>
+      <div class="sc">
+        <div class="sc-head"><div class="sc-title">🟢 المستخدمون الفعليون — آخر ٣٠ يوم</div><div style="font-size:.72rem;color:var(--w50)">مستخدمون لديهم جلسات نشطة</div></div>
+        <div class="sc-body" style="padding:0">
+          <div class="t-wrap">
+            <table><thead><tr><th>المستخدم</th><th>البريد</th><th>عدد الرحلات</th><th>آخر نشاط</th><th>الحالة</th></tr></thead>
+            <tbody id="activeUsersBody"></tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TRIPS ══ -->
     <div class="page-sec" id="sec-trips">
       <div class="search-row">
         <input class="s-input" type="text" id="tripSearch" placeholder="🔍 بحث برحلة أو وجهة..." oninput="filterTrips()">
         <select class="s-select" id="tripFilter" onchange="filterTrips()">
           <option value="">كل الحالات</option>
           <option value="active">نشطة</option>
-          <option value="pending">معلقة</option>
-          <option value="completed">مكتملة</option>
+          <option value="archived">مؤرشفة</option>
         </select>
-        <span style="font-size:.8rem;color:var(--w50);display:flex;align-items:center">إجمالي: <span id="tripTotal" style="color:var(--green);font-weight:800;margin-right:4px">٠</span> رحلة</span>
-      </div>
-      <div class="sc"><div class="sc-body" style="padding:0"><div class="t-wrap"><table><thead><tr><th>الرحلة</th><th>المالك</th><th>الوجهة</th><th>الأعضاء</th><th>التاريخ</th><th>الحالة</th><th>مدفوعة</th></tr></thead><tbody id="tripsBody"></tbody></table></div></div></div>
-    </div>
-
-    <!-- REVENUE -->
-    <div class="page-sec" id="sec-revenue">
-      <div class="mini-stats">
-        <div class="mini-stat"><div class="ms-val" id="revTotal" style="color:var(--yellow)">—</div><div class="ms-lbl">إجمالي الإيرادات (درهم)</div></div>
-        <div class="mini-stat"><div class="ms-val" id="revAvg" style="color:var(--cyan)">—</div><div class="ms-lbl">متوسط الدفع لكل رحلة</div></div>
+        <select class="s-select" id="tripPaidFilter" onchange="filterTrips()">
+          <option value="">الكل</option>
+          <option value="paid">مدفوعة</option>
+          <option value="unpaid">غير مدفوعة</option>
+        </select>
+        <span class="s-label">إجمالي:<span id="tripTotal">٠</span> رحلة</span>
       </div>
       <div class="sc">
-        <div class="sc-head"><div class="sc-title">📈 الإيرادات الشهرية</div></div>
-        <div class="sc-body"><div class="rev-bars" id="revBars"></div></div>
-      </div>
-    </div>
-
-    <!-- PAYMENTS -->
-    <div class="page-sec" id="sec-payments">
-      <div class="sc"><div class="sc-body" style="padding:0"><div class="t-wrap"><table><thead><tr><th>المعاملة</th><th>المستخدم</th><th>المبلغ</th><th>التاريخ</th><th>الحالة</th><th>Stripe ID</th></tr></thead><tbody id="paymentsBody"></tbody></table></div></div></div>
-    </div>
-
-    <!-- SETTINGS -->
-    <div class="page-sec" id="sec-settings">
-      <div class="sc">
-        <div class="sc-head"><div class="sc-title">⚙ إعدادات النظام</div></div>
-        <div class="sc-body">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
-            <div><label style="font-size:.76rem;font-weight:700;color:var(--w60);display:block;margin-bottom:6px">سعر الرحلة (درهم)</label><input class="s-input" type="number" value="249" style="width:100%"></div>
-            <div><label style="font-size:.76rem;font-weight:700;color:var(--w60);display:block;margin-bottom:6px">البريد الإلكتروني للدعم</label><input class="s-input" type="email" value="support@rehlasaa.com" style="width:100%"></div>
-            <div><label style="font-size:.76rem;font-weight:700;color:var(--w60);display:block;margin-bottom:6px">اسم الموقع</label><input class="s-input" type="text" value="رحلة+" style="width:100%"></div>
-            <div><label style="font-size:.76rem;font-weight:700;color:var(--w60);display:block;margin-bottom:6px">وضع الصيانة</label>
-              <select class="s-select" style="width:100%"><option>مفعّل (الموقع يعمل)</option><option>إيقاف مؤقت</option></select>
-            </div>
+        <div class="sc-body" style="padding:0">
+          <div class="t-wrap">
+            <table><thead><tr><th>الرحلة</th><th>المالك</th><th>الوجهة</th><th>الأعضاء</th><th>التواريخ</th><th>الحالة</th><th>الدفع</th></tr></thead>
+            <tbody id="tripsBody"></tbody></table>
           </div>
-          <button onclick="toast('✓ تم حفظ الإعدادات','ok')" style="padding:11px 24px;border-radius:var(--rsm);background:var(--blue);color:#fff;font-size:.88rem;font-weight:800;cursor:pointer">حفظ الإعدادات</button>
         </div>
       </div>
     </div>
 
-  </div>
+    <!-- ══ REVENUE ══ -->
+    <div class="page-sec" id="sec-revenue">
+      <div class="grid-3" style="margin-bottom:16px">
+        <div class="mini-stat"><div class="ms-val" id="revTotal" style="color:var(--gold)">—</div><div class="ms-lbl">إجمالي الإيرادات (درهم)</div></div>
+        <div class="mini-stat"><div class="ms-val" id="revMonth" style="color:var(--cyan)">—</div><div class="ms-lbl">إيرادات هذا الشهر (درهم)</div></div>
+        <div class="mini-stat"><div class="ms-val" id="revAvg" style="color:var(--green)">—</div><div class="ms-lbl">متوسط الدفع لكل رحلة</div></div>
+      </div>
+      <div class="sc">
+        <div class="sc-head"><div class="sc-title">📈 الإيرادات الشهرية</div></div>
+        <div class="sc-body">
+          <div class="chart-bars" id="revBars2" style="height:150px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAYMENTS ══ -->
+    <div class="page-sec" id="sec-payments">
+      <div class="search-row">
+        <input class="s-input" type="text" id="paySearch" placeholder="🔍 بحث بالاسم..." oninput="filterPayments()">
+        <select class="s-select" id="payStatusFilter" onchange="filterPayments()">
+          <option value="">كل الحالات</option>
+          <option value="paid">مكتملة</option>
+          <option value="pending">معلقة</option>
+          <option value="failed">فشلت</option>
+        </select>
+        <span class="s-label">إجمالي:<span id="payTotal">٠</span> معاملة</span>
+      </div>
+      <div class="sc">
+        <div class="sc-body" style="padding:0">
+          <div class="t-wrap">
+            <table><thead><tr><th>المعاملة</th><th>المستخدم</th><th>الرحلة</th><th>المبلغ</th><th>التاريخ</th><th>الحالة</th></tr></thead>
+            <tbody id="paymentsBody"></tbody></table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SETTINGS ══ -->
+    <div class="page-sec" id="sec-settings">
+      <div class="grid-2">
+        <div class="sc">
+          <div class="sc-head"><div class="sc-title">⚙ إعدادات النظام</div></div>
+          <div class="sc-body">
+            <div class="setting-group"><label class="setting-lbl">💰 سعر الرحلة (درهم)</label><input class="setting-inp" type="number" value="249" id="settingPrice"></div>
+            <div class="setting-group"><label class="setting-lbl">📧 بريد الدعم</label><input class="setting-inp" type="email" value="support@rehlasaa.com" id="settingEmail"></div>
+            <div class="setting-group"><label class="setting-lbl">🌐 اسم الموقع</label><input class="setting-inp" type="text" value="رحلة+" id="settingName"></div>
+            <div class="setting-group">
+              <label class="setting-lbl">🔧 وضع الصيانة</label>
+              <select class="s-select setting-inp" id="settingMode">
+                <option value="on">✅ مفعّل — الموقع يعمل</option>
+                <option value="off">🔴 إيقاف مؤقت</option>
+              </select>
+            </div>
+            <button class="btn-save" onclick="saveSettings()">💾 حفظ الإعدادات</button>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-head"><div class="sc-title">📢 شريط الإعلانات</div></div>
+          <div class="sc-body">
+            <div class="setting-group"><label class="setting-lbl">نص الإعلان</label><input class="setting-inp" type="text" id="annText" placeholder="مثال: عرض خاص — خصم ٢٠٪ هذا الأسبوع!"></div>
+            <div class="setting-group"><label class="setting-lbl">رابط الإعلان (اختياري)</label><input class="setting-inp" type="text" id="annLink" placeholder="https://..."></div>
+            <div class="setting-group">
+              <label class="setting-lbl">تاريخ انتهاء الإعلان</label>
+              <input class="setting-inp" type="date" id="annExpiry">
+            </div>
+            <div style="display:flex;gap:8px;margin-top:4px">
+              <button class="btn-save" onclick="saveAnnouncement()" style="flex:1">📢 نشر الإعلان</button>
+              <button class="btn-save" onclick="clearAnnouncement()" style="background:var(--red-dim);border-color:rgba(248,113,113,.3);color:var(--red)">✕ إلغاء</button>
+            </div>
+            <div id="annPreview" style="margin-top:12px;display:none">
+              <div style="font-size:.72rem;color:var(--w50);margin-bottom:4px">معاينة:</div>
+              <div style="background:#040c1e;border:1px solid var(--gold-border);border-radius:6px;padding:8px 12px;font-size:.78rem;color:var(--gold-light)">📢 <span id="annPreviewText"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sc" style="margin-top:0">
+        <div class="sc-head"><div class="sc-title">📊 إحصائيات النظام</div></div>
+        <div class="sc-body">
+          <div class="grid-3">
+            <div style="text-align:center;padding:10px"><div style="font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:var(--cyan)" id="statTotalExp">—</div><div style="font-size:.72rem;color:var(--w50);margin-top:3px">إجمالي المصاريف المسجلة</div></div>
+            <div style="text-align:center;padding:10px"><div style="font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:var(--green)" id="statTotalMembers">—</div><div style="font-size:.72rem;color:var(--w50);margin-top:3px">إجمالي الأعضاء</div></div>
+            <div style="text-align:center;padding:10px"><div style="font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:var(--gold)" id="statAvgExp">—</div><div style="font-size:.72rem;color:var(--w50);margin-top:3px">متوسط المصاريف لكل رحلة</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
 </main>
 
 <div id="toast"></div>
@@ -318,179 +561,399 @@ const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI
 const {createClient}=supabase;
 const sb=createClient(SURL,SKEY);
 
-// ═══ ADMIN EMAIL — غيّره لبريدك ═══
 const ADMIN_EMAIL='saahl2030@gmail.com';
+const COLORS=['#3b63d4','#7c3aed','#0891b2','#be185d','#16a34a','#b45309','#ea580c','#0d9488'];
 
-let allUsers=[],allTrips=[],allPayments=[];
+const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+const toAr=n=>String(n).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
+const fmt=n=>Number(n).toLocaleString('ar-AE');
 
-// ═══ AUTH CHECK ═══
+let allUsers=[],allTrips=[],allPayments=[],allMembers=[],allExpenses=[];
+
+/* ══ AUTH ══ */
 (async()=>{
   const {data:{session}}=await sb.auth.getSession();
   if(!session){location.href='rehla-auth.html';return}
   if(session.user.email!==ADMIN_EMAIL){
-    document.getElementById('accessDenied').style.display='block';
+    document.getElementById('accessDenied').style.display='flex';
     document.getElementById('sec-overview').classList.remove('on');
     document.querySelector('.sidebar').style.display='none';
     document.querySelector('.main').style.marginRight='0';
+    document.querySelector('.topbar').style.display='none';
     return;
   }
-  const name=session.user.user_metadata?.full_name||session.user.email?.split('@')[0]||'الآدمن';
+  const name=session.user.user_metadata?.full_name||'الآدمن';
   document.getElementById('adminName').textContent=name;
-  document.getElementById('lastUpdate').textContent='آخر تحديث: '+new Date().toLocaleTimeString('ar-AE');
+  document.getElementById('adminAv').textContent=name.charAt(0).toUpperCase();
   loadAll();
 })();
 
 async function loadAll(){
-  await Promise.all([loadUsers(),loadTrips(),loadPayments()]);
+  toast('جاري تحديث البيانات...','info');
+  await Promise.all([loadUsers(),loadTrips(),loadPayments(),loadMembers(),loadExpenses()]);
   updateKPIs();
-  renderRevChart();
+  renderRevChart('revBars');
+  renderRevChart('revBars2');
+  renderTopDests();
+  renderSystemStats();
   document.getElementById('lastUpdate').textContent='آخر تحديث: '+new Date().toLocaleTimeString('ar-AE');
+  toast('✓ تم تحديث البيانات','ok');
 }
 
 async function loadUsers(){
   const {data}=await sb.from('profiles').select('*').order('created_at',{ascending:false});
   allUsers=data||[];
-  const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-  const toAr=n=>String(n).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
   document.getElementById('userCount').textContent=toAr(allUsers.length);
   document.getElementById('userTotal').textContent=toAr(allUsers.length);
-  renderUsers(allUsers.slice(0,5),'recentUsersBody',true);
+  renderUsers(allUsers.slice(0,6),'recentUsersBody',true);
   renderUsers(allUsers,'usersBody',false);
+  renderActiveUsers();
 }
 
 async function loadTrips(){
-  const {data}=await sb.from('trips').select('*,profiles(full_name),trip_members(id)').order('created_at',{ascending:false});
+  const {data}=await sb.from('trips').select('*').order('created_at',{ascending:false});
   allTrips=data||[];
-  const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-  const toAr=n=>String(n).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
   document.getElementById('tripCount').textContent=toAr(allTrips.length);
   document.getElementById('tripTotal').textContent=toAr(allTrips.length);
-  renderTrips(allTrips.slice(0,5),'recentTripsBody',true);
+  renderTrips(allTrips.slice(0,6),'recentTripsBody',true);
   renderTrips(allTrips,'tripsBody',false);
 }
 
 async function loadPayments(){
-  const {data}=await sb.from('payments').select('*,profiles(full_name)').order('created_at',{ascending:false});
+  const {data}=await sb.from('payments').select('*').order('created_at',{ascending:false});
   allPayments=data||[];
+  document.getElementById('payTotal').textContent=toAr(allPayments.length);
   renderPayments(allPayments);
 }
 
-function updateKPIs(){
-  const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-  const toAr=n=>String(n).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
-  const fmt=n=>Number(n).toLocaleString('ar-AE');
-  document.getElementById('kUsers').textContent=toAr(allUsers.length);
-  document.getElementById('kTrips').textContent=toAr(allTrips.length);
-  const totalRev=allPayments.filter(p=>p.status==='paid').reduce((s,p)=>s+Number(p.amount),0);
-  document.getElementById('kRevenue').textContent=fmt(totalRev);
-  document.getElementById('kPaid').textContent=toAr(allPayments.filter(p=>p.status==='paid').length);
-  document.getElementById('revTotal').textContent=fmt(totalRev)+' د';
-  const paid=allPayments.filter(p=>p.status==='paid');
-  document.getElementById('revAvg').textContent=paid.length?fmt(Math.round(totalRev/paid.length))+' د':'٠ د';
+async function loadMembers(){
+  const {data}=await sb.from('trip_members').select('trip_id');
+  allMembers=data||[];
 }
 
+async function loadExpenses(){
+  const {data}=await sb.from('expenses').select('amount,trip_id');
+  allExpenses=data||[];
+}
+
+/* ══ KPIs ══ */
+function updateKPIs(){
+  // Users
+  document.getElementById('kUsers').textContent=toAr(allUsers.length);
+
+  // Active users (لديهم رحلات)
+  const now=new Date();
+  const thirtyDaysAgo=new Date(now-30*24*60*60*1000);
+  const activeUsers=allUsers.filter(u=>new Date(u.updated_at||u.created_at)>=thirtyDaysAgo);
+  document.getElementById('kActive').textContent=toAr(activeUsers.length);
+  document.getElementById('activeTotal').textContent=toAr(activeUsers.length);
+
+  const weekAgo=new Date(now-7*24*60*60*1000);
+  const weekUsers=allUsers.filter(u=>new Date(u.updated_at||u.created_at)>=weekAgo);
+  document.getElementById('activeWeek').textContent=toAr(weekUsers.length);
+
+  const todayStart=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const todayUsers=allUsers.filter(u=>new Date(u.updated_at||u.created_at)>=todayStart);
+  document.getElementById('activeToday').textContent=toAr(todayUsers.length);
+
+  // Trips
+  document.getElementById('kTrips').textContent=toAr(allTrips.length);
+  const activeTrips=allTrips.filter(t=>t.status==='active'||!t.status);
+  document.getElementById('kTripsActive').textContent=toAr(activeTrips.length)+' نشطة';
+
+  // This month trips
+  const thisMonth=new Date(now.getFullYear(),now.getMonth(),1);
+  const thisMonthTrips=allTrips.filter(t=>new Date(t.created_at)>=thisMonth);
+  document.getElementById('kThisMonth').textContent=toAr(thisMonthTrips.length);
+  document.getElementById('kThisMonthLbl').textContent=now.toLocaleDateString('ar-AE',{month:'long',year:'numeric'});
+
+  // Avg members
+  const avgMem=allTrips.length?Math.round(allMembers.length/allTrips.length):0;
+  document.getElementById('kAvgMembers').textContent=toAr(avgMem);
+
+  // Paid trips (trips where is_paid=true)
+  const paidTrips=allTrips.filter(t=>t.is_paid);
+  const unpaidTrips=allTrips.filter(t=>!t.is_paid);
+
+  // Revenue from trips * 249
+  const totalRev=allPayments.filter(p=>p.status==='paid').reduce((s,p)=>s+Number(p.amount||249),0);
+  const estRev=paidTrips.length*249;
+  const displayRev=totalRev||estRev;
+
+  document.getElementById('kRevenue').textContent=fmt(displayRev);
+  document.getElementById('kPaid').textContent=toAr(allPayments.filter(p=>p.status==='paid').length||paidTrips.length);
+  document.getElementById('kUnpaid').textContent=toAr(unpaidTrips.length);
+
+  // Revenue page
+  document.getElementById('revTotal').textContent=fmt(displayRev)+' د';
+  const thisMonthRev=allPayments.filter(p=>{
+    const d=new Date(p.created_at);
+    return p.status==='paid'&&d>=thisMonth;
+  }).reduce((s,p)=>s+Number(p.amount||249),0)||thisMonthTrips.filter(t=>t.is_paid).length*249;
+  document.getElementById('revMonth').textContent=fmt(thisMonthRev)+' د';
+  const paidCount=allPayments.filter(p=>p.status==='paid').length||paidTrips.length;
+  document.getElementById('revAvg').textContent=paidCount?fmt(Math.round(displayRev/paidCount))+' د':'٠ د';
+}
+
+/* ══ RENDER USERS ══ */
 function renderUsers(data,tbodyId,mini){
-  const COLORS=['#3b63d4','#7c3aed','#0891b2','#be185d','#16a34a','#b45309'];
-  document.getElementById(tbodyId).innerHTML=data.map((u,i)=>`
-    <tr>
+  const tripsByUser={};
+  allTrips.forEach(t=>{
+    if(!tripsByUser[t.owner_id])tripsByUser[t.owner_id]=0;
+    tripsByUser[t.owner_id]++;
+  });
+  document.getElementById(tbodyId).innerHTML=data.map((u,i)=>{
+    const trips=tripsByUser[u.id]||0;
+    const email=u.email||'—';
+    return `<tr>
       <td><div style="display:flex;align-items:center;gap:7px">
-        <div class="u-av" style="background:${COLORS[i%COLORS.length]}">${(u.full_name||u.id||'?').charAt(0).toUpperCase()}</div>
+        <div class="u-av" style="background:${COLORS[i%COLORS.length]}">${(u.full_name||'؟').charAt(0).toUpperCase()}</div>
         <span style="font-weight:700">${u.full_name||'—'}</span>
       </div></td>
-      <td style="color:var(--w60);font-size:.72rem">${mini?'':'—'}</td>
+      <td style="color:var(--w50);font-size:.72rem">${mini?email.substring(0,20)+(email.length>20?'...':''):email}</td>
       ${mini?'':`<td style="color:var(--w50);font-size:.7rem">${u.phone||'—'}</td>`}
+      ${mini?'':`<td style="text-align:center"><span style="color:${trips>0?'var(--gold)':'var(--w40)'};font-weight:700;font-family:'Tajawal',sans-serif">${toAr(trips)}</span></td>`}
       <td style="color:var(--w40);font-size:.7rem">${u.created_at?new Date(u.created_at).toLocaleDateString('ar-AE'):'—'}</td>
-      ${mini?'':`<td><span class="badge badge-green">● نشط</span></td>`}
-    </tr>`).join('')||'<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--w40)">لا توجد بيانات</td></tr>';
+      ${mini?'':`<td><span class="badge ${trips>0?'badge-green':'badge-gray'}">${trips>0?'● مستخدم':'● جديد'}</span></td>`}
+    </tr>`;
+  }).join('')||`<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--w40)">لا توجد بيانات</td></tr>`;
 }
 
+function renderActiveUsers(){
+  const now=new Date();
+  const thirtyDaysAgo=new Date(now-30*24*60*60*1000);
+  const tripsByUser={};
+  allTrips.forEach(t=>{
+    if(!tripsByUser[t.owner_id])tripsByUser[t.owner_id]=0;
+    tripsByUser[t.owner_id]++;
+  });
+  const active=allUsers
+    .filter(u=>new Date(u.updated_at||u.created_at)>=thirtyDaysAgo)
+    .sort((a,b)=>new Date(b.updated_at||b.created_at)-new Date(a.updated_at||a.created_at));
+  document.getElementById('activeUsersBody').innerHTML=active.map((u,i)=>{
+    const last=new Date(u.updated_at||u.created_at);
+    const daysAgo=Math.floor((now-last)/(24*60*60*1000));
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:7px">
+        <div class="u-av" style="background:${COLORS[i%COLORS.length]}">${(u.full_name||'؟').charAt(0)}</div>
+        <span style="font-weight:700">${u.full_name||'—'}</span>
+      </div></td>
+      <td style="color:var(--w50);font-size:.72rem">${u.email||'—'}</td>
+      <td style="text-align:center;color:var(--gold);font-weight:700;font-family:'Tajawal',sans-serif">${toAr(tripsByUser[u.id]||0)}</td>
+      <td style="color:var(--w50);font-size:.72rem">${daysAgo===0?'اليوم':daysAgo===1?'أمس':toAr(daysAgo)+' يوم مضى'}</td>
+      <td><span class="badge ${daysAgo===0?'badge-green':daysAgo<=7?'badge-cyan':'badge-gold'}">${daysAgo===0?'● اليوم':daysAgo<=7?'● هذا الأسبوع':'● هذا الشهر'}</span></td>
+    </tr>`;
+  }).join('')||`<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--w40)">لا توجد بيانات</td></tr>`;
+}
+
+/* ══ RENDER TRIPS ══ */
 function renderTrips(data,tbodyId,mini){
-  const statusMap={active:{cls:'badge-green',lbl:'● نشطة'},pending:{cls:'badge-orange',lbl:'● معلقة'},completed:{cls:'badge-cyan',lbl:'● مكتملة'}};
+  const membersByTrip={};
+  allMembers.forEach(m=>{
+    if(!membersByTrip[m.trip_id])membersByTrip[m.trip_id]=0;
+    membersByTrip[m.trip_id]++;
+  });
   document.getElementById(tbodyId).innerHTML=data.map(t=>{
-    const st=statusMap[t.status]||{cls:'badge-gray',lbl:'—'};
+    const memCount=membersByTrip[t.id]||0;
+    const statusBadge=t.status==='archived'?
+      `<span class="badge badge-gray">● مؤرشفة</span>`:
+      `<span class="badge badge-green">● نشطة</span>`;
+    const paidBadge=t.is_paid?
+      `<span class="badge badge-green">✓ مدفوعة</span>`:
+      `<span class="badge badge-orange">✗ غير مدفوعة</span>`;
     return `<tr>
       <td><span style="font-weight:700">${t.name||'—'}</span></td>
-      ${mini?'':`<td style="color:var(--w50);font-size:.72rem">${t.profiles?.full_name||'—'}</td>`}
-      <td style="color:var(--w60);font-size:.72rem">${t.destination||'—'}</td>
-      ${mini?'':`<td style="text-align:center">${t.trip_members?.length||0}</td>`}
-      ${mini?'':`<td style="color:var(--w40);font-size:.7rem">${t.created_at?new Date(t.created_at).toLocaleDateString('ar-AE'):'—'}</td>`}
-      <td><span class="badge ${st.cls}">${st.lbl}</span></td>
-      ${mini?'':`<td><span class="badge ${t.is_paid?'badge-green':'badge-red'}">${t.is_paid?'✓ مدفوعة':'✗ غير مدفوعة'}</span></td>`}
+      ${mini?'':`<td style="color:var(--w60);font-size:.72rem">${t.owner_id?.substring(0,8)+'...'||'—'}</td>`}
+      <td style="color:var(--w60);font-size:.72rem">📍 ${t.destination||'—'}</td>
+      ${mini?'':`<td style="text-align:center"><span style="color:var(--cyan);font-weight:700;font-family:'Tajawal',sans-serif">${toAr(memCount)}</span></td>`}
+      ${mini?'':`<td style="color:var(--w40);font-size:.7rem">${t.start_date||'—'}</td>`}
+      <td>${statusBadge}</td>
+      <td>${paidBadge}</td>
     </tr>`;
-  }).join('')||'<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--w40)">لا توجد بيانات</td></tr>';
+  }).join('')||`<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--w40)">لا توجد بيانات</td></tr>`;
 }
 
+/* ══ RENDER PAYMENTS ══ */
 function renderPayments(data){
-  const statusMap={paid:{cls:'badge-green',lbl:'✓ مكتمل'},pending:{cls:'badge-orange',lbl:'⏳ معلق'},failed:{cls:'badge-red',lbl:'✗ فشل'}};
+  const statusMap={
+    paid:{cls:'badge-green',lbl:'✓ مكتمل'},
+    pending:{cls:'badge-orange',lbl:'⏳ معلق'},
+    failed:{cls:'badge-red',lbl:'✗ فشل'},
+  };
   document.getElementById('paymentsBody').innerHTML=data.map(p=>{
     const st=statusMap[p.status]||{cls:'badge-gray',lbl:'—'};
     return `<tr>
-      <td style="font-size:.7rem;font-family:monospace;color:var(--w40)">${p.id?.substring(0,8)+'...'}</td>
-      <td style="font-weight:700">${p.profiles?.full_name||'—'}</td>
-      <td style="font-family:'Tajawal',sans-serif;font-weight:800;color:var(--yellow)">${Number(p.amount).toLocaleString('ar-AE')} د</td>
+      <td style="font-size:.68rem;font-family:monospace;color:var(--w40)">${(p.id||'').substring(0,12)}...</td>
+      <td style="font-weight:700">${p.user_id?.substring(0,8)+'...'||'—'}</td>
+      <td style="color:var(--w50);font-size:.72rem">${p.trip_id?.substring(0,8)+'...'||'—'}</td>
+      <td style="font-family:'Tajawal',sans-serif;font-weight:900;color:var(--gold)">${fmt(p.amount||249)} د</td>
       <td style="color:var(--w40);font-size:.72rem">${p.created_at?new Date(p.created_at).toLocaleDateString('ar-AE'):'—'}</td>
       <td><span class="badge ${st.cls}">${st.lbl}</span></td>
-      <td style="font-size:.66rem;font-family:monospace;color:var(--w30)">${p.stripe_session_id?.substring(0,16)+'...'||'—'}</td>
     </tr>`;
-  }).join('')||'<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--w40)">لا توجد مدفوعات</td></tr>';
+  }).join('')||`<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--w40)">لا توجد مدفوعات حتى الآن</td></tr>`;
 }
 
-function renderRevChart(){
-  const months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+/* ══ CHART ══ */
+function renderRevChart(elId){
+  const el=document.getElementById(elId);
+  if(!el)return;
+  const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
   const now=new Date();
   const data=Array.from({length:6},(_,i)=>{
     const d=new Date(now.getFullYear(),now.getMonth()-5+i,1);
-    const total=allPayments.filter(p=>{
-      const pd=new Date(p.paid_at||p.created_at);
-      return p.status==='paid'&&pd.getMonth()===d.getMonth()&&pd.getFullYear()===d.getFullYear();
-    }).reduce((s,p)=>s+Number(p.amount),0);
-    return{month:months[d.getMonth()],total};
+    const m=d.getMonth();const y=d.getFullYear();
+    const paidTrips=allTrips.filter(t=>{
+      const td=new Date(t.created_at);
+      return t.is_paid&&td.getMonth()===m&&td.getFullYear()===y;
+    });
+    const payTotal=allPayments.filter(p=>{
+      const pd=new Date(p.created_at);
+      return p.status==='paid'&&pd.getMonth()===m&&pd.getFullYear()===y;
+    }).reduce((s,p)=>s+Number(p.amount||249),0);
+    const total=payTotal||paidTrips.length*249;
+    return{month:MONTHS[m].substring(0,3),total,count:paidTrips.length};
   });
   const maxVal=Math.max(...data.map(d=>d.total),1);
-  document.getElementById('revBars').innerHTML=data.map(d=>`
-    <div class="rev-bar-wrap">
-      <div class="rev-bar-val">${d.total?d.total.toLocaleString('ar-AE')+'د':''}</div>
-      <div class="rev-bar" style="height:${d.total/maxVal*100}px;min-height:4px"></div>
-      <div class="rev-bar-lbl">${d.month}</div>
+  el.innerHTML=data.map(d=>`
+    <div class="bar-col">
+      <div class="bar-val">${d.total?fmt(d.total)+'د':''}</div>
+      <div class="bar-body" style="height:${Math.max(d.total/maxVal*100,3)}px"></div>
+      <div class="bar-lbl">${d.month}</div>
     </div>`).join('');
 }
 
-// Filters
+/* ══ TOP DESTINATIONS ══ */
+function renderTopDests(){
+  const destCount={};
+  allTrips.forEach(t=>{
+    const dest=(t.destination||'أخرى').split('—')[0].trim().split('-')[0].trim();
+    if(dest)destCount[dest]=(destCount[dest]||0)+1;
+  });
+  const sorted=Object.entries(destCount).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const max=sorted[0]?.[1]||1;
+  const el=document.getElementById('topDestinations');
+  if(!el)return;
+  if(!sorted.length){el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">لا توجد بيانات</div>`;return}
+  el.innerHTML=sorted.map(([dest,count],i)=>`
+    <div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:.78rem;font-weight:700">📍 ${dest}</span>
+        <span style="font-size:.75rem;color:var(--gold);font-weight:800;font-family:'Tajawal',sans-serif">${toAr(count)} رحلة</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${count/max*100}%"></div></div>
+    </div>`).join('');
+}
+
+/* ══ SYSTEM STATS ══ */
+function renderSystemStats(){
+  const totalExpAmount=allExpenses.reduce((s,e)=>s+Number(e.amount||0),0);
+  document.getElementById('statTotalExp').textContent=toAr(allExpenses.length);
+  document.getElementById('statTotalMembers').textContent=toAr(allMembers.length);
+  document.getElementById('statAvgExp').textContent=allTrips.length?toAr(Math.round(allExpenses.length/allTrips.length)):toAr(0);
+}
+
+/* ══ FILTERS ══ */
 function filterUsers(){
   const q=document.getElementById('userSearch').value.toLowerCase();
-  const filtered=allUsers.filter(u=>(u.full_name||'').toLowerCase().includes(q));
+  const s=document.getElementById('userStatusFilter').value;
+  const tripsByUser={};
+  allTrips.forEach(t=>{if(!tripsByUser[t.owner_id])tripsByUser[t.owner_id]=0;tripsByUser[t.owner_id]++;});
+  const filtered=allUsers.filter(u=>{
+    const matchQ=(u.full_name||'').toLowerCase().includes(q)||(u.email||'').toLowerCase().includes(q);
+    const trips=tripsByUser[u.id]||0;
+    const matchS=!s||(s==='active'&&trips>0)||(s==='new'&&trips===0);
+    return matchQ&&matchS;
+  });
+  document.getElementById('userTotal').textContent=toAr(filtered.length);
   renderUsers(filtered,'usersBody',false);
 }
+
 function filterTrips(){
   const q=document.getElementById('tripSearch').value.toLowerCase();
   const s=document.getElementById('tripFilter').value;
+  const p=document.getElementById('tripPaidFilter').value;
   const filtered=allTrips.filter(t=>{
     const matchQ=(t.name||'').toLowerCase().includes(q)||(t.destination||'').toLowerCase().includes(q);
-    const matchS=!s||t.status===s;
-    return matchQ&&matchS;
+    const matchS=!s||(s==='active'&&(t.status==='active'||!t.status))||(s==='archived'&&t.status==='archived');
+    const matchP=!p||(p==='paid'&&t.is_paid)||(p==='unpaid'&&!t.is_paid);
+    return matchQ&&matchS&&matchP;
   });
+  document.getElementById('tripTotal').textContent=toAr(filtered.length);
   renderTrips(filtered,'tripsBody',false);
 }
 
+function filterPayments(){
+  const q=document.getElementById('paySearch').value.toLowerCase();
+  const s=document.getElementById('payStatusFilter').value;
+  const filtered=allPayments.filter(p=>{
+    const matchS=!s||p.status===s;
+    return matchS;
+  });
+  document.getElementById('payTotal').textContent=toAr(filtered.length);
+  renderPayments(filtered);
+}
+
+/* ══ NAVIGATION ══ */
 function showSec(sec){
   document.querySelectorAll('.page-sec').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.sb-item').forEach(n=>n.classList.remove('on'));
-  document.getElementById('sec-'+sec).classList.add('on');
-  document.getElementById('sn-'+sec).classList.add('on');
-  const titles={overview:'نظرة عامة',users:'المستخدمون',trips:'الرحلات',revenue:'الإيرادات',payments:'المدفوعات',settings:'الإعدادات'};
-  document.getElementById('topTitle').textContent=titles[sec]||'';
+  document.getElementById('sec-'+sec)?.classList.add('on');
+  document.getElementById('sn-'+sec)?.classList.add('on');
+  const titles={overview:'نظرة عامة',users:'المستخدمون',active:'الزوار الفعليون',trips:'الرحلات',revenue:'الإيرادات',payments:'المدفوعات',settings:'الإعدادات'};
+  document.getElementById('topTitle').textContent=titles[sec]||sec;
+  if(sec==='revenue'){renderRevChart('revBars2');}
 }
 
+/* ══ SETTINGS ══ */
+function saveSettings(){
+  const price=document.getElementById('settingPrice').value;
+  localStorage.setItem('rehla_price',price);
+  toast('✓ تم حفظ الإعدادات','ok');
+}
+
+function saveAnnouncement(){
+  const text=document.getElementById('annText').value.trim();
+  if(!text){toast('أدخل نص الإعلان','err');return}
+  const ann={text,link:document.getElementById('annLink').value,expiry:document.getElementById('annExpiry').value,date:new Date().toISOString()};
+  localStorage.setItem('rehla_announcement',JSON.stringify(ann));
+  document.getElementById('annPreview').style.display='block';
+  document.getElementById('annPreviewText').textContent=text;
+  toast('✓ تم نشر الإعلان','ok');
+}
+
+function clearAnnouncement(){
+  localStorage.removeItem('rehla_announcement');
+  document.getElementById('annText').value='';
+  document.getElementById('annLink').value='';
+  document.getElementById('annPreview').style.display='none';
+  toast('✓ تم إلغاء الإعلان','ok');
+}
+
+/* ══ SIDEBAR MOBILE ══ */
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+/* ══ SIGN OUT ══ */
 async function doSignOut(){
   await sb.auth.signOut();
   location.href='rehla-auth.html';
 }
 
+/* ══ TOAST ══ */
 function toast(msg,type='ok'){
   const t=document.getElementById('toast');
   t.textContent=msg;t.className=`show ${type}`;
   clearTimeout(t._t);t._t=setTimeout(()=>t.className='',3000);
 }
+
+// Mobile hamburger
+window.addEventListener('load',()=>{
+  if(window.innerWidth<=900)document.getElementById('hamburger').style.display='flex';
+});
+window.addEventListener('resize',()=>{
+  document.getElementById('hamburger').style.display=window.innerWidth<=900?'flex':'none';
+});
 </script>
 </body>
 </html>
