@@ -545,7 +545,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
 
     <div class="btns-row">
       <button class="btn-sec" onclick="goStep(2)">← <span id="s3BackBtn">رجوع</span></button>
-      <button class="btn-pay" id="createBtn" onclick="createTrip()">✈ <span id="createBtnTxt">إنشاء الرحلة والانطلاق</span></button>
+      <button class="btn-pay" id="createBtn" onclick="createTrip()">💳 <span id="createBtnTxt">إنشاء الرحلة والدفع — ٢٤٩ درهم</span></button>
     </div>
   </div>
 
@@ -1069,8 +1069,9 @@ async function createTrip(){
       );
     }
 
+    // ٤ — التحويل لـ Stripe للدفع
     document.getElementById('loadOv').classList.remove('show');
-    document.getElementById('sucOv').classList.add('show');
+    await startStripePayment(trip.id, document.getElementById('tripName').value.trim());
 
   }catch(err){
     document.getElementById('loadOv').classList.remove('show');
@@ -1081,8 +1082,40 @@ async function createTrip(){
 }
 
 /* ══════════════════════
-   AFTER SUCCESS
+   STRIPE PAYMENT
 ══════════════════════ */
+const EDGE_URL='https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-checkout';
+
+async function startStripePayment(tripId, tripName){
+  showToast(isEn?'Redirecting to payment...':'جاري التحويل للدفع...', true);
+  try{
+    const {data:{session:authSession}}=await sb.auth.getSession();
+    const res=await fetch(EDGE_URL,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Bearer '+authSession.access_token,
+        'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI',
+      },
+      body:JSON.stringify({
+        trip_id:tripId,
+        user_id:currentUser.id,
+        trip_name:tripName,
+      })
+    });
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    if(data.url){
+      sessionStorage.setItem('pending_payment_trip', tripId);
+      window.location.href=data.url;
+    }
+  }catch(err){
+    // إذا فشل الدفع — اذهب للـ dashboard مع إمكانية الدفع لاحقاً
+    showToast('⚠️ تم إنشاء الرحلة — يمكنك الدفع من لوحة التحكم', true);
+    setTimeout(()=>location.href='rehla-dashboard.html', 2000);
+  }
+}
+
 function goToDash(){
   location.href='rehla-dashboard.html';
 }
