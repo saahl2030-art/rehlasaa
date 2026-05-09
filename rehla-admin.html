@@ -230,6 +230,8 @@ tr:hover td{background:var(--w03)}
     <div class="sb-section">المالية</div>
     <div class="sb-item" id="sn-revenue" onclick="showSec('revenue')"><span class="sb-icon">💰</span> الإيرادات</div>
     <div class="sb-item" id="sn-payments" onclick="showSec('payments')"><span class="sb-icon">💳</span> المدفوعات</div>
+    <div class="sb-section">الإعلانات</div>
+    <div class="sb-item" id="sn-ads" onclick="showSec('ads')"><span class="sb-icon">📢</span> الإعلانات المدفوعة <span class="sb-count" id="adsPendingCount">٠</span></div>
     <div class="sb-section">النظام</div>
     <div class="sb-item" id="sn-settings" onclick="showSec('settings')"><span class="sb-icon">⚙</span> الإعدادات</div>
   </nav>
@@ -499,6 +501,39 @@ tr:hover td{background:var(--w03)}
       </div>
     </div>
 
+    <!-- ══ PAID ADS ══ -->
+    <div class="page-sec" id="sec-ads">
+      <div class="search-row">
+        <select class="s-select" id="adsFilter" onchange="filterAds()">
+          <option value="">كل الإعلانات</option>
+          <option value="pending">⏳ معلقة — تنتظر الموافقة</option>
+          <option value="approved">✅ موافق عليها</option>
+          <option value="rejected">❌ مرفوضة</option>
+        </select>
+        <span class="s-label">إجمالي:<span id="adsTotal">٠</span> إعلان</span>
+      </div>
+      <div class="sc">
+        <div class="sc-body" style="padding:0">
+          <div class="t-wrap">
+            <table><thead><tr><th>الشركة</th><th>نص الإعلان</th><th>المدة</th><th>التواريخ</th><th>المبلغ</th><th>الحالة</th><th>إجراءات</th></tr></thead>
+            <tbody id="adsBody"></tbody></table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ REJECT MODAL ══ -->
+    <div id="rejectModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;align-items:center;justify-content:center;padding:20px">
+      <div style="background:linear-gradient(160deg,#0a1628,#0d1f4e);border:1px solid rgba(248,113,113,.3);border-radius:14px;width:100%;max-width:420px;padding:24px">
+        <div style="font-size:.95rem;font-weight:800;margin-bottom:14px;color:var(--red)">❌ سبب الرفض</div>
+        <textarea id="rejectReason" style="width:100%;padding:10px;background:rgba(255,255,255,.07);border:1px solid rgba(248,113,113,.3);border-radius:8px;color:#fff;font-family:'Cairo',sans-serif;font-size:.85rem;resize:none;height:100px;outline:none" placeholder="اكتب سبب الرفض — سيصل للشركة عبر واتساب..."></textarea>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button onclick="closeRejectModal()" style="flex:1;padding:10px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);font-size:.85rem;font-weight:700;cursor:pointer">إلغاء</button>
+          <button onclick="confirmReject()" style="flex:2;padding:10px;border-radius:8px;background:var(--red-dim);border:1px solid rgba(248,113,113,.3);color:var(--red);font-size:.85rem;font-weight:800;cursor:pointer">تأكيد الرفض وإشعار الشركة</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ══ SETTINGS ══ -->
     <div class="page-sec" id="sec-settings">
       <div class="grid-2">
@@ -590,7 +625,7 @@ let allUsers=[],allTrips=[],allPayments=[],allMembers=[],allExpenses=[];
 
 async function loadAll(){
   toast('جاري تحديث البيانات...','info');
-  await Promise.all([loadUsers(),loadTrips(),loadPayments(),loadMembers(),loadExpenses()]);
+  await Promise.all([loadUsers(),loadTrips(),loadPayments(),loadMembers(),loadExpenses(),loadAds()]);
   updateKPIs();
   renderRevChart('revBars');
   renderRevChart('revBars2');
@@ -893,15 +928,105 @@ function filterPayments(){
   renderPayments(filtered);
 }
 
+/* ══ PAID ADS ══ */
+let allAds=[];
+let rejectingAdId=null;
+
+async function loadAds(){
+  const {data}=await sb.from('paid_ads').select('*').order('created_at',{ascending:false});
+  allAds=data||[];
+  const pending=allAds.filter(a=>a.status==='pending').length;
+  const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  const toAr=n=>String(n).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
+  document.getElementById('adsPendingCount').textContent=toAr(pending);
+  document.getElementById('adsTotal').textContent=toAr(allAds.length);
+  renderAds(allAds);
+}
+
+function renderAds(data){
+  const statusMap={
+    pending:{cls:'badge-orange',lbl:'⏳ معلق'},
+    approved:{cls:'badge-green',lbl:'✅ موافق'},
+    rejected:{cls:'badge-red',lbl:'❌ مرفوض'},
+  };
+  document.getElementById('adsBody').innerHTML=data.map(ad=>{
+    const st=statusMap[ad.status]||{cls:'badge-gray',lbl:'—'};
+    const actions=ad.status==='pending'?`
+      <div style="display:flex;gap:5px">
+        <button onclick="approveAd('${ad.id}','${(ad.contact_phone||'').replace(/'/g,'')}','${(ad.company_name||'').replace(/'/g,'')}')"
+          style="padding:5px 12px;border-radius:6px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:var(--green);font-size:.72rem;font-weight:700;cursor:pointer">✅ موافقة</button>
+        <button onclick="openRejectModal('${ad.id}','${(ad.contact_phone||'').replace(/'/g,'')}','${(ad.company_name||'').replace(/'/g,'')}')"
+          style="padding:5px 12px;border-radius:6px;background:var(--red-dim);border:1px solid rgba(248,113,113,.2);color:var(--red);font-size:.72rem;font-weight:700;cursor:pointer">❌ رفض</button>
+      </div>`:`<span style="font-size:.72rem;color:var(--w40)">${ad.rejection_reason||'—'}</span>`;
+    return `<tr>
+      <td><div style="font-weight:700">${ad.company_name||'—'}</div><div style="font-size:.68rem;color:var(--w40)">${ad.contact_phone||''}</div></td>
+      <td style="max-width:200px"><div style="font-weight:600;font-size:.8rem">${ad.ad_text||'—'}</div>${ad.ad_link?`<div style="font-size:.66rem;color:var(--gold);margin-top:2px">${ad.ad_link}</div>`:''}</td>
+      <td style="text-align:center;color:var(--gold);font-weight:700">${ad.days||1} يوم</td>
+      <td style="font-size:.72rem;color:var(--w50)">${ad.start_date||'—'}<br>← ${ad.end_date||'—'}</td>
+      <td style="color:var(--gold);font-weight:800;font-family:'Tajawal',sans-serif">${ad.amount||0} د</td>
+      <td><span class="badge ${st.cls}">${st.lbl}</span></td>
+      <td>${actions}</td>
+    </tr>`;
+  }).join('')||`<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--w40)">لا توجد إعلانات</td></tr>`;
+}
+
+function filterAds(){
+  const s=document.getElementById('adsFilter').value;
+  const filtered=s?allAds.filter(a=>a.status===s):allAds;
+  document.getElementById('adsTotal').textContent=filtered.length;
+  renderAds(filtered);
+}
+
+async function approveAd(id,phone,company){
+  if(!confirm(`موافقة على إعلان ${company}؟`))return;
+  const {error}=await sb.from('paid_ads').update({status:'approved'}).eq('id',id);
+  if(error){toast('❌ '+error.message,'err');return}
+  // إشعار واتساب
+  if(phone){
+    const msg=encodeURIComponent(`مرحباً ${company} 👋\n\nتمت الموافقة على إعلانكم في رحلة+ ✅\nسينشر إعلانكم في التاريخ المحدد تلقائياً.\n\nشكراً لثقتكم — رحلة+ 🌍`);
+    window.open(`https://wa.me/${phone.replace(/\D/g,'')}?text=${msg}`,'_blank');
+  }
+  toast('✅ تمت الموافقة وتم إشعار الشركة','ok');
+  await loadAds();
+}
+
+function openRejectModal(id,phone,company){
+  rejectingAdId={id,phone,company};
+  document.getElementById('rejectReason').value='';
+  document.getElementById('rejectModal').style.display='flex';
+}
+
+function closeRejectModal(){
+  document.getElementById('rejectModal').style.display='none';
+  rejectingAdId=null;
+}
+
+async function confirmReject(){
+  if(!rejectingAdId)return;
+  const reason=document.getElementById('rejectReason').value.trim();
+  if(!reason){toast('يرجى كتابة سبب الرفض','err');return}
+  const {error}=await sb.from('paid_ads').update({status:'rejected',rejection_reason:reason}).eq('id',rejectingAdId.id);
+  if(error){toast('❌ '+error.message,'err');return}
+  // إشعار واتساب بالرفض
+  if(rejectingAdId.phone){
+    const msg=encodeURIComponent(`مرحباً ${rejectingAdId.company} 👋\n\nنأسف لإبلاغكم بأنه تم رفض طلب إعلانكم في رحلة+.\n\nالسبب: ${reason}\n\nسيتم استرداد المبلغ خلال ٣-٥ أيام عمل.\nللاستفسار تواصل معنا.\n\nرحلة+ 🌍`);
+    window.open(`https://wa.me/${rejectingAdId.phone.replace(/\D/g,'')}?text=${msg}`,'_blank');
+  }
+  closeRejectModal();
+  toast('❌ تم الرفض وتم إشعار الشركة','ok');
+  await loadAds();
+}
+
 /* ══ NAVIGATION ══ */
 function showSec(sec){
   document.querySelectorAll('.page-sec').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.sb-item').forEach(n=>n.classList.remove('on'));
   document.getElementById('sec-'+sec)?.classList.add('on');
   document.getElementById('sn-'+sec)?.classList.add('on');
-  const titles={overview:'نظرة عامة',users:'المستخدمون',active:'الزوار الفعليون',trips:'الرحلات',revenue:'الإيرادات',payments:'المدفوعات',settings:'الإعدادات'};
+  const titles={overview:'نظرة عامة',users:'المستخدمون',active:'الزوار الفعليون',trips:'الرحلات',revenue:'الإيرادات',payments:'المدفوعات',ads:'الإعلانات المدفوعة',settings:'الإعدادات'};
   document.getElementById('topTitle').textContent=titles[sec]||sec;
   if(sec==='revenue'){renderRevChart('revBars2');}
+  if(sec==='settings'){loadCurrentAnnouncement();}
 }
 
 /* ══ SETTINGS ══ */
@@ -911,22 +1036,54 @@ function saveSettings(){
   toast('✓ تم حفظ الإعدادات','ok');
 }
 
-function saveAnnouncement(){
+async function saveAnnouncement(){
   const text=document.getElementById('annText').value.trim();
   if(!text){toast('أدخل نص الإعلان','err');return}
-  const ann={text,link:document.getElementById('annLink').value,expiry:document.getElementById('annExpiry').value,date:new Date().toISOString()};
-  localStorage.setItem('rehla_announcement',JSON.stringify(ann));
+  const link=document.getElementById('annLink').value.trim();
+  const expiry=document.getElementById('annExpiry').value;
+
+  // أوقف الإعلانات القديمة أولاً
+  await sb.from('announcements').update({is_active:false}).eq('is_active',true);
+
+  // أضف الإعلان الجديد
+  const {error}=await sb.from('announcements').insert({
+    text,
+    link:link||null,
+    expires_at:expiry?new Date(expiry).toISOString():null,
+    is_active:true,
+  });
+
+  if(error){toast('❌ خطأ: '+error.message,'err');return}
+
   document.getElementById('annPreview').style.display='block';
   document.getElementById('annPreviewText').textContent=text;
-  toast('✓ تم نشر الإعلان','ok');
+  toast('✓ تم نشر الإعلان في جميع الصفحات','ok');
 }
 
-function clearAnnouncement(){
-  localStorage.removeItem('rehla_announcement');
+async function clearAnnouncement(){
+  const {error}=await sb.from('announcements').update({is_active:false}).eq('is_active',true);
+  if(error){toast('❌ '+error.message,'err');return}
   document.getElementById('annText').value='';
   document.getElementById('annLink').value='';
+  document.getElementById('annExpiry').value='';
   document.getElementById('annPreview').style.display='none';
   toast('✓ تم إلغاء الإعلان','ok');
+}
+
+async function loadCurrentAnnouncement(){
+  const {data}=await sb.from('announcements')
+    .select('*')
+    .eq('is_active',true)
+    .order('created_at',{ascending:false})
+    .limit(1);
+  if(data&&data.length>0){
+    const ann=data[0];
+    document.getElementById('annText').value=ann.text||'';
+    document.getElementById('annLink').value=ann.link||'';
+    if(ann.expires_at)document.getElementById('annExpiry').value=ann.expires_at.split('T')[0];
+    document.getElementById('annPreview').style.display='block';
+    document.getElementById('annPreviewText').textContent=ann.text;
+  }
 }
 
 /* ══ SIDEBAR MOBILE ══ */
