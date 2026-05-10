@@ -818,7 +818,7 @@ async function checkPaymentReturn() {
   const params = new URLSearchParams(window.location.search);
   const paid = params.get('paid');
 
-  // نظّف الـ URL فوراً بغض النظر عن النتيجة
+  // نظّف الـ URL فوراً
   if (paid !== null) {
     window.history.replaceState({}, '', window.location.pathname);
   }
@@ -826,16 +826,30 @@ async function checkPaymentReturn() {
   if (paid === 'true') {
     const tripId = params.get('trip') || sessionStorage.getItem('pending_payment_trip');
     if (tripId) {
-      // تحديث is_paid في Supabase — الداشبورد سيقرأه من DB لاحقاً
-      const { error } = await sb.from('trips').update({ is_paid: true }).eq('id', tripId);
+      // جلب end_date لحساب grace_until
+      const { data: tripData } = await sb.from('trips').select('end_date').eq('id', tripId).single();
+      
+      // حساب grace_until = end_date + 3 أيام
+      let graceUntil = null;
+      if (tripData?.end_date) {
+        const endDate = new Date(tripData.end_date);
+        endDate.setDate(endDate.getDate() + 3);
+        graceUntil = endDate.toISOString().split('T')[0];
+      }
+
+      // تحديث is_paid + status + grace_until دفعة واحدة
+      const { error } = await sb.from('trips').update({
+        is_paid: true,
+        status: 'active',
+        grace_until: graceUntil,
+      }).eq('id', tripId);
+
       if (!error) {
         sessionStorage.removeItem('pending_payment_trip');
         toast('🎉 تم الدفع بنجاح! رحلتك مفعّلة', 'ok');
       }
     }
   } else if (paid === 'false') {
-    // ← FIX: إلغاء الدفع = لا نفعل شيئاً — loadUserTrips ستقرأ is_paid من DB
-    // لا نفتح الداشبورد تلقائياً — إذا is_paid=false سيظهر PayGate
     toast('تم إلغاء الدفع — يمكنك الدفع في أي وقت', 'info');
     sessionStorage.removeItem('pending_payment_trip');
   }
