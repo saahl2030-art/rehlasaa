@@ -9,7 +9,8 @@
 :root{
   --bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;
   --sidebar:#050c24;--sidebar2:#080f2a;
-  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25);  --green:#22c55e;--green-dim:rgba(34,197,94,.15);
+  --cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.15);
   --red:#f87171;--red-dim:rgba(248,113,113,.15);
   --orange:#fb923c;--orange-dim:rgba(251,146,60,.15);
   --purple:#a78bfa;--purple-dim:rgba(167,139,250,.15);
@@ -37,7 +38,6 @@
   --r:12px;--rsm:9px;--rxs:6px;
   --sidebar-w:220px;
 }
-/* ════ THEMES ════ */
 [data-theme="navy"]{--bg:#060e2e;--bg2:#0a1628;--bg3:#0d1f4e;--sidebar:#050c24;--sidebar2:#080f2a;--cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25)}
 [data-theme="midnight"]{--bg:#0a0f1e;--bg2:#111827;--bg3:#1a2540;--sidebar:#060810;--sidebar2:#090d18;--cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25)}
 [data-theme="ocean"]{--bg:#042f4b;--bg2:#0c4a6e;--bg3:#0e5a85;--sidebar:#021d2e;--sidebar2:#032540;--cyan:#38bdf8;--cyan-dim:rgba(56,189,248,.15);--cyan-bright:rgba(56,189,248,.25)}
@@ -52,7 +52,6 @@ body{font-family:'Cairo',sans-serif;background:linear-gradient(160deg,var(--bg) 
 input,select,textarea,button{font-family:inherit;border:none;outline:none;-webkit-appearance:none;appearance:none}
 button{cursor:pointer}
 ::-webkit-scrollbar{width:4px;height:4px}
-/* ════ THEME PICKER ════ */
 .theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
 .theme-opt{border-radius:10px;overflow:hidden;border:2px solid var(--border2);cursor:pointer;transition:all .25s;background:var(--card)}
 .theme-opt:hover{border-color:var(--border);transform:translateY(-2px)}
@@ -71,61 +70,26 @@ button{cursor:pointer}
 .theme-cat::after{content:'';flex:1;height:1px;background:var(--border2)}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:2px}
-
-/* ════ FULL SCREEN LOADER ════ */
-.fs-loader{
-  position:fixed;inset:0;z-index:9999;
-  background:linear-gradient(160deg,var(--bg),var(--bg2));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:20px;transition:opacity .4s;
-}
+.fs-loader{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,var(--bg),var(--bg2));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .4s}
 .fs-loader.hidden{opacity:0;pointer-events:none}
-.fs-spinner{
-  width:52px;height:52px;border-radius:50%;
-  border:3px solid rgba(255,255,255,.15);
-  border-top-color:var(--cyan);
-  animation:spin .8s linear infinite;
-}
+.fs-spinner{width:52px;height:52px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:var(--cyan);animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .fs-loader-txt{font-size:.88rem;color:var(--w50);font-weight:600}
 .fs-logo{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;margin-bottom:8px}
 .fs-logo em{color:var(--cyan);font-style:normal}
-
-/* ════ LAYOUT ════ */
 .layout{display:flex;min-height:100vh}
-
-/* ════ SIDEBAR ════ */
-.sidebar{
-  width:var(--sidebar-w);flex-shrink:0;
-  background:var(--sidebar);
-  border-left:1px solid var(--border2);
-  display:flex;flex-direction:column;
-  position:fixed;top:0;right:0;bottom:0;
-  z-index:100;transition:transform .3s;
-}
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--sidebar);border-left:1px solid var(--border2);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:100;transition:transform .3s}
 .sidebar-logo{padding:18px 16px;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:10px}
 .logo-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.25);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--gold);font-weight:900;flex-shrink:0}
 .logo-text{font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:900}
 .logo-text em{color:var(--cyan);font-style:normal}
 .logo-sub{font-size:.6rem;color:var(--w50)}
-
-.sidebar-trip{
-  margin:12px 12px 0;
-  background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);
-  border-radius:var(--rsm);padding:10px 12px;cursor:pointer;transition:all .2s;
-}
+.sidebar-trip{margin:12px 12px 0;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:var(--rsm);padding:10px 12px;cursor:pointer;transition:all .2s}
 .sidebar-trip:hover{background:var(--cyan-bright)}
 .sidebar-trip-name{font-size:.82rem;font-weight:800;color:var(--white);display:flex;align-items:center;justify-content:space-between}
 .sidebar-trip-meta{font-size:.66rem;color:var(--w50);margin-top:2px}
-/* Skeleton shimmer for trip name loading */
-.skel{
-  background:linear-gradient(90deg,var(--w06) 25%,var(--w10) 50%,var(--w06) 75%);
-  background-size:200% 100%;
-  animation:shimmer 1.5s infinite;
-  border-radius:6px;
-}
+.skel{background:linear-gradient(90deg,var(--w06) 25%,var(--w10) 50%,var(--w06) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
 .sidebar-nav{flex:1;padding:8px 0;overflow-y:auto}
 .nav-section-label{font-size:.6rem;font-weight:800;color:var(--w30);text-transform:uppercase;letter-spacing:.8px;padding:10px 16px 4px}
 .nav-item{display:flex;align-items:center;gap:9px;padding:9px 16px;margin:1px 8px;border-radius:var(--rsm);font-size:.82rem;font-weight:700;color:var(--w70);cursor:pointer;transition:all .2s;position:relative}
@@ -134,20 +98,14 @@ button{cursor:pointer}
 .nav-item.active::after{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:60%;border-radius:0 2px 2px 0;background:rgba(245,158,11,.7)}
 .nav-icon{font-size:.95rem;width:20px;text-align:center;flex-shrink:0}
 .nav-badge{margin-right:auto;background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.3);color:var(--gold);font-size:.6rem;font-weight:900;padding:2px 6px;border-radius:100px;min-width:18px;text-align:center}
-
 .sidebar-footer{padding:12px;border-top:1px solid var(--border2)}
 .sidebar-user{display:flex;align-items:center;gap:9px;padding:8px;border-radius:var(--rsm);transition:background .2s;cursor:pointer}
 .sidebar-user:hover{background:var(--w06)}
 .user-av{width:32px;height:32px;border-radius:50%;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.25);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;color:var(--bg2);flex-shrink:0}
 .user-name{font-size:.78rem;font-weight:700}
 .user-role{font-size:.62rem;color:var(--w50)}
-
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99}
-
-/* ════ MAIN ════ */
 .main{flex:1;margin-right:var(--sidebar-w);display:flex;flex-direction:column;min-height:100vh}
-
-/* ════ TOPBAR ════ */
 .topbar{height:56px;background:var(--sidebar2);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:50}
 .topbar-title{font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:900}
 .topbar-actions{display:flex;align-items:center;gap:8px}
@@ -158,11 +116,7 @@ button{cursor:pointer}
 .topbar-btn-primary:hover{background:rgba(245,158,11,.15);color:rgba(245,158,11,.9)}
 .hamburger{display:none;flex-direction:column;gap:4px;padding:8px;background:var(--w10);border:1px solid var(--border);border-radius:var(--rxs);cursor:pointer}
 .hamburger span{display:block;width:18px;height:2px;background:var(--white);border-radius:1px;transition:all .3s}
-
-/* ════ CONTENT ════ */
 .content{padding:20px;flex:1}
-
-/* ════ TRIP HEADER CARD ════ */
 .trip-header-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:18px;display:flex;align-items:center;gap:16px}
 .trip-thumb{width:80px;height:80px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--cyan-dim),rgba(56,189,248,.05));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden}
 .trip-thumb img{width:100%;height:100%;object-fit:cover;border-radius:10px}
@@ -178,8 +132,6 @@ button{cursor:pointer}
 .trip-total-lbl{font-size:.7rem;color:var(--w50);margin-bottom:2px}
 .trip-total-val{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;color:var(--yellow);line-height:1}
 .trip-total-sub{font-size:.65rem;color:var(--w40);margin-top:2px}
-
-/* ════ KPI STRIP ════ */
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
 .kpi-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px;transition:border-color .2s}
 .kpi-card:hover{border-color:var(--border)}
@@ -187,19 +139,13 @@ button{cursor:pointer}
 .kpi-label{font-size:.7rem;color:var(--w50);margin-bottom:3px;font-weight:600}
 .kpi-value{font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;line-height:1}
 .kpi-sub{font-size:.65rem;color:var(--w40);margin-top:2px}
-
-/* ════ GRID LAYOUT ════ */
 .grid-main{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
-
-/* ════ SECTION CARD ════ */
 .section-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
 .section-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border2);background:var(--card2)}
 .section-title{font-size:.85rem;font-weight:800;display:flex;align-items:center;gap:7px}
 .section-body{padding:14px 16px}
 .section-action{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:var(--rxs);font-size:.74rem;font-weight:700;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--cyan);cursor:pointer;transition:all .2s}
 .section-action:hover{background:rgba(245,158,11,.2);color:var(--white)}
-
-/* ════ MEMBERS LIST ════ */
 .member-row{display:flex;align-items:center;gap:10px;padding:8px;border-radius:var(--rsm);margin-bottom:4px;transition:background .15s}
 .member-row:last-child{margin-bottom:0}
 .member-row:hover{background:var(--w06)}
@@ -211,8 +157,6 @@ button{cursor:pointer}
 .bal-pos{color:var(--green)}
 .bal-neg{color:var(--red)}
 .bal-zero{color:var(--w40)}
-
-/* ════ ADD EXPENSE FORM ════ */
 .add-exp-form{display:flex;flex-direction:column;gap:10px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .f-lbl{font-size:.73rem;font-weight:700;color:var(--w60);margin-bottom:4px;display:block}
@@ -221,20 +165,15 @@ button{cursor:pointer}
 .f-inp:focus,.f-sel:focus{border-color:rgba(245,158,11,.4);background:var(--w10);box-shadow:0 0 0 3px rgba(245,158,11,.1)}
 .f-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='rgba(255,255,255,.4)' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 10px center;padding-left:28px;cursor:pointer}
 .f-sel option{background:var(--bg2)}
-
 .cat-pills{display:flex;flex-wrap:wrap;gap:5px}
 .cat-pill{display:flex;align-items:center;gap:4px;padding:5px 10px;border-radius:100px;border:1px solid var(--border2);background:var(--w06);color:var(--w60);font-size:.72rem;font-weight:700;cursor:pointer;transition:all .2s}
 .cat-pill:hover{border-color:var(--border);color:var(--white);background:var(--w10)}
 .cat-pill.selected{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3);color:rgba(245,158,11,.9)}
-
 .dist-toggle{display:flex;gap:6px}
 .dist-btn{flex:1;padding:7px;border-radius:var(--rxs);border:1px solid var(--border2);background:var(--w06);color:var(--w60);font-size:.75rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
 .dist-btn.on{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:rgba(245,158,11,.9)}
-
 .btn-add-exp{width:100%;padding:11px;border-radius:var(--rsm);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-size:.88rem;font-weight:900;box-shadow:0 4px 16px var(--cyan-dim);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
 .btn-add-exp:hover{background:rgba(245,158,11,.15);color:rgba(245,158,11,.9);transform:translateY(-1px)}
-
-/* ════ EXPENSES TABLE ════ */
 .exp-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .exp-table{width:100%;border-collapse:collapse;min-width:560px}
 .exp-table th{font-size:.66rem;font-weight:800;color:var(--w40);text-align:right;padding:8px 10px;border-bottom:1px solid var(--border2);white-space:nowrap}
@@ -254,8 +193,6 @@ button{cursor:pointer}
 .exp-btn-edit:hover{background:var(--cyan-bright)}
 .exp-btn-del{background:var(--red-dim);color:var(--red);border:1px solid rgba(248,113,113,.2)}
 .exp-btn-del:hover{background:var(--red);color:#fff}
-
-/* ════ FINANCIAL SUMMARY ════ */
 .sum-table{width:100%;border-collapse:collapse}
 .sum-table th{font-size:.66rem;font-weight:800;color:var(--w40);text-align:right;padding:6px 8px;border-bottom:1px solid var(--border2)}
 .sum-table td{font-size:.78rem;padding:8px;border-bottom:1px solid var(--border2);vertical-align:middle}
@@ -271,8 +208,6 @@ button{cursor:pointer}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:100px;transition:width .5s}
 .settle-btn{width:100%;margin-top:12px;padding:11px;border-radius:var(--rsm);background:linear-gradient(135deg,var(--green),#16a34a);color:#fff;font-size:.88rem;font-weight:900;box-shadow:0 4px 16px var(--green-dim);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
 .settle-btn:hover{transform:translateY(-1px)}
-
-/* ════ CHART ════ */
 .donut-wrap{display:flex;align-items:center;gap:16px}
 .donut-svg{flex-shrink:0}
 .donut-legend{flex:1;display:flex;flex-direction:column;gap:6px}
@@ -280,8 +215,6 @@ button{cursor:pointer}
 .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .legend-name{flex:1;color:var(--w70);font-weight:600}
 .legend-pct{font-family:'Tajawal',sans-serif;font-weight:800;color:var(--white)}
-
-/* ════ SETTLEMENT ════ */
 .settle-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--w06);border:1px solid var(--border2);border-radius:var(--rsm);margin-bottom:7px;transition:background .15s}
 .settle-item:last-child{margin-bottom:0}
 .settle-item:hover{background:var(--w10)}
@@ -291,16 +224,12 @@ button{cursor:pointer}
 .settle-amount{margin-right:auto;font-family:'Tajawal',sans-serif;font-size:.95rem;font-weight:900;color:var(--yellow)}
 .settle-wa-btn{padding:4px 10px;border-radius:100px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:var(--green);font-size:.68rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
 .settle-wa-btn:hover{background:rgba(34,197,94,.25)}
-
-/* ════ ACTIVITY FEED ════ */
 .activity-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border2)}
 .activity-item:last-child{border-bottom:none}
 .activity-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;margin-top:1px}
 .activity-text{font-size:.78rem;color:var(--w70);line-height:1.5;flex:1}
 .activity-text strong{color:var(--white);font-weight:700}
 .activity-time{font-size:.64rem;color:var(--w40);margin-top:2px}
-
-/* ════ SHARE PANEL ════ */
 .share-link-box{display:flex;align-items:center;gap:8px;background:var(--w06);border:1px solid var(--border2);border-radius:var(--rsm);padding:8px 12px;margin-bottom:10px}
 .share-link-txt{flex:1;font-size:.74rem;color:var(--w50);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:monospace}
 .share-copy-btn{padding:5px 12px;border-radius:var(--rxs);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.8);font-size:.72rem;font-weight:800;cursor:pointer;transition:all .2s;flex-shrink:0}
@@ -314,12 +243,8 @@ button{cursor:pointer}
 .shr-pending{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(251,146,60,.25)}
 .shr-btn{padding:4px 10px;border-radius:100px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--cyan);font-size:.66rem;font-weight:700;cursor:pointer;transition:all .2s}
 .shr-btn:hover{background:rgba(245,158,11,.2)}
-
-/* ════ PAGES ════ */
 .page-section{display:none}
 .page-section.active{display:block}
-
-/* ════ MODAL ════ */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
 .modal-ov.show{opacity:1;pointer-events:all}
 .modal-box{background:linear-gradient(160deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:scale(.95) translateY(10px);transition:transform .25s cubic-bezier(.34,1.4,.64,1)}
@@ -335,52 +260,24 @@ button{cursor:pointer}
 .modal-btn-primary:hover{background:rgba(245,158,11,.15);color:rgba(245,158,11,.9)}
 .modal-btn-ghost{background:var(--w10);border:1px solid var(--border);color:var(--w70)}
 .modal-btn-ghost:hover{background:var(--w15);color:var(--white)}
-
-/* ════ TOAST ════ */
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(26,58,140,.97);border:1px solid var(--border);box-shadow:var(--shadow-lg);color:var(--white);padding:10px 20px;border-radius:var(--rsm);font-size:.8rem;font-weight:600;z-index:9999;opacity:0;pointer-events:none;display:flex;align-items:center;gap:7px;transition:all .3s;min-width:180px;justify-content:center}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 #toast.ok{border-right:4px solid var(--green)}
 #toast.err{border-right:4px solid var(--red)}
 #toast.info{border-right:4px solid var(--cyan)}
-
-
-/* ════ PAYMENT BANNER ════ */
-.pay-banner{
-  background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.06));
-  border:1px solid rgba(245,158,11,.35);
-  border-radius:var(--r);padding:16px 20px;
-  margin-bottom:18px;
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-}
+.pay-banner{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.06));border:1px solid rgba(245,158,11,.35);border-radius:var(--r);padding:16px 20px;margin-bottom:18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .pay-banner-icon{font-size:2rem;flex-shrink:0}
 .pay-banner-info{flex:1}
 .pay-banner-title{font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:900;color:var(--gold);margin-bottom:4px}
 .pay-banner-sub{font-size:.8rem;color:var(--w60);line-height:1.6}
-.btn-pay-now{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:12px 28px;border-radius:var(--rsm);
-  background:var(--gold);color:#060e2e;
-  font-family:'Cairo',sans-serif;font-size:.92rem;font-weight:900;
-  border:none;cursor:pointer;
-  box-shadow:0 4px 20px rgba(245,158,11,.3);
-  transition:all .25s;flex-shrink:0;
-}
-.btn-pay-now:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,158,11,.4)}
+.btn-pay-now{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:var(--rsm);background:var(--gold);color:#060e2e;font-family:'Cairo',sans-serif;font-size:.92rem;font-weight:900;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,.3);transition:all .25s;flex-shrink:0}
+.btn-pay-now:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,158,11,.4)}
 .btn-pay-now:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .pay-spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(6,14,46,.3);border-top-color:#060e2e;animation:spin .7s linear infinite;display:none}
 .btn-pay-now.loading .pay-spin{display:block}
 .btn-pay-now.loading .pay-txt{display:none}
-
-/* ════ PAYMENT GATE ════ */
-.pay-gate{
-  position:fixed;inset:0;z-index:9998;
-  background:linear-gradient(160deg,#060e2e,#0a1628,#0d1f4e);
-  display:flex;align-items:center;justify-content:center;padding:20px;
-}
-.pay-gate-card{
-  background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);
-  border-radius:20px;max-width:480px;width:100%;padding:40px 32px;text-align:center;
-}
+.pay-gate{position:fixed;inset:0;z-index:9998;background:linear-gradient(160deg,#060e2e,#0a1628,#0d1f4e);display:flex;align-items:center;justify-content:center;padding:20px}
+.pay-gate-card{background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);border-radius:20px;max-width:480px;width:100%;padding:40px 32px;text-align:center}
 .pay-gate-icon{font-size:3.5rem;margin-bottom:16px}
 .pay-gate-title{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold);margin-bottom:10px}
 .pay-gate-sub{font-size:.88rem;color:var(--w60);line-height:1.8;margin-bottom:24px}
@@ -389,15 +286,8 @@ button{cursor:pointer}
 .pay-gate-feat:last-child{border-bottom:none}
 .pay-gate-price{font-family:'Tajawal',sans-serif;font-size:2.8rem;font-weight:900;color:var(--gold);margin-bottom:4px}
 .pay-gate-price-sub{font-size:.78rem;color:var(--w40);margin-bottom:20px}
-.btn-pay-gate{
-  width:100%;padding:15px;border-radius:12px;
-  background:var(--gold);color:#060e2e;
-  font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;
-  border:none;cursor:pointer;
-  box-shadow:0 4px 20px rgba(245,158,11,.35);
-  transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.btn-pay-gate:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-pay-gate{width:100%;padding:15px;border-radius:12px;background:var(--gold);color:#060e2e;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,.35);transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-pay-gate:hover{transform:translateY(-2px)}
 .btn-pay-gate:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .pay-gate-spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(6,14,46,.3);border-top-color:#060e2e;animation:spin .7s linear infinite;display:none}
 .btn-pay-gate.loading .pay-gate-spin{display:block}
@@ -409,10 +299,8 @@ button{cursor:pointer}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .empty-title{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900}
 .empty-sub{font-size:.88rem;color:var(--w50);max-width:340px;line-height:1.8}
-.empty-btn{padding:15px 36px;border-radius:var(--rsm);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-size:1rem;font-weight:900;cursor:pointer;box-shadow:0 4px 20px var(--cyan-dim);transition:all .25s;border:none;display:flex;align-items:center;gap:8px;margin-top:4px}
+.empty-btn{padding:15px 36px;border-radius:var(--rsm);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-size:1rem;font-weight:900;cursor:pointer;box-shadow:0 4px 20px var(--cyan-dim);transition:all .25s;display:flex;align-items:center;gap:8px;margin-top:4px}
 .empty-btn:hover{background:rgba(245,158,11,.15);color:rgba(245,158,11,.9);transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,158,11,.15)}
-
-/* ════ RESPONSIVE ════ */
 @media(max-width:900px){
   .sidebar{transform:translateX(220px);box-shadow:none;transition:transform .3s ease}
   .sidebar.open{transform:translateX(0);box-shadow:-8px 0 32px rgba(0,0,0,.5)}
@@ -425,105 +313,46 @@ button{cursor:pointer}
   .topbar-btn-primary span:last-child{display:none}
 }
 @media(max-width:600px){
-  /* TOPBAR */
   .topbar{padding:0 10px;height:52px}
   .topbar-title{font-size:.92rem;font-weight:800}
   .topbar-actions{gap:5px}
   .topbar-btn{padding:7px 10px;font-size:.75rem;border-radius:7px}
   .topbar-btn-ghost{display:none}
-
-  /* CONTENT */
   .content{padding:10px 10px 80px}
-
-  /* TRIP HEADER */
   .trip-header-card{padding:12px;gap:10px}
   .trip-thumb{width:48px;height:48px;font-size:1.3rem;border-radius:10px;flex-shrink:0}
   .trip-info{flex:1;min-width:0}
   .trip-name{font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .trip-meta{flex-wrap:wrap;gap:4px}
   .trip-meta-item{font-size:.68rem}
-  .trip-stats{flex-direction:row;gap:8px;margin-top:8px}
-  .trip-stat{flex:1;padding:8px;border-radius:7px}
-  .trip-total-lbl{font-size:.62rem}
-  .trip-total-val{font-size:1.3rem}
-
-  /* KPIs */
   .kpi-row{grid-template-columns:1fr 1fr;gap:8px}
   .kpi-card{padding:10px;gap:8px;border-radius:9px}
   .kpi-icon{width:32px;height:32px;font-size:.85rem;border-radius:7px}
   .kpi-value{font-size:1.1rem}
   .kpi-label{font-size:.62rem}
   .kpi-sub{font-size:.6rem}
-
-  /* SECTIONS */
   .section-card{border-radius:10px}
   .section-head{padding:10px 12px}
   .section-title{font-size:.82rem}
   .section-body{padding:10px 12px}
   .grid-main{gap:10px}
-
-  /* EXPENSES TABLE */
   .exp-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
   .exp-table{min-width:500px;font-size:.75rem}
   .exp-table th{font-size:.62rem;padding:6px 8px}
   .exp-table td{padding:7px 8px}
-
-  /* FORM */
   .form-row{grid-template-columns:1fr;gap:8px}
-  .f-lbl{font-size:.75rem}
-  .f-inp,.f-sel,.f-ta{font-size:.85rem;padding:10px 11px}
-
-  /* MODAL — يفتح من الأسفل */
   .modal-ov{align-items:flex-end;padding:0}
   .modal-box{max-height:92vh;border-radius:18px 18px 0 0;margin:0;width:100%;max-width:100%}
   .modal-head{padding:14px 16px}
   .modal-body{padding:14px 16px}
-  .cat-pills{gap:5px}
-  .cat-pill{padding:5px 10px;font-size:.72rem}
-
-  /* MEMBERS */
-  .member-row{padding:9px 10px;gap:8px}
-  .member-av{width:34px;height:34px;font-size:.8rem}
-  .member-name{font-size:.82rem}
-  .member-role-badge{font-size:.62rem;padding:2px 7px}
-
-  /* SETTLE */
   .settle-item{padding:9px 10px;gap:7px;flex-wrap:wrap}
-  .settle-amount{font-size:.85rem}
-  .settle-wa-btn{padding:4px 9px;font-size:.68rem}
-
-  /* SHARE */
-  .share-link-box{flex-direction:column;gap:8px}
-  .share-link-txt{font-size:.72rem;word-break:break-all}
-  .share-copy-btn{width:100%;justify-content:center}
-  .share-member-row{padding:8px 10px;gap:8px}
-
-  /* SETTINGS / THEME */
   .theme-grid{grid-template-columns:1fr 1fr}
-  .tp-name{font-size:.7rem}
-  .tp-desc{font-size:.6rem}
-
-  /* TRIP SELECTOR */
-  .trip-selector-item{padding:9px 11px}
-
-  /* EMPTY STATE */
   .empty-state{padding:40px 20px}
   .empty-icon{font-size:3rem}
   .empty-title{font-size:1.1rem}
   .empty-sub{font-size:.82rem}
   .empty-btn{padding:11px 22px;font-size:.88rem}
-
-  /* FAB — زر إضافة عائم في أسفل الشاشة */
-  .fab-add{
-    display:flex;
-    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-    background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);
-    padding:13px 28px;border-radius:100px;
-    font-size:.9rem;font-weight:900;
-    box-shadow:0 4px 20px rgba(245,158,11,.2);
-    z-index:90;border:none;font-family:'Cairo',sans-serif;
-    align-items:center;gap:6px;white-space:nowrap;
-  }
+  .fab-add{display:flex;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);padding:13px 28px;border-radius:100px;font-size:.9rem;font-weight:900;box-shadow:0 4px 20px rgba(245,158,11,.2);z-index:90;font-family:'Cairo',sans-serif;align-items:center;gap:6px;white-space:nowrap}
 }
 @media(max-width:400px){
   .kpi-row{grid-template-columns:1fr 1fr}
@@ -572,7 +401,6 @@ button{cursor:pointer}
 
 <div class="layout">
 
-<!-- ════ SIDEBAR ════ -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <div class="logo-icon">✈</div>
@@ -581,8 +409,6 @@ button{cursor:pointer}
       <div class="logo-sub">إدارة مصاريف السفر</div>
     </div>
   </div>
-
-  <!-- Trip Badge — يتعبأ من Supabase -->
   <div class="sidebar-trip" id="sidebarTripBadge" onclick="showPage('dashboard')">
     <div class="sidebar-trip-name" id="sidebarTripName">
       <span class="skel" style="width:140px;height:14px;display:inline-block"></span>
@@ -591,7 +417,6 @@ button{cursor:pointer}
       <span class="skel" style="width:100px;height:10px;display:inline-block;margin-top:4px"></span>
     </div>
   </div>
-
   <nav class="sidebar-nav">
     <div class="nav-section-label">الرئيسية</div>
     <div class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard')"><span class="nav-icon">🏠</span> لوحة الرحلة</div>
@@ -607,7 +432,6 @@ button{cursor:pointer}
     <div class="nav-item" id="nav-share" onclick="showPage('share')"><span class="nav-icon">🔗</span> مشاركة الرحلة</div>
     <div class="nav-item" id="nav-settings" onclick="showPage('settings')"><span class="nav-icon">⚙</span> الإعدادات</div>
   </nav>
-
   <div class="sidebar-footer">
     <div class="sidebar-user" onclick="confirmSignOut()">
       <div class="user-av" id="userAv">؟</div>
@@ -620,7 +444,6 @@ button{cursor:pointer}
   </div>
 </aside>
 
-<!-- ════ MAIN ════ -->
 <main class="main">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px">
@@ -640,12 +463,8 @@ button{cursor:pointer}
 
   <div class="content">
 
-    <!-- PAGE: DASHBOARD -->
-    <div class="page-section active" id="page-dashboard">
-      <!-- يُملأ ديناميكياً من JS -->
-    </div>
+    <div class="page-section active" id="page-dashboard"></div>
 
-    <!-- PAGE: EXPENSES -->
     <div class="page-section" id="page-expenses">
       <div class="section-card">
         <div class="section-head">
@@ -667,7 +486,6 @@ button{cursor:pointer}
       </div>
     </div>
 
-    <!-- PAGE: SUMMARY -->
     <div class="page-section" id="page-summary">
       <div class="section-card">
         <div class="section-head"><div class="section-title">📊 الملخص المالي التفصيلي</div></div>
@@ -678,7 +496,6 @@ button{cursor:pointer}
       </div>
     </div>
 
-    <!-- PAGE: SETTLE -->
     <div class="page-section" id="page-settle">
       <div class="section-card">
         <div class="section-head"><div class="section-title">🧮 تصفية الحساب</div><div style="font-size:.72rem;color:var(--cyan)">أقل عدد تحويلات ممكنة</div></div>
@@ -686,7 +503,6 @@ button{cursor:pointer}
       </div>
     </div>
 
-    <!-- PAGE: MEMBERS -->
     <div class="page-section" id="page-members">
       <div class="section-card">
         <div class="section-head"><div class="section-title">👥 الأعضاء والأدوار</div><button class="section-action" onclick="openAddMemberModal()">+ إضافة عضو</button></div>
@@ -694,7 +510,6 @@ button{cursor:pointer}
       </div>
     </div>
 
-    <!-- PAGE: SHARE -->
     <div class="page-section" id="page-share">
       <div class="grid-main">
         <div class="section-card">
@@ -718,7 +533,6 @@ button{cursor:pointer}
       </div>
     </div>
 
-    <!-- PAGE: REPORT -->
     <div class="page-section" id="page-report">
       <div class="section-card">
         <div class="section-head"><div class="section-title">📄 تقرير الرحلة</div></div>
@@ -731,9 +545,7 @@ button{cursor:pointer}
       </div>
     </div>
 
-    <!-- PAGE: SETTINGS -->
     <div class="page-section" id="page-settings">
-      <!-- إعدادات الرحلة -->
       <div class="section-card" style="margin-bottom:14px">
         <div class="section-head"><div class="section-title">⚙ إعدادات الرحلة</div></div>
         <div class="section-body">
@@ -746,8 +558,6 @@ button{cursor:pointer}
           <button onclick="saveSettings()" style="padding:11px 24px;border-radius:var(--rsm);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-size:.88rem;font-weight:900;cursor:pointer">حفظ التغييرات</button>
         </div>
       </div>
-
-      <!-- اختيار الثيم -->
       <div class="section-card">
         <div class="section-head">
           <div class="section-title">🎨 ثيم الصفحة</div>
@@ -755,87 +565,48 @@ button{cursor:pointer}
         </div>
         <div class="section-body">
           <div style="font-size:.8rem;color:var(--w60);margin-bottom:4px">اختر اللون الذي يعجبك — يتغير كل شيء فوراً</div>
-
           <div class="theme-cat">🔵 رجالية — قوية وعميقة</div>
           <div class="theme-grid">
             <div class="theme-opt selected" id="th-navy" onclick="setTheme('navy')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#060e2e,#0d1f4e)">
-                <div class="tp-sidebar" style="background:#050c24"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#2563eb"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(135deg,#060e2e,#0d1f4e)"><div class="tp-sidebar" style="background:#050c24"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#2563eb"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Navy Classic</div><div class="tp-desc">الأزرق الداكن — أنيق ومحترف ⭐</div></div>
             </div>
             <div class="theme-opt" id="th-midnight" onclick="setTheme('midnight')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#0a0f1e,#111827)">
-                <div class="tp-sidebar" style="background:#060810"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#38bdf8"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(135deg,#0a0f1e,#111827)"><div class="tp-sidebar" style="background:#060810"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#38bdf8"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Midnight Steel</div><div class="tp-desc">أسود فولاذي + سماوي 🌙</div></div>
             </div>
             <div class="theme-opt" id="th-ocean" onclick="setTheme('ocean')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#042f4b,#0c4a6e)">
-                <div class="tp-sidebar" style="background:#021d2e"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#0ea5e9"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(135deg,#042f4b,#0c4a6e)"><div class="tp-sidebar" style="background:#021d2e"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#0ea5e9"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Deep Ocean</div><div class="tp-desc">أزرق المحيط العميق 🌊</div></div>
             </div>
           </div>
-
           <div class="theme-cat">🌸 أنثوية — ناعمة وراقية</div>
           <div class="theme-grid">
             <div class="theme-opt" id="th-rose" onclick="setTheme('rose')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#1e0a14,#3b0f20)">
-                <div class="tp-sidebar" style="background:#12060c"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#f43f5e"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(135deg,#1e0a14,#3b0f20)"><div class="tp-sidebar" style="background:#12060c"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#f43f5e"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Rose Dusk</div><div class="tp-desc">وردي غامق + أحمر دافئ 🌹</div></div>
             </div>
             <div class="theme-opt" id="th-lavender" onclick="setTheme('lavender')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e)">
-                <div class="tp-sidebar" style="background:#10061c"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#a78bfa"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e)"><div class="tp-sidebar" style="background:#10061c"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#a78bfa"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Lavender Night</div><div class="tp-desc">بنفسجي عميق + ذهبي 💜</div></div>
             </div>
             <div class="theme-opt" id="th-blush" onclick="setTheme('blush')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#1c0f0a,#2e1a10)">
-                <div class="tp-sidebar" style="background:#110905"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#f59e0b"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(135deg,#1c0f0a,#2e1a10)"><div class="tp-sidebar" style="background:#110905"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#f59e0b"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Blush Gold</div><div class="tp-desc">بني دافئ + ذهبي ✨</div></div>
             </div>
           </div>
-
           <div class="theme-cat">🌍 الطبيعة والسفر</div>
           <div class="theme-grid">
             <div class="theme-opt" id="th-sky" onclick="setTheme('sky')">
-              <div class="theme-preview" style="background:linear-gradient(180deg,#0c1f3f,#2a5a8c)">
-                <div class="tp-sidebar" style="background:#081428"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#60a5fa"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(180deg,#0c1f3f,#2a5a8c)"><div class="tp-sidebar" style="background:#081428"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#60a5fa"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Sky Horizon</div><div class="tp-desc">تدرج السماء من الليل للفجر ☁️</div></div>
             </div>
             <div class="theme-opt" id="th-desert" onclick="setTheme('desert')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#1a0e00,#2e1c00)">
-                <div class="tp-sidebar" style="background:#0f0800"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#d97706"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(135deg,#1a0e00,#2e1c00)"><div class="tp-sidebar" style="background:#0f0800"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#d97706"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Desert Gold</div><div class="tp-desc">ذهب الصحراء — خليجي أصيل 🏜</div></div>
             </div>
             <div class="theme-opt" id="th-forest" onclick="setTheme('forest')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#062010,#0d3520)">
-                <div class="tp-sidebar" style="background:#031408"></div>
-                <div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#10b981"></div></div>
-                <div class="tp-check">✓</div>
-              </div>
+              <div class="theme-preview" style="background:linear-gradient(135deg,#062010,#0d3520)"><div class="tp-sidebar" style="background:#031408"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#10b981"></div></div><div class="tp-check">✓</div></div>
               <div class="tp-info"><div class="tp-name">Alpine Forest</div><div class="tp-desc">أخضر الجبال والغابات 🏔</div></div>
             </div>
           </div>
@@ -843,7 +614,6 @@ button{cursor:pointer}
       </div>
     </div>
 
-    <!-- PAGE: RECEIPTS -->
     <div class="page-section" id="page-receipts">
       <div class="section-card">
         <div class="section-head"><div class="section-title">📸 الإيصالات</div></div>
@@ -854,9 +624,9 @@ button{cursor:pointer}
       </div>
     </div>
 
-  </div><!-- /content -->
+  </div>
 </main>
-</div><!-- /layout -->
+</div>
 
 <!-- ADD EXPENSE MODAL -->
 <div class="modal-ov" id="addExpModal">
@@ -920,133 +690,176 @@ button{cursor:pointer}
   </div>
 </div>
 
-<!-- FAB — زر عائم للموبايل -->
 <button class="fab-add" id="fabAdd" onclick="openAddExpModal()">+ إضافة مصروف</button>
-
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 /* ═══════════════════════════════════
-   GLOBALS
+   GLOBALS — معرّفة مرة واحدة فقط
 ═══════════════════════════════════ */
-const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
-const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
+const SURL = 'https://pokpdwvqecwjfxoraqjd.supabase.co';
+const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
+const EDGE_URL = 'https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-checkout';
+
 let sb;
+let currentUser = null;
+let currentTrip = null;
+let members = [];
+let expenses = [];
+let activities = [];
+let mDistMode = 'all';
+let editingExpId = null;
+let selectedCat = 'فندق';
+let isEn = localStorage.getItem('rehla_lang') === 'en';
 
-const COLORS=['#3b63d4','#7c3aed','#0891b2','#be185d','#b45309','#16a34a','#ea580c','#0d9488'];
-const CAT_STYLES={
-  'فندق':{icon:'🏨',bg:'rgba(88,166,255,.15)',color:'#60a5fa'},
-  'طيران':{icon:'✈',bg:'rgba(167,139,250,.15)',color:'#a78bfa'},
-  'مطاعم':{icon:'🍽',bg:'rgba(251,146,60,.15)',color:'#fb923c'},
+const COLORS = ['#3b63d4','#7c3aed','#0891b2','#be185d','#b45309','#16a34a','#ea580c','#0d9488'];
+const CAT_STYLES = {
+  'فندق':    {icon:'🏨',bg:'rgba(88,166,255,.15)',color:'#60a5fa'},
+  'طيران':   {icon:'✈',bg:'rgba(167,139,250,.15)',color:'#a78bfa'},
+  'مطاعم':  {icon:'🍽',bg:'rgba(251,146,60,.15)',color:'#fb923c'},
   'مواصلات':{icon:'🚗',bg:'rgba(56,189,248,.15)',color:'#38bdf8'},
-  'ترفيه':{icon:'🎡',bg:'rgba(244,114,182,.15)',color:'#f472b6'},
+  'ترفيه':   {icon:'🎡',bg:'rgba(244,114,182,.15)',color:'#f472b6'},
   'مشتريات':{icon:'🛍',bg:'rgba(45,212,191,.15)',color:'#2dd4bf'},
-  'أخرى':{icon:'📦',bg:'rgba(148,163,184,.15)',color:'#94a3b8'},
+  'أخرى':   {icon:'📦',bg:'rgba(148,163,184,.15)',color:'#94a3b8'},
 };
-const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
-const toAr=n=>String(Math.round(n)).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
-const fmt=n=>Number(n).toLocaleString('ar-AE',{minimumFractionDigits:0,maximumFractionDigits:2});
+const AN = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+const toAr = n => String(Math.round(n)).split('').map(d => !isNaN(+d) ? AN[+d] : d).join('');
+const fmt  = n => Number(n).toLocaleString('ar-AE',{minimumFractionDigits:0,maximumFractionDigits:2});
 
-let currentUser=null;
-let currentTrip=null;
-let members=[];
-let expenses=[];
-let activities=[];
-let mDistMode='all';
-let editingExpId=null;
-let selectedCat='فندق';
+const PAGE_TITLES    = {dashboard:'لوحة الرحلة',expenses:'المصاريف',summary:'الملخص المالي',settle:'تصفية الحساب',report:'التقرير',members:'الأعضاء والأدوار',share:'مشاركة الرحلة',settings:'الإعدادات',receipts:'الإيصالات'};
+const PAGE_TITLES_EN = {dashboard:'Dashboard',expenses:'Expenses',summary:'Financial Summary',settle:'Settlement',report:'Report',members:'Members & Roles',share:'Share Trip',settings:'Settings',receipts:'Receipts'};
 
-/* انتظر تحميل المكتبة بشكل موثوق */
-/* ════ THEME SYSTEM ════ */
-function setTheme(theme){
-  document.documentElement.setAttribute('data-theme',theme);
-  localStorage.setItem('rehla_theme',theme);
-  document.querySelectorAll('.theme-opt').forEach(el=>el.classList.remove('selected'));
-  const sel=document.getElementById('th-'+theme);
-  if(sel)sel.classList.add('selected');
-  toast('✓ تم تغيير الثيم','ok');
+/* ═══════════════════════════════════
+   THEME
+═══════════════════════════════════ */
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('rehla_theme', theme);
+  document.querySelectorAll('.theme-opt').forEach(el => el.classList.remove('selected'));
+  const sel = document.getElementById('th-' + theme);
+  if (sel) sel.classList.add('selected');
+  toast('✓ تم تغيير الثيم', 'ok');
 }
 
-function applyThemeOnLoad(){
-  const saved=localStorage.getItem('rehla_theme')||'navy';
-  document.documentElement.setAttribute('data-theme',saved);
-  // تأكد أن navy هو الافتراضي دائماً إذا لم يكن محفوظ
-  if(!localStorage.getItem('rehla_theme')){
-    localStorage.setItem('rehla_theme','navy');
-  }
-}
-function saveSettings(){
-  toast(t('تم حفظ الإعدادات ✓'),'ok');
+function applyThemeOnLoad() {
+  const saved = localStorage.getItem('rehla_theme') || 'navy';
+  document.documentElement.setAttribute('data-theme', saved);
+  if (!localStorage.getItem('rehla_theme')) localStorage.setItem('rehla_theme', 'navy');
 }
 
-function waitForSupabase(n){
-  if(n>50){
-    document.getElementById('fsLoader').innerHTML=
+/* ═══════════════════════════════════
+   BOOT — انتظار مكتبة Supabase
+═══════════════════════════════════ */
+function waitForSupabase(n) {
+  if (n > 50) {
+    document.getElementById('fsLoader').innerHTML =
       '<div style="color:#f87171;font-size:.88rem;text-align:center;padding:20px">❌ تعذر تحميل المكتبة<br><small style="color:rgba(255,255,255,.4);font-size:.75rem">تحقق من الاتصال بالإنترنت</small></div>';
     return;
   }
-  if(window.supabase&&window.supabase.createClient){
+  if (window.supabase && window.supabase.createClient) {
     initApp();
   } else {
-    setTimeout(()=>waitForSupabase(n+1),100);
+    setTimeout(() => waitForSupabase(n + 1), 100);
   }
 }
-document.addEventListener('DOMContentLoaded',()=>{
+
+document.addEventListener('DOMContentLoaded', () => {
   applyThemeOnLoad();
   waitForSupabase(0);
 });
 
-async function initApp(){
-  sb=window.supabase.createClient(SURL,SKEY);
-
-  // تطبيق اللغة
+/* ═══════════════════════════════════
+   INIT — الإصلاح الرئيسي هنا
+   1. checkPaymentReturn مرة واحدة فقط
+   2. إذا paid=false لا يفتح الداشبورد قبل التحقق من is_paid
+═══════════════════════════════════ */
+async function initApp() {
+  sb = window.supabase.createClient(SURL, SKEY);
   applyDashLang();
+
   // AUTH CHECK
-  const {data:{session}}=await sb.auth.getSession();
-  if(!session){
-    location.href='rehla-auth.html';
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) {
+    location.href = 'rehla-auth.html';
     return;
   }
-  currentUser=session.user;
-  const name=currentUser.user_metadata?.full_name||currentUser.email?.split('@')[0]||'المستخدم';
-  document.getElementById('userName').textContent=name;
-  document.getElementById('userAv').textContent=name.charAt(0).toUpperCase();
 
-  checkPaymentReturn();
+  currentUser = session.user;
+  const name = currentUser.user_metadata?.full_name || currentUser.email?.split('@')[0] || 'المستخدم';
+  document.getElementById('userName').textContent = name;
+  document.getElementById('userAv').textContent = name.charAt(0).toUpperCase();
+
+  // ← FIX: استدعاء واحد فقط، مع await
   await checkPaymentReturn();
+
+  // ← FIX: loadUserTrips دائماً تتحقق من is_paid من قاعدة البيانات
   await loadUserTrips();
+
   hideLoader();
-  // تطبيق الثيم المحفوظ على الأزرار
-  const savedTheme=localStorage.getItem('rehla_theme')||'navy';
-  document.querySelectorAll('.theme-opt').forEach(el=>el.classList.remove('selected'));
-  const thEl=document.getElementById('th-'+savedTheme);
-  if(thEl)thEl.classList.add('selected');
+
+  // تطبيق الثيم على أزرار الاختيار
+  const savedTheme = localStorage.getItem('rehla_theme') || 'navy';
+  document.querySelectorAll('.theme-opt').forEach(el => el.classList.remove('selected'));
+  const thEl = document.getElementById('th-' + savedTheme);
+  if (thEl) thEl.classList.add('selected');
 }
 
-function hideLoader(){
+function hideLoader() {
   document.getElementById('fsLoader').classList.add('hidden');
 }
 
 /* ═══════════════════════════════════
-   LOAD TRIPS FROM SUPABASE
+   PAYMENT RETURN — الإصلاح الثاني
+   لا يعتمد على URL لفتح الداشبورد
+   فقط يحدّث is_paid في قاعدة البيانات
 ═══════════════════════════════════ */
-async function loadUserTrips(){
-  const {data:trips,error}=await sb.from('trips')
-    .select('*')
-    .eq('owner_id',currentUser.id)
-    .order('created_at',{ascending:false});
+async function checkPaymentReturn() {
+  const params = new URLSearchParams(window.location.search);
+  const paid = params.get('paid');
 
-  if(error||!trips||trips.length===0){
+  // نظّف الـ URL فوراً بغض النظر عن النتيجة
+  if (paid !== null) {
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+
+  if (paid === 'true') {
+    const tripId = params.get('trip') || sessionStorage.getItem('pending_payment_trip');
+    if (tripId) {
+      // تحديث is_paid في Supabase — الداشبورد سيقرأه من DB لاحقاً
+      const { error } = await sb.from('trips').update({ is_paid: true }).eq('id', tripId);
+      if (!error) {
+        sessionStorage.removeItem('pending_payment_trip');
+        toast('🎉 تم الدفع بنجاح! رحلتك مفعّلة', 'ok');
+      }
+    }
+  } else if (paid === 'false') {
+    // ← FIX: إلغاء الدفع = لا نفعل شيئاً — loadUserTrips ستقرأ is_paid من DB
+    // لا نفتح الداشبورد تلقائياً — إذا is_paid=false سيظهر PayGate
+    toast('تم إلغاء الدفع — يمكنك الدفع في أي وقت', 'info');
+    sessionStorage.removeItem('pending_payment_trip');
+  }
+}
+
+/* ═══════════════════════════════════
+   LOAD TRIPS
+═══════════════════════════════════ */
+async function loadUserTrips() {
+  const { data: trips, error } = await sb.from('trips')
+    .select('*')
+    .eq('owner_id', currentUser.id)
+    .order('created_at', { ascending: false });
+
+  if (error || !trips || trips.length === 0) {
     showEmptyState();
     updateSidebarEmpty();
     return;
   }
 
-  currentTrip=trips[0];
+  currentTrip = trips[0];
 
-  // ════ PAYMENT GATE ════
-  if(!currentTrip.is_paid){
+  // ← PAYMENT GATE: يقرأ is_paid من قاعدة البيانات — ليس من الـ URL
+  if (!currentTrip.is_paid) {
     showPayGate();
     return;
   }
@@ -1055,101 +868,127 @@ async function loadUserTrips(){
   await loadTripData(currentTrip.id);
 }
 
-function showPayGate(){
-  document.getElementById('payGate').style.display='flex';
+function showPayGate() {
+  document.getElementById('payGate').style.display = 'flex';
   document.getElementById('fsLoader').classList.add('hidden');
 }
 
-function hidePayGate(){
-  document.getElementById('payGate').style.display='none';
+function hidePayGate() {
+  document.getElementById('payGate').style.display = 'none';
 }
 
-const EDGE_URL='https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-checkout';
-
-async function payNow(){
-  if(!currentTrip||!currentUser)return;
-  const btn=document.getElementById('btnPayGate');
-  btn.classList.add('loading');btn.disabled=true;
-  try{
-    const {data:{session:authSession}}=await sb.auth.getSession();
-    const res=await fetch(EDGE_URL,{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'Authorization':'Bearer '+authSession.access_token,
-        'apikey':SKEY,
+/* ═══════════════════════════════════
+   PAY NOW — من Payment Gate
+═══════════════════════════════════ */
+async function payNow() {
+  if (!currentTrip || !currentUser) return;
+  const btn = document.getElementById('btnPayGate');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  try {
+    const { data: { session: authSession } } = await sb.auth.getSession();
+    const res = await fetch(EDGE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + authSession.access_token,
+        'apikey': SKEY,
       },
-      body:JSON.stringify({
-        trip_id:currentTrip.id,
-        user_id:currentUser.id,
-        trip_name:currentTrip.name,
+      body: JSON.stringify({
+        trip_id: currentTrip.id,
+        user_id: currentUser.id,
+        trip_name: currentTrip.name,
       })
     });
-    const data=await res.json();
-    if(data.error)throw new Error(data.error);
-    if(data.url){
-      sessionStorage.setItem('pending_payment_trip',currentTrip.id);
-      window.location.href=data.url;
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    if (data.url) {
+      sessionStorage.setItem('pending_payment_trip', currentTrip.id);
+      window.location.href = data.url;
     }
-  }catch(err){
-    toast('❌ '+err.message,'err');
-    btn.classList.remove('loading');btn.disabled=false;
+  } catch (err) {
+    toast('❌ ' + err.message, 'err');
+    btn.classList.remove('loading');
+    btn.disabled = false;
   }
 }
 
-async function checkPaymentReturn(){
-  const params=new URLSearchParams(window.location.search);
-  if(params.get('paid')==='true'){
-    const tripId=params.get('trip')||sessionStorage.getItem('pending_payment_trip');
-    if(tripId){
-      await sb.from('trips').update({is_paid:true}).eq('id',tripId);
-      sessionStorage.removeItem('pending_payment_trip');
-      toast('🎉 تم الدفع بنجاح! رحلتك مفعّلة','ok');
-      window.history.replaceState({},'',window.location.pathname);
+/* ═══════════════════════════════════
+   START PAYMENT — من داخل الداشبورد
+═══════════════════════════════════ */
+async function startPayment() {
+  if (!currentTrip || !currentUser) { toast('خطأ في البيانات', 'err'); return; }
+  const btn = document.getElementById('btnPayNow');
+  if (btn) { btn.classList.add('loading'); btn.disabled = true; }
+  toast('جاري الاتصال بـ Stripe...', 'info');
+  try {
+    const { data: { session: authSession } } = await sb.auth.getSession();
+    const res = await fetch(EDGE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + authSession.access_token,
+        'apikey': SKEY,
+      },
+      body: JSON.stringify({
+        trip_id: currentTrip.id,
+        user_id: currentUser.id,
+        trip_name: currentTrip.name,
+      })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    if (data.url) {
+      sessionStorage.setItem('pending_payment_trip', currentTrip.id);
+      window.location.href = data.url;
     }
-  }else if(params.get('paid')==='false'){
-    toast('تم إلغاء الدفع — يمكنك الدفع في أي وقت','info');
-    window.history.replaceState({},'',window.location.pathname);
+  } catch (err) {
+    toast('❌ ' + err.message, 'err');
+    if (btn) { btn.classList.remove('loading'); btn.disabled = false; }
   }
 }
 
-function updateSidebarTrip(trip){
-  document.getElementById('sidebarTripName').innerHTML=
+/* ═══════════════════════════════════
+   SIDEBAR HELPERS
+═══════════════════════════════════ */
+function updateSidebarTrip(trip) {
+  document.getElementById('sidebarTripName').innerHTML =
     `✈ ${trip.name} <span style="color:rgba(245,158,11,.7);font-size:.7rem">▾</span>`;
-  document.getElementById('sidebarTripMeta').textContent=
-    `${trip.start_date||'—'} — ${trip.end_date||'—'} · ${trip.currency||'AED'}`;
+  document.getElementById('sidebarTripMeta').textContent =
+    `${trip.start_date || '—'} — ${trip.end_date || '—'} · ${trip.currency || 'AED'}`;
 }
 
-function updateSidebarEmpty(){
-  document.getElementById('sidebarTripName').textContent='لا توجد رحلات';
-  document.getElementById('sidebarTripMeta').textContent='أنشئ رحلتك الأولى';
+function updateSidebarEmpty() {
+  document.getElementById('sidebarTripName').textContent = 'لا توجد رحلات';
+  document.getElementById('sidebarTripMeta').textContent = 'أنشئ رحلتك الأولى';
 }
 
-async function loadTripData(tripId){
-  // Load members
-  const {data:mems}=await sb.from('trip_members')
-    .select('*').eq('trip_id',tripId).order('created_at');
-  members=(mems||[]).map((m,i)=>({
+/* ═══════════════════════════════════
+   LOAD TRIP DATA
+═══════════════════════════════════ */
+async function loadTripData(tripId) {
+  const { data: mems } = await sb.from('trip_members')
+    .select('*').eq('trip_id', tripId).order('created_at');
+  members = (mems || []).map((m, i) => ({
     ...m,
-    color:COLORS[i%COLORS.length],
-    roleIcon:m.role_icon||'👤',
-    roleColor:m.role_color||'#94a3b8',
-    role:m.role||'مرافق',
+    color: COLORS[i % COLORS.length],
+    roleIcon: m.role_icon || '👤',
+    roleColor: m.role_color || '#94a3b8',
+    role: m.role || 'مرافق',
   }));
 
-  // Load expenses
-  const {data:exps}=await sb.from('expenses')
-    .select('*').eq('trip_id',tripId).order('created_at',{ascending:false});
-  expenses=(exps||[]).map(e=>({
-    id:e.id,
-    title:e.title,
-    amount:Number(e.amount),
-    paidBy:e.paid_by,
-    cat:e.category||'أخرى',
-    date:e.expense_date||'',
-    note:e.note||'',
-    distAll:e.dist_all!==false,
-    participants:[],
+  const { data: exps } = await sb.from('expenses')
+    .select('*').eq('trip_id', tripId).order('created_at', { ascending: false });
+  expenses = (exps || []).map(e => ({
+    id: e.id,
+    title: e.title,
+    amount: Number(e.amount),
+    paidBy: e.paid_by,
+    cat: e.category || 'أخرى',
+    date: e.expense_date || '',
+    note: e.note || '',
+    distAll: e.dist_all !== false,
+    participants: [],
   }));
 
   buildDashboard();
@@ -1157,10 +996,10 @@ async function loadTripData(tripId){
 }
 
 /* ═══════════════════════════════════
-   EMPTY STATE — لا توجد رحلات
+   EMPTY STATE
 ═══════════════════════════════════ */
-function showEmptyState(){
-  document.getElementById('page-dashboard').innerHTML=`
+function showEmptyState() {
+  document.getElementById('page-dashboard').innerHTML = `
     <div class="empty-state">
       <div class="empty-icon">✈️</div>
       <div class="empty-title">${t('لا توجد رحلات بعد!')}</div>
@@ -1173,57 +1012,40 @@ function showEmptyState(){
 }
 
 /* ═══════════════════════════════════
-   BUILD DASHBOARD HTML DYNAMICALLY
+   BUILD DASHBOARD
 ═══════════════════════════════════ */
-function buildDashboard(){
-  if(!currentTrip)return;
-  document.getElementById('page-dashboard').innerHTML=`
-    <!-- Payment Banner — يظهر فقط إذا الرحلة غير مدفوعة -->
-    ${!currentTrip.is_paid ? `
-    <div class="pay-banner">
-      <div class="pay-banner-icon">💳</div>
-      <div class="pay-banner-info">
-        <div class="pay-banner-title">فعّل رحلتك الآن</div>
-        <div class="pay-banner-sub">ادفع ٢٤٩ درهم مرة واحدة وافتح جميع المزايا — تصفية الحساب، PDF، واتساب، وأكثر.</div>
-      </div>
-      <button class="btn-pay-now" id="btnPayNow" onclick="startPayment()">
-        <div class="pay-spin"></div>
-        <span class="pay-txt">🚀 ادفع الآن — ٢٤٩ درهم</span>
-      </button>
-    </div>` : ''}
-
-    <!-- Trip Header -->
+function buildDashboard() {
+  if (!currentTrip) return;
+  document.getElementById('page-dashboard').innerHTML = `
     <div class="trip-header-card">
       <div class="trip-thumb" id="tripThumb">${getDestEmoji(currentTrip.destination)}</div>
       <div class="trip-info">
         <div class="trip-name-row">
-          <span class="trip-name" id="tripName">${currentTrip.name||'رحلتي'}</span>
+          <span class="trip-name" id="tripName">${currentTrip.name || 'رحلتي'}</span>
           <button class="trip-edit-btn" onclick="showPage('settings')" title="تعديل">✏</button>
           <span style="padding:2px 8px;border-radius:100px;background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.25);font-size:.65rem;font-weight:800">● نشطة</span>
         </div>
         <div class="trip-meta-row">
-          <div class="trip-meta-item">📍 <strong>${currentTrip.destination||'—'}</strong></div>
-          <div class="trip-meta-item">📅 <strong>${currentTrip.start_date||'—'} — ${currentTrip.end_date||'—'}</strong></div>
-          <div class="trip-meta-item">💱 <strong>${currentTrip.currency||'AED'}</strong></div>
+          <div class="trip-meta-item">📍 <strong>${currentTrip.destination || '—'}</strong></div>
+          <div class="trip-meta-item">📅 <strong>${currentTrip.start_date || '—'} — ${currentTrip.end_date || '—'}</strong></div>
+          <div class="trip-meta-item">💱 <strong>${currentTrip.currency || 'AED'}</strong></div>
           <div class="trip-meta-item" id="memberCount">👥 <strong>${members.length} أعضاء</strong></div>
         </div>
       </div>
       <div class="trip-stat">
         <div class="trip-total-lbl">إجمالي المصاريف</div>
         <div class="trip-total-val" style="color:var(--yellow)" id="headerTotal">٠</div>
-        <div class="trip-total-sub">${currentTrip.currency||'AED'} · آخر تحديث: الآن</div>
+        <div class="trip-total-sub">${currentTrip.currency || 'AED'} · آخر تحديث: الآن</div>
       </div>
     </div>
 
-    <!-- KPIs -->
     <div class="kpi-row">
-      <div class="kpi-card"><div class="kpi-icon" style="background:var(--cyan-dim);color:var(--cyan)">💳</div><div><div class="kpi-label">${t('إجمالي المصاريف')}</div><div class="kpi-value" style="color:var(--yellow)" id="kpiTotal">٠</div><div class="kpi-sub" id="kpiTotalSub">${currentTrip?.currency||'AED'} · ٠</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon" style="background:var(--cyan-dim);color:var(--cyan)">💳</div><div><div class="kpi-label">${t('إجمالي المصاريف')}</div><div class="kpi-value" style="color:var(--yellow)" id="kpiTotal">٠</div><div class="kpi-sub" id="kpiTotalSub">${currentTrip?.currency || 'AED'} · ٠</div></div></div>
       <div class="kpi-card"><div class="kpi-icon" style="background:var(--purple-dim);color:var(--purple)">👤</div><div><div class="kpi-label">${t('نصيب كل شخص')}</div><div class="kpi-value" style="color:var(--purple)" id="kpiPer">٠</div><div class="kpi-sub">${t('درهم تقريباً')}</div></div></div>
       <div class="kpi-card"><div class="kpi-icon" style="background:var(--green-dim);color:var(--green)">✅</div><div><div class="kpi-label">${t('الأكثر دفعاً')}</div><div class="kpi-value" style="color:var(--green);font-size:1rem" id="kpiTop">—</div><div class="kpi-sub" id="kpiTopAmt">٠</div></div></div>
       <div class="kpi-card"><div class="kpi-icon" style="background:var(--orange-dim);color:var(--orange)">👥</div><div><div class="kpi-label">${t('عدد الأعضاء')}</div><div class="kpi-value" style="color:var(--orange)" id="kpiMembers">${toAr(members.length)}</div><div class="kpi-sub">${t('مشارك في الرحلة')}</div></div></div>
     </div>
 
-    <!-- Grid: Members + Quick Add -->
     <div class="grid-main">
       <div class="section-card">
         <div class="section-head"><div class="section-title">👥 الأعضاء</div><div class="section-action" onclick="openAddMemberModal()">+ إضافة</div></div>
@@ -1254,7 +1076,6 @@ function buildDashboard(){
       </div>
     </div>
 
-    <!-- Expenses Table -->
     <div class="grid-main">
       <div class="section-card" style="grid-column:1/-1">
         <div class="section-head"><div class="section-title">💳 قائمة المصاريف</div><div style="display:flex;gap:7px"><div class="section-action" onclick="showPage('expenses')">عرض الكل</div><div class="section-action" onclick="openAddExpModal()">+ مصروف</div></div></div>
@@ -1265,7 +1086,6 @@ function buildDashboard(){
       </div>
     </div>
 
-    <!-- Summary + Donut -->
     <div class="grid-main">
       <div class="section-card">
         <div class="section-head"><div class="section-title">📊 الملخص المالي</div><div class="section-action" onclick="showPage('summary')">تفاصيل</div></div>
@@ -1281,136 +1101,132 @@ function buildDashboard(){
       </div>
     </div>
 
-    <!-- Activity -->
     <div class="section-card">
       <div class="section-head"><div class="section-title">🕒 آخر النشاطات</div></div>
       <div class="section-body" id="activityFeed"></div>
     </div>`;
 
-  // ملء settings
-  document.getElementById('settingName').value=currentTrip.name||'';
-  document.getElementById('settingDest').value=currentTrip.destination||'';
-  document.getElementById('settingStart').value=currentTrip.start_date||'';
-  document.getElementById('settingEnd').value=currentTrip.end_date||'';
+  document.getElementById('settingName').value  = currentTrip.name || '';
+  document.getElementById('settingDest').value  = currentTrip.destination || '';
+  document.getElementById('settingStart').value = currentTrip.start_date || '';
+  document.getElementById('settingEnd').value   = currentTrip.end_date || '';
+  document.getElementById('shareLink').textContent =
+    `https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip.id}`;
 
-  // share link
-  document.getElementById('shareLink').textContent=`https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip.id}`;
   populatePayerSelects();
 }
 
-function getDestEmoji(dest){
-  if(!dest)return'✈';
-  const d=dest.toLowerCase();
-  if(d.includes('دبي')||d.includes('dubai'))return'🌴';
-  if(d.includes('مصر')||d.includes('egypt'))return'🏺';
-  if(d.includes('تركيا')||d.includes('turkey'))return'🕌';
-  if(d.includes('أوروبا')||d.includes('europe')||d.includes('فرنسا'))return'🗼';
-  if(d.includes('يابان')||d.includes('japan'))return'🗾';
-  if(d.includes('تايلاند')||d.includes('thailand'))return'🌺';
-  return'✈';
+function getDestEmoji(dest) {
+  if (!dest) return '✈';
+  const d = dest.toLowerCase();
+  if (d.includes('دبي') || d.includes('dubai'))   return '🌴';
+  if (d.includes('مصر') || d.includes('egypt'))   return '🏺';
+  if (d.includes('تركيا') || d.includes('turkey')) return '🕌';
+  if (d.includes('أوروبا') || d.includes('europe') || d.includes('فرنسا')) return '🗼';
+  if (d.includes('يابان') || d.includes('japan'))   return '🗾';
+  if (d.includes('تايلاند') || d.includes('thailand')) return '🌺';
+  return '✈';
 }
 
 /* ═══════════════════════════════════
    CALCULATIONS
 ═══════════════════════════════════ */
-function calcStats(){
-  const stats={};
-  members.forEach(m=>{stats[m.id]={paid:0,owe:0}});
-  expenses.forEach(e=>{
-    if(stats[e.paidBy]!==undefined)stats[e.paidBy].paid+=e.amount;
-    const pp=e.distAll?members.map(m=>m.id):e.participants;
-    const share=e.amount/(pp.length||1);
-    pp.forEach(pid=>{if(stats[pid]!==undefined)stats[pid].owe+=share});
+function calcStats() {
+  const stats = {};
+  members.forEach(m => { stats[m.id] = { paid: 0, owe: 0 }; });
+  expenses.forEach(e => {
+    if (stats[e.paidBy] !== undefined) stats[e.paidBy].paid += e.amount;
+    const pp = e.distAll ? members.map(m => m.id) : e.participants;
+    const share = e.amount / (pp.length || 1);
+    pp.forEach(pid => { if (stats[pid] !== undefined) stats[pid].owe += share; });
   });
   return stats;
 }
 
-function minimize(stats){
-  const cred=members.map(m=>({...m,bal:stats[m.id].paid-stats[m.id].owe})).filter(m=>m.bal>0.01).sort((a,b)=>b.bal-a.bal);
-  const debt=members.map(m=>({...m,bal:stats[m.id].paid-stats[m.id].owe})).filter(m=>m.bal<-0.01).sort((a,b)=>a.bal-b.bal);
-  const txns=[];let ci=0,di=0;
-  while(ci<cred.length&&di<debt.length){
-    const amt=Math.min(cred[ci].bal,-debt[di].bal);
-    if(amt>0.01)txns.push({from:debt[di].name,to:cred[ci].name,amount:Math.round(amt*100)/100,fromColor:debt[di].color,toColor:cred[ci].color,fromPhone:debt[di].phone});
-    cred[ci].bal-=amt;debt[di].bal+=amt;
-    if(Math.abs(cred[ci].bal)<0.01)ci++;
-    if(Math.abs(debt[di].bal)<0.01)di++;
+function minimize(stats) {
+  const cred = members.map(m => ({ ...m, bal: stats[m.id].paid - stats[m.id].owe })).filter(m => m.bal > 0.01).sort((a, b) => b.bal - a.bal);
+  const debt = members.map(m => ({ ...m, bal: stats[m.id].paid - stats[m.id].owe })).filter(m => m.bal < -0.01).sort((a, b) => a.bal - b.bal);
+  const txns = []; let ci = 0, di = 0;
+  while (ci < cred.length && di < debt.length) {
+    const amt = Math.min(cred[ci].bal, -debt[di].bal);
+    if (amt > 0.01) txns.push({ from: debt[di].name, to: cred[ci].name, amount: Math.round(amt * 100) / 100, fromColor: debt[di].color, toColor: cred[ci].color, fromPhone: debt[di].phone });
+    cred[ci].bal -= amt; debt[di].bal += amt;
+    if (Math.abs(cred[ci].bal) < 0.01) ci++;
+    if (Math.abs(debt[di].bal) < 0.01) di++;
   }
   return txns;
 }
 
 /* ═══════════════════════════════════
-   RENDER FUNCTIONS
+   RENDER
 ═══════════════════════════════════ */
-function renderAll(){
+function renderAll() {
   renderMembersBar();
-  renderExpensesTable(document.getElementById('expTableBody'),8);
+  renderExpensesTable(document.getElementById('expTableBody'), 8);
   renderSummaryMini();
   renderDonut();
   renderActivityFeed();
   updateKPIs();
-  const badge=document.getElementById('exp-badge');
-  if(badge)badge.textContent=toAr(expenses.length);
+  const badge = document.getElementById('exp-badge');
+  if (badge) badge.textContent = toAr(expenses.length);
 }
 
-function updateKPIs(){
-  const total=expenses.reduce((s,e)=>s+e.amount,0);
-  const el=id=>document.getElementById(id);
-  if(el('headerTotal'))el('headerTotal').textContent=toAr(total);
-  if(el('kpiTotal'))el('kpiTotal').textContent=toAr(total);
-  if(el('kpiTotalSub'))el('kpiTotalSub').textContent=`${currentTrip?.currency||'AED'} · ${toAr(expenses.length)} مصاريف`;
-  if(el('kpiPer'))el('kpiPer').textContent=toAr(members.length?Math.round(total/members.length):0);
-  if(el('kpiMembers'))el('kpiMembers').textContent=toAr(members.length);
-
-  // أكثر شخص دفع
-  if(members.length&&el('kpiTop')){
-    const stats=calcStats();
-    const top=members.reduce((a,b)=>stats[b.id].paid>stats[a.id].paid?b:a,members[0]);
-    el('kpiTop').textContent=top.name;
-    if(el('kpiTopAmt'))el('kpiTopAmt').textContent=`${fmt(stats[top.id].paid)} ${currentTrip?.currency||'AED'}`;
+function updateKPIs() {
+  const total = expenses.reduce((s, e) => s + e.amount, 0);
+  const el = id => document.getElementById(id);
+  if (el('headerTotal')) el('headerTotal').textContent = toAr(total);
+  if (el('kpiTotal'))    el('kpiTotal').textContent    = toAr(total);
+  if (el('kpiTotalSub')) el('kpiTotalSub').textContent = `${currentTrip?.currency || 'AED'} · ${toAr(expenses.length)} مصاريف`;
+  if (el('kpiPer'))      el('kpiPer').textContent      = toAr(members.length ? Math.round(total / members.length) : 0);
+  if (el('kpiMembers'))  el('kpiMembers').textContent  = toAr(members.length);
+  if (members.length && el('kpiTop')) {
+    const stats = calcStats();
+    const top = members.reduce((a, b) => stats[b.id].paid > stats[a.id].paid ? b : a, members[0]);
+    el('kpiTop').textContent = top.name;
+    if (el('kpiTopAmt')) el('kpiTopAmt').textContent = `${fmt(stats[top.id].paid)} ${currentTrip?.currency || 'AED'}`;
   }
 }
 
-function renderMembersBar(){
-  const el=document.getElementById('membersListDash');
-  if(!el)return;
-  if(!members.length){el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">لا يوجد أعضاء بعد<br><button onclick="openAddMemberModal()" style="margin-top:8px;padding:6px 14px;border-radius:var(--rxs);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--cyan);font-size:.75rem;font-weight:700;cursor:pointer">+ إضافة عضو</button></div>`;return}
-  const stats=calcStats();
-  el.innerHTML=members.map(m=>{
-    const s=stats[m.id]||{};const net=(s.paid||0)-(s.owe||0);
-    const balClass=net>0.01?'bal-pos':net<-0.01?'bal-neg':'bal-zero';
-    const balText=net>0.01?`+${fmt(net)}`:net<-0.01?`-${fmt(-net)}`:'٠';
+function renderMembersBar() {
+  const el = document.getElementById('membersListDash');
+  if (!el) return;
+  if (!members.length) {
+    el.innerHTML = `<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">لا يوجد أعضاء بعد<br><button onclick="openAddMemberModal()" style="margin-top:8px;padding:6px 14px;border-radius:var(--rxs);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--cyan);font-size:.75rem;font-weight:700;cursor:pointer">+ إضافة عضو</button></div>`;
+    return;
+  }
+  const stats = calcStats();
+  el.innerHTML = members.map(m => {
+    const s = stats[m.id] || {}; const net = (s.paid || 0) - (s.owe || 0);
+    const balClass = net > 0.01 ? 'bal-pos' : net < -0.01 ? 'bal-neg' : 'bal-zero';
+    const balText  = net > 0.01 ? `+${fmt(net)}` : net < -0.01 ? `-${fmt(-net)}` : '٠';
     return `<div class="member-row">
       <div class="member-av" style="background:${m.color}">${m.name.charAt(0)}</div>
-      <div class="member-info">
-        <div class="member-name">${m.name}</div>
-        <div class="member-role">${m.roleIcon} ${m.role}</div>
-      </div>
+      <div class="member-info"><div class="member-name">${m.name}</div><div class="member-role">${m.roleIcon} ${m.role}</div></div>
       <div style="font-size:.68rem;color:var(--w40);text-align:left">
-        <div>دفع: <span style="color:var(--w70);font-weight:700;font-family:'Tajawal',sans-serif">${fmt(s.paid||0)}</span></div>
-        <div>عليه: <span style="color:var(--w70);font-weight:700;font-family:'Tajawal',sans-serif">${fmt(s.owe||0)}</span></div>
+        <div>دفع: <span style="color:var(--w70);font-weight:700;font-family:'Tajawal',sans-serif">${fmt(s.paid || 0)}</span></div>
+        <div>عليه: <span style="color:var(--w70);font-weight:700;font-family:'Tajawal',sans-serif">${fmt(s.owe || 0)}</span></div>
       </div>
       <div class="member-balance ${balClass}">${balText}</div>
     </div>`;
   }).join('');
 }
 
-function renderExpensesTable(tbody,limit=null){
-  if(!tbody)return;
-  if(!expenses.length){
-    tbody.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--w40)">لا توجد مصاريف بعد — أضف أول مصروف!</td></tr>`;
+function renderExpensesTable(tbody, limit = null) {
+  if (!tbody) return;
+  if (!expenses.length) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--w40)">لا توجد مصاريف بعد — أضف أول مصروف!</td></tr>`;
     return;
   }
-  const list=limit?expenses.slice(0,limit):expenses;
-  tbody.innerHTML=list.map(e=>{
-    const payer=members.find(m=>m.id===e.paidBy);
-    const cs=CAT_STYLES[e.cat]||CAT_STYLES['أخرى'];
+  const list = limit ? expenses.slice(0, limit) : expenses;
+  tbody.innerHTML = list.map(e => {
+    const payer = members.find(m => m.id === e.paidBy);
+    const cs = CAT_STYLES[e.cat] || CAT_STYLES['أخرى'];
     return `<tr>
-      <td><div class="exp-name">${e.title}</div>${e.note?`<div class="exp-note">${e.note}</div>`:''}</td>
+      <td><div class="exp-name">${e.title}</div>${e.note ? `<div class="exp-note">${e.note}</div>` : ''}</td>
       <td><span class="cat-badge" style="background:${cs.bg};color:${cs.color}">${cs.icon} ${e.cat}</span></td>
-      <td><div class="payer-chip"><div class="payer-av" style="background:${payer?.color||'#666'}">${payer?.name?.charAt(0)||'؟'}</div><span>${payer?.name||'؟'}</span></div></td>
-      <td style="color:var(--w50);font-size:.72rem">${e.date||'—'}</td>
-      <td><span class="dist-chip">${e.distAll?'👥 الجميع':'✔ محددين'}</span></td>
+      <td><div class="payer-chip"><div class="payer-av" style="background:${payer?.color || '#666'}">${payer?.name?.charAt(0) || '؟'}</div><span>${payer?.name || '؟'}</span></div></td>
+      <td style="color:var(--w50);font-size:.72rem">${e.date || '—'}</td>
+      <td><span class="dist-chip">${e.distAll ? '👥 الجميع' : '✔ محددين'}</span></td>
       <td><span class="exp-amount" style="color:${cs.color}">${fmt(e.amount)}</span></td>
       <td><div class="exp-actions">
         <div class="exp-btn exp-btn-edit" onclick="openAddExpModal('${e.id}')" title="تعديل">✏</div>
@@ -1420,485 +1236,405 @@ function renderExpensesTable(tbody,limit=null){
   }).join('');
 }
 
-function renderExpensesFull(){
+function renderExpensesFull() {
   renderExpensesTable(document.getElementById('expTableBodyFull'));
-  const total=expenses.reduce((s,e)=>s+e.amount,0);
-  const ft=document.getElementById('filterTotal');
-  if(ft)ft.textContent='الإجمالي: '+fmt(total)+' '+( currentTrip?.currency||'AED');
+  const total = expenses.reduce((s, e) => s + e.amount, 0);
+  const ft = document.getElementById('filterTotal');
+  if (ft) ft.textContent = 'الإجمالي: ' + fmt(total) + ' ' + (currentTrip?.currency || 'AED');
 }
 
-function renderSummaryMini(){
-  const el=document.getElementById('summaryBody');
-  if(!el)return;
-  if(!members.length){el.innerHTML=`<tr><td colspan="4" style="text-align:center;padding:16px;color:var(--w40);font-size:.8rem">أضف أعضاء أولاً</td></tr>`;return}
-  const stats=calcStats();
-  const total=expenses.reduce((x,e)=>x+e.amount,0);
-  el.innerHTML=members.map(m=>{
-    const s=stats[m.id]||{};const net=(s.paid||0)-(s.owe||0);
-    const pct=total>0?Math.min(100,(s.paid||0)/total*100):0;
+function renderSummaryMini() {
+  const el = document.getElementById('summaryBody');
+  if (!el) return;
+  if (!members.length) { el.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:16px;color:var(--w40);font-size:.8rem">أضف أعضاء أولاً</td></tr>`; return; }
+  const stats = calcStats();
+  const total = expenses.reduce((x, e) => x + e.amount, 0);
+  el.innerHTML = members.map(m => {
+    const s = stats[m.id] || {}; const net = (s.paid || 0) - (s.owe || 0);
+    const pct = total > 0 ? Math.min(100, (s.paid || 0) / total * 100) : 0;
     return `<tr>
       <td><div style="display:flex;align-items:center;gap:7px">
         <div class="sum-av" style="background:${m.color}">${m.name.charAt(0)}</div>
         <span style="font-size:.78rem;font-weight:700">${m.name}</span>
       </div>
       <div class="progress-bar" style="width:80px;margin-top:4px"><div class="progress-fill" style="width:${pct}%"></div></div></td>
-      <td class="num-cell">${fmt(s.paid||0)}</td>
-      <td class="num-cell">${fmt(s.owe||0)}</td>
-      <td><span class="result-badge ${net>0.01?'res-pos':net<-0.01?'res-neg':'res-zero'}">
-        ${net>0.01?'له '+fmt(net):net<-0.01?'عليه '+fmt(-net):'متوازن'}
+      <td class="num-cell">${fmt(s.paid || 0)}</td>
+      <td class="num-cell">${fmt(s.owe || 0)}</td>
+      <td><span class="result-badge ${net > 0.01 ? 'res-pos' : net < -0.01 ? 'res-neg' : 'res-zero'}">
+        ${net > 0.01 ? 'له ' + fmt(net) : net < -0.01 ? 'عليه ' + fmt(-net) : 'متوازن'}
       </span></td>
     </tr>`;
   }).join('');
 }
 
-function renderDonut(){
-  const svg=document.getElementById('donutSvg');
-  const legend=document.getElementById('donutLegend');
-  if(!svg||!legend)return;
-  const catTotals={};
-  expenses.forEach(e=>{catTotals[e.cat]=(catTotals[e.cat]||0)+e.amount});
-  const total=Object.values(catTotals).reduce((s,v)=>s+v,0)||1;
-  const r=35,cx=50,cy=50,stroke=14,circ=2*Math.PI*r;
-  const entries=Object.entries(catTotals).sort((a,b)=>b[1]-a[1]);
-  svg.innerHTML=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="${stroke}"/>`;
-  if(!entries.length){svg.innerHTML+=`<text x="50" y="54" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="8">لا يوجد</text>`;legend.innerHTML='';return}
-  let offset=0;
-  entries.forEach(([cat,val])=>{
-    const cs=CAT_STYLES[cat]||CAT_STYLES['أخرى'];
-    const pct=val/total;const dash=circ*pct;
-    svg.innerHTML+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${cs.color}" stroke-width="${stroke}" stroke-dasharray="${dash} ${circ-dash}" stroke-dashoffset="${-offset*circ}" stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})"/>`;
-    offset+=pct;
+function renderDonut() {
+  const svg = document.getElementById('donutSvg');
+  const legend = document.getElementById('donutLegend');
+  if (!svg || !legend) return;
+  const catTotals = {};
+  expenses.forEach(e => { catTotals[e.cat] = (catTotals[e.cat] || 0) + e.amount; });
+  const total = Object.values(catTotals).reduce((s, v) => s + v, 0) || 1;
+  const r = 35, cx = 50, cy = 50, stroke = 14, circ = 2 * Math.PI * r;
+  const entries = Object.entries(catTotals).sort((a, b) => b[1] - a[1]);
+  svg.innerHTML = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="${stroke}"/>`;
+  if (!entries.length) { svg.innerHTML += `<text x="50" y="54" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="8">لا يوجد</text>`; legend.innerHTML = ''; return; }
+  let offset = 0;
+  entries.forEach(([cat, val]) => {
+    const cs = CAT_STYLES[cat] || CAT_STYLES['أخرى'];
+    const pct = val / total; const dash = circ * pct;
+    svg.innerHTML += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${cs.color}" stroke-width="${stroke}" stroke-dasharray="${dash} ${circ - dash}" stroke-dashoffset="${-offset * circ}" stroke-linecap="round" transform="rotate(-90 ${cx} ${cy})"/>`;
+    offset += pct;
   });
-  legend.innerHTML=entries.slice(0,5).map(([cat,val])=>{
-    const cs=CAT_STYLES[cat]||CAT_STYLES['أخرى'];
-    return `<div class="legend-item"><div class="legend-dot" style="background:${cs.color}"></div><span class="legend-name">${cs.icon} ${cat}</span><span class="legend-pct">${Math.round(val/total*100)}%</span></div>`;
+  legend.innerHTML = entries.slice(0, 5).map(([cat, val]) => {
+    const cs = CAT_STYLES[cat] || CAT_STYLES['أخرى'];
+    return `<div class="legend-item"><div class="legend-dot" style="background:${cs.color}"></div><span class="legend-name">${cs.icon} ${cat}</span><span class="legend-pct">${Math.round(val / total * 100)}%</span></div>`;
   }).join('');
 }
 
-function renderActivityFeed(){
-  const el=document.getElementById('activityFeed');
-  if(!el)return;
-  if(!activities.length&&!expenses.length){el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">لا توجد نشاطات بعد</div>`;return}
-  const feed=expenses.slice(0,5).map(e=>{
-    const payer=members.find(m=>m.id===e.paidBy);
-    const cs=CAT_STYLES[e.cat]||CAT_STYLES['أخرى'];
+function renderActivityFeed() {
+  const el = document.getElementById('activityFeed');
+  if (!el) return;
+  if (!activities.length && !expenses.length) { el.innerHTML = `<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">لا توجد نشاطات بعد</div>`; return; }
+  el.innerHTML = expenses.slice(0, 5).map(e => {
+    const payer = members.find(m => m.id === e.paidBy);
+    const cs = CAT_STYLES[e.cat] || CAT_STYLES['أخرى'];
     return `<div class="activity-item">
       <div class="activity-icon" style="background:${cs.bg}">${cs.icon}</div>
       <div>
-        <div class="activity-text"><strong>${payer?.name||'؟'}</strong> أضاف "${e.title}" — <strong>${fmt(e.amount)} ${currentTrip?.currency||'AED'}</strong></div>
-        <div class="activity-time">${e.date||'—'}</div>
+        <div class="activity-text"><strong>${payer?.name || '؟'}</strong> أضاف "${e.title}" — <strong>${fmt(e.amount)} ${currentTrip?.currency || 'AED'}</strong></div>
+        <div class="activity-time">${e.date || '—'}</div>
       </div>
     </div>`;
-  });
-  el.innerHTML=feed.join('');
+  }).join('');
 }
 
-function renderSettle(){
-  const el=document.getElementById('settleList');
-  if(!el||!members.length)return;
-  const stats=calcStats();
-  const txns=minimize(stats);
-  if(!txns.length){
-    el.innerHTML=`<div style="text-align:center;padding:40px;color:var(--w50)"><div style="font-size:2.5rem;margin-bottom:8px">🎉</div><div style="font-weight:700">الحسابات متوازنة!</div><div style="font-size:.78rem;margin-top:4px">لا توجد مبالغ متبقية بين الأعضاء</div></div>`;
+function renderSettle() {
+  const el = document.getElementById('settleList');
+  if (!el || !members.length) return;
+  const stats = calcStats();
+  const txns = minimize(stats);
+  if (!txns.length) {
+    el.innerHTML = `<div style="text-align:center;padding:40px;color:var(--w50)"><div style="font-size:2.5rem;margin-bottom:8px">🎉</div><div style="font-weight:700">الحسابات متوازنة!</div><div style="font-size:.78rem;margin-top:4px">لا توجد مبالغ متبقية بين الأعضاء</div></div>`;
     return;
   }
-  el.innerHTML=`<div style="font-size:.76rem;color:var(--w50);margin-bottom:10px">عدد التحويلات: <span style="color:var(--cyan);font-weight:800">${txns.length}</span></div>`+
-  txns.map(t=>`<div class="settle-item">
-    <div style="width:28px;height:28px;border-radius:50%;background:${t.fromColor};display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;flex-shrink:0">${t.from.charAt(0)}</div>
-    <div class="settle-from">${t.from}</div>
-    <div class="settle-arrow">⟵</div>
-    <div style="width:28px;height:28px;border-radius:50%;background:${t.toColor};display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;flex-shrink:0">${t.to.charAt(0)}</div>
-    <div class="settle-to">${t.to}</div>
-    <div class="settle-amount">${fmt(t.amount)} ${currentTrip?.currency||'د'}</div>
-    ${t.fromPhone?`<button class="settle-wa-btn" onclick="sendWA('${t.fromPhone}','${t.from}','${t.to}','${fmt(t.amount)}')">💬 واتساب</button>`:''}
-  </div>`).join('');
+  el.innerHTML = `<div style="font-size:.76rem;color:var(--w50);margin-bottom:10px">عدد التحويلات: <span style="color:var(--cyan);font-weight:800">${txns.length}</span></div>` +
+    txns.map(t => `<div class="settle-item">
+      <div style="width:28px;height:28px;border-radius:50%;background:${t.fromColor};display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;flex-shrink:0">${t.from.charAt(0)}</div>
+      <div class="settle-from">${t.from}</div>
+      <div class="settle-arrow">⟵</div>
+      <div style="width:28px;height:28px;border-radius:50%;background:${t.toColor};display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;flex-shrink:0">${t.to.charAt(0)}</div>
+      <div class="settle-to">${t.to}</div>
+      <div class="settle-amount">${fmt(t.amount)} ${currentTrip?.currency || 'د'}</div>
+      ${t.fromPhone ? `<button class="settle-wa-btn" onclick="sendWA('${t.fromPhone}','${t.from}','${t.to}','${fmt(t.amount)}')">💬 واتساب</button>` : ''}
+    </div>`).join('');
 }
 
-function renderMembersPage(){
-  const el=document.getElementById('membersPageList');
-  if(!el)return;
-  if(!members.length){el.innerHTML=`<div style="text-align:center;padding:40px;color:var(--w40)">لا يوجد أعضاء بعد</div>`;return}
-  const stats=calcStats();
-  el.innerHTML=members.map(m=>{
-    const s=stats[m.id]||{};const net=(s.paid||0)-(s.owe||0);
+function renderMembersPage() {
+  const el = document.getElementById('membersPageList');
+  if (!el) return;
+  if (!members.length) { el.innerHTML = `<div style="text-align:center;padding:40px;color:var(--w40)">لا يوجد أعضاء بعد</div>`; return; }
+  const stats = calcStats();
+  el.innerHTML = members.map(m => {
+    const s = stats[m.id] || {}; const net = (s.paid || 0) - (s.owe || 0);
     return `<div class="member-row" style="padding:12px;background:var(--w06);border-radius:var(--rsm);margin-bottom:8px">
       <div class="member-av" style="background:${m.color};width:40px;height:40px;font-size:.95rem">${m.name.charAt(0)}</div>
       <div class="member-info">
         <div class="member-name" style="font-size:.88rem">${m.name}</div>
         <div><span style="background:${m.roleColor}20;color:${m.roleColor};padding:2px 8px;border-radius:100px;font-size:.65rem;font-weight:700">${m.roleIcon} ${m.role}</span></div>
-        <div style="font-size:.68rem;color:var(--w40);margin-top:4px">${m.phone||'بدون رقم'}</div>
+        <div style="font-size:.68rem;color:var(--w40);margin-top:4px">${m.phone || 'بدون رقم'}</div>
       </div>
       <div style="text-align:left">
-        <div style="font-size:.68rem;color:var(--w40)">دفع: <span style="color:var(--cyan);font-weight:700">${fmt(s.paid||0)}</span></div>
-        <span class="result-badge ${net>0.01?'res-pos':net<-0.01?'res-neg':'res-zero'}" style="display:inline-flex;margin-top:5px">
-          ${net>0.01?'له '+fmt(net):net<-0.01?'عليه '+fmt(-net):'متوازن'}
+        <div style="font-size:.68rem;color:var(--w40)">دفع: <span style="color:var(--cyan);font-weight:700">${fmt(s.paid || 0)}</span></div>
+        <span class="result-badge ${net > 0.01 ? 'res-pos' : net < -0.01 ? 'res-neg' : 'res-zero'}" style="display:inline-flex;margin-top:5px">
+          ${net > 0.01 ? 'له ' + fmt(net) : net < -0.01 ? 'عليه ' + fmt(-net) : 'متوازن'}
         </span>
       </div>
     </div>`;
   }).join('');
 }
 
-function renderShare(){
-  const el=document.getElementById('shareMembers');
-  if(!el)return;
-  if(!members.length){
-    el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">${isEn?'Add members first':'أضف أعضاء أولاً'}</div>`;
-    return;
-  }
-  const tripLink=`https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip?.id||''}`;
-  el.innerHTML=members.map((m,i)=>{
-    const waMsg=encodeURIComponent(
-      `مرحباً ${m.name} 👋\nتمت دعوتك لمتابعة رحلة "${currentTrip?.name||''}"\n\nاضغط الرابط لمشاهدة المصاريف وحسابك:\n${tripLink}\n\nرحلة+ ✈`
-    );
-    const waLink=m.phone?`https://wa.me/${m.phone.replace(/\D/g,'')}?text=${waMsg}`:'';
+function renderShare() {
+  const el = document.getElementById('shareMembers');
+  if (!el) return;
+  if (!members.length) { el.innerHTML = `<div style="text-align:center;padding:20px;color:var(--w40);font-size:.82rem">${isEn ? 'Add members first' : 'أضف أعضاء أولاً'}</div>`; return; }
+  const tripLink = `https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip?.id || ''}`;
+  el.innerHTML = members.map(m => {
+    const waMsg = encodeURIComponent(`مرحباً ${m.name} 👋\nتمت دعوتك لمتابعة رحلة "${currentTrip?.name || ''}"\n\nاضغط الرابط لمشاهدة المصاريف وحسابك:\n${tripLink}\n\nرحلة+ ✈`);
+    const waLink = m.phone ? `https://wa.me/${m.phone.replace(/\D/g, '')}?text=${waMsg}` : '';
     return `<div class="share-member-row">
       <div class="shr-av" style="background:${m.color}">${m.name.charAt(0)}</div>
-      <div><div class="shr-name">${m.name}</div><div style="font-size:.64rem;color:var(--w40)">${m.phone||'بدون رقم'}</div></div>
-      <span class="shr-status ${m.phone?'shr-pending':'shr-pending'}">${m.phone?'لم يُرسل':'بدون رقم'}</span>
-      <button class="shr-btn" onclick="${waLink?`window.open('${waLink}','_blank');toast('تم فتح واتساب','ok')`:`toast('${isEn?'No phone number':'لا يوجد رقم واتساب'}','err')`}">
-        💬 ${isEn?'Send':'إرسال'}
-      </button>
+      <div><div class="shr-name">${m.name}</div><div style="font-size:.64rem;color:var(--w40)">${m.phone || 'بدون رقم'}</div></div>
+      <span class="shr-status shr-pending">${m.phone ? 'لم يُرسل' : 'بدون رقم'}</span>
+      <button class="shr-btn" onclick="${waLink ? `window.open('${waLink}','_blank');toast('تم فتح واتساب','ok')` : `toast('لا يوجد رقم واتساب','err')`}">💬 إرسال</button>
     </div>`;
   }).join('');
 }
 
+function renderSummaryFull() {
+  const el = document.getElementById('summaryBodyFull'); if (!el) return;
+  const stats = calcStats();
+  el.innerHTML = members.map(m => {
+    const s = stats[m.id] || {}; const net = (s.paid || 0) - (s.owe || 0);
+    return `<tr>
+      <td><div style="display:flex;align-items:center;gap:7px"><div class="sum-av" style="background:${m.color}">${m.name.charAt(0)}</div><div><div style="font-weight:700">${m.name}</div></div></div></td>
+      <td class="num-cell" style="color:var(--cyan)">${fmt(s.paid || 0)}</td>
+      <td class="num-cell">${fmt(s.owe || 0)}</td>
+      <td><span class="result-badge ${net > 0.01 ? 'res-pos' : net < -0.01 ? 'res-neg' : 'res-zero'}">${net > 0.01 ? 'له ' + fmt(net) : net < -0.01 ? 'عليه ' + fmt(-net) : 'متوازن'}</span></td>
+    </tr>`;
+  }).join('');
+}
+
 /* ═══════════════════════════════════
-   EXPENSE — ADD / EDIT / DELETE
+   EXPENSE CRUD
 ═══════════════════════════════════ */
-function selectCat(el,cat){
-  selectedCat=cat;
-  document.querySelectorAll('#qCatPills .cat-pill').forEach(p=>p.classList.remove('selected'));
+function selectCat(el, cat) {
+  selectedCat = cat;
+  document.querySelectorAll('#qCatPills .cat-pill').forEach(p => p.classList.remove('selected'));
   el.classList.add('selected');
 }
 
-function populatePayerSelects(){
-  ['qExpPayer','mExpPayer'].forEach(id=>{
-    const sel=document.getElementById(id);if(!sel)return;
-    sel.innerHTML='<option value="">اختر...</option>'+members.map(m=>`<option value="${m.id}">${m.name}</option>`).join('');
+function populatePayerSelects() {
+  ['qExpPayer', 'mExpPayer'].forEach(id => {
+    const sel = document.getElementById(id); if (!sel) return;
+    sel.innerHTML = '<option value="">اختر...</option>' + members.map(m => `<option value="${m.id}">${m.name}</option>`).join('');
   });
-  const participantsWrap=document.getElementById('mParticipants');
-  if(participantsWrap){
-    participantsWrap.innerHTML=members.map(m=>`
+  const pw = document.getElementById('mParticipants');
+  if (pw) {
+    pw.innerHTML = members.map(m => `
       <label class="dist-btn" style="flex:none;padding:5px 10px;cursor:pointer">
         <input type="checkbox" class="m-participant-cb" data-id="${m.id}" style="display:none" checked>
         <span>${m.name}</span>
       </label>`).join('');
-    document.querySelectorAll('.m-participant-cb').forEach(cb=>{
+    document.querySelectorAll('.m-participant-cb').forEach(cb => {
       cb.closest('label').classList.add('on');
-      cb.addEventListener('change',function(){this.closest('label').classList.toggle('on',this.checked)});
+      cb.addEventListener('change', function () { this.closest('label').classList.toggle('on', this.checked); });
     });
   }
 }
 
-function openAddExpModal(expId=null){
-  editingExpId=expId;
+function openAddExpModal(expId = null) {
+  editingExpId = expId;
   populatePayerSelects();
-  if(expId){
-    const e=expenses.find(x=>x.id===expId||x.id===+expId);
-    if(e){
-      document.getElementById('mExpTitle').value=e.title;
-      document.getElementById('mExpAmount').value=e.amount;
-      document.getElementById('mExpPayer').value=e.paidBy;
-      document.getElementById('mExpCat').value=e.cat;
-      document.getElementById('mExpDate').value=e.date;
-      document.getElementById('mExpNote').value=e.note||'';
-      setModalDist(e.distAll?'all':'select');
+  if (expId) {
+    const e = expenses.find(x => x.id === expId || x.id === +expId);
+    if (e) {
+      document.getElementById('mExpTitle').value  = e.title;
+      document.getElementById('mExpAmount').value = e.amount;
+      document.getElementById('mExpPayer').value  = e.paidBy;
+      document.getElementById('mExpCat').value    = e.cat;
+      document.getElementById('mExpDate').value   = e.date;
+      document.getElementById('mExpNote').value   = e.note || '';
+      setModalDist(e.distAll ? 'all' : 'select');
     }
   } else {
-    document.getElementById('mExpTitle').value='';
-    document.getElementById('mExpAmount').value='';
-    document.getElementById('mExpPayer').value='';
-    document.getElementById('mExpCat').value='فندق';
-    document.getElementById('mExpDate').value=new Date().toISOString().split('T')[0];
-    document.getElementById('mExpNote').value='';
+    document.getElementById('mExpTitle').value  = '';
+    document.getElementById('mExpAmount').value = '';
+    document.getElementById('mExpPayer').value  = '';
+    document.getElementById('mExpCat').value    = 'فندق';
+    document.getElementById('mExpDate').value   = new Date().toISOString().split('T')[0];
+    document.getElementById('mExpNote').value   = '';
     setModalDist('all');
   }
   openModal('addExpModal');
 }
 
-function setModalDist(mode){
-  mDistMode=mode;
-  const wrap=document.getElementById('mParticipants');
-  document.getElementById('mDistAll').classList.toggle('on',mode==='all');
-  document.getElementById('mDistSel').classList.toggle('on',mode==='select');
-  if(wrap)wrap.style.display=mode==='select'?'flex':'none';
+function setModalDist(mode) {
+  mDistMode = mode;
+  const wrap = document.getElementById('mParticipants');
+  document.getElementById('mDistAll').classList.toggle('on', mode === 'all');
+  document.getElementById('mDistSel').classList.toggle('on', mode === 'select');
+  if (wrap) wrap.style.display = mode === 'select' ? 'flex' : 'none';
 }
 
-async function saveExpense(){
-  const title=document.getElementById('mExpTitle').value.trim();
-  const amount=parseFloat(document.getElementById('mExpAmount').value);
-  const paidBy=document.getElementById('mExpPayer').value;
-  if(!title||!amount||!paidBy){toast('يرجى ملء الحقول المطلوبة','err');return}
-  if(!currentTrip){toast('لا توجد رحلة محددة','err');return}
-
-  const expData={
-    trip_id:currentTrip.id,
-    title,amount,
-    paid_by:paidBy,
-    category:document.getElementById('mExpCat').value,
-    expense_date:document.getElementById('mExpDate').value||new Date().toISOString().split('T')[0],
-    note:document.getElementById('mExpNote').value.trim(),
-    dist_all:mDistMode==='all',
-    created_by:currentUser.id,
+async function saveExpense() {
+  const title   = document.getElementById('mExpTitle').value.trim();
+  const amount  = parseFloat(document.getElementById('mExpAmount').value);
+  const paidBy  = document.getElementById('mExpPayer').value;
+  if (!title || !amount || !paidBy) { toast('يرجى ملء الحقول المطلوبة', 'err'); return; }
+  if (!currentTrip) { toast('لا توجد رحلة محددة', 'err'); return; }
+  const expData = {
+    trip_id: currentTrip.id, title, amount,
+    paid_by: paidBy,
+    category: document.getElementById('mExpCat').value,
+    expense_date: document.getElementById('mExpDate').value || new Date().toISOString().split('T')[0],
+    note: document.getElementById('mExpNote').value.trim(),
+    dist_all: mDistMode === 'all',
+    created_by: currentUser.id,
   };
-
-  if(editingExpId){
-    const {error}=await sb.from('expenses').update(expData).eq('id',editingExpId);
-    if(error){toast('❌ خطأ في التعديل','err');return}
-    toast('✓ تم تعديل المصروف','ok');
+  if (editingExpId) {
+    const { error } = await sb.from('expenses').update(expData).eq('id', editingExpId);
+    if (error) { toast('❌ خطأ في التعديل', 'err'); return; }
+    toast('✓ تم تعديل المصروف', 'ok');
   } else {
-    const {error}=await sb.from('expenses').insert(expData);
-    if(error){toast('❌ خطأ في الحفظ: '+error.message,'err');return}
-    toast('✓ تم إضافة المصروف','ok');
+    const { error } = await sb.from('expenses').insert(expData);
+    if (error) { toast('❌ خطأ في الحفظ: ' + error.message, 'err'); return; }
+    toast('✓ تم إضافة المصروف', 'ok');
   }
   closeModal('addExpModal');
   await loadTripData(currentTrip.id);
 }
 
-async function quickAddExpense(){
-  const title=document.getElementById('qExpTitle').value.trim();
-  const amount=parseFloat(document.getElementById('qExpAmount').value);
-  const paidBy=document.getElementById('qExpPayer').value;
-  if(!title||!amount||!paidBy){toast('يرجى ملء الحقول المطلوبة','err');return}
-  if(!currentTrip){toast('لا توجد رحلة','err');return}
-
-  const {error}=await sb.from('expenses').insert({
-    trip_id:currentTrip.id,title,amount,
-    paid_by:paidBy,category:selectedCat,
-    expense_date:new Date().toISOString().split('T')[0],
-    dist_all:true,created_by:currentUser.id,
+async function quickAddExpense() {
+  const title  = document.getElementById('qExpTitle').value.trim();
+  const amount = parseFloat(document.getElementById('qExpAmount').value);
+  const paidBy = document.getElementById('qExpPayer').value;
+  if (!title || !amount || !paidBy) { toast('يرجى ملء الحقول المطلوبة', 'err'); return; }
+  if (!currentTrip) { toast('لا توجد رحلة', 'err'); return; }
+  const { error } = await sb.from('expenses').insert({
+    trip_id: currentTrip.id, title, amount,
+    paid_by: paidBy, category: selectedCat,
+    expense_date: new Date().toISOString().split('T')[0],
+    dist_all: true, created_by: currentUser.id,
   });
-  if(error){toast('❌ خطأ: '+error.message,'err');return}
-  document.getElementById('qExpTitle').value='';
-  document.getElementById('qExpAmount').value='';
-  toast('✓ تم إضافة المصروف','ok');
+  if (error) { toast('❌ خطأ: ' + error.message, 'err'); return; }
+  document.getElementById('qExpTitle').value  = '';
+  document.getElementById('qExpAmount').value = '';
+  toast('✓ تم إضافة المصروف', 'ok');
   await loadTripData(currentTrip.id);
 }
 
-async function deleteExpense(id){
-  if(!confirm('هل تريد حذف هذا المصروف؟'))return;
-  const {error}=await sb.from('expenses').delete().eq('id',id);
-  if(error){toast('❌ خطأ في الحذف','err');return}
-  toast('تم حذف المصروف','info');
+async function deleteExpense(id) {
+  if (!confirm('هل تريد حذف هذا المصروف؟')) return;
+  const { error } = await sb.from('expenses').delete().eq('id', id);
+  if (error) { toast('❌ خطأ في الحذف', 'err'); return; }
+  toast('تم حذف المصروف', 'info');
   await loadTripData(currentTrip.id);
 }
 
 /* ═══════════════════════════════════
-   MEMBER — ADD
+   MEMBER
 ═══════════════════════════════════ */
-function openAddMemberModal(){
+function openAddMemberModal() {
   openModal('addMemberModal');
-  document.getElementById('mMemberName').value='';
-  document.getElementById('mMemberPhone').value='';
+  document.getElementById('mMemberName').value  = '';
+  document.getElementById('mMemberPhone').value = '';
 }
 
-async function addMember(){
-  const name=document.getElementById('mMemberName').value.trim();
-  if(!name){toast('يرجى إدخال الاسم','err');return}
-  if(!currentTrip){toast('لا توجد رحلة','err');return}
-  const rv=document.getElementById('mMemberRole').value.split('|');
-
-  const {error}=await sb.from('trip_members').insert({
-    trip_id:currentTrip.id,
-    name,
-    phone:document.getElementById('mMemberPhone').value.trim()||null,
-    role:rv[0],
-    role_icon:rv[1],
-    role_color:rv[2],
+async function addMember() {
+  const name = document.getElementById('mMemberName').value.trim();
+  if (!name) { toast('يرجى إدخال الاسم', 'err'); return; }
+  if (!currentTrip) { toast('لا توجد رحلة', 'err'); return; }
+  const rv = document.getElementById('mMemberRole').value.split('|');
+  const { error } = await sb.from('trip_members').insert({
+    trip_id: currentTrip.id, name,
+    phone: document.getElementById('mMemberPhone').value.trim() || null,
+    role: rv[0], role_icon: rv[1], role_color: rv[2],
   });
-  if(error){toast('❌ خطأ في الإضافة: '+error.message,'err');return}
+  if (error) { toast('❌ خطأ في الإضافة: ' + error.message, 'err'); return; }
   closeModal('addMemberModal');
-  toast('✓ تم إضافة العضو: '+name,'ok');
+  toast('✓ تم إضافة العضو: ' + name, 'ok');
   await loadTripData(currentTrip.id);
 }
 
 /* ═══════════════════════════════════
    NAVIGATION
 ═══════════════════════════════════ */
-function showPage(page){
-  document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const pg=document.getElementById('page-'+page);
-  const nav=document.getElementById('nav-'+page);
-  if(pg)pg.classList.add('active');
-  if(nav)nav.classList.add('active');
-  const title=isEn?(PAGE_TITLES_EN[page]||page):(PAGE_TITLES[page]||page);
-  document.getElementById('topbarTitle').textContent=title;
-  if(page==='summary')renderSummaryFull();
-  if(page==='settle')renderSettle();
-  if(page==='expenses')renderExpensesFull();
-  if(page==='members')renderMembersPage();
-  if(page==='share')renderShare();
+function showPage(page) {
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pg  = document.getElementById('page-' + page);
+  const nav = document.getElementById('nav-' + page);
+  if (pg)  pg.classList.add('active');
+  if (nav) nav.classList.add('active');
+  document.getElementById('topbarTitle').textContent = isEn ? (PAGE_TITLES_EN[page] || page) : (PAGE_TITLES[page] || page);
+  if (page === 'summary')  renderSummaryFull();
+  if (page === 'settle')   renderSettle();
+  if (page === 'expenses') renderExpensesFull();
+  if (page === 'members')  renderMembersPage();
+  if (page === 'share')    renderShare();
   closeSidebar();
 }
 
-function renderSummaryFull(){
-  const el=document.getElementById('summaryBodyFull');if(!el)return;
-  const stats=calcStats();
-  el.innerHTML=members.map(m=>{
-    const s=stats[m.id]||{};const net=(s.paid||0)-(s.owe||0);
-    return `<tr>
-      <td><div style="display:flex;align-items:center;gap:7px"><div class="sum-av" style="background:${m.color}">${m.name.charAt(0)}</div><div><div style="font-weight:700">${m.name}</div></div></div></td>
-      <td class="num-cell" style="color:var(--cyan)">${fmt(s.paid||0)}</td>
-      <td class="num-cell">${fmt(s.owe||0)}</td>
-      <td><span class="result-badge ${net>0.01?'res-pos':net<-0.01?'res-neg':'res-zero'}">${net>0.01?'له '+fmt(net):net<-0.01?'عليه '+fmt(-net):'متوازن'}</span></td>
-    </tr>`;
-  }).join('');
-}
-
 /* ═══════════════════════════════════
-   SIDEBAR / MODALS / UTILS
+   SIDEBAR / MODAL
 ═══════════════════════════════════ */
-function toggleSidebar(){
+function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('sidebarOv').classList.toggle('show');
 }
-function closeSidebar(){
+function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebarOv').classList.remove('show');
 }
-function openModal(id){document.getElementById(id).classList.add('show')}
-function closeModal(id){document.getElementById(id).classList.remove('show')}
-document.querySelectorAll('.modal-ov').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('show')}));
-
-/* ══════════════════════════════════
-   LANGUAGE TEXTS
-══════════════════════════════════ */
-/* ════ LANGUAGE — بسيط ════ */
-let isEn=localStorage.getItem('rehla_lang')==='en';
-
-const PAGE_TITLES={
-  dashboard:'لوحة الرحلة',expenses:'المصاريف',summary:'الملخص المالي',
-  settle:'تصفية الحساب',report:'التقرير',members:'الأعضاء والأدوار',
-  share:'مشاركة الرحلة',settings:'الإعدادات',receipts:'الإيصالات',
-};
-
-const PAGE_TITLES_EN={
-  dashboard:'Dashboard',expenses:'Expenses',summary:'Financial Summary',
-  settle:'Settlement',report:'Report',members:'Members & Roles',
-  share:'Share Trip',settings:'Settings',receipts:'Receipts',
-};
-
-function t(ar,en){
-  if(!isEn)return ar;
-  return en||ar;
-}
-
-function applyDashLang(){
-  document.documentElement.setAttribute('lang',isEn?'en':'ar');
-  document.documentElement.setAttribute('dir',isEn?'ltr':'rtl');
-  const btn=document.getElementById('langBtn');
-  if(btn)btn.textContent=isEn?'ع':'EN';
-}
-
-function toggleLang(){
-  isEn=!isEn;
-  localStorage.setItem('rehla_lang',isEn?'en':'ar');
-  sessionStorage.setItem('rehla_lang',isEn?'en':'ar');
-  applyDashLang();
-  const activePage=document.querySelector('.nav-item.active')?.id?.replace('nav-','');
-  if(activePage)showPage(activePage);
-}
-
-function confirmSignOut(){
-  if(confirm(isEn?'Sign out?':'هل تريد تسجيل الخروج؟'))signOut();
-}
-async function signOut(){
-  await sb.auth.signOut();
-  location.href='rehla-auth.html';
-}
-
-function sendWA(phone,from,to,amount){
-  const msg=encodeURIComponent(`مرحباً ${from}،\nيرجى تحويل ${amount} ${currentTrip?.currency||'درهم'} إلى ${to} لتسوية حسابات الرحلة.\n\nرحلة+ 🌍`);
-  window.open(`https://wa.me/${phone.replace(/\D/g,'')}?text=${msg}`,'_blank');
-}
-
-function copyLink(){
-  const link=`https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip?.id||''}`;
-  navigator.clipboard.writeText(link).catch(()=>{});
-  toast('✓ تم نسخ الرابط','ok');
-}
-
-function toast(msg,type='ok'){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.className=`show ${type}`;
-  clearTimeout(t._t);t._t=setTimeout(()=>t.className='',3200);
-}
-
+function openModal(id)  { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+document.querySelectorAll('.modal-ov').forEach(el =>
+  el.addEventListener('click', e => { if (e.target === el) el.classList.remove('show'); })
+);
 
 /* ═══════════════════════════════════
-   STRIPE PAYMENT
+   LANGUAGE
 ═══════════════════════════════════ */
-const STRIPE_PK='pk_live_51T0igO7KLniAPTryC4eJpV1YXxe20Whx5Y0Ml1sFQfj7cTrGycTcS8FcoHguV5aW75nPtT7RoOtAb10usCL19oci00eLrvkPhz';
-const EDGE_URL='https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-checkout';
+function t(ar, en) { return !isEn ? ar : (en || ar); }
 
-async function startPayment(){
-  if(!currentTrip||!currentUser){toast('خطأ في البيانات','err');return}
-  const btn=document.getElementById('btnPayNow');
-  if(btn){btn.classList.add('loading');btn.disabled=true}
-  toast('جاري الاتصال بـ Stripe...','info');
-  try{
-    const {data:{session:authSession}}=await sb.auth.getSession();
-    const res=await fetch(EDGE_URL,{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'Authorization':'Bearer '+authSession.access_token,
-        'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI',
-      },
-      body:JSON.stringify({
-        trip_id:currentTrip.id,
-        user_id:currentUser.id,
-        trip_name:currentTrip.name,
-      })
-    });
-    const data=await res.json();
-    if(data.error)throw new Error(data.error);
-    if(data.url){
-      // حفظ trip_id قبل التحويل
-      sessionStorage.setItem('pending_payment_trip',currentTrip.id);
-      window.location.href=data.url;
-    }
-  }catch(err){
-    toast('❌ '+err.message,'err');
-    if(btn){btn.classList.remove('loading');btn.disabled=false}
-  }
+function applyDashLang() {
+  document.documentElement.setAttribute('lang', isEn ? 'en' : 'ar');
+  document.documentElement.setAttribute('dir',  isEn ? 'ltr' : 'rtl');
+  const btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = isEn ? 'ع' : 'EN';
 }
 
-async function checkPaymentReturn(){
-  const params=new URLSearchParams(window.location.search);
-  if(params.get('paid')==='true'){
-    const tripId=params.get('trip')||sessionStorage.getItem('pending_payment_trip');
-    if(tripId){
-      // تحديث is_paid في Supabase
-      await sb.from('trips').update({is_paid:true}).eq('id',tripId);
-      sessionStorage.removeItem('pending_payment_trip');
-      toast('🎉 تم الدفع بنجاح! رحلتك مفعّلة','ok');
-      // تنظيف الـ URL
-      window.history.replaceState({},'',window.location.pathname);
-    }
-  } else if(params.get('paid')==='false'){
-    toast('تم إلغاء الدفع','info');
-    window.history.replaceState({},'',window.location.pathname);
-  }
+function toggleLang() {
+  isEn = !isEn;
+  localStorage.setItem('rehla_lang', isEn ? 'en' : 'ar');
+  applyDashLang();
+  const activePage = document.querySelector('.nav-item.active')?.id?.replace('nav-', '');
+  if (activePage) showPage(activePage);
 }
 
-// FAB — يظهر فقط على الموبايل
-function updateFAB(){
-  const fab=document.getElementById('fabAdd');
-  if(!fab)return;
-  if(window.innerWidth<=600){
-    fab.style.display='flex';
-    const addBtn=document.querySelector('.topbar-btn-primary');
-    if(addBtn)addBtn.style.display='none';
+/* ═══════════════════════════════════
+   SETTINGS
+═══════════════════════════════════ */
+function saveSettings() { toast('تم حفظ الإعدادات ✓', 'ok'); }
+
+/* ═══════════════════════════════════
+   UTILS
+═══════════════════════════════════ */
+function confirmSignOut() {
+  if (confirm(isEn ? 'Sign out?' : 'هل تريد تسجيل الخروج؟')) signOut();
+}
+async function signOut() {
+  await sb.auth.signOut();
+  location.href = 'rehla-auth.html';
+}
+
+function sendWA(phone, from, to, amount) {
+  const msg = encodeURIComponent(`مرحباً ${from}،\nيرجى تحويل ${amount} ${currentTrip?.currency || 'درهم'} إلى ${to} لتسوية حسابات الرحلة.\n\nرحلة+ 🌍`);
+  window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${msg}`, '_blank');
+}
+
+function copyLink() {
+  const link = `https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip=${currentTrip?.id || ''}`;
+  navigator.clipboard.writeText(link).catch(() => {});
+  toast('✓ تم نسخ الرابط', 'ok');
+}
+
+function toast(msg, type = 'ok') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `show ${type}`;
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.className = '', 3200);
+}
+
+/* ═══════════════════════════════════
+   FAB
+═══════════════════════════════════ */
+function updateFAB() {
+  const fab = document.getElementById('fabAdd');
+  if (!fab) return;
+  if (window.innerWidth <= 600) {
+    fab.style.display = 'flex';
+    const addBtn = document.querySelector('.topbar-btn-primary');
+    if (addBtn) addBtn.style.display = 'none';
   } else {
-    fab.style.display='none';
-    const addBtn=document.querySelector('.topbar-btn-primary');
-    if(addBtn)addBtn.style.display='';
+    fab.style.display = 'none';
+    const addBtn = document.querySelector('.topbar-btn-primary');
+    if (addBtn) addBtn.style.display = '';
   }
 }
-window.addEventListener('resize',updateFAB);
-document.addEventListener('DOMContentLoaded',updateFAB);
+window.addEventListener('resize', updateFAB);
+document.addEventListener('DOMContentLoaded', updateFAB);
 </script>
 </body>
 </html>
