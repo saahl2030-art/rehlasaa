@@ -9,13 +9,13 @@
 :root{
   --bg:#f0f2f5;--bg2:#f5f7fa;--bg3:#eef0f3;
   --sidebar:#ffffff;--sidebar2:#ffffff;
-  --gold:#b8970a;--gold-light:#d4a827;--gold-dim:rgba(184,151,10,.1);--gold-border:rgba(184,151,10,.3);
+  --gold:#c9a227;--gold-light:#ddb828;--gold-dim:rgba(201,162,39,.1);--gold-border:rgba(201,162,39,.3);
   --green:#16a34a;--green-dim:rgba(22,163,74,.12);
   --red:#dc2626;--red-dim:rgba(220,38,38,.12);
   --orange:#d97706;--orange-dim:rgba(217,119,6,.12);
   --purple:#7c3aed;--purple-dim:rgba(124,58,237,.12);
   --cyan:#0369a1;--cyan-dim:rgba(3,105,161,.1);--cyan-bright:rgba(3,105,161,.15);
-  --yellow:#b8970a;--yellow-dim:rgba(184,151,10,.1);
+  --yellow:#c9a227;--yellow-dim:rgba(201,162,39,.1);
   --white:#ffffff;
   --text:#1a1a2e;--text2:#374151;--text3:#6b7280;--text4:#9ca3af;
   --w90:rgba(26,26,46,.9);--w80:rgba(26,26,46,.8);--w70:rgba(26,26,46,.7);
@@ -92,7 +92,7 @@ button{cursor:pointer}
 .topbar-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--rxs);font-size:.78rem;font-weight:700;transition:all .2s}
 .topbar-btn-ghost{background:#f3f4f6;border:1px solid #d1d5db;color:var(--text2)}
 .topbar-btn-ghost:hover{background:#e5e7eb;color:var(--text)}
-.topbar-btn-primary{background:var(--gold);border:1px solid var(--gold-light);color:#fff;font-weight:900;box-shadow:0 2px 6px rgba(184,151,10,.25)}
+.topbar-btn-primary{background:var(--gold);border:1px solid var(--gold-light);color:#fff;font-weight:900;box-shadow:0 2px 6px rgba(201,162,39,.25)}
 .topbar-btn-primary:hover{background:var(--gold-light);color:#fff}
 .hamburger{display:none;flex-direction:column;gap:4px;padding:8px;background:#f3f4f6;border:1px solid #d1d5db;border-radius:var(--rxs);cursor:pointer}
 .hamburger span{display:block;width:18px;height:2px;background:var(--text);border-radius:1px;transition:all .3s}
@@ -142,7 +142,7 @@ button{cursor:pointer}
 .f-lbl{font-size:.73rem;font-weight:700;color:var(--text2);margin-bottom:4px;display:block}
 .f-inp,.f-sel{width:100%;padding:9px 11px;background:#f9fafb;border:1px solid #d1d5db;border-radius:var(--rxs);color:var(--text);font-size:.83rem;transition:all .2s}
 .f-inp::placeholder{color:var(--text4)}
-.f-inp:focus,.f-sel:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(184,151,10,.12);outline:none}
+.f-inp:focus,.f-sel:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px rgba(201,162,39,.12);outline:none}
 .f-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='rgba(255,255,255,.4)' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 10px center;padding-left:28px;cursor:pointer}
 .f-sel option{background:var(--bg2)}
 .cat-pills{display:flex;flex-wrap:wrap;gap:5px}
@@ -152,7 +152,7 @@ button{cursor:pointer}
 .dist-toggle{display:flex;gap:6px}
 .dist-btn{flex:1;padding:7px;border-radius:var(--rxs);border:1px solid #d1d5db;background:#f3f4f6;color:var(--text3);font-size:.75rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
 .dist-btn.on{background:#fef3c7;border-color:var(--gold-light);color:#92400e}
-.btn-add-exp{width:100%;padding:11px;border-radius:var(--rsm);background:var(--gold);border:1px solid var(--gold-light);color:#fff;font-size:.88rem;font-weight:900;box-shadow:0 4px 16px rgba(184,151,10,.2);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-add-exp{width:100%;padding:11px;border-radius:var(--rsm);background:var(--gold);border:1px solid var(--gold-light);color:#fff;font-size:.88rem;font-weight:900;box-shadow:0 4px 16px rgba(201,162,39,.2);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
 .btn-add-exp:hover{background:var(--gold-light);color:#fff;transform:translateY(-1px)}
 .exp-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .exp-table{width:100%;border-collapse:collapse;min-width:560px}
@@ -186,7 +186,7 @@ button{cursor:pointer}
 .res-zero{background:var(--w10);color:var(--w50);border:1px solid var(--border2)}
 .progress-bar{height:3px;background:var(--border2);border-radius:100px;margin-top:4px;overflow:hidden}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:100px;transition:width .5s}
-.settle-btn{width:100%;margin-top:12px;padding:11px;border-radius:var(--rsm);background:var(--gold);color:#fff;font-size:.88rem;font-weight:900;box-shadow:0 4px 16px rgba(184,151,10,.2);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
+.settle-btn{width:100%;margin-top:12px;padding:11px;border-radius:var(--rsm);background:var(--gold);color:#fff;font-size:.88rem;font-weight:900;box-shadow:0 4px 16px rgba(201,162,39,.2);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
 .settle-btn:hover{transform:translateY(-1px)}
 .donut-wrap{display:flex;align-items:center;gap:16px}
 .donut-svg{flex-shrink:0}
@@ -250,8 +250,8 @@ button{cursor:pointer}
 .pay-banner-info{flex:1}
 .pay-banner-title{font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:900;color:#92400e;margin-bottom:4px}
 .pay-banner-sub{font-size:.8rem;color:var(--text3);line-height:1.6}
-.btn-pay-now{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:var(--rsm);background:var(--gold);color:#fff;font-family:'Cairo',sans-serif;font-size:.92rem;font-weight:900;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(184,151,10,.25);transition:all .25s;flex-shrink:0}
-.btn-pay-now:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(184,151,10,.35)}
+.btn-pay-now{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:var(--rsm);background:var(--gold);color:#fff;font-family:'Cairo',sans-serif;font-size:.92rem;font-weight:900;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(201,162,39,.25);transition:all .25s;flex-shrink:0}
+.btn-pay-now:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,162,39,.35)}
 .btn-pay-now:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .pay-spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(6,14,46,.3);border-top-color:#060e2e;animation:spin .7s linear infinite;display:none}
 .btn-pay-now.loading .pay-spin{display:block}
@@ -279,8 +279,8 @@ button{cursor:pointer}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .empty-title{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;color:var(--text)}
 .empty-sub{font-size:.88rem;color:var(--text3);max-width:340px;line-height:1.8}
-.empty-btn{padding:15px 36px;border-radius:var(--rsm);background:var(--gold);border:1px solid var(--gold-light);color:#fff;font-size:1rem;font-weight:900;cursor:pointer;box-shadow:0 4px 20px rgba(184,151,10,.2);transition:all .25s;display:flex;align-items:center;gap:8px;margin-top:4px}
-.empty-btn:hover{background:var(--gold-light);color:#fff;transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,151,10,.25)}
+.empty-btn{padding:15px 36px;border-radius:var(--rsm);background:var(--gold);border:1px solid var(--gold-light);color:#fff;font-size:1rem;font-weight:900;cursor:pointer;box-shadow:0 4px 20px rgba(201,162,39,.2);transition:all .25s;display:flex;align-items:center;gap:8px;margin-top:4px}
+.empty-btn:hover{background:var(--gold-light);color:#fff;transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,162,39,.25)}
 @media(max-width:900px){
   .sidebar{transform:translateX(220px);box-shadow:none;transition:transform .3s ease}
   .sidebar.open{transform:translateX(0);box-shadow:-8px 0 32px rgba(0,0,0,.5)}
@@ -332,7 +332,7 @@ button{cursor:pointer}
   .empty-title{font-size:1.1rem}
   .empty-sub{font-size:.82rem}
   .empty-btn{padding:11px 22px;font-size:.88rem}
-  .fab-add{display:flex;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);border:1px solid var(--gold-light);color:#fff;padding:13px 28px;border-radius:100px;font-size:.9rem;font-weight:900;box-shadow:0 4px 20px rgba(184,151,10,.3);z-index:90;font-family:'Cairo',sans-serif;align-items:center;gap:6px;white-space:nowrap}
+  .fab-add{display:flex;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);border:1px solid var(--gold-light);color:#fff;padding:13px 28px;border-radius:100px;font-size:.9rem;font-weight:900;box-shadow:0 4px 20px rgba(201,162,39,.3);z-index:90;font-family:'Cairo',sans-serif;align-items:center;gap:6px;white-space:nowrap}
 }
 @media(max-width:400px){
   .kpi-row{grid-template-columns:1fr 1fr}
@@ -538,68 +538,16 @@ button{cursor:pointer}
           <button onclick="saveSettings()" style="padding:11px 24px;border-radius:var(--rsm);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-size:.88rem;font-weight:900;cursor:pointer">حفظ التغييرات</button>
         </div>
       </div>
-      <div class="section-card">
-        <div class="section-head">
-          <div class="section-title">🎨 ثيم الصفحة</div>
-          <div style="font-size:.7rem;color:var(--w50)">يُحفظ تلقائياً</div>
-        </div>
-        <div class="section-body">
-          <div style="font-size:.8rem;color:var(--w60);margin-bottom:4px">اختر اللون الذي يعجبك — يتغير كل شيء فوراً</div>
-          <div class="theme-cat">🔵 رجالية — قوية وعميقة</div>
-          <div class="theme-grid">
-            <div class="theme-opt selected" id="th-navy" onclick="setTheme('navy')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#060e2e,#0d1f4e)"><div class="tp-sidebar" style="background:#050c24"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#2563eb"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Navy Classic</div><div class="tp-desc">الأزرق الداكن — أنيق ومحترف ⭐</div></div>
-            </div>
-            <div class="theme-opt" id="th-midnight" onclick="setTheme('midnight')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#0a0f1e,#111827)"><div class="tp-sidebar" style="background:#060810"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#38bdf8"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Midnight Steel</div><div class="tp-desc">أسود فولاذي + سماوي 🌙</div></div>
-            </div>
-            <div class="theme-opt" id="th-ocean" onclick="setTheme('ocean')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#042f4b,#0c4a6e)"><div class="tp-sidebar" style="background:#021d2e"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#0ea5e9"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Deep Ocean</div><div class="tp-desc">أزرق المحيط العميق 🌊</div></div>
-            </div>
-          </div>
-          <div class="theme-cat">🌸 أنثوية — ناعمة وراقية</div>
-          <div class="theme-grid">
-            <div class="theme-opt" id="th-rose" onclick="setTheme('rose')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#1e0a14,#3b0f20)"><div class="tp-sidebar" style="background:#12060c"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#f43f5e"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Rose Dusk</div><div class="tp-desc">وردي غامق + أحمر دافئ 🌹</div></div>
-            </div>
-            <div class="theme-opt" id="th-lavender" onclick="setTheme('lavender')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#1a0a2e,#2d1b4e)"><div class="tp-sidebar" style="background:#10061c"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#a78bfa"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Lavender Night</div><div class="tp-desc">بنفسجي عميق + ذهبي 💜</div></div>
-            </div>
-            <div class="theme-opt" id="th-blush" onclick="setTheme('blush')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#1c0f0a,#2e1a10)"><div class="tp-sidebar" style="background:#110905"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#f59e0b"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Blush Gold</div><div class="tp-desc">بني دافئ + ذهبي ✨</div></div>
-            </div>
-          </div>
-          <div class="theme-cat">🌍 الطبيعة والسفر</div>
-          <div class="theme-grid">
-            <div class="theme-opt" id="th-sky" onclick="setTheme('sky')">
-              <div class="theme-preview" style="background:linear-gradient(180deg,#0c1f3f,#2a5a8c)"><div class="tp-sidebar" style="background:#081428"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#60a5fa"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Sky Horizon</div><div class="tp-desc">تدرج السماء من الليل للفجر ☁️</div></div>
-            </div>
-            <div class="theme-opt" id="th-desert" onclick="setTheme('desert')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#1a0e00,#2e1c00)"><div class="tp-sidebar" style="background:#0f0800"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#d97706"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Desert Gold</div><div class="tp-desc">ذهب الصحراء — خليجي أصيل 🏜</div></div>
-            </div>
-            <div class="theme-opt" id="th-forest" onclick="setTheme('forest')">
-              <div class="theme-preview" style="background:linear-gradient(135deg,#062010,#0d3520)"><div class="tp-sidebar" style="background:#031408"></div><div class="tp-content"><div class="tp-line"></div><div class="tp-line" style="width:60%"></div><div class="tp-btn" style="background:#10b981"></div></div><div class="tp-check">✓</div></div>
-              <div class="tp-info"><div class="tp-name">Alpine Forest</div><div class="tp-desc">أخضر الجبال والغابات 🏔</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
 
     <div class="page-section" id="page-receipts">
       <div class="section-card">
-        <div class="section-head"><div class="section-title">📸 الإيصالات</div></div>
-        <div class="section-body" style="text-align:center;padding:40px">
-          <div style="font-size:2.5rem;margin-bottom:10px">📸</div>
-          <div style="font-size:.9rem;color:var(--w60)">الإيصالات ترتبط بكل مصروف عند الإضافة.<br>لا توجد إيصالات مرفوعة بعد.</div>
+        <div class="section-head"><div class="section-title">📸 الإيصالات</div><span style="background:#fef3c7;color:#92400e;border:1px solid #c9a227;padding:3px 10px;border-radius:100px;font-size:.65rem;font-weight:700">قريباً</span></div>
+        <div class="section-body" style="text-align:center;padding:50px 20px">
+          <div style="font-size:3rem;margin-bottom:14px">📸</div>
+          <div style="font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:900;margin-bottom:8px;color:var(--text)">ميزة الإيصالات قادمة قريباً</div>
+          <div style="font-size:.82rem;color:var(--text3);line-height:1.7;max-width:320px;margin:0 auto">ستتمكن من رفع صور الإيصالات ومرفقات لكل مصروف وتنزيلها مع التقرير النهائي.</div>
         </div>
       </div>
     </div>
@@ -1579,7 +1527,31 @@ function toggleLang() {
 /* ═══════════════════════════════════
    SETTINGS
 ═══════════════════════════════════ */
-function saveSettings() { toast('تم حفظ الإعدادات ✓', 'ok'); }
+async function saveSettings() {
+  if (!currentTrip) { toast('لا توجد رحلة', 'err'); return; }
+  const name  = document.getElementById('settingName').value.trim();
+  const dest  = document.getElementById('settingDest').value.trim();
+  const start = document.getElementById('settingStart').value;
+  const end   = document.getElementById('settingEnd').value;
+  if (!name) { toast('يرجى إدخال اسم الرحلة', 'err'); return; }
+  const { error } = await sb.from('trips').update({
+    name, destination: dest, start_date: start, end_date: end
+  }).eq('id', currentTrip.id);
+  if (error) { toast('❌ خطأ في الحفظ: ' + error.message, 'err'); return; }
+  // تحديث البيانات المحلية والواجهة
+  currentTrip.name        = name;
+  currentTrip.destination = dest;
+  currentTrip.start_date  = start;
+  currentTrip.end_date    = end;
+  updateSidebarTrip(currentTrip);
+  // تحديث header إذا كان ظاهراً
+  const tn = document.getElementById('tripName');
+  if (tn) tn.textContent = name;
+  const tm = document.querySelectorAll('.trip-meta-item');
+  buildDashboard();
+  renderAll();
+  toast('✓ تم حفظ الإعدادات بنجاح', 'ok');
+}
 
 /* ═══════════════════════════════════
    UTILS
