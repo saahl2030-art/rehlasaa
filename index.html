@@ -3,684 +3,353 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>رحلة+ — إدارة مصاريف السفر</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<title>رحلة+ — تسجيل الدخول</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --gold:#b8970a;
   --gold-light:#d4a827;
-  --gold-bright:#f0c040;
   --gold-dim:rgba(184,151,10,.1);
   --gold-border:rgba(184,151,10,.3);
-  --white:#ffffff;
-  --bg:#f0f2f5;
-  --bg2:#f5f7fa;
+  --green:#16a34a;
+  --green-dim:rgba(22,163,74,.12);
+  --red:#dc2626;
+  --red-dim:rgba(220,38,38,.12);
   --text:#1a1a2e;
   --text2:#374151;
   --text3:#6b7280;
   --text4:#9ca3af;
   --border:rgba(0,0,0,.1);
   --border2:rgba(0,0,0,.07);
-  --green:#16a34a;
-  --green-dim:rgba(22,163,74,.12);
-  --red:#dc2626;
-  --shadow:0 1px 4px rgba(0,0,0,.06);
-  --shadow-md:0 4px 16px rgba(0,0,0,.08);
-  --shadow-lg:0 8px 32px rgba(0,0,0,.1);
-  --radius:16px;--radius-sm:10px;--radius-xs:8px;
 }
-
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:'Cairo',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-  line-height:1.6;
   min-height:100vh;
+  background:linear-gradient(160deg,#f0f2f5 0%,#f5f7fa 60%,#eef0f3 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;color:var(--text);
 }
-
-/* ══ TICKER ══ */
-.ticker-wrap{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:36px;background:var(--gold);
-  overflow:hidden;display:flex;align-items:center;
-}
-.ticker-inner{
-  display:flex;align-items:center;white-space:nowrap;
-  animation:tickerScroll 35s linear infinite;
-}
-.ticker-wrap:hover .ticker-inner{animation-play-state:paused}
-@keyframes tickerScroll{0%{transform:translateX(-50%)}100%{transform:translateX(0%)}}
-.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 24px;font-size:.75rem;font-weight:700;color:rgba(255,255,255,.9)}
-.ticker-item strong{color:#fff}
-.ticker-sep{color:rgba(255,255,255,.5);padding:0 6px}
-.ticker-cta{
-  display:inline-flex;align-items:center;gap:5px;
-  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
-  color:#fff;font-size:.7rem;font-weight:800;
-  padding:3px 10px;border-radius:100px;margin-right:8px;text-decoration:none;
-  transition:background .2s;
-}
-.ticker-cta:hover{background:rgba(255,255,255,.35)}
-
-/* ══ NAV ══ */
-nav{
-  position:fixed;top:36px;left:0;right:0;z-index:900;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 6%;height:66px;
+.card{
   background:#ffffff;
-  border-bottom:1px solid var(--border2);
-  box-shadow:var(--shadow);
-  transition:box-shadow .3s;
+  border:1px solid var(--border);
+  border-radius:20px;
+  width:100%;max-width:420px;
+  overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
 }
-nav.scrolled{box-shadow:var(--shadow-md)}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
-.logo-icon{width:40px;height:40px;background:var(--gold);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px var(--gold-dim);color:#fff}
-.logo-name{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:var(--text)}
-.logo-name em{color:var(--gold);font-style:normal}
-.logo-sub{font-size:.62rem;color:var(--text4);margin-top:-4px}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-a{padding:7px 14px;border-radius:8px;font-size:.85rem;font-weight:600;color:var(--text2);cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif;transition:all .2s;text-decoration:none}
-.nav-a:hover{color:var(--text);background:rgba(0,0,0,.04)}
-.nav-btn-outline{padding:8px 18px;border-radius:8px;border:1.5px solid var(--border);color:var(--text2);font-weight:700;font-size:.85rem;background:#f3f4f6;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s}
-.nav-btn-outline:hover{border-color:var(--gold);color:var(--gold)}
-.nav-btn-solid{padding:9px 20px;border-radius:8px;background:var(--gold);color:#fff;font-weight:800;font-size:.88rem;border:none;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 4px 12px var(--gold-dim);transition:all .25s}
-.nav-btn-solid:hover{background:var(--gold-light);transform:translateY(-1px)}
-
-/* ══ HERO ══ */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:120px 6% 60px;
-  background:linear-gradient(160deg,#fefefe 0%,#f5f7fa 60%,#eef0f3 100%);
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 70% 50% at 15% 40%,rgba(184,151,10,.06) 0%,transparent 70%),
-    radial-gradient(ellipse 50% 40% at 85% 70%,rgba(184,151,10,.04) 0%,transparent 70%);
-  pointer-events:none;
-}
-.hero-dots{
-  position:absolute;inset:0;
-  background-image:radial-gradient(circle,rgba(184,151,10,.08) 1px,transparent 1px);
-  background-size:40px 40px;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
-  pointer-events:none;
-}
-
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--gold-dim);border:1px solid var(--gold-border);
-  color:#92400e;padding:7px 18px;border-radius:100px;
-  font-size:.8rem;font-weight:700;margin-bottom:24px;
-}
-
-.hero-title{
-  font-family:'Tajawal',sans-serif;
-  font-size:clamp(2.6rem,6vw,4.5rem);
-  font-weight:900;line-height:1.15;
-  text-align:center;margin-bottom:20px;
-  color:var(--text);
-}
-.hero-title .line2{display:block;color:var(--gold)}
-
-.word-swap{display:inline-block;position:relative;min-width:120px;text-align:center}
-.word-swap .word{display:inline-block;position:absolute;right:0;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;white-space:nowrap}
-.word-swap .word.visible{opacity:1;transform:translateY(0);position:relative}
-
-.hero-sub{font-size:1rem;color:var(--text3);text-align:center;max-width:500px;line-height:1.85;margin-bottom:40px}
-
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 32px;border-radius:var(--radius-sm);
-  background:var(--gold);color:#fff;
-  font-family:'Cairo',sans-serif;font-size:.98rem;font-weight:800;
-  border:none;cursor:pointer;box-shadow:0 4px 16px var(--gold-dim);transition:all .25s;
-}
-.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,151,10,.25)}
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:13px 28px;border-radius:var(--radius-sm);
-  background:#ffffff;border:1.5px solid var(--border);
-  color:var(--text2);font-family:'Cairo',sans-serif;
-  font-size:.98rem;font-weight:700;cursor:pointer;transition:all .2s;
-}
-.btn-secondary:hover{border-color:var(--gold);color:var(--gold);background:#fef9ed}
-
-.hero-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.chip{
-  display:flex;align-items:center;gap:8px;
-  background:#ffffff;border:1px solid var(--border);
-  padding:9px 16px;border-radius:12px;
-  font-size:.8rem;font-weight:600;color:var(--text2);
-  box-shadow:var(--shadow);
-}
-.chip strong{color:var(--text)}
-.chip small{color:var(--text4);font-size:.7rem;display:block;line-height:1.2}
-
-/* ══ MOCK UI ══ */
-.hero-visual{position:relative;margin-top:56px;width:100%;max-width:960px}
-.mock-laptop{
-  background:#ffffff;border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;
-  box-shadow:var(--shadow-lg);
-}
-.mock-bar{background:#f9fafb;padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border2)}
-.mock-dots{display:flex;gap:5px}
-.mock-dot{width:10px;height:10px;border-radius:50%}
-.mock-content{padding:16px;display:grid;grid-template-columns:180px 1fr 210px;gap:14px;min-height:300px}
-.mock-sidebar{background:#fafafa;border:1px solid var(--border2);border-radius:10px;padding:12px}
-.mock-logo-sm{display:flex;align-items:center;gap:6px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border2)}
-.mock-logo-sm .ico{width:24px;height:24px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:#fff}
-.mock-logo-sm span{font-size:.8rem;font-weight:800;color:var(--text)}
-.mock-trip-badge{background:#fef9ed;border:1px solid var(--gold-border);border-radius:7px;padding:7px 9px;margin-bottom:10px}
-.mock-trip-name{font-size:.72rem;font-weight:800;color:#92400e}
-.mock-trip-meta{font-size:.6rem;color:var(--text4);margin-top:2px}
-.mock-nav-item{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:7px;font-size:.7rem;font-weight:600;color:var(--text3);margin-bottom:3px}
-.mock-nav-item.active{background:#fef3c7;color:#92400e;border:1px solid var(--gold-border)}
-.mock-trip-hd{background:#f9fafb;border:1px solid var(--border2);border-radius:10px;padding:12px;display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.mock-trip-thumb{width:44px;height:44px;border-radius:9px;background:#fef9ed;border:1px solid var(--gold-border);font-size:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.mock-trip-nm{font-size:.85rem;font-weight:800;color:var(--text);margin-bottom:3px}
-.mock-trip-mt{display:flex;gap:10px}
-.mock-mt-item{font-size:.62rem;color:var(--text3)}
-.mock-mt-item b{color:var(--text2);display:block}
-.mock-total{margin-right:auto;text-align:left}
-.mock-total-lbl{font-size:.6rem;color:var(--text4)}
-.mock-total-val{font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;color:var(--gold)}
-.mock-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:10px}
-.mock-stat{background:#f9fafb;border:1px solid var(--border2);border-radius:7px;padding:8px}
-.mock-stat-val{font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:800;color:var(--gold)}
-.mock-stat-lbl{font-size:.6rem;color:var(--text4)}
-.mock-exp-row{background:#f9fafb;border:1px solid var(--border2);border-radius:7px;padding:8px 10px;display:flex;align-items:center;gap:8px;margin-bottom:5px}
-.mock-exp-cat{width:26px;height:26px;border-radius:6px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
-.mock-exp-nm{font-size:.7rem;font-weight:700;color:var(--text);flex:1}
-.mock-exp-who{font-size:.6rem;color:var(--text3)}
-.mock-exp-amt{font-family:'Tajawal',sans-serif;font-size:.82rem;font-weight:800;color:var(--text)}
-.mock-summary{background:#f9fafb;border:1px solid var(--border2);border-radius:10px;padding:12px}
-.mock-sum-ttl{font-size:.72rem;font-weight:800;color:var(--text2);margin-bottom:10px}
-.mock-sum-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border2);font-size:.68rem}
-.mock-sum-row:last-of-type{border-bottom:none}
-.mock-nm{color:var(--text2);font-weight:600}
-.pos{color:var(--green);font-weight:800;font-family:'Tajawal',sans-serif}
-.neg{color:var(--red);font-weight:800;font-family:'Tajawal',sans-serif}
-.mock-settle-btn{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:10px;padding:8px;border-radius:7px;background:var(--gold);color:#fff;font-size:.7rem;font-weight:800}
-
-/* ══ SECTIONS ══ */
-.section{padding:90px 6%;max-width:1200px;margin:0 auto}
-.section-center{text-align:center}
-.s-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;font-size:.76rem;font-weight:700;background:var(--gold-dim);border:1px solid var(--gold-border);color:#92400e;margin-bottom:16px}
-.s-title{font-family:'Tajawal',sans-serif;font-size:clamp(1.8rem,4vw,2.7rem);font-weight:900;color:var(--text);margin-bottom:12px;line-height:1.3}
-.s-sub{font-size:.95rem;color:var(--text3);max-width:500px;line-height:1.85}
-.section-center .s-sub{margin:0 auto}
-
-/* ══ FEATURES ══ */
-.features-wrap{background:#ffffff;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
-.feat-card{background:#f9fafb;border:1px solid var(--border2);border-radius:var(--radius);padding:26px;transition:all .3s;position:relative;overflow:hidden}
-.feat-card::after{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .35s}
-.feat-card:hover{border-color:var(--gold-border);transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.feat-card:hover::after{transform:scaleX(1)}
-.feat-icon{width:52px;height:52px;border-radius:13px;background:#fef3c7;border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px}
-.feat-card h3{font-size:.98rem;font-weight:800;margin-bottom:8px;color:var(--text)}
-.feat-card p{font-size:.83rem;color:var(--text3);line-height:1.7}
-
-/* ══ HOW IT WORKS ══ */
-.how-wrap{background:#f5f7fa;border-top:1px solid var(--border2)}
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:50px;position:relative}
-.steps-grid::before{content:'';position:absolute;top:36px;right:12%;left:12%;height:2px;background:linear-gradient(90deg,var(--gold),rgba(184,151,10,.2));z-index:0;opacity:.5}
-.step{background:#ffffff;border:1px solid var(--border2);border-radius:var(--radius);padding:24px 16px;text-align:center;position:relative;z-index:1;transition:all .3s;box-shadow:var(--shadow)}
-.step:hover{border-color:var(--gold-border);transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.step-num{width:52px;height:52px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;margin:0 auto 10px;color:#fff;box-shadow:0 4px 12px var(--gold-dim)}
-.step-icon{font-size:1.4rem;margin-bottom:8px}
-.step h3{font-size:.9rem;font-weight:800;margin-bottom:5px;color:var(--text)}
-.step p{font-size:.78rem;color:var(--text3);line-height:1.6}
-
-/* ══ PRICING ══ */
-.pricing-wrap{background:#ffffff;border-top:1px solid var(--border2);padding:80px 6%}
-.price-card-main{
-  max-width:860px;margin:0 auto;
-  background:#ffffff;border:1.5px solid var(--gold-border);
-  border-radius:20px;overflow:hidden;
-  box-shadow:0 8px 32px rgba(184,151,10,.1);
-}
-.price-top{
-  background:linear-gradient(135deg,#fef9ed 0%,#f9fafb 100%);
-  padding:clamp(22px,4vw,40px);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:24px;flex-wrap:wrap;
+.head{
+  background:#fef9ed;
+  padding:24px;text-align:center;
   border-bottom:1px solid var(--gold-border);
 }
-.price-badge-top{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#fff;font-size:.75rem;font-weight:800;padding:5px 14px;border-radius:100px;margin-bottom:12px}
-.price-title{font-family:'Tajawal',sans-serif;font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:var(--text);margin-bottom:8px}
-.price-desc{font-size:.88rem;color:var(--text3);line-height:1.7;max-width:400px}
-.price-amount{font-family:'Tajawal',sans-serif;font-size:clamp(4rem,9vw,5.5rem);font-weight:900;color:var(--gold);line-height:1}
-.price-curr{font-size:.9rem;color:var(--text3);margin-top:4px}
-.price-once{display:inline-flex;align-items:center;gap:5px;background:var(--green-dim);border:1px solid rgba(22,163,74,.25);color:var(--green);font-size:.73rem;font-weight:700;padding:4px 12px;border-radius:100px;margin-top:8px}
-.price-body{padding:clamp(20px,4vw,36px)}
-.price-feats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px}
-.price-feat{display:flex;align-items:flex-start;gap:10px;background:#f9fafb;border:1px solid var(--border2);border-radius:10px;padding:12px 14px;transition:all .2s}
-.price-feat:hover{border-color:var(--gold-border);background:#fef9ed}
-.price-feat-ico{width:28px;height:28px;border-radius:7px;background:var(--green-dim);border:1px solid rgba(22,163,74,.2);display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0}
-.price-feat strong{display:block;font-size:.83rem;margin-bottom:2px;color:var(--text)}
-.price-feat span{font-size:.73rem;color:var(--text3)}
-.price-cta-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--border2)}
-.btn-price-main{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:15px 36px;border-radius:11px;
-  background:var(--gold);color:#fff;
-  font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:800;
-  box-shadow:0 4px 16px var(--gold-dim);border:none;cursor:pointer;flex:1;justify-content:center;
-  transition:all .25s;
+.logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}
+.logo-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;
+  box-shadow:0 4px 12px var(--gold-dim);
 }
-.btn-price-main:hover{background:var(--gold-light);transform:translateY(-2px)}
-.price-note{font-size:.75rem;color:var(--text3);line-height:1.6}
-.price-checks{display:flex;justify-content:center;gap:clamp(16px,3vw,40px);margin-top:24px;flex-wrap:wrap}
-.price-check{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--text3)}
-.price-check .ck{color:var(--green);font-size:.9rem}
-
-/* ══ TESTIMONIALS ══ */
-.test-wrap{background:#f5f7fa;border-top:1px solid var(--border2);padding:80px 6%}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;max-width:1100px;margin-left:auto;margin-right:auto}
-.test-card{background:#ffffff;border:1px solid var(--border2);border-radius:var(--radius);padding:24px;transition:all .3s;box-shadow:var(--shadow)}
-.test-card:hover{border-color:var(--gold-border);transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.test-stars{color:var(--gold);font-size:.85rem;margin-bottom:10px}
-.test-text{font-size:.86rem;color:var(--text3);line-height:1.8;margin-bottom:16px;font-style:italic}
-.test-author{display:flex;align-items:center;gap:10px}
-.test-av{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;color:#fff;flex-shrink:0}
-.test-name{font-size:.84rem;font-weight:800;color:var(--text)}
-.test-role{font-size:.7rem;color:var(--text4)}
-
-/* ══ CTA ══ */
-.cta-wrap{background:linear-gradient(135deg,#fef9ed,#f5f7fa);padding:80px 6%;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--gold-border)}
-.cta-inner{position:relative;z-index:1}
-.cta-title{font-family:'Tajawal',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--text);margin-bottom:12px}
-.cta-sub{color:var(--text3);font-size:.98rem;margin-bottom:32px}
-.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:15px 36px;border-radius:var(--radius-sm);background:var(--gold);color:#fff;font-family:"Cairo",sans-serif;font-size:1rem;font-weight:800;border:none;cursor:pointer;box-shadow:0 4px 16px var(--gold-dim);transition:all .25s}
-.btn-cta:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,151,10,.2)}
-.cta-note{color:var(--text4);font-size:.78rem;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:6px}
-
-/* ══ FOOTER ══ */
-footer{background:#ffffff;padding:60px 6% 28px;color:var(--text);border-top:1px solid var(--border2)}
-.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.ft-brand .logo-name{font-size:1.3rem;color:var(--text)}
-.ft-brand .logo-name em{color:var(--gold)}
-.ft-brand p{font-size:.82rem;color:var(--text3);margin-top:10px;line-height:1.7}
-.ft-col h4{font-size:.85rem;font-weight:800;margin-bottom:14px;color:var(--text)}
-.ft-col ul{list-style:none}
-.ft-col ul li{margin-bottom:10px}
-.ft-col ul li a{color:var(--text3);font-size:.82rem;text-decoration:none;transition:color .2s}
-.ft-col ul li a:hover{color:var(--gold)}
-.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border2);padding-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:.76rem;color:var(--text4)}
-
-/* ══ REVEAL ══ */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
-
-/* ══ RESPONSIVE ══ */
-@media(max-width:1024px){
-  .mock-content{grid-template-columns:1fr 1fr}
-  .mock-sidebar{display:none}
-  .features-grid{grid-template-columns:1fr 1fr}
-  .steps-grid{grid-template-columns:1fr 1fr}
-  .steps-grid::before{display:none}
-  .price-feats-grid{grid-template-columns:1fr 1fr}
+.logo-name{font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900;color:var(--text)}
+.logo-name em{color:var(--gold);font-style:normal}
+.head-sub{font-size:.78rem;color:var(--text3)}
+.tabs{display:flex;border-bottom:1px solid var(--border2)}
+.tab{
+  flex:1;padding:13px;background:none;border:none;
+  font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;
+  color:var(--text3);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .2s;
 }
-@media(max-width:768px){
-  nav{padding:0 4%}.nav-a{display:none}
-  .hero{padding:100px 4% 50px}
-  .test-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .mock-content{display:block;padding:12px}
+.tab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.tab:hover{color:var(--text)}
+.body{padding:22px 24px 24px;background:#ffffff}
+.pane{display:none}.pane.on{display:block}
+.fg{margin-bottom:14px}
+.fl{font-size:.77rem;font-weight:700;color:var(--text2);margin-bottom:6px;display:block}
+.fi{
+  width:100%;padding:11px 13px;
+  background:#f9fafb;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  color:var(--text);
+  font-family:'Cairo',sans-serif;font-size:.88rem;
+  transition:all .2s;
 }
-@media(max-width:540px){
-  .features-grid,.steps-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .price-feats-grid{grid-template-columns:1fr}
-  .hero-title{font-size:2.2rem}
+.fi:focus{
+  border-color:var(--gold);
+  outline:none;
+  background:#fff;
+  box-shadow:0 0 0 3px var(--gold-dim);
 }
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:#f1f5f9}
-::-webkit-scrollbar-thumb{background:rgba(184,151,10,.3);border-radius:3px}
+.fi::placeholder{color:var(--text4)}
+.alert{
+  padding:10px 13px;border-radius:8px;font-size:.78rem;font-weight:600;
+  margin-bottom:14px;display:none;align-items:center;gap:7px;
+}
+.alert.show{display:flex}
+.alert.err{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);color:var(--red)}
+.alert.ok{background:var(--green-dim);border:1px solid rgba(22,163,74,.25);color:var(--green)}
+.btn{
+  width:100%;padding:13px;border-radius:10px;
+  background:var(--gold);
+  border:none;
+  color:#fff;
+  font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:900;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 4px 12px var(--gold-dim);
+}
+.btn:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 16px rgba(184,151,10,.2)}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+.sp{
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.3);border-top-color:#fff;
+  animation:spin .7s linear infinite;display:none;
+}
+.btn.loading .sp{display:block}
+.btn.loading .bt{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sw{text-align:center;font-size:.77rem;color:var(--text3);margin-top:14px}
+.sw a{color:var(--gold);cursor:pointer;font-weight:700}
+.sw a:hover{color:var(--gold-light)}
+.dvd{
+  display:flex;align-items:center;gap:10px;margin:14px 0;
+  font-size:.75rem;color:var(--text4);
+}
+.dvd::before,.dvd::after{content:'';flex:1;height:1px;background:var(--border2)}
+.gg{
+  width:100%;padding:11px;border-radius:10px;
+  background:#f9fafb;
+  border:1.5px solid var(--border);
+  color:var(--text2);
+  font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  cursor:pointer;transition:all .2s;
+}
+.gg:hover{background:#f3f4f6;color:var(--text);border-color:#9ca3af}
+.terms{font-size:.71rem;color:var(--text4);text-align:center;margin-top:12px;line-height:1.6}
+.terms a{color:var(--gold);cursor:pointer}
+.forgot{
+  display:block;text-align:left;font-size:.74rem;
+  color:var(--gold);cursor:pointer;margin-top:5px;
+}
+.forgot:hover{color:var(--gold-light)}
 </style>
 </head>
 <body>
 
-<!-- TICKER -->
-<div class="ticker-wrap" id="ticker">
-  <div class="ticker-inner" id="tickerInner">
-    <span class="ticker-item">✈ وكالات السفر — <strong>نظّم رحلات عملائك</strong> ببضع نقرات</span>
-    <span class="ticker-sep">◆</span>
-    <span class="ticker-item">🏨 شركات السياحة — <strong>تتبع مصاريف الرحلات الجماعية</strong> بسهولة تامة</span>
-    <span class="ticker-sep">◆</span>
-    <span class="ticker-item">💼 مكاتب رحلات العمل — <strong>تقارير PDF احترافية</strong> جاهزة للمحاسبة</span>
-    <span class="ticker-sep">◆</span>
-    <span class="ticker-item">🌍 منظمو الرحلات الجماعية — <strong>مرافقون غير محدودين</strong> بسعر واحد</span>
-    <span class="ticker-sep">◆</span>
-    <span class="ticker-item">🎯 <strong>٢٤٩ درهم فقط</strong> للرحلة الكاملة — بدون اشتراك شهري</span>
-    <span class="ticker-sep">◆</span>
-    <a class="ticker-cta" href="rehla-auth.html">ابدأ الآن ←</a>
-    <span class="ticker-sep">◆</span>
-    <a class="ticker-cta" href="rehla-advertise.html" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)">📢 أعلن هنا — ٦٠ د/يوم</a>
-    <span class="ticker-item">✈ وكالات السفر — <strong>نظّم رحلات عملائك</strong> ببضع نقرات</span>
-    <span class="ticker-sep">◆</span>
-    <span class="ticker-item">🏨 شركات السياحة — <strong>تتبع مصاريف الرحلات الجماعية</strong> بسهولة تامة</span>
-    <span class="ticker-sep">◆</span>
-    <span class="ticker-item">💼 مكاتب رحلات العمل — <strong>تقارير PDF احترافية</strong> جاهزة للمحاسبة</span>
-    <span class="ticker-sep">◆</span>
-    <span class="ticker-item">🌍 منظمو الرحلات الجماعية — <strong>مرافقون غير محدودين</strong> بسعر واحد</span>
-    <span class="ticker-sep">◆</span>
-    <span class="ticker-item">🎯 <strong>٢٤٩ درهم فقط</strong> للرحلة الكاملة — بدون اشتراك شهري</span>
-    <span class="ticker-sep">◆</span>
-    <a class="ticker-cta" href="rehla-auth.html">ابدأ الآن ←</a>
-    <span class="ticker-sep">◆</span>
-    <a class="ticker-cta" href="rehla-advertise.html" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)">📢 أعلن هنا — ٦٠ د/يوم</a>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav id="nav">
-  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <div class="logo-icon">✈</div>
-    <div>
+<div class="card">
+  <div class="head">
+    <div class="logo">
+      <div class="logo-icon">✈</div>
       <div class="logo-name">رحلة<em>+</em></div>
-      <div class="logo-sub">إدارة مصاريف السفر</div>
     </div>
+    <div class="head-sub" id="sub">إدارة مصاريف السفر الجماعي</div>
   </div>
-  <div class="nav-links">
-    <button class="nav-a" onclick="smoothScroll('#features')">المزايا</button>
-    <button class="nav-a" onclick="smoothScroll('#how')">كيف يعمل؟</button>
-    <button class="nav-a" onclick="smoothScroll('#pricing')">الأسعار</button>
-    <button class="nav-a" onclick="smoothScroll('#contact')">تواصل معنا</button>
-    <button class="nav-btn-outline" id="indexLangBtn" onclick="toggleIndexLang()">EN</button>
-    <button class="nav-btn-outline" onclick="window.location.href='rehla-auth.html'">تسجيل الدخول</button>
-    <button class="nav-btn-solid" onclick="window.location.href='rehla-auth.html'">ابدأ رحلة جديدة</button>
+  <div class="tabs" id="tabs">
+    <button class="tab on" id="tL" onclick="go('login')">تسجيل الدخول</button>
+    <button class="tab" id="tR" onclick="go('reg')">حساب جديد</button>
   </div>
-</nav>
+  <div class="body">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-dots"></div>
-  <div class="hero-tag">✈ منصة إدارة مصاريف السفر</div>
-  <h1 class="hero-title">
-    رتّب رحلتك...<br>
-    <span class="line2">
-      واترك
-      <span class="word-swap" id="wordSwap">
-        <span class="word visible" id="w0">الحساب</span>
-        <span class="word" id="w1">الأرقام</span>
-        <span class="word" id="w2">التقارير</span>
-        <span class="word" id="w3">التفاصيل</span>
-      </span>
-      علينا
-    </span>
-  </h1>
-  <p class="hero-sub">أضف أصحابك، سجّل المصاريف، وشوف كل شخص كم دفع وكم عليه — بكل سهولة وشفافية.</p>
-  <div class="hero-btns">
-    <button class="btn-primary" onclick="window.location.href='rehla-auth.html'">+ ابدأ رحلة جديدة مجاناً</button>
-    <button class="btn-secondary" onclick="smoothScroll('#how')">كيف يعمل؟ ←</button>
-  </div>
-  <div class="hero-chips">
-    <div class="chip"><span>📱</span><div><strong>متوافق</strong><small>جميع الأجهزة</small></div></div>
-    <div class="chip"><span>⚡</span><div><strong>فوري</strong><small>تتبع لحظي</small></div></div>
-    <div class="chip"><span>🔒</span><div><strong>آمن</strong><small>صلاحيات محكمة</small></div></div>
-    <div class="chip"><span>🏛</span><div><strong>100%</strong><small>رقمي بالكامل</small></div></div>
-  </div>
-
-  <!-- MOCK -->
-  <div class="hero-visual reveal">
-    <div class="mock-laptop">
-      <div class="mock-bar">
-        <div class="mock-dots">
-          <div class="mock-dot" style="background:#ff5f57"></div>
-          <div class="mock-dot" style="background:#febc2e"></div>
-          <div class="mock-dot" style="background:#28c840"></div>
-        </div>
-        <div style="flex:1;background:#f3f4f6;border-radius:5px;height:20px;margin:0 12px;display:flex;align-items:center;padding:0 10px">
-          <span style="font-size:.62rem;color:var(--text4)">🔒 rehlasaa.com/dashboard</span>
-        </div>
+    <!-- LOGIN -->
+    <div class="pane on" id="pL">
+      <div class="alert" id="aL"></div>
+      <div class="fg">
+        <label class="fl">📧 البريد الإلكتروني</label>
+        <input class="fi" type="email" id="lE" placeholder="example@email.com" autocomplete="email">
       </div>
-      <div class="mock-content">
-        <div class="mock-sidebar">
-          <div class="mock-logo-sm"><div class="ico">✈</div><span>رحلة+</span></div>
-          <div class="mock-trip-badge">
-            <div class="mock-trip-name">🌴 رحلة دبي ▾</div>
-            <div class="mock-trip-meta">٢ مايو — ١٢ مايو · AED</div>
-          </div>
-          <div class="mock-nav-item active">🏠 لوحة الرحلة</div>
-          <div class="mock-nav-item">💳 المصاريف</div>
-          <div class="mock-nav-item">📊 الملخص المالي</div>
-          <div class="mock-nav-item">🧮 تصفية الحساب</div>
-          <div class="mock-nav-item">📄 التقرير</div>
-          <div class="mock-nav-item">🔗 مشاركة الرحلة</div>
-        </div>
-        <div class="mock-main">
-          <div class="mock-trip-hd">
-            <div class="mock-trip-thumb">🌴</div>
-            <div>
-              <div class="mock-trip-nm">رحلة دبي صيف ٢٠٢٥</div>
-              <div class="mock-trip-mt">
-                <div class="mock-mt-item"><b>الوجهة</b>دبي</div>
-                <div class="mock-mt-item"><b>التاريخ</b>2025/06/15</div>
-                <div class="mock-mt-item"><b>الأعضاء</b>5</div>
-              </div>
-            </div>
-            <div class="mock-total"><div class="mock-total-lbl">إجمالي</div><div class="mock-total-val">2,450</div></div>
-          </div>
-          <div class="mock-stats">
-            <div class="mock-stat"><div class="mock-stat-val">2,450</div><div class="mock-stat-lbl">إجمالي</div></div>
-            <div class="mock-stat"><div class="mock-stat-val" style="color:var(--text2)">5</div><div class="mock-stat-lbl">أعضاء</div></div>
-            <div class="mock-stat"><div class="mock-stat-val" style="color:var(--text2)">490</div><div class="mock-stat-lbl">للشخص</div></div>
-          </div>
-          <div class="mock-exp-row"><div class="mock-exp-cat">🏨</div><div style="flex:1"><div class="mock-exp-nm">فندق ليلتين</div><div class="mock-exp-who">دفع: محمد</div></div><div class="mock-exp-amt">800</div></div>
-          <div class="mock-exp-row"><div class="mock-exp-cat">✈</div><div style="flex:1"><div class="mock-exp-nm">تذاكر الطيران</div><div class="mock-exp-who">دفع: أحمد</div></div><div class="mock-exp-amt">1,200</div></div>
-          <div class="mock-exp-row"><div class="mock-exp-cat">🍽</div><div style="flex:1"><div class="mock-exp-nm">عشاء اليوم الأول</div><div class="mock-exp-who">دفع: سارة</div></div><div class="mock-exp-amt">250</div></div>
-        </div>
-        <div class="mock-summary">
-          <div class="mock-sum-ttl">📊 الملخص المالي</div>
-          <div class="mock-sum-row"><span class="mock-nm">محمد</span><span class="pos">+310</span></div>
-          <div class="mock-sum-row"><span class="mock-nm">أحمد</span><span class="pos">+710</span></div>
-          <div class="mock-sum-row"><span class="mock-nm">سارة</span><span class="neg">-240</span></div>
-          <div class="mock-sum-row"><span class="mock-nm">خالد</span><span class="neg">-290</span></div>
-          <div class="mock-sum-row"><span class="mock-nm">يوسف</span><span class="neg">-490</span></div>
-          <div class="mock-settle-btn">🧮 تصفية الحساب</div>
-        </div>
+      <div class="fg">
+        <label class="fl">🔒 كلمة المرور</label>
+        <input class="fi" type="password" id="lP" placeholder="••••••••" autocomplete="current-password">
+        <span class="forgot" onclick="go('reset')">نسيت كلمة المرور؟</span>
+      </div>
+      <button class="btn" id="bL" onclick="doLogin()"><div class="sp"></div><span class="bt">دخول ←</span></button>
+      <div class="dvd">أو</div>
+      <button class="gg" onclick="doGoogle()">
+        <svg width="16" height="16" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
+        الدخول بـ Google
+      </button>
+      <div class="sw">ليس لديك حساب؟ <a onclick="go('reg')">سجّل الآن</a></div>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="pane" id="pR">
+      <div class="alert" id="aR"></div>
+      <div class="fg">
+        <label class="fl">👤 الاسم الكامل</label>
+        <input class="fi" type="text" id="rN" placeholder="محمد العامري">
+      </div>
+      <div class="fg">
+        <label class="fl">📱 رقم الواتساب</label>
+        <input class="fi" type="tel" id="rPh" placeholder="+971 50 000 0000">
+      </div>
+      <div class="fg">
+        <label class="fl">📧 البريد الإلكتروني</label>
+        <input class="fi" type="email" id="rE" placeholder="example@email.com" autocomplete="email">
+      </div>
+      <div class="fg">
+        <label class="fl">🔒 كلمة المرور (٨ أحرف على الأقل)</label>
+        <input class="fi" type="password" id="rP" placeholder="••••••••" autocomplete="new-password">
+      </div>
+      <button class="btn" id="bR" onclick="doReg()"><div class="sp"></div><span class="bt">إنشاء الحساب ←</span></button>
+      <div class="dvd">أو</div>
+      <button class="gg" onclick="doGoogle()">
+        <svg width="16" height="16" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
+        التسجيل بـ Google
+      </button>
+      <div class="terms">بالتسجيل أنت توافق على <a href="rehla-terms.html">شروط الخدمة</a> و<a href="rehla-privacy.html">سياسة الخصوصية</a></div>
+      <div class="sw">لديك حساب؟ <a onclick="go('login')">سجّل دخولك</a></div>
+    </div>
+
+    <!-- RESET -->
+    <div class="pane" id="pReset">
+      <div style="color:var(--text3);font-size:.77rem;cursor:pointer;margin-bottom:14px" onclick="go('login')">← العودة</div>
+      <div class="alert" id="aReset"></div>
+      <div class="fg">
+        <label class="fl">📧 البريد الإلكتروني</label>
+        <input class="fi" type="email" id="resetE" placeholder="example@email.com">
+      </div>
+      <button class="btn" id="bReset" onclick="doReset()"><div class="sp"></div><span class="bt">إرسال رابط الاستعادة</span></button>
+    </div>
+
+    <!-- CONFIRM -->
+    <div class="pane" id="pConfirm">
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:3rem;margin-bottom:12px">✉️</div>
+        <div style="font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:8px;color:var(--text)">تحقق من بريدك!</div>
+        <div style="font-size:.8rem;color:var(--text3);line-height:1.7;margin-bottom:20px">أرسلنا رابط تأكيد على بريدك الإلكتروني. افتحه للدخول للتطبيق.</div>
+        <button class="btn" style="max-width:200px;margin:0 auto" onclick="go('login')"><span class="bt">العودة للدخول</span></button>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- FEATURES -->
-<div class="features-wrap" id="features">
-  <div class="section section-center">
-    <div class="s-tag">⚡ المزايا</div>
-    <h2 class="s-title">كل ما تحتاجه لإدارة مصاريف رحلتك</h2>
-    <p class="s-sub">رحلة+ يوفر لك كل الأدوات لإدارة المصاريف الجماعية بكل سهولة وشفافية.</p>
-    <div class="features-grid">
-      <div class="feat-card reveal"><div class="feat-icon">📋</div><h3>سجّل أي مصروف</h3><p>أضف المصروف بسهولة مع تحديد من دفع ومن عليه — فندق، طيران، مطاعم، وأكثر.</p></div>
-      <div class="feat-card reveal d1"><div class="feat-icon">👥</div><h3>أضف أصحابك</h3><p>أضف أعضاء الرحلة وحدد دور كل شخص — مسؤول، عضو، أو مسؤول مصاريف.</p></div>
-      <div class="feat-card reveal d2"><div class="feat-icon">⚡</div><h3>تقسيم تلقائي</h3><p>النظام يقسم المصروف تلقائياً على من عليه — على الجميع أو على أشخاص محددين.</p></div>
-      <div class="feat-card reveal"><div class="feat-icon">🧮</div><h3>تصفية الحساب</h3><p>اعرف من يدفع لمن بأقل عدد تحويلات ممكنة — خوارزمية ذكية تحل المعادلة بثانية.</p></div>
-      <div class="feat-card reveal d1"><div class="feat-icon">📊</div><h3>تقارير واضحة</h3><p>تقارير وملخصات كاملة قابلة للمشاركة والتحميل كـ PDF بضغطة واحدة.</p></div>
-      <div class="feat-card reveal d2"><div class="feat-icon">🔒</div><h3>خصوصية وأمان</h3><p>بيانات رحلتك خاصة بك فقط — ولا تُشارك مع أحد بدون إذنك.</p></div>
-    </div>
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
-<div class="how-wrap" id="how">
-  <div class="section section-center">
-    <div class="s-tag">📖 خطوات بسيطة</div>
-    <h2 class="s-title">كيف تعمل رحلة+؟</h2>
-    <p class="s-sub">أربع خطوات وحساباتك واضحة من أول يوم للرحلة.</p>
-    <div class="steps-grid">
-      <div class="step reveal"><div class="step-num">١</div><div class="step-icon">✈</div><h3>أنشئ رحلتك</h3><p>أضف اسم الرحلة، الوجهة، التواريخ، والعملة</p></div>
-      <div class="step reveal d1"><div class="step-num">٢</div><div class="step-icon">👥</div><h3>أضف الأعضاء</h3><p>أضف كل من يشارك وأرسل لهم رابط الانضمام</p></div>
-      <div class="step reveal d2"><div class="step-num">٣</div><div class="step-icon">💳</div><h3>سجّل المصاريف</h3><p>أضف كل مصروف مع من دفعه وعلى من يوزَّع</p></div>
-      <div class="step reveal d3"><div class="step-num">٤</div><div class="step-icon">🧮</div><h3>صفّي الحساب</h3><p>اضغط تصفية واحصل على أقل تحويلات ممكنة</p></div>
-    </div>
-  </div>
+<div style="text-align:center;margin-top:16px;font-size:.72rem;color:var(--text4)">
+  © ٢٠٢٦ رحلة+ · <a href="index.html" style="color:var(--gold)">الرئيسية</a>
 </div>
 
-<!-- PRICING -->
-<div class="pricing-wrap" id="pricing">
-  <div style="max-width:1100px;margin:0 auto">
-    <div style="text-align:center;margin-bottom:48px">
-      <div class="s-tag">💳 السعر</div>
-      <h2 class="s-title">ادفع للرحلة — مش للاشتراك</h2>
-      <p class="s-sub" style="margin:0 auto">سعر ثابت واحد للرحلة الكاملة بغض النظر عن عدد المرافقين.</p>
-    </div>
-    <div class="price-card-main reveal">
-      <div class="price-top">
-        <div>
-          <div class="price-badge-top">✈ رحلة كاملة — كل المزايا</div>
-          <div class="price-title">كل شيء — رحلة واحدة</div>
-          <div class="price-desc">ادفع مرة واحدة وافتح كل المزايا — من أول مصروف حتى تحميل التقرير النهائي.</div>
-        </div>
-        <div style="text-align:center;flex-shrink:0">
-          <div style="font-size:.85rem;color:var(--text4);margin-bottom:4px">إجمالي الدفع</div>
-          <div class="price-amount">249</div>
-          <div class="price-curr">درهم إماراتي</div>
-          <div class="price-once">✓ دفعة واحدة فقط</div>
-        </div>
-      </div>
-      <div class="price-body">
-        <div style="font-size:.75rem;font-weight:800;color:var(--text4);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px">ماذا تحصل عليه؟</div>
-        <div class="price-feats-grid">
-          <div class="price-feat"><div class="price-feat-ico">🧮</div><div><strong>تصفية الحساب الذكية</strong><span>أقل عدد تحويلات ممكنة</span></div></div>
-          <div class="price-feat"><div class="price-feat-ico">📄</div><div><strong>تقرير PDF احترافي</strong><span>قابل للتحميل والمشاركة</span></div></div>
-          <div class="price-feat"><div class="price-feat-ico">📸</div><div><strong>رفع الإيصالات</strong><span>مرتبطة بكل مصروف</span></div></div>
-          <div class="price-feat"><div class="price-feat-ico">💬</div><div><strong>إشعارات واتساب</strong><span>لكل مرافق تلقائياً</span></div></div>
-          <div class="price-feat"><div class="price-feat-ico">🔗</div><div><strong>رابط مشاركة + QR</strong><span>رابط خاص لكل مرافق</span></div></div>
-          <div class="price-feat"><div class="price-feat-ico">👥</div><div><strong>مرافقون غير محدودين</strong><span>بدون قيود على العدد</span></div></div>
-          <div class="price-feat"><div class="price-feat-ico">📊</div><div><strong>رسوم بيانية تفاعلية</strong><span>توزيع المصاريف بالفئات</span></div></div>
-          <div class="price-feat"><div class="price-feat-ico">🗄</div><div><strong>أرشيف مدى الحياة</strong><span>رحلتك محفوظة للأبد</span></div></div>
-        </div>
-        <div class="price-cta-row">
-          <button class="btn-price-main" onclick="window.location.href='rehla-auth.html'">🚀 ابدأ رحلتك الآن — ٢٤٩ درهم</button>
-          <div class="price-note"><strong style="color:var(--text2);display:block;margin-bottom:2px">🔒 دفع آمن بـ Stripe</strong>سجّل وأضف المرافقين مجاناً — الدفع عند تأكيد الرحلة.</div>
-        </div>
-      </div>
-    </div>
-    <div class="price-checks">
-      <div class="price-check"><span class="ck">✓</span> بدون اشتراك شهري</div>
-      <div class="price-check"><span class="ck">✓</span> ادفع مرة واحدة فقط</div>
-      <div class="price-check"><span class="ck">✓</span> يعمل على الهاتف بدون تطبيق</div>
-    </div>
-  </div>
-</div>
-
-<!-- TESTIMONIALS -->
-<div class="test-wrap">
-  <div style="max-width:1100px;margin:0 auto;text-align:center">
-    <div class="s-tag">💬 آراء المستخدمين</div>
-    <h2 class="s-title">ماذا يقولون عن رحلة+؟</h2>
-    <div class="test-grid">
-      <div class="test-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"كنا ندور على ورقة وقلم في كل رحلة — رحلة+ حل المشكلة من أول يوم. الحساب واضح وما فيه أي لخبطة."</p><div class="test-author"><div class="test-av">م</div><div><div class="test-name">محمد العامري</div><div class="test-role">مسافر متكرر — دبي</div></div></div></div>
-      <div class="test-card reveal d1"><div class="test-stars">★★★★★</div><p class="test-text">"استخدمناه في رحلة ٨ أشخاص لتركيا. أفضل أداة جربتها لإدارة المصاريف الجماعية بدون أي توتر."</p><div class="test-author"><div class="test-av">س</div><div><div class="test-name">سارة الزهراني</div><div class="test-role">مدونة سفر — الرياض</div></div></div></div>
-      <div class="test-card reveal d2"><div class="test-stars">★★★★★</div><p class="test-text">"ميزة التصفية رهيبة — بدل ما كل شخص يحوّل لكل شخص، يعطيك ٣ تحويلات بس وخلاص!"</p><div class="test-author"><div class="test-av">خ</div><div><div class="test-name">خالد المطيري</div><div class="test-role">مهندس — الكويت</div></div></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- CTA -->
-<div class="cta-wrap" id="contact">
-  <div class="cta-inner">
-    <h2 class="cta-title">جاهز تنطلق؟</h2>
-    <p class="cta-sub">أنشئ رحلتك الأولى في أقل من دقيقة</p>
-    <button class="btn-cta" onclick="window.location.href='rehla-auth.html'">+ ابدأ الآن ←</button>
-    <div class="cta-note">✓ بدون تسجيل دخول معقد &nbsp;•&nbsp; ✓ مجاني للتجربة</div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div class="ft-brand">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <div class="logo-icon" style="width:32px;height:32px;font-size:.9rem">✈</div>
-        <span class="logo-name">رحلة<em>+</em></span>
-      </div>
-      <p>أفضل طريقة لإدارة مصاريف السفر الجماعي — بدون توتر، بدون لخبطة.</p>
-    </div>
-    <div class="ft-col"><h4>المنتج</h4><ul><li><a href="#">المزايا</a></li><li><a href="#">كيف يعمل</a></li><li><a href="#">الأسعار</a></li></ul></div>
-    <div class="ft-col"><h4>الشركة</h4><ul><li><a href="#">من نحن</a></li><li><a href="#">تواصل معنا</a></li></ul></div>
-    <div class="ft-col"><h4>قانوني</h4><ul><li><a href="rehla-terms.html">الشروط والأحكام</a></li><li><a href="rehla-privacy.html">سياسة الخصوصية</a></li></ul></div>
-  </div>
-  <div class="footer-bottom">
-    <span>© ٢٠٢٦ رحلة+ — جميع الحقوق محفوظة</span>
-    <span>صُنع بـ ❤ في الإمارات</span>
-  </div>
-</footer>
-
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>30));
-function smoothScroll(sel){document.querySelector(sel)?.scrollIntoView({behavior:'smooth'})}
-const obs=new IntersectionObserver(en=>en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('load', function() {
+  const SURL = 'https://pokpdwvqecwjfxoraqjd.supabase.co';
+  const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
+  if (!window.supabase) { console.error('Supabase not loaded'); return; }
+  const sb = window.supabase.createClient(SURL, SKEY, {
+    auth: { autoRefreshToken:true, persistSession:true, detectSessionInUrl:true, flowType:'implicit' }
+  });
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (session) location.href = 'rehla-dashboard.html';
+  });
 
-const words=['الحساب','الأرقام','التقارير','التفاصيل'];
-let wIdx=0;
-function swapWord(){
-  document.getElementById('w'+wIdx).classList.remove('visible');
-  wIdx=(wIdx+1)%words.length;
-  setTimeout(()=>document.getElementById('w'+wIdx).classList.add('visible'),500);
-}
-setInterval(swapWord,2800);
-
-let indexLang=localStorage.getItem('rehla_lang')||'ar';
-document.addEventListener('DOMContentLoaded',()=>{
-  if(indexLang==='en')document.getElementById('indexLangBtn').textContent='ع';
-  loadAnnouncement();
-});
-function toggleIndexLang(){
-  indexLang=indexLang==='ar'?'en':'ar';
-  localStorage.setItem('rehla_lang',indexLang);
-  sessionStorage.setItem('rehla_lang',indexLang);
-  document.getElementById('indexLangBtn').textContent=indexLang==='ar'?'EN':'ع';
-}
-
-async function loadAnnouncement(){
-  try{
-    const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
-    const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
-    const res=await fetch(`${SURL}/rest/v1/announcements?is_active=eq.true&order=created_at.desc&limit=1`,{
-      headers:{'apikey':SKEY,'Authorization':'Bearer '+SKEY,'Content-Type':'application/json'}
+  window.go = function(tab) {
+    ['pL','pR','pReset','pConfirm'].forEach(p => {
+      const el=document.getElementById(p); if(el) el.classList.remove('on');
     });
-    if(!res.ok)return;
-    const data=await res.json();
-    if(!data||!data.length)return;
-    const ann=data[0];
-    if(ann.expires_at&&new Date(ann.expires_at)<new Date())return;
-    injectAnnouncement(ann);
-  }catch(e){console.log('ann:',e)}
-}
-
-function injectAnnouncement(ann){
-  const ticker=document.getElementById('tickerInner');
-  if(!ticker||!ann.text)return;
-  const makeItem=()=>{
-    const item=document.createElement('span');
-    item.className='ticker-item';
-    item.style.cssText='font-weight:800;';
-    const inner=ann.link
-      ?`📢 <a href="${ann.link}" style="color:#fff;text-decoration:none;font-weight:800">${ann.text} ←</a>`
-      :`📢 <strong style="color:#fff">${ann.text}</strong>`;
-    item.innerHTML=inner;
-    return item;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+    document.getElementById('tabs').style.display = (tab==='reset'||tab==='confirm') ? 'none' : 'flex';
+    if(tab==='login'){
+      document.getElementById('pL').classList.add('on');
+      document.getElementById('tL').classList.add('on');
+      document.getElementById('sub').textContent='أهلاً بعودتك 👋';
+    } else if(tab==='reg'){
+      document.getElementById('pR').classList.add('on');
+      document.getElementById('tR').classList.add('on');
+      document.getElementById('sub').textContent='سجّل حسابك مجاناً';
+    } else if(tab==='reset'){
+      document.getElementById('pReset').classList.add('on');
+    } else if(tab==='confirm'){
+      document.getElementById('pConfirm').classList.add('on');
+    }
+    clearAlerts();
   };
-  const makeSep=()=>{const s=document.createElement('span');s.className='ticker-sep';s.textContent='◆';return s;};
-  ticker.prepend(makeSep());
-  ticker.prepend(makeItem());
-  const items=ticker.querySelectorAll('.ticker-item');
-  const mid=Math.floor(items.length/2);
-  if(items[mid]){ticker.insertBefore(makeSep(),items[mid]);ticker.insertBefore(makeItem(),items[mid]);}
-}
+
+  function showAlert(id, msg, type='err') {
+    const el=document.getElementById(id); if(!el) return;
+    el.textContent=msg; el.className=`alert show ${type}`;
+  }
+  function clearAlerts() {
+    document.querySelectorAll('.alert').forEach(a => a.classList.remove('show'));
+  }
+  function setLoad(id, v) {
+    const b=document.getElementById(id); if(!b) return;
+    b.classList.toggle('loading',v); b.disabled=v;
+  }
+  function isEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+  window.doLogin = async function() {
+    const email=document.getElementById('lE').value.trim();
+    const pass=document.getElementById('lP').value;
+    if(!email||!pass){showAlert('aL','⚠️ يرجى ملء جميع الحقول');return}
+    if(!isEmail(email)){showAlert('aL','⚠️ البريد الإلكتروني غير صحيح');return}
+    setLoad('bL',true); clearAlerts();
+    try {
+      const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+      if(error)throw error;
+      showAlert('aL','✅ تم تسجيل الدخول — جاري التحويل...','ok');
+      setTimeout(()=>location.href='rehla-dashboard.html',800);
+    } catch(e) {
+      const msg=e.message.includes('Invalid')?'❌ البريد أو كلمة المرور غير صحيحة':
+        e.message.includes('Email not confirmed')?'📧 يرجى تأكيد بريدك الإلكتروني أولاً':'❌ '+e.message;
+      showAlert('aL',msg);
+    } finally {setLoad('bL',false);}
+  };
+
+  window.doReg = async function() {
+    const name=document.getElementById('rN').value.trim();
+    const phone=document.getElementById('rPh').value.trim();
+    const email=document.getElementById('rE').value.trim();
+    const pass=document.getElementById('rP').value;
+    if(!name||!email||!pass){showAlert('aR','⚠️ يرجى ملء الحقول المطلوبة');return}
+    if(!isEmail(email)){showAlert('aR','⚠️ البريد الإلكتروني غير صحيح');return}
+    if(pass.length<8){showAlert('aR','⚠️ كلمة المرور يجب أن تكون ٨ أحرف على الأقل');return}
+    setLoad('bR',true); clearAlerts();
+    try {
+      const {data,error}=await sb.auth.signUp({
+        email, password:pass,
+        options:{data:{full_name:name,phone},emailRedirectTo:'https://rehlasaa.com/rehla-auth.html'}
+      });
+      if(error)throw error;
+      if(data.user&&!data.session){go('confirm');}
+      else{
+        showAlert('aR','✅ تم إنشاء الحساب — جاري التحويل...','ok');
+        setTimeout(()=>location.href='rehla-dashboard.html',800);
+      }
+    } catch(e) {
+      const msg=e.message.includes('already')?'⚠️ هذا البريد مسجل بالفعل — جرّب تسجيل الدخول':'❌ '+e.message;
+      showAlert('aR',msg);
+    } finally {setLoad('bR',false);}
+  };
+
+  window.doGoogle = async function() {
+    try {
+      const {error}=await sb.auth.signInWithOAuth({
+        provider:'google',
+        options:{redirectTo:'https://rehlasaa.com/rehla-dashboard.html'}
+      });
+      if(error)throw error;
+    } catch(e) {showAlert('aL','❌ '+e.message);}
+  };
+
+  window.doReset = async function() {
+    const email=document.getElementById('resetE').value.trim();
+    if(!email){showAlert('aReset','⚠️ يرجى إدخال بريدك الإلكتروني');return}
+    setLoad('bReset',true); clearAlerts();
+    try {
+      const {error}=await sb.auth.resetPasswordForEmail(email,{
+        redirectTo:'https://rehlasaa.com/rehla-reset.html'
+      });
+      if(error)throw error;
+      showAlert('aReset','✅ تم إرسال رابط الاستعادة — راجع بريدك','ok');
+    } catch(e) {showAlert('aReset','❌ '+e.message);}
+    finally{setLoad('bReset',false);}
+  };
+
+  document.getElementById('lP').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+  document.getElementById('rP').addEventListener('keydown',e=>{if(e.key==='Enter')doReg();});
+});
 </script>
 </body>
 </html>
