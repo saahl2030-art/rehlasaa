@@ -7,71 +7,164 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --gold:#f59e0b;--gold-light:#fcd34d;
-  --gold-dim:rgba(245,158,11,.1);--gold-border:rgba(245,158,11,.25);
+  --gold:#c9a227;
+  --gold-light:#ddb828;
+  --gold-dim:rgba(201,162,39,.1);
+  --gold-border:rgba(201,162,39,.3);
+  --green:#16a34a;
+  --green-dim:rgba(22,163,74,.12);
+  --red:#dc2626;
+  --red-dim:rgba(220,38,38,.12);
+  --text:#1a1a2e;
+  --text2:#374151;
+  --text3:#6b7280;
+  --text4:#9ca3af;
+  --border:rgba(0,0,0,.1);
+  --border2:rgba(0,0,0,.07);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Cairo',sans-serif;min-height:100vh;background:linear-gradient(160deg,#060e2e,#0a1628,#0d1f4e);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;color:#fff}
-.card{background:rgba(255,255,255,.07);border:1px solid rgba(245,158,11,.2);border-radius:20px;width:100%;max-width:420px;overflow:hidden;backdrop-filter:blur(20px)}
-.head{background:rgba(255,255,255,.05);padding:24px;text-align:center;border-bottom:1px solid rgba(245,158,11,.15)}
+body{
+  font-family:'Cairo',sans-serif;
+  min-height:100vh;
+  background:linear-gradient(160deg,#f0f2f5 0%,#f5f7fa 60%,#eef0f3 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;color:var(--text);
+}
+.card{
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  width:100%;max-width:420px;
+  overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+}
+.head{
+  background:#fef9ed;
+  padding:24px;text-align:center;
+  border-bottom:1px solid var(--gold-border);
+}
 .logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}
-.logo-icon{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
-.logo-name{font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900}
+.logo-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;
+  box-shadow:0 4px 12px var(--gold-dim);
+}
+.logo-name{font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900;color:var(--text)}
 .logo-name em{color:var(--gold);font-style:normal}
-.tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.08)}
-.tab{flex:1;padding:13px;background:none;border:none;font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.head-sub{font-size:.78rem;color:var(--text3)}
+.tabs{display:flex;border-bottom:1px solid var(--border2)}
+.tab{
+  flex:1;padding:13px;background:none;border:none;
+  font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;
+  color:var(--text3);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .2s;
+}
 .tab.on{color:var(--gold);border-bottom-color:var(--gold)}
-.body{padding:22px 24px 24px}
+.tab:hover{color:var(--text)}
+.body{padding:22px 24px 24px;background:#ffffff}
 .pane{display:none}.pane.on{display:block}
 .fg{margin-bottom:14px}
-.fl{font-size:.77rem;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:6px;display:block}
-.fi{width:100%;padding:11px 13px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;font-family:'Cairo',sans-serif;font-size:.88rem;transition:all .2s}
-.fi:focus{border-color:var(--gold-border);outline:none;background:rgba(255,255,255,.1);box-shadow:0 0 0 3px var(--gold-dim)}
-.fi::placeholder{color:rgba(255,255,255,.3)}
-.alert{padding:10px 13px;border-radius:8px;font-size:.78rem;font-weight:600;margin-bottom:14px;display:none;align-items:center;gap:7px}
+.fl{font-size:.77rem;font-weight:700;color:var(--text2);margin-bottom:6px;display:block}
+.fi{
+  width:100%;padding:11px 13px;
+  background:#f9fafb;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  color:var(--text);
+  font-family:'Cairo',sans-serif;font-size:.88rem;
+  transition:all .2s;
+}
+.fi:focus{
+  border-color:var(--gold);
+  outline:none;
+  background:#fff;
+  box-shadow:0 0 0 3px var(--gold-dim);
+}
+.fi::placeholder{color:var(--text4)}
+.alert{
+  padding:10px 13px;border-radius:8px;font-size:.78rem;font-weight:600;
+  margin-bottom:14px;display:none;align-items:center;gap:7px;
+}
 .alert.show{display:flex}
-.alert.err{background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.3);color:#f87171}
-.alert.ok{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#4ade80}
-.btn{width:100%;padding:13px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:900;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn:hover{background:rgba(245,158,11,.15);color:var(--gold-light);border-color:rgba(245,158,11,.5);transform:translateY(-1px)}
-.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.sp{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.3);border-top-color:var(--gold);animation:spin .7s linear infinite;display:none}
+.alert.err{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);color:var(--red)}
+.alert.ok{background:var(--green-dim);border:1px solid rgba(22,163,74,.25);color:var(--green)}
+.btn{
+  width:100%;padding:13px;border-radius:10px;
+  background:var(--gold);
+  border:none;
+  color:#fff;
+  font-family:'Cairo',sans-serif;font-size:.95rem;font-weight:900;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 4px 12px var(--gold-dim);
+}
+.btn:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 16px rgba(201,162,39,.2)}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+.sp{
+  width:16px;height:16px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.3);border-top-color:#fff;
+  animation:spin .7s linear infinite;display:none;
+}
 .btn.loading .sp{display:block}
 .btn.loading .bt{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
-.sw{text-align:center;font-size:.77rem;color:rgba(255,255,255,.5);margin-top:14px}
+.sw{text-align:center;font-size:.77rem;color:var(--text3);margin-top:14px}
 .sw a{color:var(--gold);cursor:pointer;font-weight:700}
-.dvd{display:flex;align-items:center;gap:10px;margin:14px 0;font-size:.75rem;color:rgba(255,255,255,.3)}
-.dvd::before,.dvd::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
-.gg{width:100%;padding:11px;border-radius:10px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s}
-.gg:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
-.terms{font-size:.71rem;color:rgba(255,255,255,.4);text-align:center;margin-top:12px;line-height:1.6}
+.sw a:hover{color:var(--gold-light)}
+.dvd{
+  display:flex;align-items:center;gap:10px;margin:14px 0;
+  font-size:.75rem;color:var(--text4);
+}
+.dvd::before,.dvd::after{content:'';flex:1;height:1px;background:var(--border2)}
+.gg{
+  width:100%;padding:11px;border-radius:10px;
+  background:#f9fafb;
+  border:1.5px solid var(--border);
+  color:var(--text2);
+  font-family:'Cairo',sans-serif;font-size:.88rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  cursor:pointer;transition:all .2s;
+}
+.gg:hover{background:#f3f4f6;color:var(--text);border-color:#9ca3af}
+.terms{font-size:.71rem;color:var(--text4);text-align:center;margin-top:12px;line-height:1.6}
 .terms a{color:var(--gold);cursor:pointer}
-.forgot{display:block;text-align:left;font-size:.74rem;color:var(--gold);cursor:pointer;margin-top:5px}
+.forgot{
+  display:block;text-align:left;font-size:.74rem;
+  color:var(--gold);cursor:pointer;margin-top:5px;
+}
+.forgot:hover{color:var(--gold-light)}
 </style>
 </head>
 <body>
+
 <div class="card">
   <div class="head">
     <div class="logo">
       <div class="logo-icon">✈</div>
       <div class="logo-name">رحلة<em>+</em></div>
     </div>
-    <div style="font-size:.78rem;color:rgba(255,255,255,.5)" id="sub">إدارة مصاريف السفر الجماعي</div>
+    <div class="head-sub" id="sub">إدارة مصاريف السفر الجماعي</div>
   </div>
   <div class="tabs" id="tabs">
     <button class="tab on" id="tL" onclick="go('login')">تسجيل الدخول</button>
     <button class="tab" id="tR" onclick="go('reg')">حساب جديد</button>
   </div>
   <div class="body">
+
     <!-- LOGIN -->
     <div class="pane on" id="pL">
       <div class="alert" id="aL"></div>
-      <div class="fg"><label class="fl">📧 البريد الإلكتروني</label>
-        <input class="fi" type="email" id="lE" placeholder="example@email.com" autocomplete="email"></div>
-      <div class="fg"><label class="fl">🔒 كلمة المرور</label>
+      <div class="fg">
+        <label class="fl">📧 البريد الإلكتروني</label>
+        <input class="fi" type="email" id="lE" placeholder="example@email.com" autocomplete="email">
+      </div>
+      <div class="fg">
+        <label class="fl">🔒 كلمة المرور</label>
         <input class="fi" type="password" id="lP" placeholder="••••••••" autocomplete="current-password">
-        <span class="forgot" onclick="go('reset')">نسيت كلمة المرور؟</span></div>
+        <span class="forgot" onclick="go('reset')">نسيت كلمة المرور؟</span>
+      </div>
       <button class="btn" id="bL" onclick="doLogin()"><div class="sp"></div><span class="bt">دخول ←</span></button>
       <div class="dvd">أو</div>
       <button class="gg" onclick="doGoogle()">
@@ -80,17 +173,26 @@ body{font-family:'Cairo',sans-serif;min-height:100vh;background:linear-gradient(
       </button>
       <div class="sw">ليس لديك حساب؟ <a onclick="go('reg')">سجّل الآن</a></div>
     </div>
+
     <!-- REGISTER -->
     <div class="pane" id="pR">
       <div class="alert" id="aR"></div>
-      <div class="fg"><label class="fl">👤 الاسم الكامل</label>
-        <input class="fi" type="text" id="rN" placeholder="محمد العامري"></div>
-      <div class="fg"><label class="fl">📱 رقم الواتساب</label>
-        <input class="fi" type="tel" id="rPh" placeholder="+971 50 000 0000"></div>
-      <div class="fg"><label class="fl">📧 البريد الإلكتروني</label>
-        <input class="fi" type="email" id="rE" placeholder="example@email.com" autocomplete="email"></div>
-      <div class="fg"><label class="fl">🔒 كلمة المرور (٨ أحرف على الأقل)</label>
-        <input class="fi" type="password" id="rP" placeholder="••••••••" autocomplete="new-password"></div>
+      <div class="fg">
+        <label class="fl">👤 الاسم الكامل</label>
+        <input class="fi" type="text" id="rN" placeholder="محمد العامري">
+      </div>
+      <div class="fg">
+        <label class="fl">📱 رقم الواتساب</label>
+        <input class="fi" type="tel" id="rPh" placeholder="+971 50 000 0000">
+      </div>
+      <div class="fg">
+        <label class="fl">📧 البريد الإلكتروني</label>
+        <input class="fi" type="email" id="rE" placeholder="example@email.com" autocomplete="email">
+      </div>
+      <div class="fg">
+        <label class="fl">🔒 كلمة المرور (٨ أحرف على الأقل)</label>
+        <input class="fi" type="password" id="rP" placeholder="••••••••" autocomplete="new-password">
+      </div>
       <button class="btn" id="bR" onclick="doReg()"><div class="sp"></div><span class="bt">إنشاء الحساب ←</span></button>
       <div class="dvd">أو</div>
       <button class="gg" onclick="doGoogle()">
@@ -100,97 +202,151 @@ body{font-family:'Cairo',sans-serif;min-height:100vh;background:linear-gradient(
       <div class="terms">بالتسجيل أنت توافق على <a href="rehla-terms.html">شروط الخدمة</a> و<a href="rehla-privacy.html">سياسة الخصوصية</a></div>
       <div class="sw">لديك حساب؟ <a onclick="go('login')">سجّل دخولك</a></div>
     </div>
+
     <!-- RESET -->
     <div class="pane" id="pReset">
-      <div style="color:rgba(255,255,255,.5);font-size:.77rem;cursor:pointer;margin-bottom:14px" onclick="go('login')">← العودة</div>
+      <div style="color:var(--text3);font-size:.77rem;cursor:pointer;margin-bottom:14px" onclick="go('login')">← العودة</div>
       <div class="alert" id="aReset"></div>
-      <div class="fg"><label class="fl">📧 البريد الإلكتروني</label>
-        <input class="fi" type="email" id="resetE" placeholder="example@email.com"></div>
+      <div class="fg">
+        <label class="fl">📧 البريد الإلكتروني</label>
+        <input class="fi" type="email" id="resetE" placeholder="example@email.com">
+      </div>
       <button class="btn" id="bReset" onclick="doReset()"><div class="sp"></div><span class="bt">إرسال رابط الاستعادة</span></button>
     </div>
+
     <!-- CONFIRM -->
     <div class="pane" id="pConfirm">
       <div style="text-align:center;padding:20px 0">
         <div style="font-size:3rem;margin-bottom:12px">✉️</div>
-        <div style="font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:8px">تحقق من بريدك!</div>
-        <div style="font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:20px">أرسلنا رابط تأكيد على بريدك الإلكتروني. افتحه للدخول للتطبيق.</div>
+        <div style="font-family:'Tajawal',sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:8px;color:var(--text)">تحقق من بريدك!</div>
+        <div style="font-size:.8rem;color:var(--text3);line-height:1.7;margin-bottom:20px">أرسلنا رابط تأكيد على بريدك الإلكتروني. افتحه للدخول للتطبيق.</div>
         <button class="btn" style="max-width:200px;margin:0 auto" onclick="go('login')"><span class="bt">العودة للدخول</span></button>
       </div>
     </div>
+
   </div>
 </div>
-<div style="text-align:center;margin-top:16px;font-size:.72rem;color:rgba(255,255,255,.3)">
-  © ٢٠٢٦ رحلة+ · <a href="index.html" style="color:rgba(245,158,11,.5)">الرئيسية</a>
+
+<div style="text-align:center;margin-top:16px;font-size:.72rem;color:var(--text4)">
+  © ٢٠٢٦ رحلة+ · <a href="index.html" style="color:var(--gold)">الرئيسية</a>
 </div>
+
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 window.addEventListener('load', function() {
   const SURL = 'https://pokpdwvqecwjfxoraqjd.supabase.co';
   const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
   if (!window.supabase) { console.error('Supabase not loaded'); return; }
-  const sb = window.supabase.createClient(SURL, SKEY, { auth: { autoRefreshToken:true, persistSession:true, detectSessionInUrl:true, flowType:'implicit' } });
-  sb.auth.getSession().then(({ data: { session } }) => { if (session) location.href = 'rehla-dashboard.html'; });
+  const sb = window.supabase.createClient(SURL, SKEY, {
+    auth: { autoRefreshToken:true, persistSession:true, detectSessionInUrl:true, flowType:'implicit' }
+  });
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (session) location.href = 'rehla-dashboard.html';
+  });
+
   window.go = function(tab) {
-    ['pL','pR','pReset','pConfirm'].forEach(p => { const el=document.getElementById(p); if(el) el.classList.remove('on'); });
+    ['pL','pR','pReset','pConfirm'].forEach(p => {
+      const el=document.getElementById(p); if(el) el.classList.remove('on');
+    });
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
     document.getElementById('tabs').style.display = (tab==='reset'||tab==='confirm') ? 'none' : 'flex';
-    if(tab==='login'){document.getElementById('pL').classList.add('on');document.getElementById('tL').classList.add('on');document.getElementById('sub').textContent='أهلاً بعودتك 👋';}
-    else if(tab==='reg'){document.getElementById('pR').classList.add('on');document.getElementById('tR').classList.add('on');document.getElementById('sub').textContent='سجّل حسابك مجاناً';}
-    else if(tab==='reset'){document.getElementById('pReset').classList.add('on');}
-    else if(tab==='confirm'){document.getElementById('pConfirm').classList.add('on');}
+    if(tab==='login'){
+      document.getElementById('pL').classList.add('on');
+      document.getElementById('tL').classList.add('on');
+      document.getElementById('sub').textContent='أهلاً بعودتك 👋';
+    } else if(tab==='reg'){
+      document.getElementById('pR').classList.add('on');
+      document.getElementById('tR').classList.add('on');
+      document.getElementById('sub').textContent='سجّل حسابك مجاناً';
+    } else if(tab==='reset'){
+      document.getElementById('pReset').classList.add('on');
+    } else if(tab==='confirm'){
+      document.getElementById('pConfirm').classList.add('on');
+    }
     clearAlerts();
   };
-  function showAlert(id, msg, type='err') { const el=document.getElementById(id); if(!el) return; el.textContent=msg; el.className=`alert show ${type}`; }
-  function clearAlerts() { document.querySelectorAll('.alert').forEach(a => a.classList.remove('show')); }
-  function setLoad(id, v) { const b=document.getElementById(id); if(!b) return; b.classList.toggle('loading',v); b.disabled=v; }
+
+  function showAlert(id, msg, type='err') {
+    const el=document.getElementById(id); if(!el) return;
+    el.textContent=msg; el.className=`alert show ${type}`;
+  }
+  function clearAlerts() {
+    document.querySelectorAll('.alert').forEach(a => a.classList.remove('show'));
+  }
+  function setLoad(id, v) {
+    const b=document.getElementById(id); if(!b) return;
+    b.classList.toggle('loading',v); b.disabled=v;
+  }
   function isEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
   window.doLogin = async function() {
-    const email=document.getElementById('lE').value.trim(); const pass=document.getElementById('lP').value;
+    const email=document.getElementById('lE').value.trim();
+    const pass=document.getElementById('lP').value;
     if(!email||!pass){showAlert('aL','⚠️ يرجى ملء جميع الحقول');return}
     if(!isEmail(email)){showAlert('aL','⚠️ البريد الإلكتروني غير صحيح');return}
-    setLoad('bL',true);clearAlerts();
+    setLoad('bL',true); clearAlerts();
     try {
       const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
       if(error)throw error;
       showAlert('aL','✅ تم تسجيل الدخول — جاري التحويل...','ok');
       setTimeout(()=>location.href='rehla-dashboard.html',800);
     } catch(e) {
-      const msg=e.message.includes('Invalid')?'❌ البريد أو كلمة المرور غير صحيحة':e.message.includes('Email not confirmed')?'📧 يرجى تأكيد بريدك الإلكتروني أولاً':'❌ '+e.message;
+      const msg=e.message.includes('Invalid')?'❌ البريد أو كلمة المرور غير صحيحة':
+        e.message.includes('Email not confirmed')?'📧 يرجى تأكيد بريدك الإلكتروني أولاً':'❌ '+e.message;
       showAlert('aL',msg);
     } finally {setLoad('bL',false);}
   };
+
   window.doReg = async function() {
-    const name=document.getElementById('rN').value.trim(); const phone=document.getElementById('rPh').value.trim();
-    const email=document.getElementById('rE').value.trim(); const pass=document.getElementById('rP').value;
+    const name=document.getElementById('rN').value.trim();
+    const phone=document.getElementById('rPh').value.trim();
+    const email=document.getElementById('rE').value.trim();
+    const pass=document.getElementById('rP').value;
     if(!name||!email||!pass){showAlert('aR','⚠️ يرجى ملء الحقول المطلوبة');return}
     if(!isEmail(email)){showAlert('aR','⚠️ البريد الإلكتروني غير صحيح');return}
     if(pass.length<8){showAlert('aR','⚠️ كلمة المرور يجب أن تكون ٨ أحرف على الأقل');return}
-    setLoad('bR',true);clearAlerts();
+    setLoad('bR',true); clearAlerts();
     try {
-      const {data,error}=await sb.auth.signUp({email,password:pass,options:{data:{full_name:name,phone},emailRedirectTo:'https://rehlasaa.com/rehla-auth.html'}});
+      const {data,error}=await sb.auth.signUp({
+        email, password:pass,
+        options:{data:{full_name:name,phone},emailRedirectTo:'https://rehlasaa.com/rehla-auth.html'}
+      });
       if(error)throw error;
       if(data.user&&!data.session){go('confirm');}
-      else{showAlert('aR','✅ تم إنشاء الحساب — جاري التحويل...','ok');setTimeout(()=>location.href='rehla-dashboard.html',800);}
+      else{
+        showAlert('aR','✅ تم إنشاء الحساب — جاري التحويل...','ok');
+        setTimeout(()=>location.href='rehla-dashboard.html',800);
+      }
     } catch(e) {
       const msg=e.message.includes('already')?'⚠️ هذا البريد مسجل بالفعل — جرّب تسجيل الدخول':'❌ '+e.message;
       showAlert('aR',msg);
     } finally {setLoad('bR',false);}
   };
+
   window.doGoogle = async function() {
-    try { const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://rehlasaa.com/rehla-dashboard.html'}}); if(error)throw error; }
-    catch(e) {showAlert('aL','❌ '+e.message);}
+    try {
+      const {error}=await sb.auth.signInWithOAuth({
+        provider:'google',
+        options:{redirectTo:'https://rehlasaa.com/rehla-dashboard.html'}
+      });
+      if(error)throw error;
+    } catch(e) {showAlert('aL','❌ '+e.message);}
   };
+
   window.doReset = async function() {
     const email=document.getElementById('resetE').value.trim();
     if(!email){showAlert('aReset','⚠️ يرجى إدخال بريدك الإلكتروني');return}
-    setLoad('bReset',true);clearAlerts();
+    setLoad('bReset',true); clearAlerts();
     try {
-      const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:'https://rehlasaa.com/rehla-reset.html'});
+      const {error}=await sb.auth.resetPasswordForEmail(email,{
+        redirectTo:'https://rehlasaa.com/rehla-reset.html'
+      });
       if(error)throw error;
       showAlert('aReset','✅ تم إرسال رابط الاستعادة — راجع بريدك','ok');
     } catch(e) {showAlert('aReset','❌ '+e.message);}
     finally{setLoad('bReset',false);}
   };
+
   document.getElementById('lP').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
   document.getElementById('rP').addEventListener('keydown',e=>{if(e.key==='Enter')doReg();});
 });
