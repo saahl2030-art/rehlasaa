@@ -7,32 +7,56 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --gold:#f59e0b;--gold-dim:rgba(245,158,11,.12);--gold-bright:rgba(245,158,11,.28);
-  --green:#22c55e;--green-dim:rgba(34,197,94,.15);
-  --red:#f87171;--red-dim:rgba(248,113,113,.15);
-  --white:#fff;
-  --w70:rgba(255,255,255,.7);--w50:rgba(255,255,255,.5);
-  --w30:rgba(255,255,255,.3);--w15:rgba(255,255,255,.15);--w10:rgba(255,255,255,.1);
-  --w06:rgba(255,255,255,.06);
-  --border:rgba(255,255,255,.12);--border2:rgba(255,255,255,.08);
+  --gold:#b8970a;--gold-light:#d4a827;
+  --gold-dim:rgba(184,151,10,.1);--gold-border:rgba(184,151,10,.3);
+  --green:#16a34a;--green-dim:rgba(22,163,74,.12);
+  --red:#dc2626;--red-dim:rgba(220,38,38,.12);
+  --text:#1a1a2e;--text2:#374151;--text3:#6b7280;--text4:#9ca3af;
+  --bg:#f0f2f5;--bg2:#f5f7fa;
+  --border:rgba(0,0,0,.1);--border2:rgba(0,0,0,.07);
+  --card:#ffffff;
   --r:14px;--rsm:10px;--rxs:7px;
+  --shadow:0 1px 4px rgba(0,0,0,.06);
+  --shadow-md:0 4px 16px rgba(0,0,0,.08);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-tap-highlight-color:transparent;scroll-behavior:smooth}
-body{font-family:'Cairo',sans-serif;background:linear-gradient(160deg,#060e2e 0%,#0a1628 50%,#0d1f4e 100%);min-height:100vh;color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{
+  font-family:'Cairo',sans-serif;
+  background:linear-gradient(160deg,#f0f2f5 0%,#f5f7fa 60%,#eef0f3 100%);
+  min-height:100vh;color:var(--text);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
 input,select,textarea,button{font-family:inherit;border:none;outline:none;-webkit-appearance:none;appearance:none}
 button{cursor:pointer}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:2px}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:rgba(184,151,10,.3);border-radius:2px}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;background:rgba(6,14,46,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2)}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 4%;background:#ffffff;
+  border-bottom:1px solid var(--border2);
+  box-shadow:var(--shadow);
+}
 .nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
-.nav-logo-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:900;color:var(--gold);flex-shrink:0}
-.nav-logo-name{font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:900}
+.nav-logo-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;font-weight:900;color:#fff;flex-shrink:0;
+  box-shadow:0 4px 10px var(--gold-dim);
+}
+.nav-logo-name{font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:900;color:var(--text)}
 .nav-logo-name em{color:var(--gold);font-style:normal}
 .nav-right{display:flex;align-items:center;gap:8px}
-.btn-nav{padding:7px 14px;border-radius:var(--rxs);background:var(--w10);border:1px solid var(--border);color:var(--w70);font-size:.8rem;font-weight:700;transition:all .2s}
-.btn-nav:hover{background:var(--w15);color:var(--white)}
+.btn-nav{
+  padding:7px 14px;border-radius:var(--rxs);
+  background:#f3f4f6;border:1px solid var(--border);
+  color:var(--text2);font-size:.8rem;font-weight:700;transition:all .2s;
+}
+.btn-nav:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
 
 /* PAGE */
 .page{padding:70px 4% 60px;max-width:680px;margin:0 auto;width:100%}
@@ -42,38 +66,66 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
 .stepper-track{display:flex;align-items:center}
 .step-item{display:flex;align-items:center;flex:1}
 .step-item:last-child{flex:none}
-.step-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Tajawal',sans-serif;font-size:.9rem;font-weight:900;border:2px solid var(--border2);background:var(--w10);color:var(--w50);transition:all .4s;flex-shrink:0;z-index:2}
-.step-dot.active{background:rgba(255,255,255,.08);border-color:var(--gold);color:var(--gold);box-shadow:0 4px 16px var(--gold-dim)}
+.step-dot{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Tajawal',sans-serif;font-size:.9rem;font-weight:900;
+  border:2px solid var(--border);background:#f3f4f6;color:var(--text4);
+  transition:all .4s;flex-shrink:0;z-index:2;
+}
+.step-dot.active{
+  background:#fef9ed;border-color:var(--gold);color:var(--gold);
+  box-shadow:0 4px 16px var(--gold-dim);
+}
 .step-dot.done{background:var(--green-dim);border-color:var(--green);color:var(--green)}
 .step-line{flex:1;height:2px;background:var(--border2);overflow:hidden;margin:0 3px}
-.step-line-fill{height:100%;background:linear-gradient(90deg,rgba(245,158,11,.7),var(--green));width:0%;transition:width .6s ease}
+.step-line-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--green));width:0%;transition:width .6s ease}
 .step-meta-row{display:flex;justify-content:space-between;margin-top:12px}
-.step-lbl{font-size:.66rem;font-weight:700;color:var(--w50);flex:1;text-align:center}
+.step-lbl{font-size:.66rem;font-weight:700;color:var(--text4);flex:1;text-align:center}
 .step-lbl:first-child{text-align:right}
 .step-lbl:last-child{text-align:left;flex:none;width:40px}
 .step-lbl.active{color:var(--gold)}
 .step-lbl.done{color:var(--green)}
 .stepper-hd{text-align:center;margin-top:18px}
-.step-title{font-family:'Tajawal',sans-serif;font-size:clamp(1.45rem,5vw,1.95rem);font-weight:900;margin-bottom:4px}
-.step-sub-txt{font-size:.83rem;color:var(--w50)}
+.step-title{font-family:'Tajawal',sans-serif;font-size:clamp(1.45rem,5vw,1.95rem);font-weight:900;margin-bottom:4px;color:var(--text)}
+.step-sub-txt{font-size:.83rem;color:var(--text3)}
 
 /* CARD */
-.card{background:rgba(255,255,255,.1);border:1px solid var(--border);border-radius:var(--r);padding:clamp(14px,4vw,22px);backdrop-filter:blur(12px);margin-bottom:12px}
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:clamp(14px,4vw,22px);
+  box-shadow:var(--shadow);margin-bottom:12px;
+}
 
 /* FORM */
-.f-sec{font-size:.68rem;font-weight:800;color:var(--w50);text-transform:uppercase;letter-spacing:.8px;margin:16px 0 10px;display:flex;align-items:center;gap:8px}
+.f-sec{
+  font-size:.68rem;font-weight:800;color:var(--text4);
+  text-transform:uppercase;letter-spacing:.8px;
+  margin:16px 0 10px;display:flex;align-items:center;gap:8px;
+}
 .f-sec:first-child{margin-top:0}
 .f-sec::after{content:'';flex:1;height:1px;background:var(--border2)}
 .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .f-full{grid-column:1/-1}
 .f-group{margin-bottom:10px}
-.f-lbl{font-size:.76rem;font-weight:700;color:var(--w70);margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.f-lbl{font-size:.76rem;font-weight:700;color:var(--text2);margin-bottom:6px;display:flex;align-items:center;gap:5px}
 .req{color:var(--red);font-size:.7rem}
-.f-inp,.f-sel,.f-ta{width:100%;padding:11px 13px;background:rgba(255,255,255,.08);border:1.5px solid var(--border2);border-radius:var(--rsm);color:var(--white);font-size:.87rem;transition:all .2s}
-.f-inp::placeholder,.f-ta::placeholder{color:var(--w30)}
-.f-inp:focus,.f-sel:focus,.f-ta:focus{border-color:rgba(245,158,11,.5);background:rgba(255,255,255,.12);box-shadow:0 0 0 3px rgba(245,158,11,.12);outline:none}
-.f-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='rgba(255,255,255,.4)' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 12px center;padding-left:30px;cursor:pointer}
-.f-sel option{background:#0a1628}
+.f-inp,.f-sel,.f-ta{
+  width:100%;padding:11px 13px;
+  background:#f9fafb;border:1.5px solid var(--border);
+  border-radius:var(--rsm);color:var(--text);font-size:.87rem;transition:all .2s;
+}
+.f-inp::placeholder,.f-ta::placeholder{color:var(--text4)}
+.f-inp:focus,.f-sel:focus,.f-ta:focus{
+  border-color:var(--gold);background:#fff;
+  box-shadow:0 0 0 3px var(--gold-dim);outline:none;
+}
+.f-sel{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='rgba(0,0,0,.4)' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 12px center;
+  padding-left:30px;cursor:pointer;
+}
+.f-sel option{background:#ffffff;color:var(--text)}
 .f-ta{resize:vertical;min-height:70px;line-height:1.6}
 .f-err{font-size:.7rem;color:var(--red);margin-top:4px;display:none}
 .f-group.err .f-err{display:block}
@@ -81,101 +133,239 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
 
 /* IMAGE */
 .img-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
-.img-av{width:52px;height:52px;border-radius:50%;background:var(--w10);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden;cursor:pointer;transition:all .2s;flex-shrink:0;position:relative}
+.img-av{
+  width:52px;height:52px;border-radius:50%;
+  background:#f3f4f6;border:2px dashed var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;overflow:hidden;cursor:pointer;
+  transition:all .2s;flex-shrink:0;position:relative;
+}
 .img-av:hover{border-color:var(--gold)}
 .img-av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
-.img-badge{position:absolute;bottom:-2px;left:-2px;width:17px;height:17px;border-radius:50%;background:var(--gold);border:2px solid #1a3a8c;display:flex;align-items:center;justify-content:center;font-size:.5rem;color:#060e2e;font-weight:900}
+.img-badge{
+  position:absolute;bottom:-2px;left:-2px;width:17px;height:17px;
+  border-radius:50%;background:var(--gold);border:2px solid #f5f7fa;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.5rem;color:#fff;font-weight:900;
+}
 .img-input{display:none}
-.img-ttl{font-size:.8rem;font-weight:700;margin-bottom:3px}
-.img-hint{font-size:.7rem;color:var(--w50);line-height:1.4}
-.img-btn{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:5px 12px;border-radius:100px;background:var(--w10);border:1px solid var(--border);color:var(--w70);font-size:.7rem;font-weight:700;cursor:pointer;transition:all .2s}
-.img-btn:hover{background:var(--w15);color:var(--white)}
+.img-ttl{font-size:.8rem;font-weight:700;margin-bottom:3px;color:var(--text)}
+.img-hint{font-size:.7rem;color:var(--text3);line-height:1.4}
+.img-btn{
+  display:inline-flex;align-items:center;gap:5px;margin-top:6px;
+  padding:5px 12px;border-radius:100px;
+  background:#f3f4f6;border:1px solid var(--border);
+  color:var(--text2);font-size:.7rem;font-weight:700;cursor:pointer;transition:all .2s;
+}
+.img-btn:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
 
 /* CURRENCY */
 .curr-row{display:flex;align-items:center;gap:9px}
-.curr-flag{width:40px;height:40px;border-radius:9px;background:var(--w10);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.curr-flag{
+  width:40px;height:40px;border-radius:9px;
+  background:#f3f4f6;border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;
+}
 
 /* TOGGLE */
-.toggle-row{display:flex;align-items:center;gap:10px;margin-top:12px;cursor:pointer;padding:9px 14px;border-radius:var(--rxs);border:1px solid var(--border2);background:var(--w06);transition:all .2s;width:100%}
-.toggle-row:hover{border-color:var(--border);background:var(--w10)}
-.tw{width:32px;height:18px;border-radius:100px;background:var(--w30);position:relative;transition:all .25s;flex-shrink:0}
-.tw.on{background:rgba(245,158,11,.7)}
-.tk{position:absolute;top:2px;right:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:all .25s}
+.toggle-row{
+  display:flex;align-items:center;gap:10px;margin-top:12px;cursor:pointer;
+  padding:9px 14px;border-radius:var(--rxs);
+  border:1px solid var(--border2);background:#f9fafb;
+  transition:all .2s;width:100%;
+}
+.toggle-row:hover{border-color:var(--gold-border);background:#fef9ed}
+.tw{width:32px;height:18px;border-radius:100px;background:#d1d5db;position:relative;transition:all .25s;flex-shrink:0}
+.tw.on{background:var(--gold)}
+.tk{position:absolute;top:2px;right:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:all .25s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .tw.on .tk{right:auto;left:2px}
-.toggle-lbl{font-size:.8rem;color:var(--w70);font-weight:600}
+.toggle-lbl{font-size:.8rem;color:var(--text2);font-weight:600}
 
 /* MULTI COUNTRY */
-.multi-panel{display:none;margin-top:12px;background:rgba(255,255,255,.06);border:1px solid var(--border2);border-radius:var(--rsm);padding:14px;animation:fadeUp .25s ease}
+.multi-panel{
+  display:none;margin-top:12px;
+  background:#f9fafb;border:1px solid var(--border2);
+  border-radius:var(--rsm);padding:14px;animation:fadeUp .25s ease;
+}
 .multi-panel.open{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.ctr-row{background:var(--w10);border:1px solid var(--border2);border-radius:var(--rxs);padding:10px 12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px}
+.ctr-row{
+  background:#ffffff;border:1px solid var(--border2);
+  border-radius:var(--rxs);padding:10px 12px;margin-bottom:8px;
+  display:flex;align-items:flex-start;gap:10px;
+}
 .ctr-flag{font-size:1.1rem;flex-shrink:0;margin-top:2px}
 .ctr-body{flex:1}
 .ctr-head{display:flex;align-items:center;gap:7px;margin-bottom:7px}
-.ctr-name{font-size:.82rem;font-weight:800}
-.ctr-curr{font-size:.65rem;color:var(--w50);background:var(--w10);border:1px solid var(--border2);padding:2px 7px;border-radius:100px}
+.ctr-name{font-size:.82rem;font-weight:800;color:var(--text)}
+.ctr-curr{
+  font-size:.65rem;color:var(--text3);
+  background:#f3f4f6;border:1px solid var(--border2);
+  padding:2px 7px;border-radius:100px;
+}
 .ctr-dates{display:flex;gap:8px;flex-wrap:wrap}
-.ctr-date-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--w50)}
-.ctr-date-inp{padding:4px 8px;border-radius:5px;background:var(--w10);border:1px solid var(--border2);color:var(--white);font-size:.7rem;font-family:'Cairo',sans-serif;width:128px;transition:border-color .2s}
-.ctr-date-inp:focus{border-color:rgba(245,158,11,.5);outline:none}
-.ctr-del{width:24px;height:24px;border-radius:5px;background:var(--red-dim);border:1px solid rgba(248,113,113,.2);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:.7rem;cursor:pointer;flex-shrink:0;transition:all .15s}
+.ctr-date-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text3)}
+.ctr-date-inp{
+  padding:4px 8px;border-radius:5px;
+  background:#f9fafb;border:1px solid var(--border2);
+  color:var(--text);font-size:.7rem;font-family:'Cairo',sans-serif;
+  width:128px;transition:border-color .2s;
+}
+.ctr-date-inp:focus{border-color:var(--gold);outline:none}
+.ctr-del{
+  width:24px;height:24px;border-radius:5px;
+  background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);
+  color:var(--red);display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;cursor:pointer;flex-shrink:0;transition:all .15s;
+}
 .ctr-del:hover{background:var(--red);color:#fff}
 .add-ctr-row{display:flex;gap:8px;margin-top:4px}
 .add-ctr-row .f-sel{flex:1;font-size:.8rem;padding:9px 30px 9px 10px}
-.btn-add-ctr{padding:9px 16px;border-radius:var(--rxs);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-size:.8rem;font-weight:800;white-space:nowrap;transition:all .2s;cursor:pointer}
-.btn-add-ctr:hover{background:rgba(245,158,11,.15);color:var(--gold)}
-.multi-note{font-size:.69rem;color:var(--w40);margin-top:8px;line-height:1.5;display:flex;gap:5px}
+.btn-add-ctr{
+  padding:9px 16px;border-radius:var(--rxs);
+  background:var(--gold);border:1px solid var(--gold-light);
+  color:#fff;font-size:.8rem;font-weight:800;white-space:nowrap;
+  transition:all .2s;cursor:pointer;
+}
+.btn-add-ctr:hover{background:var(--gold-light)}
+.multi-note{font-size:.69rem;color:var(--text4);margin-top:8px;line-height:1.5;display:flex;gap:5px}
 
 /* COMPANIONS */
-.org-card{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:var(--rsm);padding:11px 13px;display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.org-av{width:38px;height:38px;border-radius:50%;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;color:#060e2e;flex-shrink:0}
-.org-name{font-size:.88rem;font-weight:800}
-.org-badge{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:var(--gold);font-size:.63rem;font-weight:700;padding:2px 8px;border-radius:100px}
-.org-phone{font-size:.68rem;color:var(--w50);margin-top:2px}
-.comp-ctr{display:flex;align-items:center;justify-content:space-between;background:var(--w10);border:1px solid var(--border2);border-radius:var(--rxs);padding:9px 13px;margin-bottom:10px}
+.org-card{
+  background:#fef9ed;border:1px solid var(--gold-border);
+  border-radius:var(--rsm);padding:11px 13px;
+  display:flex;align-items:center;gap:10px;margin-bottom:10px;
+}
+.org-av{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;font-weight:900;color:#fff;flex-shrink:0;
+}
+.org-name{font-size:.88rem;font-weight:800;color:var(--text)}
+.org-badge{
+  background:var(--gold-dim);border:1px solid var(--gold-border);
+  color:#92400e;font-size:.63rem;font-weight:700;padding:2px 8px;border-radius:100px;
+}
+.org-phone{font-size:.68rem;color:var(--text3);margin-top:2px}
+.comp-ctr{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#f9fafb;border:1px solid var(--border2);
+  border-radius:var(--rxs);padding:9px 13px;margin-bottom:10px;
+}
 .comp-ctr-val{font-family:'Tajawal',sans-serif;font-size:1.05rem;font-weight:900;color:var(--gold)}
-.comp-row{background:var(--w10);border:1px solid var(--border2);border-radius:var(--rsm);padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:7px;animation:fadeUp .3s ease}
-.comp-row:hover{border-color:var(--border)}
+.comp-row{
+  background:#f9fafb;border:1px solid var(--border2);
+  border-radius:var(--rsm);padding:10px 13px;
+  display:flex;align-items:center;gap:10px;margin-bottom:7px;animation:fadeUp .3s ease;
+}
+.comp-row:hover{border-color:var(--gold-border);background:#fef9ed}
 .comp-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:900;color:#fff;flex-shrink:0}
 .comp-info{flex:1;min-width:0}
-.comp-nm{font-size:.85rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.comp-ph{font-size:.68rem;color:var(--w40);margin-top:1px}
+.comp-nm{font-size:.85rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.comp-ph{font-size:.68rem;color:var(--text4);margin-top:1px}
 .comp-role-badge{padding:3px 8px;border-radius:100px;font-size:.65rem;font-weight:700;flex-shrink:0}
-.comp-del{width:28px;height:28px;border-radius:6px;background:var(--red-dim);border:1px solid rgba(248,113,113,.2);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:.75rem;cursor:pointer;flex-shrink:0;transition:all .2s}
+.comp-del{
+  width:28px;height:28px;border-radius:6px;
+  background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);
+  color:var(--red);display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;cursor:pointer;flex-shrink:0;transition:all .2s;
+}
 .comp-del:hover{background:var(--red);color:#fff}
-.comp-form{background:rgba(255,255,255,.06);border:1.5px dashed var(--border);border-radius:var(--rsm);padding:14px;margin-bottom:10px;display:none}
+.comp-form{
+  background:#f9fafb;border:1.5px dashed var(--border);
+  border-radius:var(--rsm);padding:14px;margin-bottom:10px;display:none;
+}
 .comp-form.open{display:block;animation:fadeUp .25s ease}
-.add-comp-btn{width:100%;padding:12px;background:var(--w06);border:1.5px dashed var(--border2);border-radius:var(--rsm);color:var(--w50);font-size:.84rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;cursor:pointer}
-.add-comp-btn:hover{border-color:rgba(245,158,11,.4);color:var(--gold);background:var(--gold-dim)}
+.add-comp-btn{
+  width:100%;padding:12px;
+  background:#f9fafb;border:1.5px dashed var(--border2);
+  border-radius:var(--rsm);color:var(--text3);font-size:.84rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .2s;cursor:pointer;
+}
+.add-comp-btn:hover{border-color:var(--gold);color:var(--gold);background:#fef9ed}
 
 /* STEP 3 */
-.sum-card{background:rgba(255,255,255,.1);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
-.sum-title{font-family:'Tajawal',sans-serif;font-size:1.15rem;font-weight:900;margin-bottom:8px}
+.sum-card{
+  background:#ffffff;border:1px solid var(--border);
+  border-radius:var(--r);padding:16px;margin-bottom:12px;
+  box-shadow:var(--shadow);
+}
+.sum-title{font-family:'Tajawal',sans-serif;font-size:1.15rem;font-weight:900;margin-bottom:8px;color:var(--text)}
 .sum-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.sum-tag{display:flex;align-items:center;gap:4px;background:var(--w10);border:1px solid var(--border2);padding:5px 10px;border-radius:100px;font-size:.72rem;font-weight:600}
-.sum-chip{display:inline-flex;align-items:center;gap:5px;background:var(--w10);border:1px solid var(--border2);padding:4px 10px;border-radius:100px;font-size:.71rem;font-weight:600;margin:0 4px 4px 0}
+.sum-tag{
+  display:flex;align-items:center;gap:4px;
+  background:#f3f4f6;border:1px solid var(--border2);
+  padding:5px 10px;border-radius:100px;font-size:.72rem;font-weight:600;color:var(--text2);
+}
+.sum-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  background:#f3f4f6;border:1px solid var(--border2);
+  padding:4px 10px;border-radius:100px;font-size:.71rem;font-weight:600;
+  margin:0 4px 4px 0;color:var(--text2);
+}
 .mem-tbl{width:100%;border-collapse:collapse;min-width:300px}
-.mem-tbl th{font-size:.67rem;font-weight:800;color:var(--w50);text-align:right;padding:6px 8px;border-bottom:1px solid var(--border2);background:rgba(255,255,255,.05)}
-.mem-tbl td{font-size:.77rem;padding:8px;border-bottom:1px solid var(--border2);vertical-align:middle}
+.mem-tbl th{
+  font-size:.67rem;font-weight:800;color:var(--text4);text-align:right;
+  padding:6px 8px;border-bottom:1px solid var(--border2);background:#f9fafb;
+}
+.mem-tbl td{font-size:.77rem;padding:8px;border-bottom:1px solid var(--border2);vertical-align:middle;color:var(--text)}
 .mem-tbl tr:last-child td{border-bottom:none}
+.mem-tbl tr:hover td{background:#f9fafb}
 .mem-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.63rem;font-weight:900;color:#fff;flex-shrink:0}
-.wg-card{background:var(--w06);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;margin-bottom:12px}
-.wg-head{background:var(--w10);padding:10px 14px;font-size:.74rem;font-weight:800;color:var(--w70);border-bottom:1px solid var(--border2)}
-.wg-item{display:flex;align-items:center;gap:9px;padding:7px 10px;font-size:.79rem;font-weight:600}
-.wg-ico{width:24px;height:24px;border-radius:6px;background:var(--green-dim);border:1px solid rgba(34,197,94,.25);display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0}
-.price-box{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.06);border:1px solid rgba(245,158,11,.25);border-radius:var(--r);padding:16px 20px;margin-bottom:12px;flex-wrap:wrap;gap:10px}
+.wg-card{
+  background:#f9fafb;border:1px solid var(--border2);
+  border-radius:var(--r);overflow:hidden;margin-bottom:12px;
+}
+.wg-head{
+  background:#f3f4f6;padding:10px 14px;font-size:.74rem;
+  font-weight:800;color:var(--text2);border-bottom:1px solid var(--border2);
+}
+.wg-item{display:flex;align-items:center;gap:9px;padding:7px 10px;font-size:.79rem;font-weight:600;color:var(--text2)}
+.wg-ico{
+  width:24px;height:24px;border-radius:6px;
+  background:var(--green-dim);border:1px solid rgba(22,163,74,.2);
+  display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;
+}
+.price-box{
+  display:flex;align-items:center;justify-content:space-between;
+  background:#fef9ed;border:1px solid var(--gold-border);
+  border-radius:var(--r);padding:16px 20px;margin-bottom:12px;flex-wrap:wrap;gap:10px;
+}
 .price-num{font-family:'Tajawal',sans-serif;font-size:2.4rem;font-weight:900;color:var(--gold);line-height:1}
-.price-sub{font-size:.73rem;color:var(--w50);margin-top:2px}
-.price-badge{display:inline-flex;align-items:center;gap:5px;background:var(--green-dim);border:1px solid rgba(34,197,94,.3);color:var(--green);font-size:.7rem;font-weight:800;padding:4px 12px;border-radius:100px}
+.price-sub{font-size:.73rem;color:var(--text3);margin-top:2px}
+.price-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--green-dim);border:1px solid rgba(22,163,74,.25);
+  color:var(--green);font-size:.7rem;font-weight:800;
+  padding:4px 12px;border-radius:100px;
+}
 
 /* BUTTONS */
-.btn-main{width:100%;padding:14px;border-radius:var(--rsm);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-size:.95rem;font-weight:900;box-shadow:0 4px 16px var(--gold-dim);transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-main:hover{background:rgba(245,158,11,.15);color:var(--gold);transform:translateY(-1px)}
-.btn-main:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.btn-sec{width:100%;padding:13px;border-radius:var(--rsm);background:var(--w10);border:1px solid var(--border);color:var(--w70);font-size:.9rem;font-weight:700;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
-.btn-sec:hover{background:var(--w15);color:var(--white)}
-.btn-pay{width:100%;padding:15px;border-radius:var(--rsm);background:var(--green);color:#fff;font-size:.97rem;font-weight:900;box-shadow:0 4px 16px var(--green-dim);transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-pay:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(34,197,94,.35)}
+.btn-main{
+  width:100%;padding:14px;border-radius:var(--rsm);
+  background:var(--gold);border:1px solid var(--gold-light);
+  color:#fff;font-size:.95rem;font-weight:900;
+  box-shadow:0 4px 12px var(--gold-dim);transition:all .25s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-main:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 16px rgba(184,151,10,.2)}
+.btn-main:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-sec{
+  width:100%;padding:13px;border-radius:var(--rsm);
+  background:#f3f4f6;border:1px solid var(--border);
+  color:var(--text2);font-size:.9rem;font-weight:700;
+  transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-sec:hover{background:#e5e7eb;color:var(--text)}
+.btn-pay{
+  width:100%;padding:15px;border-radius:var(--rsm);
+  background:var(--green);color:#fff;font-size:.97rem;font-weight:900;
+  box-shadow:0 4px 12px rgba(22,163,74,.2);
+  transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-pay:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 6px 16px rgba(22,163,74,.25)}
 .btn-pay:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .btns-row{display:grid;grid-template-columns:1fr 3fr;gap:10px;margin-top:12px}
 .btns-1{margin-top:12px}
@@ -184,31 +374,81 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
 .step-pane{display:none}
 .step-pane.active{display:block;animation:fadeUp .3s ease}
 
-/* SUCCESS */
-.suc-ov{position:fixed;inset:0;z-index:500;background:rgba(6,14,46,.93);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
+/* SUCCESS OVERLAY */
+.suc-ov{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(240,242,245,.95);backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .35s;
+}
 .suc-ov.show{opacity:1;pointer-events:all}
-.suc-card{background:rgba(255,255,255,.12);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;padding:clamp(22px,5vw,40px);text-align:center;transform:scale(.95);transition:transform .35s cubic-bezier(.34,1.4,.64,1);backdrop-filter:blur(12px)}
+.suc-card{
+  background:#ffffff;border:1px solid var(--border);
+  border-radius:20px;width:100%;max-width:440px;
+  padding:clamp(22px,5vw,40px);text-align:center;
+  transform:scale(.95);transition:transform .35s cubic-bezier(.34,1.4,.64,1);
+  box-shadow:var(--shadow-md);
+}
 .suc-ov.show .suc-card{transform:scale(1)}
-.suc-ico{width:72px;height:72px;border-radius:50%;background:var(--green-dim);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 16px;animation:pop .5s .1s cubic-bezier(.34,1.5,.64,1) both}
+.suc-ico{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--green-dim);border:2px solid var(--green);
+  display:flex;align-items:center;justify-content:center;font-size:2rem;
+  margin:0 auto 16px;animation:pop .5s .1s cubic-bezier(.34,1.5,.64,1) both;
+}
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
-.suc-ttl{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;margin-bottom:8px}
-.suc-sub{font-size:.85rem;color:var(--w70);line-height:1.7;margin-bottom:18px}
-.suc-info{background:var(--w10);border:1px solid var(--border2);border-radius:var(--rsm);padding:13px;margin-bottom:18px;text-align:right}
-.suc-nm{font-size:.95rem;font-weight:800;margin-bottom:6px}
-.suc-row{display:flex;align-items:center;gap:6px;font-size:.77rem;color:var(--w70);margin-bottom:3px}
-.btn-goto{width:100%;padding:14px;border-radius:var(--rsm);background:rgba(255,255,255,.08);border:1px solid rgba(245,158,11,.3);color:rgba(255,255,255,.9);font-size:.95rem;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:9px;cursor:pointer;transition:all .2s;border:none}
-.btn-goto:hover{background:rgba(245,158,11,.15);color:var(--gold)}
-.btn-share{width:100%;padding:12px;border-radius:var(--rsm);background:var(--w10);border:1px solid var(--border);color:var(--w70);font-size:.87rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;transition:all .2s}
+.suc-ttl{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;margin-bottom:8px;color:var(--text)}
+.suc-sub{font-size:.85rem;color:var(--text3);line-height:1.7;margin-bottom:18px}
+.suc-info{
+  background:#f9fafb;border:1px solid var(--border2);
+  border-radius:var(--rsm);padding:13px;margin-bottom:18px;text-align:right;
+}
+.suc-nm{font-size:.95rem;font-weight:800;margin-bottom:6px;color:var(--text)}
+.suc-row{display:flex;align-items:center;gap:6px;font-size:.77rem;color:var(--text3);margin-bottom:3px}
+.btn-goto{
+  width:100%;padding:14px;border-radius:var(--rsm);
+  background:var(--gold);border:none;color:#fff;
+  font-size:.95rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-bottom:9px;cursor:pointer;transition:all .2s;
+  box-shadow:0 4px 12px var(--gold-dim);
+}
+.btn-goto:hover{background:var(--gold-light)}
+.btn-share{
+  width:100%;padding:12px;border-radius:var(--rsm);
+  background:#f3f4f6;border:1px solid var(--border);
+  color:var(--text2);font-size:.87rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  cursor:pointer;transition:all .2s;
+}
 .btn-share:hover{border-color:var(--green);color:var(--green);background:var(--green-dim)}
 
 /* LOADING */
-.load-ov{position:fixed;inset:0;z-index:400;background:rgba(6,14,46,.92);backdrop-filter:blur(12px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;opacity:0;pointer-events:none;transition:opacity .3s}
+.load-ov{
+  position:fixed;inset:0;z-index:400;
+  background:rgba(240,242,245,.92);backdrop-filter:blur(12px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:18px;opacity:0;pointer-events:none;transition:opacity .3s;
+}
 .load-ov.show{opacity:1;pointer-events:all}
-.spinner{width:48px;height:48px;border-radius:50%;border:3px solid rgba(255,255,255,.15);border-top-color:rgba(245,158,11,.8);animation:spin .8s linear infinite}
+.spinner{
+  width:48px;height:48px;border-radius:50%;
+  border:3px solid rgba(184,151,10,.15);border-top-color:var(--gold);
+  animation:spin .8s linear infinite;
+}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* TOAST */
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(6,14,46,.97);border:1px solid var(--border);box-shadow:0 16px 48px rgba(0,0,0,.4);color:var(--white);padding:11px 22px;border-radius:var(--rsm);font-size:.82rem;font-weight:700;z-index:9999;opacity:0;pointer-events:none;display:flex;align-items:center;gap:8px;transition:all .3s;min-width:200px;justify-content:center}
+#toast{
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(12px);
+  background:#1a1a2e;border:1px solid var(--border);
+  box-shadow:0 16px 48px rgba(0,0,0,.15);
+  color:#fff;padding:11px 22px;border-radius:var(--rsm);
+  font-size:.82rem;font-weight:700;z-index:9999;
+  opacity:0;pointer-events:none;display:flex;align-items:center;gap:8px;
+  transition:all .3s;min-width:200px;justify-content:center;
+}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 #toast.ok{border-right:4px solid var(--green)}
 #toast.err{border-right:4px solid var(--red)}
@@ -282,7 +522,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
   <!-- ════ STEP 1 ════ -->
   <div class="step-pane active" id="pane1">
     <div class="card">
-
       <div class="f-sec" id="s1Img">🖼 صورة الرحلة</div>
       <div class="img-row">
         <div class="img-av" onclick="document.getElementById('imgFile').click()">
@@ -301,7 +540,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
       <div class="f-grid">
         <div class="f-group f-full">
           <div class="f-lbl"><span id="s1Name">اسم الرحلة</span> <span class="req">*</span></div>
-          <input class="f-inp" type="text" id="tripName" maxlength="60" placeholder="رحلة دبي صيف ٢٠٢٥" id="tripName">
+          <input class="f-inp" type="text" id="tripName" maxlength="60" placeholder="رحلة دبي صيف ٢٠٢٥">
           <div class="f-err" id="errTripName">يرجى إدخال اسم الرحلة</div>
         </div>
         <div class="f-group">
@@ -348,13 +587,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
         </select>
       </div>
 
-      <!-- MULTI COUNTRY -->
       <div class="toggle-row" onclick="toggleMulti()">
         <div class="tw" id="tw1"><div class="tk"></div></div>
         <span class="toggle-lbl">🌍 <span id="s1Multi">الرحلة تمر بأكثر من دولة</span></span>
       </div>
       <div class="multi-panel" id="multiPanel">
-        <div style="font-size:.72rem;font-weight:700;color:var(--w50);margin-bottom:10px" id="multiHint">أضف الدول مع تواريخ الوصول والمغادرة</div>
+        <div style="font-size:.72rem;font-weight:700;color:var(--text3);margin-bottom:10px" id="multiHint">أضف الدول مع تواريخ الوصول والمغادرة</div>
         <div id="countriesList"></div>
         <div class="add-ctr-row">
           <select class="f-sel" id="ctrySelect">
@@ -433,13 +671,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
 
       <div class="f-sec" id="s2CompSec">👥 المرافقون</div>
       <div class="comp-ctr">
-        <span style="font-size:.75rem;color:var(--w70);font-weight:600" id="compCtrLbl">إجمالي المرافقين المضافين</span>
+        <span style="font-size:.75rem;color:var(--text2);font-weight:600" id="compCtrLbl">إجمالي المرافقين المضافين</span>
         <span class="comp-ctr-val" id="compCount">٠</span>
       </div>
       <div id="companionsList"></div>
 
       <div class="comp-form" id="compForm">
-        <div style="font-size:.78rem;font-weight:800;margin-bottom:10px" id="compFormTtl">➕ بيانات المرافق</div>
+        <div style="font-size:.78rem;font-weight:800;margin-bottom:10px;color:var(--text)" id="compFormTtl">➕ بيانات المرافق</div>
         <div class="f-grid">
           <div class="f-group">
             <div class="f-lbl"><span id="s2CompName">الاسم</span> <span class="req">*</span></div>
@@ -477,7 +715,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
       <button class="add-comp-btn" id="addCompBtn" onclick="openComp()">
         + <span id="addCompBtnTxt">إضافة مرافق جديد</span>
       </button>
-      <div style="font-size:.69rem;color:var(--w40);margin-top:8px;display:flex;align-items:flex-start;gap:4px">
+      <div style="font-size:.69rem;color:var(--text4);margin-top:8px;display:flex;align-items:flex-start;gap:4px">
         💡 <span id="compHint">يمكنك إضافة المرافقين لاحقاً من لوحة التحكم</span>
       </div>
     </div>
@@ -498,7 +736,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
         <div class="sum-tag">👥 <span id="sumMembers">—</span></div>
       </div>
       <div id="sumCtrsWrap" style="display:none;margin-bottom:10px">
-        <div style="font-size:.69rem;font-weight:700;color:var(--w50);margin-bottom:6px">🌍 <span id="sumCtrsLbl">الدول المضافة</span></div>
+        <div style="font-size:.69rem;font-weight:700;color:var(--text4);margin-bottom:6px">🌍 <span id="sumCtrsLbl">الدول المضافة</span></div>
         <div id="sumCtrsChips"></div>
       </div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
@@ -528,19 +766,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
 
     <div class="price-box">
       <div>
-        <div style="font-size:.72rem;color:var(--w50);margin-bottom:4px" id="totalPayLbl">إجمالي الدفع</div>
+        <div style="font-size:.72rem;color:var(--text4);margin-bottom:4px" id="totalPayLbl">إجمالي الدفع</div>
         <div class="price-num">٢٤٩ <span style="font-size:1.1rem">د</span></div>
         <div class="price-sub" id="priceSub">درهم إماراتي — رحلة كاملة</div>
       </div>
       <div>
         <div class="price-badge">✓ <span id="priceBadge">دفعة واحدة فقط</span></div>
-        <div style="font-size:.7rem;color:var(--w50);margin-top:5px" id="noSubTxt">بدون اشتراك شهري</div>
+        <div style="font-size:.7rem;color:var(--text4);margin-top:5px" id="noSubTxt">بدون اشتراك شهري</div>
       </div>
     </div>
 
-    <div style="background:var(--w06);border:1px solid var(--border2);border-radius:var(--rsm);padding:13px;margin-bottom:12px">
-      <div style="font-size:.78rem;font-weight:700;color:var(--w70);margin-bottom:6px">🔒 <span id="payInfoTtl">معلومات الدفع</span></div>
-      <p style="font-size:.79rem;color:var(--w50);line-height:1.7" id="payInfoTxt">سيتم حفظ رحلتك وتفعيلها مباشرة. ربط Stripe للدفع الحقيقي قيد التطوير — ستتم إضافته قريباً.</p>
+    <div style="background:#f9fafb;border:1px solid var(--border2);border-radius:var(--rsm);padding:13px;margin-bottom:12px">
+      <div style="font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:6px">🔒 <span id="payInfoTtl">معلومات الدفع</span></div>
+      <p style="font-size:.79rem;color:var(--text3);line-height:1.7" id="payInfoTxt">سيتم حفظ رحلتك وتفعيلها مباشرة بعد إتمام الدفع عبر Stripe بشكل آمن.</p>
     </div>
 
     <div class="btns-row">
@@ -554,7 +792,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
 <!-- LOADING -->
 <div class="load-ov" id="loadOv">
   <div class="spinner"></div>
-  <div style="font-size:.9rem;font-weight:700;color:var(--w70)" id="loadTxt">جاري حفظ الرحلة...</div>
+  <div style="font-size:.9rem;font-weight:700;color:var(--text2)" id="loadTxt">جاري حفظ الرحلة...</div>
 </div>
 
 <!-- SUCCESS -->
@@ -579,85 +817,43 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:58px;display:flex;ali
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-/* ══════════════════════
-   CONFIG
-══════════════════════ */
 const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
 const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
-let sb=null, currentUser=null, createdTripId=null;
-
+const EDGE_URL='https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-checkout';
+let sb=null,currentUser=null,createdTripId=null;
 const COLORS=['#3b63d4','#7c3aed','#0891b2','#be185d','#b45309','#16a34a','#ea580c','#0d9488'];
 const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
 let ST={step:1,currency:'AED',companions:[],countries:[],multiOn:false};
-
-/* ══════════════════════
-   LANGUAGE SYSTEM
-══════════════════════ */
 let isEn=localStorage.getItem('rehla_lang')==='en';
 
-// النصوص الثنائية
 const TEXTS={
-  // NAV
-  backHome:{ar:'الرئيسية',en:'Home'},
-  backStep:{ar:'رجوع',en:'Back'},
-  // STEPPER LABELS
-  sl1:{ar:'تفاصيل الرحلة',en:'Trip Details'},
-  sl2:{ar:'المرافقون',en:'Companions'},
-  sl3:{ar:'التأكيد',en:'Confirm'},
-  // STEP TITLES
-  title1:{ar:'تفاصيل رحلتك',en:'Trip Details'},
-  sub1:{ar:'أدخل معلومات الرحلة الأساسية',en:'Enter basic trip information'},
-  title2:{ar:'أضف المرافقين',en:'Add Companions'},
-  sub2:{ar:'حدد أدوار كل مرافق',en:"Define each companion's role"},
-  title3:{ar:'راجع وأنشئ',en:'Review & Create'},
-  sub3:{ar:'راجع التفاصيل وأنشئ رحلتك',en:'Review details and create your trip'},
-  // STEP 1
-  s1Img:{ar:'🖼 صورة الرحلة',en:'🖼 Trip Photo'},
-  s1ImgTtl:{ar:'صورة الرحلة',en:'Trip Photo'},
+  sl1:{ar:'تفاصيل الرحلة',en:'Trip Details'},sl2:{ar:'المرافقون',en:'Companions'},sl3:{ar:'التأكيد',en:'Confirm'},
+  title1:{ar:'تفاصيل رحلتك',en:'Trip Details'},sub1:{ar:'أدخل معلومات الرحلة الأساسية',en:'Enter basic trip information'},
+  title2:{ar:'أضف المرافقين',en:'Add Companions'},sub2:{ar:'حدد أدوار كل مرافق',en:"Define each companion's role"},
+  title3:{ar:'راجع وأنشئ',en:'Review & Create'},sub3:{ar:'راجع التفاصيل وأنشئ رحلتك',en:'Review details and create your trip'},
+  s1Img:{ar:'🖼 صورة الرحلة',en:'🖼 Trip Photo'},s1ImgTtl:{ar:'صورة الرحلة',en:'Trip Photo'},
   s1ImgHint:{ar:'اختياري — وجهتك أو لحظة من السفر',en:'Optional — your destination or a travel moment'},
-  s1ImgBtn:{ar:'اختر صورة',en:'Choose Photo'},
-  s1TripSec:{ar:'✈ معلومات الرحلة',en:'✈ Trip Info'},
-  s1Name:{ar:'اسم الرحلة',en:'Trip Name'},
-  errTripName:{ar:'يرجى إدخال اسم الرحلة',en:'Please enter trip name'},
-  s1Dest:{ar:'الوجهة الرئيسية',en:'Main Destination'},
-  errDest:{ar:'يرجى إدخال الوجهة',en:'Required'},
-  s1Nights:{ar:'عدد الليالي',en:'Nights'},
-  s1Start:{ar:'تاريخ البداية',en:'Start Date'},
-  errStart:{ar:'مطلوب',en:'Required'},
-  s1End:{ar:'تاريخ النهاية',en:'End Date'},
-  errEnd:{ar:'مطلوب',en:'Required'},
-  s1CurrSec:{ar:'💱 عملة الرحلة',en:'💱 Trip Currency'},
-  s1Multi:{ar:'الرحلة تمر بأكثر من دولة',en:'Multi-country trip'},
+  s1ImgBtn:{ar:'اختر صورة',en:'Choose Photo'},s1TripSec:{ar:'✈ معلومات الرحلة',en:'✈ Trip Info'},
+  s1Name:{ar:'اسم الرحلة',en:'Trip Name'},errTripName:{ar:'يرجى إدخال اسم الرحلة',en:'Please enter trip name'},
+  s1Dest:{ar:'الوجهة الرئيسية',en:'Main Destination'},errDest:{ar:'يرجى إدخال الوجهة',en:'Required'},
+  s1Nights:{ar:'عدد الليالي',en:'Nights'},s1Start:{ar:'تاريخ البداية',en:'Start Date'},errStart:{ar:'مطلوب',en:'Required'},
+  s1End:{ar:'تاريخ النهاية',en:'End Date'},errEnd:{ar:'مطلوب',en:'Required'},
+  s1CurrSec:{ar:'💱 عملة الرحلة',en:'💱 Trip Currency'},s1Multi:{ar:'الرحلة تمر بأكثر من دولة',en:'Multi-country trip'},
   multiHint:{ar:'أضف الدول مع تواريخ الوصول والمغادرة',en:'Add countries with arrival & departure dates'},
-  addCtrTxt:{ar:'أضف',en:'Add'},
-  multiNote:{ar:'مصاريف كل دولة تُسجل بعملتها — للمرجعية فقط',en:'Each country\'s expenses in its currency — for reference'},
-  s1NotesSec:{ar:'📝 ملاحظات',en:'📝 Notes'},
-  s1NextBtn:{ar:'التالي — المرافقون ←',en:'Next — Companions →'},
-  // STEP 2
-  s2OrgSec:{ar:'👑 مسؤول الرحلة (أنت)',en:'👑 Trip Organizer (You)'},
-  s2OrgName:{ar:'اسمك الكامل',en:'Your Full Name'},
-  errOrgName:{ar:'مطلوب',en:'Required'},
-  s2OrgPhone:{ar:'رقم الواتساب',en:'WhatsApp Number'},
-  orgBadgeTxt:{ar:'مسؤول الرحلة',en:'Organizer'},
-  s2CompSec:{ar:'👥 المرافقون',en:'👥 Companions'},
-  compCtrLbl:{ar:'إجمالي المرافقين المضافين',en:'Total companions added'},
-  compFormTtl:{ar:'➕ بيانات المرافق',en:'➕ Companion Details'},
-  s2CompName:{ar:'الاسم',en:'Name'},
-  s2CompPhone:{ar:'الواتساب',en:'WhatsApp'},
-  s2RoleLbl:{ar:'دور المرافق',en:'Role'},
-  cancelTxt:{ar:'إلغاء',en:'Cancel'},
-  addCompTxt:{ar:'إضافة المرافق',en:'Add Companion'},
+  addCtrTxt:{ar:'أضف',en:'Add'},multiNote:{ar:'مصاريف كل دولة تُسجل بعملتها — للمرجعية فقط',en:"Each country's expenses in its currency — for reference"},
+  s1NotesSec:{ar:'📝 ملاحظات',en:'📝 Notes'},s1NextBtn:{ar:'التالي — المرافقون ←',en:'Next — Companions →'},
+  s2OrgSec:{ar:'👑 مسؤول الرحلة (أنت)',en:'👑 Trip Organizer (You)'},s2OrgName:{ar:'اسمك الكامل',en:'Your Full Name'},
+  errOrgName:{ar:'مطلوب',en:'Required'},s2OrgPhone:{ar:'رقم الواتساب',en:'WhatsApp Number'},
+  orgBadgeTxt:{ar:'مسؤول الرحلة',en:'Organizer'},s2CompSec:{ar:'👥 المرافقون',en:'👥 Companions'},
+  compCtrLbl:{ar:'إجمالي المرافقين المضافين',en:'Total companions added'},compFormTtl:{ar:'➕ بيانات المرافق',en:'➕ Companion Details'},
+  s2CompName:{ar:'الاسم',en:'Name'},s2CompPhone:{ar:'الواتساب',en:'WhatsApp'},s2RoleLbl:{ar:'دور المرافق',en:'Role'},
+  cancelTxt:{ar:'إلغاء',en:'Cancel'},addCompTxt:{ar:'إضافة المرافق',en:'Add Companion'},
   addCompBtnTxt:{ar:'إضافة مرافق جديد',en:'Add New Companion'},
   compHint:{ar:'يمكنك إضافة المرافقين لاحقاً من لوحة التحكم',en:'You can add companions later from the dashboard'},
-  s2BackBtn:{ar:'رجوع',en:'Back'},
-  s2NextBtn:{ar:'التالي — المراجعة ←',en:'Next — Review →'},
-  // STEP 3
-  thMember:{ar:'العضو',en:'Member'},
-  thRole:{ar:'الدور',en:'Role'},
-  thPhone:{ar:'الواتساب',en:'WhatsApp'},
-  sumCtrsLbl:{ar:'الدول المضافة',en:'Added Countries'},
-  wgHead:{ar:'ماذا تحصل عليه مقابل ٢٤٩ درهم؟',en:'What you get for 249 AED?'},
+  s2BackBtn:{ar:'رجوع',en:'Back'},s2NextBtn:{ar:'التالي — المراجعة ←',en:'Next — Review →'},
+  thMember:{ar:'العضو',en:'Member'},thRole:{ar:'الدور',en:'Role'},thPhone:{ar:'الواتساب',en:'WhatsApp'},
+  sumCtrsLbl:{ar:'الدول المضافة',en:'Added Countries'},wgHead:{ar:'ماذا تحصل عليه مقابل ٢٤٩ درهم؟',en:'What you get for 249 AED?'},
   wg1:{ar:'تصفية الحساب — أقل تحويلات ممكنة',en:'Smart settlement — minimum transfers'},
   wg2:{ar:'تقرير PDF احترافي للتحميل',en:'Professional PDF report, downloadable'},
   wg3:{ar:'رفع الإيصالات مرتبطة بكل مصروف',en:'Receipt uploads linked to each expense'},
@@ -665,113 +861,66 @@ const TEXTS={
   wg5:{ar:'رابط مشاركة + QR Code للرحلة',en:'Share link + QR Code for the trip'},
   wg6:{ar:'مرافقون غير محدودين — نفس السعر',en:'Unlimited companions — same price'},
   wg7:{ar:'أرشيف الرحلة محفوظ مدى الحياة',en:'Trip archived forever in your account'},
-  totalPayLbl:{ar:'إجمالي الدفع',en:'Total Payment'},
-  priceSub:{ar:'درهم إماراتي — رحلة كاملة',en:'AED — full trip access'},
-  priceBadge:{ar:'دفعة واحدة فقط',en:'One-time payment'},
-  noSubTxt:{ar:'بدون اشتراك شهري',en:'No monthly subscription'},
+  totalPayLbl:{ar:'إجمالي الدفع',en:'Total Payment'},priceSub:{ar:'درهم إماراتي — رحلة كاملة',en:'AED — full trip access'},
+  priceBadge:{ar:'دفعة واحدة فقط',en:'One-time payment'},noSubTxt:{ar:'بدون اشتراك شهري',en:'No monthly subscription'},
   payInfoTtl:{ar:'معلومات الدفع',en:'Payment Info'},
-  payInfoTxt:{ar:'سيتم حفظ رحلتك وتفعيلها مباشرة. ربط Stripe للدفع الحقيقي قيد التطوير — ستتم إضافته قريباً.',en:'Your trip will be saved and activated immediately. Stripe payment integration is coming soon.'},
-  s3BackBtn:{ar:'رجوع',en:'Back'},
-  createBtnTxt:{ar:'إنشاء الرحلة والانطلاق',en:'Create Trip & Go'},
-  // LOADING/SUCCESS
-  loadTxt:{ar:'جاري حفظ الرحلة...',en:'Saving trip...'},
-  sucTtl:{ar:'تم إنشاء رحلتك!',en:'Trip Created!'},
+  payInfoTxt:{ar:'سيتم حفظ رحلتك وتفعيلها مباشرة بعد إتمام الدفع عبر Stripe بشكل آمن.',en:'Your trip will be saved and activated immediately after secure Stripe payment.'},
+  s3BackBtn:{ar:'رجوع',en:'Back'},createBtnTxt:{ar:'إنشاء الرحلة والدفع — ٢٤٩ درهم',en:'Create Trip & Pay — 249 AED'},
+  loadTxt:{ar:'جاري حفظ الرحلة...',en:'Saving trip...'},sucTtl:{ar:'تم إنشاء رحلتك!',en:'Trip Created!'},
   sucSubTxt:{ar:'ابدأ بتسجيل المصاريف وشارك الرابط مع رفاقك.',en:'Start logging expenses and share the link with your companions.'},
   sucOkTxt:{ar:'تم إنشاء الرحلة بنجاح',en:'Trip created successfully'},
-  gotoDashTxt:{ar:'انتقل للوحة الرحلة',en:'Go to Dashboard'},
-  shareTxt:{ar:'شارك الرابط مع المرافقين',en:'Share link with companions'},
-  orgBadge:{ar:'مسؤول الرحلة',en:'Organizer'},
+  gotoDashTxt:{ar:'انتقل للوحة الرحلة',en:'Go to Dashboard'},shareTxt:{ar:'شارك الرابط مع المرافقين',en:'Share link with companions'},
   membersLbl:{ar:'مشاركين',en:'members'},
 };
 
 function applyLang(){
   const root=document.getElementById('htmlRoot');
-  root.setAttribute('lang',isEn?'en':'ar');
-  root.setAttribute('dir',isEn?'ltr':'rtl');
+  root.setAttribute('lang',isEn?'en':'ar');root.setAttribute('dir',isEn?'ltr':'rtl');
   document.getElementById('langBtn').textContent=isEn?'🌐 ع':'🌐 EN';
-  // تطبيق كل النصوص
-  Object.keys(TEXTS).forEach(id=>{
-    const el=document.getElementById(id);
-    if(el){el.textContent=isEn?TEXTS[id].en:TEXTS[id].ar}
-  });
-  // Placeholders
-  const ph={
-    tripName:{ar:'رحلة دبي صيف ٢٠٢٥',en:'Dubai Summer Trip 2025'},
-    tripDest:{ar:'دبي — الإمارات',en:'Dubai — UAE'},
-    tripNights:{ar:'٣',en:'3'},
-    orgName:{ar:'محمد العامري',en:'Mohammed Al Ameri'},
-    orgPhone:{ar:'+971 50 000 0000',en:'+971 50 000 0000'},
-    newName:{ar:'اسم المرافق',en:'Companion name'},
-    newPhone:{ar:'+971 50 ...',en:'+971 50 ...'},
-    tripNotes:{ar:'أي تفاصيل اختيارية...',en:'Any optional details...'},
-  };
-  Object.keys(ph).forEach(id=>{
-    const el=document.getElementById(id);
-    if(el)el.placeholder=isEn?ph[id].en:ph[id].ar;
-  });
-  localStorage.setItem('rehla_lang',isEn?'en':'ar');
-  sessionStorage.setItem('rehla_lang',isEn?'en':'ar');
+  Object.keys(TEXTS).forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=isEn?TEXTS[id].en:TEXTS[id].ar});
+  const ph={tripName:{ar:'رحلة دبي صيف ٢٠٢٥',en:'Dubai Summer Trip 2025'},tripDest:{ar:'دبي — الإمارات',en:'Dubai — UAE'},tripNights:{ar:'٣',en:'3'},orgName:{ar:'محمد العامري',en:'Mohammed Al Ameri'},orgPhone:{ar:'+971 50 000 0000',en:'+971 50 000 0000'},newName:{ar:'اسم المرافق',en:'Companion name'},newPhone:{ar:'+971 50 ...',en:'+971 50 ...'},tripNotes:{ar:'أي تفاصيل اختيارية...',en:'Any optional details...'}};
+  Object.keys(ph).forEach(id=>{const el=document.getElementById(id);if(el)el.placeholder=isEn?ph[id].en:ph[id].ar});
+  localStorage.setItem('rehla_lang',isEn?'en':'ar');sessionStorage.setItem('rehla_lang',isEn?'en':'ar');
 }
+function toggleLang(){isEn=!isEn;applyLang()}
 
-function toggleLang(){
-  isEn=!isEn;
-  applyLang();
-}
-
-/* ══════════════════════
-   SUPABASE INIT
-══════════════════════ */
 function waitForSB(n){
-  if(n>60){showToast('❌ '+(isEn?'Connection error':'خطأ في الاتصال'),false);return}
+  if(n>60){showToast('❌ خطأ في الاتصال',false);return}
   if(window.supabase&&window.supabase.createClient)initApp();
   else setTimeout(()=>waitForSB(n+1),100);
 }
-
 document.addEventListener('DOMContentLoaded',()=>{
   applyLang();
   document.getElementById('tripStart').value=new Date().toISOString().split('T')[0];
   waitForSB(0);
-  // Clear errors on input
-  document.querySelectorAll('.f-inp,.f-sel').forEach(el=>{
-    el.addEventListener('input',()=>el.closest('.f-group')?.classList.remove('err'));
-  });
+  document.querySelectorAll('.f-inp,.f-sel').forEach(el=>{el.addEventListener('input',()=>el.closest('.f-group')?.classList.remove('err'))});
 });
 
 async function initApp(){
-  sb=window.supabase.createClient(SURL,SKEY);
-  applyLang();
+  sb=window.supabase.createClient(SURL,SKEY);applyLang();
   const {data:{session}}=await sb.auth.getSession();
   if(!session){location.href='rehla-auth.html';return}
   currentUser=session.user;
   const savedName=currentUser.user_metadata?.full_name||'';
-  if(savedName){
-    document.getElementById('orgName').value=savedName;
-    updateOrgCard();
-  }
+  if(savedName){document.getElementById('orgName').value=savedName;updateOrgCard()}
 }
 
-/* ══════════════════════
-   STEPPER
-══════════════════════ */
 function goStep(n){
   if(n>ST.step&&!validateStep(ST.step))return;
   ST.step=n;
   document.querySelectorAll('.step-pane').forEach(p=>p.classList.remove('active'));
   document.getElementById('pane'+n).classList.add('active');
   [1,2,3].forEach(i=>{
-    const dot=document.getElementById('sd'+i);
-    const lbl=document.getElementById('sl'+i);
-    dot.classList.remove('active','done');
-    lbl.classList.remove('active','done');
+    const dot=document.getElementById('sd'+i);const lbl=document.getElementById('sl'+i);
+    dot.classList.remove('active','done');lbl.classList.remove('active','done');
     if(i<n){dot.classList.add('done');dot.textContent='✓';lbl.classList.add('done')}
     else if(i===n){dot.classList.add('active');dot.textContent=toAr(i);lbl.classList.add('active')}
     else dot.textContent=toAr(i);
   });
   document.getElementById('lf1').style.width=n>1?'100%':'0%';
   document.getElementById('lf2').style.width=n>2?'100%':'0%';
-  const k=n;
-  document.getElementById('stepTitle').textContent=isEn?TEXTS['title'+k].en:TEXTS['title'+k].ar;
-  document.getElementById('stepSub').textContent=isEn?TEXTS['sub'+k].en:TEXTS['sub'+k].ar;
+  document.getElementById('stepTitle').textContent=isEn?TEXTS['title'+n].en:TEXTS['title'+n].ar;
+  document.getElementById('stepSub').textContent=isEn?TEXTS['sub'+n].en:TEXTS['sub'+n].ar;
   document.getElementById('backTxt').textContent=n===1?(isEn?'Home':'الرئيسية'):(isEn?'Back':'رجوع');
   if(n===3)buildSummary();
   window.scrollTo({top:0,behavior:'smooth'});
@@ -783,125 +932,62 @@ function validateStep(s){
   if(s===1){
     let ok=true;
     ['tripName','tripDest','tripStart','tripEnd'].forEach(id=>{
-      const el=document.getElementById(id);
-      const g=el?.closest('.f-group');
-      if(!el?.value.trim()){if(g)g.classList.add('err');ok=false}
-      else if(g)g.classList.remove('err');
+      const el=document.getElementById(id);const g=el?.closest('.f-group');
+      if(!el?.value.trim()){if(g)g.classList.add('err');ok=false}else if(g)g.classList.remove('err');
     });
     if(!ok){showToast(isEn?'Please fill required fields':'يرجى ملء الحقول المطلوبة',false);return false}
-    const s=document.getElementById('tripStart').value;
-    const e=document.getElementById('tripEnd').value;
+    const s=document.getElementById('tripStart').value;const e=document.getElementById('tripEnd').value;
     if(e&&s&&e<s){showToast(isEn?'End date must be after start':'تاريخ النهاية يجب أن يكون بعد البداية',false);return false}
     return true;
   }
   if(s===2){
     const n=document.getElementById('orgName');
-    if(!n.value.trim()){
-      n.closest('.f-group')?.classList.add('err');
-      showToast(isEn?'Enter your name':'يرجى إدخال اسمك',false);
-      return false;
-    }
-    n.closest('.f-group')?.classList.remove('err');
-    return true;
+    if(!n.value.trim()){n.closest('.f-group')?.classList.add('err');showToast(isEn?'Enter your name':'يرجى إدخال اسمك',false);return false}
+    n.closest('.f-group')?.classList.remove('err');return true;
   }
   return true;
 }
 
-/* ══════════════════════
-   IMAGE
-══════════════════════ */
 function previewImg(inp){
   if(inp.files&&inp.files[0]){
     const r=new FileReader();
-    r.onload=e=>{
-      const img=document.getElementById('imgPreview');
-      img.src=e.target.result;img.style.display='block';
-      document.getElementById('imgEmoji').style.display='none';
-    };
+    r.onload=e=>{const img=document.getElementById('imgPreview');img.src=e.target.result;img.style.display='block';document.getElementById('imgEmoji').style.display='none'};
     r.readAsDataURL(inp.files[0]);
   }
 }
-
-/* ══════════════════════
-   DATE & CURRENCY
-══════════════════════ */
 function calcEnd(){
-  const s=document.getElementById('tripStart').value;
-  const n=parseInt(document.getElementById('tripNights').value)||0;
-  if(s&&n){
-    const d=new Date(s);
-    d.setDate(d.getDate()+n);
-    document.getElementById('tripEnd').value=d.toISOString().split('T')[0];
-  }
+  const s=document.getElementById('tripStart').value;const n=parseInt(document.getElementById('tripNights').value)||0;
+  if(s&&n){const d=new Date(s);d.setDate(d.getDate()+n);document.getElementById('tripEnd').value=d.toISOString().split('T')[0]}
 }
-
-function onCurr(sel){
-  const p=sel.value.split('|');
-  ST.currency=p[0];
-  document.getElementById('currFlag').textContent=p[1];
-}
-
-/* ══════════════════════
-   MULTI COUNTRY
-══════════════════════ */
-function toggleMulti(){
-  ST.multiOn=!ST.multiOn;
-  document.getElementById('tw1').classList.toggle('on',ST.multiOn);
-  document.getElementById('multiPanel').classList.toggle('open',ST.multiOn);
-}
+function onCurr(sel){const p=sel.value.split('|');ST.currency=p[0];document.getElementById('currFlag').textContent=p[1]}
+function toggleMulti(){ST.multiOn=!ST.multiOn;document.getElementById('tw1').classList.toggle('on',ST.multiOn);document.getElementById('multiPanel').classList.toggle('open',ST.multiOn)}
 
 function addCountry(){
   const sel=document.getElementById('ctrySelect');
   if(!sel.value){showToast(isEn?'Select a country':'اختر دولة أولاً',false);return}
   const p=sel.value.split('|');
-  if(ST.countries.find(c=>c.name===p[1])){
-    showToast(isEn?'Country already added':'هذه الدولة مضافة مسبقاً',false);return;
-  }
-  ST.countries.push({flag:p[0],name:p[1],curr:p[2],arrival:'',departure:''});
-  renderCountries();
-  sel.value='';
+  if(ST.countries.find(c=>c.name===p[1])){showToast(isEn?'Country already added':'هذه الدولة مضافة مسبقاً',false);return}
+  ST.countries.push({flag:p[0],name:p[1],curr:p[2],arrival:'',departure:''});renderCountries();sel.value='';
 }
-
-function removeCountry(name){
-  ST.countries=ST.countries.filter(c=>c.name!==name);
-  renderCountries();
-}
-
-function updDate(name,field,val){
-  const c=ST.countries.find(c=>c.name===name);
-  if(c)c[field]=val;
-}
-
+function removeCountry(name){ST.countries=ST.countries.filter(c=>c.name!==name);renderCountries()}
+function updDate(name,field,val){const c=ST.countries.find(c=>c.name===name);if(c)c[field]=val}
 function renderCountries(){
   document.getElementById('countriesList').innerHTML=ST.countries.map(c=>`
     <div class="ctr-row">
       <span class="ctr-flag">${c.flag}</span>
       <div class="ctr-body">
-        <div class="ctr-head">
-          <span class="ctr-name">${c.name}</span>
-          <span class="ctr-curr">${c.curr}</span>
-        </div>
+        <div class="ctr-head"><span class="ctr-name">${c.name}</span><span class="ctr-curr">${c.curr}</span></div>
         <div class="ctr-dates">
-          <div class="ctr-date-item">📅 ${isEn?'Arrival:':'وصول:'}
-            <input type="date" class="ctr-date-inp" value="${c.arrival}"
-              onchange="updDate('${c.name}','arrival',this.value)">
-          </div>
-          <div class="ctr-date-item">🛫 ${isEn?'Departure:':'مغادرة:'}
-            <input type="date" class="ctr-date-inp" value="${c.departure}"
-              onchange="updDate('${c.name}','departure',this.value)">
-          </div>
+          <div class="ctr-date-item">📅 ${isEn?'Arrival:':'وصول:'}<input type="date" class="ctr-date-inp" value="${c.arrival}" onchange="updDate('${c.name}','arrival',this.value)"></div>
+          <div class="ctr-date-item">🛫 ${isEn?'Departure:':'مغادرة:'}<input type="date" class="ctr-date-inp" value="${c.departure}" onchange="updDate('${c.name}','departure',this.value)"></div>
         </div>
       </div>
       <button class="ctr-del" onclick="removeCountry('${c.name}')">✕</button>
     </div>`).join('');
 }
 
-/* ══════════════════════
-   ORGANIZER CARD
-══════════════════════ */
 function updateOrgCard(){
-  const name=document.getElementById('orgName').value.trim();
-  const phone=document.getElementById('orgPhone').value.trim();
+  const name=document.getElementById('orgName').value.trim();const phone=document.getElementById('orgPhone').value.trim();
   const card=document.getElementById('orgCard');
   if(!name){card.style.display='none';return}
   card.style.display='flex';
@@ -910,216 +996,100 @@ function updateOrgCard(){
   document.getElementById('orgDisplayPhone').textContent=phone||'—';
 }
 
-/* ══════════════════════
-   COMPANIONS
-══════════════════════ */
 function openComp(){
   document.getElementById('compForm').classList.add('open');
   document.getElementById('addCompBtn').style.display='none';
   ['newName','newPhone'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('roleSelect').value='';
-  document.getElementById('newName').focus();
+  document.getElementById('roleSelect').value='';document.getElementById('newName').focus();
 }
-
-function cancelComp(){
-  document.getElementById('compForm').classList.remove('open');
-  document.getElementById('addCompBtn').style.display='flex';
-}
+function cancelComp(){document.getElementById('compForm').classList.remove('open');document.getElementById('addCompBtn').style.display='flex'}
 
 function addCompanion(){
-  const name=document.getElementById('newName').value.trim();
-  const rv=document.getElementById('roleSelect').value;
+  const name=document.getElementById('newName').value.trim();const rv=document.getElementById('roleSelect').value;
   if(!name){showToast(isEn?'Enter companion name':'أدخل اسم المرافق',false);return}
   if(!rv){showToast(isEn?'Select a role':'اختر دور المرافق',false);return}
   const p=rv.split('|');
-  ST.companions.push({
-    id:Date.now(),name,
-    phone:document.getElementById('newPhone').value.trim(),
-    role:p[0],roleIcon:p[1],roleColor:p[2],
-    color:COLORS[ST.companions.length%COLORS.length],
-  });
-  renderCompanions();
-  cancelComp();
-  showToast((isEn?'✓ Added ':'✓ تمت إضافة ')+name,true);
+  ST.companions.push({id:Date.now(),name,phone:document.getElementById('newPhone').value.trim(),role:p[0],roleIcon:p[1],roleColor:p[2],color:COLORS[ST.companions.length%COLORS.length]});
+  renderCompanions();cancelComp();showToast((isEn?'✓ Added ':'✓ تمت إضافة ')+name,true);
 }
-
-function removeCompanion(id){
-  ST.companions=ST.companions.filter(c=>c.id!==id);
-  renderCompanions();
-}
-
+function removeCompanion(id){ST.companions=ST.companions.filter(c=>c.id!==id);renderCompanions()}
 function renderCompanions(){
   document.getElementById('compCount').textContent=toAr(ST.companions.length);
   document.getElementById('companionsList').innerHTML=ST.companions.map(c=>`
     <div class="comp-row">
       <div class="comp-av" style="background:${c.color}">${c.name.charAt(0)}</div>
-      <div class="comp-info">
-        <div class="comp-nm">${c.name}</div>
-        <div class="comp-ph">${c.phone||'—'}</div>
-      </div>
-      <div class="comp-role-badge" style="background:${c.roleColor}22;color:${c.roleColor};border:1px solid ${c.roleColor}44">
-        ${c.roleIcon} ${c.role}
-      </div>
+      <div class="comp-info"><div class="comp-nm">${c.name}</div><div class="comp-ph">${c.phone||'—'}</div></div>
+      <div class="comp-role-badge" style="background:${c.roleColor}22;color:${c.roleColor};border:1px solid ${c.roleColor}44">${c.roleIcon} ${c.role}</div>
       <button class="comp-del" onclick="removeCompanion(${c.id})">✕</button>
     </div>`).join('');
 }
 
-/* ══════════════════════
-   SUMMARY
-══════════════════════ */
 function fmtDate(d){if(!d)return'—';const p=d.split('-');return p[2]+'/'+p[1]+'/'+p[0]}
-
 function buildSummary(){
-  const name=document.getElementById('tripName').value||'—';
-  const dest=document.getElementById('tripDest').value||'—';
-  const s=document.getElementById('tripStart').value;
-  const e=document.getElementById('tripEnd').value;
-  const orgName=document.getElementById('orgName').value||'أنت';
-  const orgPhone=document.getElementById('orgPhone').value;
-  const total=ST.companions.length+1;
-  const membLbl=isEn?'members':'مشاركين';
-
-  document.getElementById('sumTitle').textContent=name;
-  document.getElementById('sumDest').textContent=dest;
+  const name=document.getElementById('tripName').value||'—';const dest=document.getElementById('tripDest').value||'—';
+  const s=document.getElementById('tripStart').value;const e=document.getElementById('tripEnd').value;
+  const orgName=document.getElementById('orgName').value||'أنت';const orgPhone=document.getElementById('orgPhone').value;
+  const total=ST.companions.length+1;const membLbl=isEn?'members':'مشاركين';
+  document.getElementById('sumTitle').textContent=name;document.getElementById('sumDest').textContent=dest;
   document.getElementById('sumDates').textContent=fmtDate(s)+' — '+fmtDate(e);
-  document.getElementById('sumCurr').textContent=ST.currency;
-  document.getElementById('sumMembers').textContent=toAr(total)+' '+membLbl;
-
-  // الدول
+  document.getElementById('sumCurr').textContent=ST.currency;document.getElementById('sumMembers').textContent=toAr(total)+' '+membLbl;
   const cw=document.getElementById('sumCtrsWrap');
   if(ST.multiOn&&ST.countries.length>0){
     cw.style.display='block';
-    document.getElementById('sumCtrsChips').innerHTML=ST.countries.map(c=>
-      `<span class="sum-chip">${c.flag} ${c.name} <span style="color:var(--w40);font-size:.62rem">${c.curr}</span>${c.arrival?' · '+fmtDate(c.arrival):''}${c.departure?' → '+fmtDate(c.departure):''}</span>`
-    ).join('');
-  } else cw.style.display='none';
-
-  // جدول الأعضاء
+    document.getElementById('sumCtrsChips').innerHTML=ST.countries.map(c=>`<span class="sum-chip">${c.flag} ${c.name} <span style="color:var(--text4);font-size:.62rem">${c.curr}</span>${c.arrival?' · '+fmtDate(c.arrival):''}${c.departure?' → '+fmtDate(c.departure):''}</span>`).join('');
+  }else cw.style.display='none';
   const orgRole=isEn?'Organizer':'مسؤول الرحلة';
-  const all=[{name:orgName,phone:orgPhone,role:orgRole,roleIcon:'👑',roleColor:'#38bdf8',color:'#38bdf8',isOrg:true},...ST.companions];
-  document.getElementById('membersBody').innerHTML=all.map(m=>`
-    <tr>
-      <td><div style="display:flex;align-items:center;gap:7px">
-        <div class="mem-av" style="background:${m.color}">${m.name.charAt(0)}</div>
-        <span style="font-weight:700">${m.name}</span>
-      </div></td>
-      <td><span style="${m.isOrg?'background:rgba(56,189,248,.2);color:#38bdf8;border:1px solid rgba(56,189,248,.35)':'background:'+m.roleColor+'22;color:'+m.roleColor+';border:1px solid '+m.roleColor+'44'};padding:3px 8px;border-radius:100px;font-size:.64rem;font-weight:700;display:inline-flex;align-items:center;gap:3px">
-        ${m.roleIcon} ${m.role}</span></td>
-      <td style="color:var(--w40);font-size:.72rem">${m.phone||'—'}</td>
-    </tr>`).join('');
-
-  // Success data
-  document.getElementById('sucName').textContent=name;
-  document.getElementById('sucDest').textContent=dest;
-  document.getElementById('sucDates').textContent=fmtDate(s)+' — '+fmtDate(e);
-  document.getElementById('sucMembers').textContent=toAr(total)+' '+membLbl;
+  const all=[{name:orgName,phone:orgPhone,role:orgRole,roleIcon:'👑',roleColor:'#b8970a',color:'#b8970a',isOrg:true},...ST.companions];
+  document.getElementById('membersBody').innerHTML=all.map(m=>`<tr>
+    <td><div style="display:flex;align-items:center;gap:7px"><div class="mem-av" style="background:${m.color}">${m.name.charAt(0)}</div><span style="font-weight:700;color:var(--text)">${m.name}</span></div></td>
+    <td><span style="${m.isOrg?'background:#fef9ed;color:#92400e;border:1px solid #d4a827':'background:'+m.roleColor+'22;color:'+m.roleColor+';border:1px solid '+m.roleColor+'44'};padding:3px 8px;border-radius:100px;font-size:.64rem;font-weight:700;display:inline-flex;align-items:center;gap:3px">${m.roleIcon} ${m.role}</span></td>
+    <td style="color:var(--text4);font-size:.72rem">${m.phone||'—'}</td></tr>`).join('');
+  document.getElementById('sucName').textContent=name;document.getElementById('sucDest').textContent=dest;
+  document.getElementById('sucDates').textContent=fmtDate(s)+' — '+fmtDate(e);document.getElementById('sucMembers').textContent=toAr(total)+' '+membLbl;
 }
 
-/* ══════════════════════
-   CREATE TRIP
-══════════════════════ */
 async function createTrip(){
-  if(!currentUser){
-    showToast(isEn?'Please sign in first':'يرجى تسجيل الدخول أولاً',false);
-    setTimeout(()=>location.href='rehla-auth.html',1500);
-    return;
-  }
-  const name=document.getElementById('tripName').value.trim();
-  const dest=document.getElementById('tripDest').value.trim();
-  const start=document.getElementById('tripStart').value;
-  const end=document.getElementById('tripEnd').value;
+  if(!currentUser){showToast(isEn?'Please sign in first':'يرجى تسجيل الدخول أولاً',false);setTimeout(()=>location.href='rehla-auth.html',1500);return}
+  const name=document.getElementById('tripName').value.trim();const dest=document.getElementById('tripDest').value.trim();
+  const start=document.getElementById('tripStart').value;const end=document.getElementById('tripEnd').value;
   const orgName=document.getElementById('orgName').value.trim();
-  if(!name||!dest||!start||!end||!orgName){
-    showToast(isEn?'Please fill all required fields':'يرجى ملء جميع الحقول المطلوبة',false);
-    return;
-  }
-  const btn=document.getElementById('createBtn');
-  btn.disabled=true;
+  if(!name||!dest||!start||!end||!orgName){showToast(isEn?'Please fill all required fields':'يرجى ملء جميع الحقول المطلوبة',false);return}
+  const btn=document.getElementById('createBtn');btn.disabled=true;
   document.getElementById('loadOv').classList.add('show');
   try{
-    // ١ — إنشاء الرحلة
     const {data:trip,error:tErr}=await sb.from('trips').insert({
-      owner_id:currentUser.id,
-      name,destination:dest,
-      start_date:start,end_date:end,
-      currency:ST.currency,
+      owner_id:currentUser.id,name,destination:dest,start_date:start,end_date:end,currency:ST.currency,
       notes:document.getElementById('tripNotes').value.trim()||null,
       countries:ST.multiOn&&ST.countries.length>0?JSON.stringify(ST.countries):null,
-      is_paid:false,
-      status:'active',
+      is_paid:false,status:'pending',
     }).select().single();
     if(tErr)throw new Error(tErr.message);
     createdTripId=trip.id;
-
-    // ٢ — المنظم كعضو أول
-    await sb.from('trip_members').insert({
-      trip_id:trip.id,name:orgName,
-      phone:document.getElementById('orgPhone').value.trim()||null,
-      role:'مسؤول الرحلة',role_icon:'👑',role_color:'#38bdf8',
-      user_id:currentUser.id,is_organizer:true,
-    });
-
-    // ٣ — المرافقون
-    if(ST.companions.length>0){
-      await sb.from('trip_members').insert(
-        ST.companions.map(c=>({
-          trip_id:trip.id,name:c.name,phone:c.phone||null,
-          role:c.role,role_icon:c.roleIcon,role_color:c.roleColor,
-        }))
-      );
-    }
-
-    // ٤ — التحويل لـ Stripe للدفع
+    await sb.from('trip_members').insert({trip_id:trip.id,name:orgName,phone:document.getElementById('orgPhone').value.trim()||null,role:'مسؤول الرحلة',role_icon:'👑',role_color:'#b8970a',user_id:currentUser.id,is_organizer:true});
+    if(ST.companions.length>0)await sb.from('trip_members').insert(ST.companions.map(c=>({trip_id:trip.id,name:c.name,phone:c.phone||null,role:c.role,role_icon:c.roleIcon,role_color:c.roleColor})));
     document.getElementById('loadOv').classList.remove('show');
-    await startStripePayment(trip.id, document.getElementById('tripName').value.trim());
-
+    await startStripePayment(trip.id,name);
   }catch(err){
-    document.getElementById('loadOv').classList.remove('show');
-    btn.disabled=false;
-    console.error(err);
+    document.getElementById('loadOv').classList.remove('show');btn.disabled=false;
     showToast('❌ '+(err.message||'خطأ في إنشاء الرحلة'),false);
   }
 }
 
-/* ══════════════════════
-   STRIPE PAYMENT
-══════════════════════ */
-const EDGE_URL='https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-checkout';
-
-async function startStripePayment(tripId, tripName){
-  showToast(isEn?'Redirecting to payment...':'جاري التحويل للدفع...', true);
+async function startStripePayment(tripId,tripName){
+  showToast(isEn?'Redirecting to payment...':'جاري التحويل للدفع...',true);
   try{
     const {data:{session:authSession}}=await sb.auth.getSession();
-    const res=await fetch(EDGE_URL,{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'Authorization':'Bearer '+authSession.access_token,
-        'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI',
-      },
-      body:JSON.stringify({
-        trip_id:tripId,
-        user_id:currentUser.id,
-        trip_name:tripName,
-      })
-    });
+    const res=await fetch(EDGE_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+authSession.access_token,'apikey':SKEY},body:JSON.stringify({trip_id:tripId,user_id:currentUser.id,trip_name:tripName})});
     const data=await res.json();
     if(data.error)throw new Error(data.error);
-    if(data.url){
-      sessionStorage.setItem('pending_payment_trip', tripId);
-      window.location.href=data.url;
-    }
+    if(data.url){sessionStorage.setItem('pending_payment_trip',tripId);window.location.href=data.url}
   }catch(err){
-    // إذا فشل الدفع — اذهب للـ dashboard مع إمكانية الدفع لاحقاً
-    showToast('⚠️ تم إنشاء الرحلة — يمكنك الدفع من لوحة التحكم', true);
-    setTimeout(()=>location.href='rehla-dashboard.html', 2000);
+    showToast('⚠️ تم إنشاء الرحلة — يمكنك الدفع من لوحة التحكم',true);
+    setTimeout(()=>location.href='rehla-dashboard.html',2000);
   }
 }
 
-function goToDash(){
-  location.href='rehla-dashboard.html';
-}
-
+function goToDash(){location.href='rehla-dashboard.html'}
 function shareTrip(){
   if(!createdTripId){showToast(isEn?'Trip not created yet':'الرحلة لم تُنشأ بعد',false);return}
   const link='https://saahl2030-art.github.io/rehlasaa/rehla-companion.html?trip='+createdTripId;
@@ -1127,15 +1097,9 @@ function shareTrip(){
   showToast(isEn?'✓ Link copied!':'✓ تم نسخ الرابط!',true);
 }
 
-/* ══════════════════════
-   TOAST
-══════════════════════ */
 function showToast(msg,ok=true){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.className='show '+(ok?'ok':'err');
-  clearTimeout(t._t);
-  t._t=setTimeout(()=>t.className='',3500);
+  const t=document.getElementById('toast');t.textContent=msg;t.className='show '+(ok?'ok':'err');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.className='',3500);
 }
 </script>
 </body>
