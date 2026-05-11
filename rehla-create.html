@@ -7,8 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --gold:#b8970a;--gold-light:#d4a827;
-  --gold-dim:rgba(184,151,10,.1);--gold-border:rgba(184,151,10,.3);
+  --gold:#c9a227;--gold-light:#ddb828;
+  --gold-dim:rgba(201,162,39,.1);--gold-border:rgba(201,162,39,.3);
   --green:#16a34a;--green-dim:rgba(22,163,74,.12);
   --red:#dc2626;--red-dim:rgba(220,38,38,.12);
   --text:#1a1a2e;--text2:#374151;--text3:#6b7280;--text4:#9ca3af;
@@ -30,7 +30,7 @@ body{
 input,select,textarea,button{font-family:inherit;border:none;outline:none;-webkit-appearance:none;appearance:none}
 button{cursor:pointer}
 ::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-thumb{background:rgba(184,151,10,.3);border-radius:2px}
+::-webkit-scrollbar-thumb{background:rgba(201,162,39,.3);border-radius:2px}
 
 /* NAV */
 nav{
@@ -350,7 +350,7 @@ nav{
   box-shadow:0 4px 12px var(--gold-dim);transition:all .25s;
   display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.btn-main:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 16px rgba(184,151,10,.2)}
+.btn-main:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 16px rgba(201,162,39,.2)}
 .btn-main:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
 .btn-sec{
   width:100%;padding:13px;border-radius:var(--rsm);
@@ -433,7 +433,7 @@ nav{
 .load-ov.show{opacity:1;pointer-events:all}
 .spinner{
   width:48px;height:48px;border-radius:50%;
-  border:3px solid rgba(184,151,10,.15);border-top-color:var(--gold);
+  border:3px solid rgba(201,162,39,.15);border-top-color:var(--gold);
   animation:spin .8s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -1039,10 +1039,10 @@ function buildSummary(){
     document.getElementById('sumCtrsChips').innerHTML=ST.countries.map(c=>`<span class="sum-chip">${c.flag} ${c.name} <span style="color:var(--text4);font-size:.62rem">${c.curr}</span>${c.arrival?' · '+fmtDate(c.arrival):''}${c.departure?' → '+fmtDate(c.departure):''}</span>`).join('');
   }else cw.style.display='none';
   const orgRole=isEn?'Organizer':'مسؤول الرحلة';
-  const all=[{name:orgName,phone:orgPhone,role:orgRole,roleIcon:'👑',roleColor:'#b8970a',color:'#b8970a',isOrg:true},...ST.companions];
+  const all=[{name:orgName,phone:orgPhone,role:orgRole,roleIcon:'👑',roleColor:'#c9a227',color:'#c9a227',isOrg:true},...ST.companions];
   document.getElementById('membersBody').innerHTML=all.map(m=>`<tr>
     <td><div style="display:flex;align-items:center;gap:7px"><div class="mem-av" style="background:${m.color}">${m.name.charAt(0)}</div><span style="font-weight:700;color:var(--text)">${m.name}</span></div></td>
-    <td><span style="${m.isOrg?'background:#fef9ed;color:#92400e;border:1px solid #d4a827':'background:'+m.roleColor+'22;color:'+m.roleColor+';border:1px solid '+m.roleColor+'44'};padding:3px 8px;border-radius:100px;font-size:.64rem;font-weight:700;display:inline-flex;align-items:center;gap:3px">${m.roleIcon} ${m.role}</span></td>
+    <td><span style="${m.isOrg?'background:#fef9ed;color:#92400e;border:1px solid #ddb828':'background:'+m.roleColor+'22;color:'+m.roleColor+';border:1px solid '+m.roleColor+'44'};padding:3px 8px;border-radius:100px;font-size:.64rem;font-weight:700;display:inline-flex;align-items:center;gap:3px">${m.roleIcon} ${m.role}</span></td>
     <td style="color:var(--text4);font-size:.72rem">${m.phone||'—'}</td></tr>`).join('');
   document.getElementById('sucName').textContent=name;document.getElementById('sucDest').textContent=dest;
   document.getElementById('sucDates').textContent=fmtDate(s)+' — '+fmtDate(e);document.getElementById('sucMembers').textContent=toAr(total)+' '+membLbl;
@@ -1065,7 +1065,7 @@ async function createTrip(){
     }).select().single();
     if(tErr)throw new Error(tErr.message);
     createdTripId=trip.id;
-    await sb.from('trip_members').insert({trip_id:trip.id,name:orgName,phone:document.getElementById('orgPhone').value.trim()||null,role:'مسؤول الرحلة',role_icon:'👑',role_color:'#b8970a',user_id:currentUser.id,is_organizer:true});
+    await sb.from('trip_members').insert({trip_id:trip.id,name:orgName,phone:document.getElementById('orgPhone').value.trim()||null,role:'مسؤول الرحلة',role_icon:'👑',role_color:'#c9a227',user_id:currentUser.id,is_organizer:true});
     if(ST.companions.length>0)await sb.from('trip_members').insert(ST.companions.map(c=>({trip_id:trip.id,name:c.name,phone:c.phone||null,role:c.role,role_icon:c.roleIcon,role_color:c.roleColor})));
     document.getElementById('loadOv').classList.remove('show');
     await startStripePayment(trip.id,name);
