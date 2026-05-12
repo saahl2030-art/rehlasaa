@@ -44,7 +44,7 @@ body{
 /* ══ TICKER ══ */
 .ticker-wrap{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:36px;background:var(--gold);
+  height:36px;background:#c8a96a;
   overflow:hidden;display:flex;align-items:center;
 }
 .ticker-inner{
@@ -70,22 +70,22 @@ nav{
   position:fixed;top:36px;left:0;right:0;z-index:900;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 6%;height:66px;
-  background:#ffffff;
-  border-bottom:1px solid var(--border2);
-  box-shadow:var(--shadow);
+  background:#c8a96a;
+  border-bottom:1px solid #a07840;
+  box-shadow:0 1px 4px rgba(0,0,0,.1);
   transition:box-shadow .3s;
 }
 nav.scrolled{box-shadow:var(--shadow-md)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
 .logo-icon{width:40px;height:40px;background:var(--gold);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px var(--gold-dim);color:#fff}
-.logo-name{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:var(--text)}
+.logo-name{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:#3d2200}
 .logo-name em{color:var(--gold);font-style:normal}
 .logo-sub{font-size:.62rem;color:var(--text4);margin-top:-4px}
 .nav-links{display:flex;align-items:center;gap:4px}
-.nav-a{padding:7px 14px;border-radius:8px;font-size:.85rem;font-weight:600;color:var(--text2);cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif;transition:all .2s;text-decoration:none}
-.nav-a:hover{color:var(--text);background:rgba(0,0,0,.04)}
-.nav-btn-outline{padding:8px 18px;border-radius:8px;border:1.5px solid var(--border);color:var(--text2);font-weight:700;font-size:.85rem;background:#f3f4f6;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s}
-.nav-btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.nav-a{padding:7px 14px;border-radius:8px;font-size:.85rem;font-weight:600;color:#3d2200;cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif;transition:all .2s;text-decoration:none}
+.nav-a:hover{color:#1a0e00;background:rgba(0,0,0,.1)}
+.nav-btn-outline{padding:8px 18px;border-radius:8px;border:1.5px solid rgba(255,255,255,.5);color:#3d2200;font-weight:700;font-size:.85rem;background:rgba(255,255,255,.2);cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s}
+.nav-btn-outline:hover{border-color:rgba(255,255,255,.8);color:#1a0e00;background:rgba(255,255,255,.35)}
 .nav-btn-solid{padding:9px 20px;border-radius:8px;background:var(--gold);color:#fff;font-weight:800;font-size:.88rem;border:none;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 4px 12px var(--gold-dim);transition:all .25s}
 .nav-btn-solid:hover{background:var(--gold-light);transform:translateY(-1px)}
 
