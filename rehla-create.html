@@ -12,7 +12,7 @@
   --green:#16a34a;--green-dim:rgba(22,163,74,.12);
   --red:#dc2626;--red-dim:rgba(220,38,38,.12);
   --text:#1a1a2e;--text2:#374151;--text3:#6b7280;--text4:#9ca3af;
-  --bg:#f0f2f5;--bg2:#f5f7fa;
+  --bg:#ffffff;--bg2:#ffffff;
   --border:rgba(0,0,0,.1);--border2:rgba(0,0,0,.07);
   --card:#ffffff;
   --r:14px;--rsm:10px;--rxs:7px;
@@ -23,7 +23,7 @@
 html{-webkit-tap-highlight-color:transparent;scroll-behavior:smooth}
 body{
   font-family:'Cairo',sans-serif;
-  background:linear-gradient(160deg,#f0f2f5 0%,#f5f7fa 60%,#eef0f3 100%);
+  background:#ffffff;
   min-height:100vh;color:var(--text);
   overflow-x:hidden;-webkit-font-smoothing:antialiased;
 }
@@ -36,9 +36,9 @@ button{cursor:pointer}
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;height:58px;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 4%;background:#ffffff;
-  border-bottom:1px solid var(--border2);
-  box-shadow:var(--shadow);
+  padding:0 4%;background:#f5edd8;
+  border-bottom:1px solid #c9a227;
+  box-shadow:0 1px 4px rgba(0,0,0,.1);
 }
 .nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
 .nav-logo-icon{
@@ -48,15 +48,15 @@ nav{
   font-size:1rem;font-weight:900;color:#fff;flex-shrink:0;
   box-shadow:0 4px 10px var(--gold-dim);
 }
-.nav-logo-name{font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:900;color:var(--text)}
+.nav-logo-name{font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:900;color:#374151}
 .nav-logo-name em{color:var(--gold);font-style:normal}
 .nav-right{display:flex;align-items:center;gap:8px}
 .btn-nav{
   padding:7px 14px;border-radius:var(--rxs);
-  background:#f3f4f6;border:1px solid var(--border);
-  color:var(--text2);font-size:.8rem;font-weight:700;transition:all .2s;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
+  color:#374151;font-size:.8rem;font-weight:700;transition:all .2s;
 }
-.btn-nav:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn-nav:hover{background:rgba(255,255,255,.35);color:#1a1a2e;border-color:rgba(255,255,255,.6)}
 
 /* PAGE */
 .page{padding:70px 4% 60px;max-width:680px;margin:0 auto;width:100%}
