@@ -44,7 +44,7 @@ body{
 /* ══ TICKER ══ */
 .ticker-wrap{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:36px;background:#c8a96a;
+  height:36px;background:#f5edd8;
   overflow:hidden;display:flex;align-items:center;
 }
 .ticker-inner{
@@ -53,39 +53,39 @@ body{
 }
 .ticker-wrap:hover .ticker-inner{animation-play-state:paused}
 @keyframes tickerScroll{0%{transform:translateX(-50%)}100%{transform:translateX(0%)}}
-.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 24px;font-size:.75rem;font-weight:700;color:rgba(255,255,255,.9)}
-.ticker-item strong{color:#fff}
-.ticker-sep{color:rgba(255,255,255,.5);padding:0 6px}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 24px;font-size:.75rem;font-weight:700;color:#374151}
+.ticker-item strong{color:#1a1a2e}
+.ticker-sep{color:#c9a227;padding:0 6px}
 .ticker-cta{
   display:inline-flex;align-items:center;gap:5px;
-  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
-  color:#fff;font-size:.7rem;font-weight:800;
+  background:rgba(201,162,39,.15);border:1px solid #c9a227;
+  color:#374151;font-size:.7rem;font-weight:800;
   padding:3px 10px;border-radius:100px;margin-right:8px;text-decoration:none;
   transition:background .2s;
 }
-.ticker-cta:hover{background:rgba(255,255,255,.35)}
+.ticker-cta:hover{background:rgba(201,162,39,.25)}
 
 /* ══ NAV ══ */
 nav{
   position:fixed;top:36px;left:0;right:0;z-index:900;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 6%;height:66px;
-  background:#c8a96a;
-  border-bottom:1px solid #a07840;
+  background:#f5edd8;
+  border-bottom:1px solid #c9a227;
   box-shadow:0 1px 4px rgba(0,0,0,.1);
   transition:box-shadow .3s;
 }
 nav.scrolled{box-shadow:var(--shadow-md)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
 .logo-icon{width:40px;height:40px;background:var(--gold);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:0 4px 12px var(--gold-dim);color:#fff}
-.logo-name{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:#3d2200}
+.logo-name{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:#374151}
 .logo-name em{color:var(--gold);font-style:normal}
 .logo-sub{font-size:.62rem;color:var(--text4);margin-top:-4px}
 .nav-links{display:flex;align-items:center;gap:4px}
-.nav-a{padding:7px 14px;border-radius:8px;font-size:.85rem;font-weight:600;color:#3d2200;cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif;transition:all .2s;text-decoration:none}
-.nav-a:hover{color:#1a0e00;background:rgba(0,0,0,.1)}
-.nav-btn-outline{padding:8px 18px;border-radius:8px;border:1.5px solid rgba(255,255,255,.5);color:#3d2200;font-weight:700;font-size:.85rem;background:rgba(255,255,255,.2);cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s}
-.nav-btn-outline:hover{border-color:rgba(255,255,255,.8);color:#1a0e00;background:rgba(255,255,255,.35)}
+.nav-a{padding:7px 14px;border-radius:8px;font-size:.85rem;font-weight:600;color:#374151;cursor:pointer;border:none;background:none;font-family:'Cairo',sans-serif;transition:all .2s;text-decoration:none}
+.nav-a:hover{color:#1a1a2e;background:rgba(0,0,0,.1)}
+.nav-btn-outline{padding:8px 18px;border-radius:8px;border:1.5px solid rgba(255,255,255,.5);color:#374151;font-weight:700;font-size:.85rem;background:rgba(255,255,255,.2);cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s}
+.nav-btn-outline:hover{border-color:rgba(255,255,255,.8);color:#1a1a2e;background:rgba(255,255,255,.35)}
 .nav-btn-solid{padding:9px 20px;border-radius:8px;background:var(--gold);color:#fff;font-weight:800;font-size:.88rem;border:none;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 4px 12px var(--gold-dim);transition:all .25s}
 .nav-btn-solid:hover{background:var(--gold-light);transform:translateY(-1px)}
 
