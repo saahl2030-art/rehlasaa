@@ -436,7 +436,7 @@ footer{background:#ffffff;padding:60px 6% 28px;color:var(--text);border-top:1px 
     <span class="ticker-sep">◆</span>
     <a class="ticker-cta" href="rehla-auth.html">ابدأ الآن ←</a>
     <span class="ticker-sep">◆</span>
-    <a class="ticker-cta" href="rehla-advertise.html" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)">📢 أعلن هنا — ٦٠ د/يوم</a>
+    <a class="ticker-cta" href="rehla-advertise.html" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)">📢 شريط ٦٠ د | أضواء ١٥٠ د</a>
     <span class="ticker-item">✈ وكالات السفر — <strong>نظّم رحلات عملائك</strong> ببضع نقرات</span>
     <span class="ticker-sep">◆</span>
     <span class="ticker-item">🏨 شركات السياحة — <strong>تتبع مصاريف الرحلات الجماعية</strong> بسهولة تامة</span>
@@ -449,7 +449,7 @@ footer{background:#ffffff;padding:60px 6% 28px;color:var(--text);border-top:1px 
     <span class="ticker-sep">◆</span>
     <a class="ticker-cta" href="rehla-auth.html">ابدأ الآن ←</a>
     <span class="ticker-sep">◆</span>
-    <a class="ticker-cta" href="rehla-advertise.html" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)">📢 أعلن هنا — ٦٠ د/يوم</a>
+    <a class="ticker-cta" href="rehla-advertise.html" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)">📢 شريط ٦٠ د | أضواء ١٥٠ د</a>
   </div>
 </div>
 
@@ -707,6 +707,7 @@ let indexLang=localStorage.getItem('rehla_lang')||'ar';
 document.addEventListener('DOMContentLoaded',()=>{
   if(indexLang==='en')document.getElementById('indexLangBtn').textContent='ع';
   loadAnnouncement();
+  loadStripAds();
 });
 function toggleIndexLang(){
   indexLang=indexLang==='ar'?'en':'ar';
@@ -729,6 +730,44 @@ async function loadAnnouncement(){
     if(ann.expires_at&&new Date(ann.expires_at)<new Date())return;
     injectAnnouncement(ann);
   }catch(e){console.log('ann:',e)}
+}
+
+async function loadStripAds(){
+  try{
+    const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
+    const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
+    const res=await fetch(
+      `${SURL}/rest/v1/paid_ads?status=eq.approved&ad_type=eq.strip&order=created_at.desc&limit=5`,
+      {headers:{'apikey':SKEY,'Authorization':'Bearer '+SKEY}}
+    );
+    if(!res.ok)return;
+    const data=await res.json();
+    if(!data||!data.length)return;
+    data.forEach(ad=>{
+      injectStripAd(ad);
+    });
+  }catch(e){console.log('strip ads:',e)}
+}
+
+function injectStripAd(ad){
+  const ticker=document.getElementById('tickerInner');
+  if(!ticker||!ad.ad_text)return;
+  const makeItem=()=>{
+    const item=document.createElement('span');
+    item.className='ticker-item';
+    item.style.cssText='font-weight:800;';
+    const inner=ad.ad_link
+      ?`📢 <strong>${ad.company_name}</strong> — <a href="${ad.ad_link}" target="_blank" style="color:var(--gold);text-decoration:none;font-weight:800">${ad.ad_text} ←</a>`
+      :`📢 <strong>${ad.company_name}</strong> — ${ad.ad_text}`;
+    item.innerHTML=inner;
+    return item;
+  };
+  const makeSep=()=>{const s=document.createElement('span');s.className='ticker-sep';s.textContent='◆';return s;};
+  ticker.prepend(makeSep());
+  ticker.prepend(makeItem());
+  const items=ticker.querySelectorAll('.ticker-item');
+  const mid=Math.floor(items.length/2);
+  if(items[mid]){ticker.insertBefore(makeSep(),items[mid]);ticker.insertBefore(makeItem(),items[mid]);}
 }
 
 function injectAnnouncement(ann){
@@ -841,7 +880,7 @@ async function loadSpotlightAds(){
     const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
     const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
     const res = await fetch(
-      `${SURL}/rest/v1/paid_ads?status=eq.approved&order=created_at.desc&limit=5`,
+      `${SURL}/rest/v1/paid_ads?status=eq.approved&ad_type=eq.spotlight&order=created_at.desc&limit=5`,
       {headers:{'apikey':SKEY,'Authorization':'Bearer '+SKEY}}
     );
     const data = await res.json();
