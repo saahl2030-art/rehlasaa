@@ -566,9 +566,20 @@ async function submitAd(){
 
     // ٢ — التحويل لـ Stripe
     toast('جاري التحويل للدفع...','info');
+    // جلب الـ session للـ Authorization
+    let authToken = SKEY;
+    try{
+      const {data:{session:s}} = await sb.auth.getSession();
+      if(s?.access_token) authToken = s.access_token;
+    }catch(e){}
+
     const res=await fetch(AD_EDGE_URL,{
       method:'POST',
-      headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI'},
+      headers:{
+        'Content-Type':'application/json',
+        'apikey':SKEY,
+        'Authorization':'Bearer '+authToken,
+      },
       body:JSON.stringify({
         ad_id:ad.id,
         ad_type:selectedType,
