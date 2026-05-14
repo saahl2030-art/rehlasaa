@@ -53,7 +53,7 @@ body{
 }
 .ticker-wrap:hover .ticker-inner{animation-play-state:paused}
 @keyframes tickerScroll{0%{transform:translateX(-50%)}100%{transform:translateX(0%)}}
-.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 24px;font-size:.75rem;font-weight:700;color:#374151}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 24px;font-size:.88rem;font-weight:700;color:#374151}
 .ticker-item strong{color:#1a1a2e}
 .ticker-sep{color:#c9a227;padding:0 6px}
 .ticker-cta{
@@ -850,16 +850,23 @@ function swShowAd(idx){
   if(!swAds.length) return;
   swCurrent = idx;
   const ad = swAds[idx];
+  const hasImg = !!ad.ad_image;
+  const imgHtml = hasImg
+    ? `<img src="${ad.ad_image}" style="width:100%;height:100px;object-fit:cover;border-radius:8px;margin-bottom:8px;display:block">`
+    : '';
+  const iconHtml = !hasImg ? `<div class="sw-ad-icon">${ad.icon||'📢'}</div>` : '';
   document.getElementById('swBody').innerHTML = `
-    <div class="sw-ad-card">
-      <div class="sw-ad-icon">${ad.icon||'📢'}</div>
-      <div class="sw-ad-info">
-        <div class="sw-ad-company">${ad.company_name||'إعلان'}</div>
-        <div class="sw-ad-text">${ad.ad_text||''}</div>
-        ${ad.ad_link?`<a class="sw-ad-btn" href="${ad.ad_link}" target="_blank">اكتشف الآن</a>`:''}
+    <div class="sw-ad-card" style="${hasImg?'flex-direction:column;align-items:flex-start':''}">
+      ${imgHtml}
+      <div style="display:flex;gap:10px;align-items:center;width:100%">
+        ${iconHtml}
+        <div class="sw-ad-info">
+          <div class="sw-ad-company">${ad.company_name||'إعلان'}</div>
+          <div class="sw-ad-text">${ad.ad_text||''}</div>
+          ${ad.ad_link?`<a class="sw-ad-btn" href="${ad.ad_link}" target="_blank">اكتشف الآن</a>`:''}
+        </div>
       </div>
     </div>`;
-  // تحديث النقاط
   document.querySelectorAll('.sw-nav-dot').forEach((d,i)=>{
     d.classList.toggle('active', i===idx);
   });
