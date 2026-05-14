@@ -22,8 +22,6 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);min-height:100vh;color:
 input,select,textarea,button{font-family:inherit;border:none;outline:none}
 button{cursor:pointer}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(201,162,39,.3);border-radius:2px}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(--bg2);border-bottom:1px solid #e8d5b0;display:flex;align-items:center;justify-content:space-between;padding:0 6%;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-icon{width:38px;height:38px;border-radius:10px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff}
@@ -31,124 +29,94 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
 .logo-name em{color:var(--gold);font-style:normal}
 .nav-back{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--rxs);background:#f3f4f6;border:1px solid #e8d5b0;color:var(--text2);font-size:.82rem;font-weight:700;transition:all .2s;text-decoration:none}
 .nav-back:hover{background:#e8d5b0;color:var(--text)}
-
-/* HERO */
 .hero{padding:90px 6% 50px;text-align:center;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)}
 .hero-tag{display:inline-flex;align-items:center;gap:7px;background:var(--gold-dim);border:1px solid var(--gold-border);color:#92400e;padding:6px 16px;border-radius:100px;font-size:.8rem;font-weight:700;margin-bottom:20px}
 .hero-title{font-family:'Tajawal',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:var(--text);line-height:1.2;margin-bottom:14px}
 .hero-title em{color:var(--gold);font-style:normal}
 .hero-sub{font-size:.95rem;color:var(--text3);max-width:520px;margin:0 auto 40px;line-height:1.8}
-
-/* STATS */
-.stats-row{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:50px}
-.stat-item{text-align:center;background:#fff;border:1px solid #e8d5b0;border-radius:12px;padding:16px 24px;min-width:110px}
+.stats-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:50px}
+.stat-item{text-align:center;background:#fff;border:1px solid #e8d5b0;border-radius:12px;padding:16px 22px;min-width:100px}
 .stat-val{font-family:'Tajawal',sans-serif;font-size:2rem;font-weight:900;color:var(--gold)}
-.stat-lbl{font-size:.78rem;color:var(--text3);margin-top:3px}
-
-/* AD TYPES */
-.ad-types{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:780px;margin:0 auto 40px;padding:0 6%}
-.ad-type-card{background:#fff;border:2px solid #e8d5b0;border-radius:14px;padding:20px;cursor:pointer;transition:all .25s;position:relative}
-.ad-type-card:hover{border-color:var(--gold);box-shadow:0 4px 16px rgba(201,162,39,.15)}
-.ad-type-card.selected{border-color:var(--gold);background:#fef9ed;box-shadow:0 4px 16px rgba(201,162,39,.2)}
-.ad-type-badge{position:absolute;top:12px;left:12px;background:var(--gold);color:#fff;font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:100px}
-.ad-type-icon{font-size:2rem;margin-bottom:10px}
-.ad-type-name{font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:900;color:var(--text);margin-bottom:4px}
-.ad-type-desc{font-size:.78rem;color:var(--text3);line-height:1.5;margin-bottom:10px}
-.ad-type-price{font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900;color:var(--gold)}
-.ad-type-price small{font-size:.75rem;color:var(--text3);font-family:'Cairo',sans-serif}
-.ad-type-features{list-style:none;margin-top:8px}
-.ad-type-features li{font-size:.72rem;color:var(--text3);padding:2px 0;display:flex;align-items:center;gap:5px}
-.ad-type-features li::before{content:'✓';color:var(--green);font-weight:700}
-
-/* FORM */
+.stat-lbl{font-size:.76rem;color:var(--text3);margin-top:3px}
+.ad-types-wrap{max-width:780px;margin:0 auto;padding:0 6% 30px}
+.ad-types-title{font-size:.78rem;font-weight:800;color:var(--text4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ad-types-title::after{content:'';flex:1;height:1px;background:var(--border2)}
+.ad-types{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ad-type-card{background:#fff;border:2px solid #e8d5b0;border-radius:14px;padding:20px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.ad-type-card:hover{border-color:var(--gold);box-shadow:0 4px 16px var(--gold-dim)}
+.ad-type-card.selected{border-color:var(--gold);background:#fef9ed}
+.ad-check{position:absolute;top:12px;left:12px;width:22px;height:22px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;opacity:0;transition:opacity .25s}
+.ad-type-card.selected .ad-check{opacity:1}
+.ad-type-badge{display:inline-flex;align-items:center;gap:4px;background:var(--gold);color:#fff;font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:100px;margin-bottom:8px}
+.ad-type-icon{font-size:2.2rem;margin-bottom:8px}
+.ad-type-name{font-family:'Tajawal',sans-serif;font-size:1.05rem;font-weight:900;color:var(--text);margin-bottom:4px}
+.ad-type-desc{font-size:.76rem;color:var(--text3);line-height:1.5;margin-bottom:12px}
+.ad-type-price{font-family:'Tajawal',sans-serif;font-size:1.7rem;font-weight:900;color:var(--gold)}
+.ad-type-price small{font-size:.74rem;color:var(--text3);font-family:'Cairo',sans-serif;font-weight:600}
+.ad-type-features{list-style:none;margin-top:10px;border-top:1px solid #f3f4f6;padding-top:10px}
+.ad-type-features li{font-size:.72rem;color:var(--text3);padding:3px 0;display:flex;align-items:center;gap:6px}
+.ad-type-features li::before{content:'✓';color:var(--green);font-weight:800}
 .form-wrap{max-width:780px;margin:0 auto;padding:0 6% 80px}
 .step-card{background:#fff;border:1px solid #e8d5b0;border-radius:var(--r);overflow:hidden;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.step-head{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #f3f4f6;background:#fdf8f2}
+.step-head{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #f3f4f6;background:var(--bg3)}
 .step-num{width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Tajawal',sans-serif;font-size:.9rem;font-weight:900;color:#fff;flex-shrink:0}
 .step-title{font-size:.9rem;font-weight:800;color:var(--text)}
 .step-body{padding:20px}
-
-/* FORM FIELDS */
 .f-group{margin-bottom:14px}
 .f-lbl{font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
 .f-lbl span{font-size:.7rem;color:var(--text4);font-weight:600}
-.f-inp,.f-sel,.f-ta{width:100%;padding:11px 13px;background:#f9fafb;border:1px solid #e8d5b0;border-radius:var(--rsm);color:var(--text);font-size:.88rem;transition:all .2s}
-.f-inp::placeholder,.f-ta::placeholder{color:var(--text4)}
-.f-inp:focus,.f-sel:focus,.f-ta:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px var(--gold-dim);outline:none}
+.f-inp,.f-sel{width:100%;padding:11px 13px;background:#f9fafb;border:1.5px solid #e8d5b0;border-radius:var(--rsm);color:var(--text);font-size:.88rem;transition:all .2s}
+.f-inp::placeholder{color:var(--text4)}
+.f-inp:focus,.f-sel:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px var(--gold-dim);outline:none}
 .f-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='rgba(0,0,0,.4)' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 12px center;padding-left:32px;cursor:pointer;-webkit-appearance:none}
 .f-sel option{background:#fff;color:var(--text)}
-.f-ta{resize:vertical;min-height:70px;line-height:1.6}
 .f-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .f-err{font-size:.72rem;color:var(--red);margin-top:4px;display:none}
 .f-group.err .f-err{display:block}
-.f-group.err .f-inp,.f-group.err .f-sel{border-color:var(--red)}
-
-/* WORD COUNTER */
+.f-group.err .f-inp{border-color:var(--red)}
 .word-counter{font-size:.72rem;font-weight:700;margin-top:5px;display:flex;align-items:center;gap:5px}
 .wc-ok{color:var(--green)}.wc-warn{color:var(--gold)}.wc-err{color:var(--red)}
-
-/* TICKER PREVIEW */
-.preview-wrap{background:#fdf8f2;border:1px solid #e8d5b0;border-radius:var(--rsm);padding:12px 16px;margin-top:10px}
-.preview-lbl{font-size:.7rem;color:var(--text4);margin-bottom:8px;font-weight:600}
-.preview-ticker{
-  display:flex;align-items:center;gap:8px;
-  background:#f5edd8;border:1px solid #e8d5b0;
-  border-radius:6px;padding:10px 14px;
-  font-size:.92rem;/* ← تكبير الخط */
-  font-weight:700;color:var(--text);
-  overflow:hidden;
-}
-.preview-ticker em{color:var(--gold);font-style:normal;font-size:.85rem;margin-right:4px}
-
-/* SPOTLIGHT PREVIEW */
-.spotlight-preview{
-  background:#1a1206;border:2px solid var(--gold);
-  border-radius:12px;padding:14px;margin-top:10px;
-}
+.preview-wrap{background:var(--bg3);border:1px solid #e8d5b0;border-radius:var(--rsm);padding:14px 16px;margin-top:12px}
+.preview-lbl{font-size:.72rem;color:var(--text4);margin-bottom:8px;font-weight:600}
+/* شريط الأخبار — خط مكبّر */
+.preview-ticker{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid #e8d5b0;border-radius:8px;padding:12px 16px;font-size:1rem;font-weight:700;color:var(--text);overflow:hidden}
+.preview-ticker em{color:var(--gold);font-style:normal}
+/* نافذة الأضواء preview */
+.spotlight-preview{background:#1a1206;border:2px solid var(--gold);border-radius:12px;padding:14px;margin-top:0}
 .sp-header{text-align:center;border-bottom:1px solid rgba(201,162,39,.3);padding-bottom:8px;margin-bottom:10px}
-.sp-title{font-family:'Tajawal',sans-serif;font-size:13px;font-weight:900;color:var(--gold)}
+.sp-title-txt{font-family:'Tajawal',sans-serif;font-size:13px;font-weight:900;color:var(--gold)}
+.sp-sub-txt{font-size:10px;color:#a07820}
 .sp-ad{display:flex;gap:10px;align-items:center}
-.sp-icon{width:40px;height:40px;border-radius:8px;background:rgba(201,162,39,.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.sp-info .sp-company{font-size:11px;font-weight:800;color:var(--gold);margin-bottom:3px}
-.sp-info .sp-text{font-size:11px;color:#d4b87a;line-height:1.4}
-
-/* PRICING */
-.price-display{background:#fef9ed;border:1px solid var(--gold-border);border-radius:var(--rsm);padding:16px 20px;margin-top:4px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.price-breakdown{font-size:.82rem;color:var(--text3);line-height:1.8}
-.price-breakdown strong{color:var(--text)}
-.price-total{text-align:center}
-.price-num{font-family:'Tajawal',sans-serif;font-size:2.4rem;font-weight:900;color:var(--gold);line-height:1}
-.price-curr{font-size:.78rem;color:var(--text3);margin-top:2px}
-
-/* DURATION PILLS */
+.sp-icon{width:42px;height:42px;border-radius:8px;background:rgba(201,162,39,.15);border:1px solid rgba(201,162,39,.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.sp-company{font-size:12px;font-weight:800;color:var(--gold);margin-bottom:3px;font-family:'Cairo',sans-serif}
+.sp-text-prev{font-size:11px;color:#d4b87a;line-height:1.4;font-family:'Cairo',sans-serif}
+.sp-ad-btn{display:inline-block;margin-top:5px;padding:3px 10px;background:var(--gold);color:#1a1206;border-radius:100px;font-size:10px;font-weight:700}
 .dur-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.dur-pill{padding:8px 16px;border-radius:100px;border:1px solid #e8d5b0;background:#f9fafb;color:var(--text3);font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:1px}
+.dur-pill{padding:9px 16px;border-radius:100px;border:1.5px solid #e8d5b0;background:#f9fafb;color:var(--text3);font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:2px}
 .dur-pill:hover{border-color:var(--gold);color:var(--gold)}
 .dur-pill.on{background:#fef3c7;border-color:var(--gold);color:#92400e}
 .dur-pill small{font-size:.66rem;color:inherit;opacity:.8}
-
-/* SUMMARY */
+.price-display{background:#fef9ed;border:1px solid var(--gold-border);border-radius:var(--rsm);padding:16px 20px;margin-top:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.price-breakdown{font-size:.84rem;color:var(--text3);line-height:1.9}
+.price-breakdown strong{color:var(--text);font-weight:700}
+.price-total{text-align:center}
+.price-num{font-family:'Tajawal',sans-serif;font-size:2.4rem;font-weight:900;color:var(--gold);line-height:1}
+.price-curr{font-size:.78rem;color:var(--text3);margin-top:2px}
 .summary-box{background:#fff;border:1px solid #e8d5b0;border-radius:var(--rsm);padding:16px 20px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .sum-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f3f4f6;font-size:.84rem}
-.sum-row:last-child{border-bottom:none;padding-top:10px;font-weight:800;font-size:.9rem}
+.sum-row:last-child{border-bottom:none;padding-top:10px;font-weight:800;font-size:.92rem}
 .sum-lbl{color:var(--text3)}
-.sum-val{color:var(--text);font-weight:700}
-.sum-total-val{color:var(--gold);font-family:'Tajawal',sans-serif;font-size:1.1rem}
-
-/* SUBMIT */
-.btn-submit{width:100%;padding:15px;border-radius:var(--rsm);background:var(--gold);color:#fff;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;box-shadow:0 4px 16px rgba(201,162,39,.25);transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;border:none}
-.btn-submit:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,162,39,.3)}
+.sum-val{color:var(--text);font-weight:700;text-align:left;max-width:55%}
+.sum-total-val{color:var(--gold);font-family:'Tajawal',sans-serif;font-size:1.15rem}
+.notes-box{background:var(--bg3);border:1px solid #e8d5b0;border-radius:var(--rsm);padding:14px 18px;margin-bottom:16px;font-size:.8rem;color:var(--text3);line-height:1.9}
+.notes-box strong{color:var(--text)}
+.btn-submit{width:100%;padding:15px;border-radius:var(--rsm);background:var(--gold);color:#fff;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;box-shadow:0 4px 16px var(--gold-dim);transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;border:none}
+.btn-submit:hover{background:var(--gold-light);transform:translateY(-2px)}
 .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .sub-spin{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;animation:spin .7s linear infinite;display:none}
 .btn-submit.loading .sub-spin{display:block}
 .btn-submit.loading .sub-txt{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* NOTES */
-.notes-box{background:#fdf8f2;border:1px solid #e8d5b0;border-radius:var(--rsm);padding:12px 16px;margin-bottom:16px;font-size:.78rem;color:var(--text3);line-height:1.8}
-.notes-box strong{color:var(--text)}
-
-/* SUCCESS */
 .success-ov{position:fixed;inset:0;z-index:500;background:rgba(245,240,230,.95);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
 .success-ov.show{opacity:1;pointer-events:all}
 .success-card{background:#fff;border:2px solid var(--gold-border);border-radius:20px;max-width:460px;width:100%;padding:40px 32px;text-align:center;transform:scale(.95);transition:transform .35s cubic-bezier(.34,1.4,.64,1);box-shadow:0 8px 32px rgba(0,0,0,.1)}
@@ -157,24 +125,48 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
 @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 .suc-title{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold);margin-bottom:10px}
 .suc-sub{font-size:.88rem;color:var(--text3);line-height:1.8;margin-bottom:24px}
-.suc-steps{background:#fdf8f2;border:1px solid #e8d5b0;border-radius:var(--rsm);padding:16px;text-align:right;margin-bottom:20px}
+.suc-steps{background:var(--bg3);border:1px solid #e8d5b0;border-radius:var(--rsm);padding:16px;text-align:right;margin-bottom:20px}
 .suc-step{display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:var(--text2);padding:5px 0;border-bottom:1px solid #f3f4f6}
 .suc-step:last-child{border-bottom:none}
 .suc-step-num{width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:.7rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .btn-back-home{width:100%;padding:13px;border-radius:var(--rsm);background:var(--gold);border:none;color:#fff;font-size:.92rem;font-weight:800;cursor:pointer;transition:all .2s}
 .btn-back-home:hover{background:var(--gold-light)}
+/* ─── IMAGE UPLOAD ─── */
+.img-upload-wrap{margin-top:12px}
+.img-upload-lbl{font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:6px;display:block}
+.img-upload-lbl span{font-size:.7rem;color:var(--text4);font-weight:600}
+.img-upload-area{
+  border:2px dashed #e8d5b0;border-radius:var(--rsm);
+  padding:16px;text-align:center;cursor:pointer;
+  transition:all .2s;background:#f9fafb;position:relative;
+}
+.img-upload-area:hover{border-color:var(--gold);background:#fef9ed}
+.img-upload-area.has-img{border-style:solid;border-color:var(--gold)}
+.img-upload-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-upload-placeholder{display:flex;flex-direction:column;align-items:center;gap:6px}
+.img-upload-icon{font-size:2rem}
+.img-upload-txt{font-size:.78rem;color:var(--text3);font-weight:600}
+.img-upload-hint{font-size:.68rem;color:var(--text4)}
+.img-preview-wrap{display:none;position:relative}
+.img-preview{width:100%;max-height:140px;object-fit:cover;border-radius:8px}
+.img-remove-btn{
+  position:absolute;top:6px;left:6px;
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(220,38,38,.9);color:#fff;
+  border:none;font-size:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.img-uploading{display:none;align-items:center;gap:8px;justify-content:center;padding:8px}
+.img-spin{width:16px;height:16px;border-radius:50%;border:2px solid #e8d5b0;border-top-color:var(--gold);animation:spin .7s linear infinite}
 
-/* TOAST */
-#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:#1a1a2e;border:1px solid #e8d5b0;box-shadow:0 16px 48px rgba(0,0,0,.15);color:#fff;padding:10px 20px;border-radius:var(--rsm);font-size:.8rem;font-weight:600;z-index:9999;opacity:0;pointer-events:none;display:flex;align-items:center;gap:7px;transition:all .3s;min-width:180px;justify-content:center}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(10px);background:#1a1a2e;border:1px solid #e8d5b0;box-shadow:0 16px 48px rgba(0,0,0,.12);color:#fff;padding:10px 20px;border-radius:var(--rsm);font-size:.8rem;font-weight:600;z-index:9999;opacity:0;pointer-events:none;display:flex;align-items:center;gap:7px;transition:all .3s;min-width:180px;justify-content:center}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 #toast.ok{border-right:4px solid var(--green)}
 #toast.err{border-right:4px solid var(--red)}
 #toast.info{border-right:4px solid var(--gold)}
-
 @media(max-width:600px){
-  .stats-row{gap:12px}
-  .stat-item{padding:12px 16px;min-width:80px}
   .ad-types{grid-template-columns:1fr}
+  .stats-row{gap:10px}
   .f-grid{grid-template-columns:1fr}
   .dur-pills{gap:6px}
   .dur-pill{padding:7px 12px;font-size:.76rem}
@@ -197,7 +189,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
   <div class="hero-tag">📢 إعلانات رحلة+</div>
   <h1 class="hero-title">أوصل علامتك التجارية<br><em>لمسافري الخليج</em></h1>
   <p class="hero-sub">إعلانك يظهر لآلاف المسافرين يومياً — مستخدمون فعليون يخططون لرحلاتهم الآن.</p>
-
   <div class="stats-row">
     <div class="stat-item"><div class="stat-val">+٥٠٠</div><div class="stat-lbl">مستخدم نشط</div></div>
     <div class="stat-item"><div class="stat-val">٢٤/٧</div><div class="stat-lbl">ظهور مستمر</div></div>
@@ -205,36 +196,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
   </div>
 </div>
 
-<!-- اختيار نوع الإعلان -->
-<div class="ad-types">
-  <div class="ad-type-card selected" id="typeStrip" onclick="selectAdType('strip')">
-    <div class="ad-type-icon">📰</div>
-    <div class="ad-type-name">شريط الأخبار</div>
-    <div class="ad-type-desc">إعلانك يتحرك في الشريط العلوي — يراه كل زائر للصفحة الرئيسية</div>
-    <div class="ad-type-price">٦٠ <small>درهم / يوم</small></div>
-    <ul class="ad-type-features">
-      <li>ظهور مستمر في الأعلى</li>
-      <li>نص + رابط مباشر</li>
-      <li>حركة جذابة للعين</li>
-    </ul>
-  </div>
-  <div class="ad-type-card" id="typeSpotlight" onclick="selectAdType('spotlight')">
-    <div class="ad-type-badge">⭐ مميز</div>
-    <div class="ad-type-icon">🔦</div>
-    <div class="ad-type-name">نافذة الأضواء</div>
-    <div class="ad-type-desc">نافذة بارزة في الزاوية — تظهر لكل زائر عند فتح الصفحة</div>
-    <div class="ad-type-price">١٥٠ <small>درهم / يوم</small></div>
-    <ul class="ad-type-features">
-      <li>أيقونة + اسم + نص + زر</li>
-      <li>أكثر جذباً وتأثيراً</li>
-      <li>تبديل تلقائي بين الإعلانات</li>
-    </ul>
+<div class="ad-types-wrap">
+  <div class="ad-types-title">اختر نوع الإعلان</div>
+  <div class="ad-types">
+    <div class="ad-type-card selected" id="typeStrip" onclick="selectAdType('strip')">
+      <div class="ad-check">✓</div>
+      <div class="ad-type-icon">📰</div>
+      <div class="ad-type-name">شريط الأخبار</div>
+      <div class="ad-type-desc">إعلانك يتحرك في الشريط العلوي — يراه كل زائر للصفحة الرئيسية</div>
+      <div class="ad-type-price">٦٠ <small>درهم / يوم</small></div>
+      <ul class="ad-type-features">
+        <li>ظهور مستمر في أعلى الصفحة</li>
+        <li>نص + رابط مباشر</li>
+        <li>حركة جذابة للعين</li>
+      </ul>
+    </div>
+    <div class="ad-type-card" id="typeSpotlight" onclick="selectAdType('spotlight')">
+      <div class="ad-check">✓</div>
+      <div class="ad-type-badge">⭐ مميز</div>
+      <div class="ad-type-icon">🔦</div>
+      <div class="ad-type-name">نافذة الأضواء</div>
+      <div class="ad-type-desc">نافذة بارزة في الزاوية — تظهر لكل زائر عند فتح الصفحة</div>
+      <div class="ad-type-price">١٥٠ <small>درهم / يوم</small></div>
+      <ul class="ad-type-features">
+        <li>أيقونة + اسم شركة + نص + زر</li>
+        <li>أكثر جذباً وتأثيراً</li>
+        <li>تبديل تلقائي بين الإعلانات</li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <div class="form-wrap">
-
-  <!-- STEP 1 -->
   <div class="step-card">
     <div class="step-head"><div class="step-num">١</div><div class="step-title">بيانات الشركة</div></div>
     <div class="step-body">
@@ -257,43 +250,62 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
     </div>
   </div>
 
-  <!-- STEP 2 -->
   <div class="step-card">
     <div class="step-head"><div class="step-num">٢</div><div class="step-title">محتوى الإعلان</div></div>
     <div class="step-body">
       <div class="f-group">
-        <div class="f-lbl">نص الإعلان <span id="wordLimit">٨ كلمات كحد أقصى</span></div>
+        <div class="f-lbl">نص الإعلان <span>٨ كلمات كحد أقصى</span></div>
         <input class="f-inp" type="text" id="adText" placeholder="مثال: احجز فندقك في دبي بأفضل الأسعار!" oninput="updateWordCount();updatePreview()">
         <div class="word-counter" id="wordCounter"><span id="wordCount">٠</span> / ٨ كلمات</div>
         <div class="f-err">يرجى إدخال نص الإعلان (٨ كلمات كحد أقصى)</div>
       </div>
       <div class="f-group">
-        <div class="f-lbl">رابط الإعلان <span>اختياري — يفتح عند الضغط</span></div>
+        <div class="f-lbl">رابط الإعلان <span>اختياري</span></div>
         <input class="f-inp" type="url" id="adLink" placeholder="https://www.yoursite.com" oninput="updatePreview()">
       </div>
 
-      <!-- معاينة شريط الأخبار -->
-      <div id="previewStrip">
-        <div class="preview-wrap">
-          <div class="preview-lbl">📺 معاينة في شريط رحلة+</div>
-          <div class="preview-ticker">
-            <em>📢</em>
-            <span id="previewText">نص إعلانك سيظهر هنا...</span>
+      <div class="img-upload-wrap">
+        <label class="img-upload-lbl">صورة الإعلان <span>اختياري — تظهر في نافذة الأضواء</span></label>
+        <div class="img-upload-area" id="imgUploadArea" onclick="document.getElementById('adImgInput').click()">
+          <input type="file" id="adImgInput" class="img-upload-input" accept="image/jpeg,image/png,image/webp" onchange="handleImgSelect(this)">
+          <div class="img-upload-placeholder" id="imgPlaceholder">
+            <div class="img-upload-icon">🖼</div>
+            <div class="img-upload-txt">اضغط لرفع صورة</div>
+            <div class="img-upload-hint">JPG, PNG, WebP — حد أقصى 2MB</div>
+          </div>
+          <div class="img-preview-wrap" id="imgPreviewWrap">
+            <img id="imgPreview" class="img-preview" src="" alt="معاينة">
+            <button class="img-remove-btn" onclick="removeImg(event)" title="حذف الصورة">✕</button>
+          </div>
+          <div class="img-uploading" id="imgUploading">
+            <div class="img-spin"></div>
+            <span style="font-size:.78rem;color:var(--text3)">جاري رفع الصورة...</span>
           </div>
         </div>
       </div>
 
-      <!-- معاينة نافذة الأضواء -->
+      <div id="previewStrip">
+        <div class="preview-wrap">
+          <div class="preview-lbl">📺 معاينة في شريط رحلة+</div>
+          <div class="preview-ticker"><em>📢</em><span id="previewText">نص إعلانك سيظهر هنا...</span></div>
+        </div>
+      </div>
+
       <div id="previewSpotlight" style="display:none">
-        <div class="spotlight-preview">
-          <div class="sp-header">
-            <div class="sp-title">✨ نافذة الأضواء</div>
-          </div>
-          <div class="sp-ad">
-            <div class="sp-icon">📢</div>
-            <div class="sp-info">
-              <div class="sp-company" id="spCompany">اسم شركتك</div>
-              <div class="sp-text" id="spText">نص إعلانك سيظهر هنا...</div>
+        <div class="preview-wrap">
+          <div class="preview-lbl">🔦 معاينة في نافذة الأضواء</div>
+          <div class="spotlight-preview">
+            <div class="sp-header">
+              <div class="sp-title-txt">✨ نافذة الأضواء</div>
+              <div class="sp-sub-txt">كل إعلان، فرصة جديدة</div>
+            </div>
+            <div class="sp-ad">
+              <div class="sp-icon">📢</div>
+              <div>
+                <div class="sp-company" id="spCompany">اسم شركتك</div>
+                <div class="sp-text-prev" id="spText">نص إعلانك سيظهر هنا...</div>
+                <div class="sp-ad-btn">اكتشف الآن</div>
+              </div>
             </div>
           </div>
         </div>
@@ -301,14 +313,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
     </div>
   </div>
 
-  <!-- STEP 3 -->
   <div class="step-card">
     <div class="step-head"><div class="step-num">٣</div><div class="step-title">المدة والتاريخ</div></div>
     <div class="step-body">
       <div class="f-group">
         <div class="f-lbl">اختر مدة الإعلان</div>
-        <div class="dur-pills" id="durPills">
-          <div class="dur-pill on" onclick="setDur(this,1)">يوم واحد<small id="dp1">٦٠ د</small></div>
+        <div class="dur-pills">
+          <div class="dur-pill on" onclick="setDur(this,1)">يوم<small id="dp1">٦٠ د</small></div>
           <div class="dur-pill" onclick="setDur(this,3)">٣ أيام<small id="dp3">١٨٠ د</small></div>
           <div class="dur-pill" onclick="setDur(this,7)">أسبوع<small id="dp7">٤٢٠ د</small></div>
           <div class="dur-pill" onclick="setDur(this,14)">أسبوعان<small id="dp14">٨٤٠ د</small></div>
@@ -320,9 +331,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
         <input class="f-inp" type="date" id="startDate" onchange="updatePricing()">
         <div class="f-err">يرجى تحديد تاريخ البداية</div>
       </div>
-      <div class="price-display" id="priceDisplay">
+      <div class="price-display">
         <div class="price-breakdown">
-          <div>المدة: <strong id="priceDays">١</strong> يوم</div>
+          <div>نوع الإعلان: <strong id="priceType">شريط الأخبار</strong></div>
+          <div>المدة: <strong><span id="priceDays">١</span> يوم</strong></div>
           <div>السعر: <strong><span id="pricePerDay">٦٠</span> درهم × <span id="priceDays2">١</span> يوم</strong></div>
           <div>تاريخ الانتهاء: <strong id="priceEndDate">—</strong></div>
         </div>
@@ -334,7 +346,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
     </div>
   </div>
 
-  <!-- NOTES -->
   <div class="notes-box">
     <strong>ملاحظات مهمة:</strong><br>
     ✅ إعلانك سيُراجع من فريق رحلة+ خلال ٢٤ ساعة قبل النشر<br>
@@ -343,28 +354,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
     ✅ الإعلان ينشر تلقائياً في التاريخ المحدد بعد الموافقة
   </div>
 
-  <!-- SUMMARY -->
-  <div class="summary-box" id="summaryBox">
+  <div class="summary-box">
     <div class="sum-row"><span class="sum-lbl">نوع الإعلان</span><span class="sum-val" id="sumType">شريط الأخبار</span></div>
     <div class="sum-row"><span class="sum-lbl">الشركة</span><span class="sum-val" id="sumCompany">—</span></div>
     <div class="sum-row"><span class="sum-lbl">نص الإعلان</span><span class="sum-val" id="sumText">—</span></div>
     <div class="sum-row"><span class="sum-lbl">المدة</span><span class="sum-val" id="sumDays">—</span></div>
     <div class="sum-row"><span class="sum-lbl">تاريخ البداية</span><span class="sum-val" id="sumStart">—</span></div>
     <div class="sum-row"><span class="sum-lbl">تاريخ الانتهاء</span><span class="sum-val" id="sumEnd">—</span></div>
-    <div class="sum-row">
-      <span class="sum-lbl">إجمالي الدفع</span>
-      <span class="sum-total-val" id="sumTotal">٦٠ درهم</span>
-    </div>
+    <div class="sum-row"><span class="sum-lbl">إجمالي الدفع</span><span class="sum-total-val" id="sumTotal">٦٠ درهم</span></div>
   </div>
 
   <button class="btn-submit" id="btnSubmit" onclick="submitAd()">
     <div class="sub-spin"></div>
     <span class="sub-txt">💳 ادفع وأرسل طلب الإعلان</span>
   </button>
-
 </div>
 
-<!-- SUCCESS -->
 <div class="success-ov" id="successOv">
   <div class="success-card">
     <div class="suc-icon">🎉</div>
@@ -385,59 +390,100 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;background:var(-
 <script>
 const SURL='https://pokpdwvqecwjfxoraqjd.supabase.co';
 const SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI';
-
-const PRICE_STRIP = 60;      // شريط الأخبار
-const PRICE_SPOTLIGHT = 150; // نافذة الأضواء
-
+const PRICE_STRIP=60, PRICE_SPOTLIGHT=150;
 const AN=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(d=>!isNaN(+d)?AN[+d]:d).join('');
-
-let sb;
-let selectedDays=1;
-let selectedType='strip'; // strip | spotlight
+let sb, selectedDays=1, selectedType='strip';
 
 window.addEventListener('load',()=>{
   if(window.supabase)sb=window.supabase.createClient(SURL,SKEY);
   const tmr=new Date();tmr.setDate(tmr.getDate()+1);
   document.getElementById('startDate').value=tmr.toISOString().split('T')[0];
   document.getElementById('startDate').min=tmr.toISOString().split('T')[0];
-  updatePricing();
+  updateDurPillPrices();updatePricing();
+  checkAdPaymentReturn();
 });
 
-/* ══ AD TYPE ══ */
+/* ══ IMAGE UPLOAD ══ */
+let adImgFile = null;
+let adImgUrl = null;
+
+function handleImgSelect(input){
+  const file = input.files[0];
+  if(!file) return;
+  // تحقق الحجم (2MB)
+  if(file.size > 2*1024*1024){
+    toast('حجم الصورة يجب أن يكون أقل من 2MB','err');
+    input.value='';return;
+  }
+  adImgFile = file;
+  // معاينة فورية
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('imgPreview').src = e.target.result;
+    document.getElementById('imgPlaceholder').style.display='none';
+    document.getElementById('imgPreviewWrap').style.display='block';
+    document.getElementById('imgUploadArea').classList.add('has-img');
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeImg(e){
+  e.stopPropagation();
+  adImgFile = null; adImgUrl = null;
+  document.getElementById('adImgInput').value='';
+  document.getElementById('imgPreview').src='';
+  document.getElementById('imgPlaceholder').style.display='flex';
+  document.getElementById('imgPreviewWrap').style.display='none';
+  document.getElementById('imgUploadArea').classList.remove('has-img');
+}
+
+async function uploadAdImg(adId){
+  if(!adImgFile) return null;
+  try{
+    document.getElementById('imgUploading').style.display='flex';
+    const ext = adImgFile.name.split('.').pop();
+    const path = `ad-images/${adId}.${ext}`;
+    const { data, error } = await sb.storage
+      .from('ads')
+      .upload(path, adImgFile, { upsert:true, contentType: adImgFile.type });
+    document.getElementById('imgUploading').style.display='none';
+    if(error){ console.log('img upload error:', error); return null; }
+    const { data: urlData } = sb.storage.from('ads').getPublicUrl(path);
+    return urlData.publicUrl;
+  }catch(e){
+    document.getElementById('imgUploading').style.display='none';
+    console.log('img error:', e); return null;
+  }
+}
+
 function selectAdType(type){
   selectedType=type;
-  document.getElementById('typeStrip').classList.toggle('selected', type==='strip');
-  document.getElementById('typeSpotlight').classList.toggle('selected', type==='spotlight');
-  document.getElementById('previewStrip').style.display = type==='strip'?'block':'none';
-  document.getElementById('previewSpotlight').style.display = type==='spotlight'?'block':'none';
-  document.getElementById('sumType').textContent = type==='strip'?'شريط الأخبار':'نافذة الأضواء ⭐';
-  // تحديث أسعار الأيام
-  updateDurPillPrices();
-  updatePricing();
+  document.getElementById('typeStrip').classList.toggle('selected',type==='strip');
+  document.getElementById('typeSpotlight').classList.toggle('selected',type==='spotlight');
+  document.getElementById('previewStrip').style.display=type==='strip'?'block':'none';
+  document.getElementById('previewSpotlight').style.display=type==='spotlight'?'block':'none';
+  const lbl=type==='strip'?'شريط الأخبار':'نافذة الأضواء ⭐';
+  document.getElementById('sumType').textContent=lbl;
+  document.getElementById('priceType').textContent=type==='strip'?'شريط الأخبار':'نافذة الأضواء';
+  updateDurPillPrices();updatePricing();
 }
 
 function updateDurPillPrices(){
-  const p = selectedType==='strip' ? PRICE_STRIP : PRICE_SPOTLIGHT;
-  const days=[1,3,7,14,30];
-  const ids=['dp1','dp3','dp7','dp14','dp30'];
-  days.forEach((d,i)=>{
-    const el=document.getElementById(ids[i]);
+  const p=selectedType==='strip'?PRICE_STRIP:PRICE_SPOTLIGHT;
+  [[1,'dp1'],[3,'dp3'],[7,'dp7'],[14,'dp14'],[30,'dp30']].forEach(([d,id])=>{
+    const el=document.getElementById(id);
     if(el)el.textContent=toAr(d*p)+' د';
   });
 }
 
-/* ══ WORD COUNT ══ */
-function countWords(str){return str.trim().split(/\s+/).filter(w=>w.length>0).length}
+function countWords(s){return s.trim().split(/\s+/).filter(w=>w.length>0).length}
 function updateWordCount(){
   const text=document.getElementById('adText').value;
   const count=text.trim()?countWords(text):0;
-  const el=document.getElementById('wordCounter');
   document.getElementById('wordCount').textContent=toAr(count);
-  el.className='word-counter '+(count===0?'':(count<=6?'wc-ok':count<=8?'wc-warn':'wc-err'));
+  document.getElementById('wordCounter').className='word-counter '+(count===0?'':(count<=6?'wc-ok':count<=8?'wc-warn':'wc-err'));
 }
-
-/* ══ PREVIEW ══ */
 function updatePreview(){
   const text=document.getElementById('adText').value.trim();
   const company=document.getElementById('companyName').value.trim();
@@ -445,114 +491,121 @@ function updatePreview(){
   document.getElementById('spText').textContent=text||'نص إعلانك سيظهر هنا...';
   document.getElementById('spCompany').textContent=company||'اسم شركتك';
 }
-
-/* ══ DURATION ══ */
 function setDur(el,days){
   document.querySelectorAll('.dur-pill').forEach(p=>p.classList.remove('on'));
-  el.classList.add('on');
-  selectedDays=days;
-  updatePricing();
+  el.classList.add('on');selectedDays=days;updatePricing();
 }
-
-/* ══ PRICING ══ */
 function updatePricing(){
-  const pricePerDay = selectedType==='strip' ? PRICE_STRIP : PRICE_SPOTLIGHT;
-  const total=selectedDays*pricePerDay;
+  const p=selectedType==='strip'?PRICE_STRIP:PRICE_SPOTLIGHT;
+  const total=selectedDays*p;
   const startVal=document.getElementById('startDate').value;
   let endDate='—';
-  if(startVal){
-    const end=new Date(startVal);
-    end.setDate(end.getDate()+selectedDays-1);
-    endDate=end.toLocaleDateString('ar-AE');
-  }
-  document.getElementById('pricePerDay').textContent=toAr(pricePerDay);
+  if(startVal){const end=new Date(startVal);end.setDate(end.getDate()+selectedDays-1);endDate=end.toLocaleDateString('ar-AE')}
+  document.getElementById('pricePerDay').textContent=toAr(p);
   document.getElementById('priceDays').textContent=toAr(selectedDays);
   document.getElementById('priceDays2').textContent=toAr(selectedDays);
   document.getElementById('priceTotal').textContent=toAr(total);
   document.getElementById('priceEndDate').textContent=endDate;
-
-  // ملخص
   document.getElementById('sumCompany').textContent=document.getElementById('companyName').value||'—';
   document.getElementById('sumText').textContent=document.getElementById('adText').value||'—';
   document.getElementById('sumDays').textContent=toAr(selectedDays)+' يوم';
   document.getElementById('sumStart').textContent=startVal?new Date(startVal).toLocaleDateString('ar-AE'):'—';
   document.getElementById('sumEnd').textContent=endDate;
   document.getElementById('sumTotal').textContent=toAr(total)+' درهم';
-
   updatePreview();
 }
+['companyName','adText','startDate'].forEach(id=>{document.getElementById(id)?.addEventListener('input',updatePricing)});
 
-['companyName','adText','startDate'].forEach(id=>{
-  document.getElementById(id)?.addEventListener('input',updatePricing);
-});
-
-/* ══ VALIDATION ══ */
 function validate(){
   let ok=true;
-  const checks=[
-    {id:'companyName',check:v=>v.trim().length>0},
-    {id:'contactPhone',check:v=>v.trim().length>0},
-    {id:'adText',check:v=>v.trim().length>0&&countWords(v)<=8},
-    {id:'startDate',check:v=>v.length>0},
-  ];
-  checks.forEach(c=>{
-    const el=document.getElementById(c.id);
-    const g=el?.closest('.f-group');
+  [{id:'companyName',check:v=>v.trim().length>0},
+   {id:'contactPhone',check:v=>v.trim().length>0},
+   {id:'adText',check:v=>v.trim().length>0&&countWords(v)<=8},
+   {id:'startDate',check:v=>v.length>0}].forEach(c=>{
+    const el=document.getElementById(c.id);const g=el?.closest('.f-group');
     if(!el||!c.check(el.value)){if(g)g.classList.add('err');ok=false}
     else if(g)g.classList.remove('err');
   });
-  if(!ok)toast('يرجى ملء جميع الحقول المطلوبة بشكل صحيح','err');
+  if(!ok)toast('يرجى ملء جميع الحقول المطلوبة','err');
   return ok;
 }
 
-/* ══ SUBMIT ══ */
+const AD_EDGE_URL='https://pokpdwvqecwjfxoraqjd.supabase.co/functions/v1/create-ad-checkout';
+
 async function submitAd(){
   if(!validate())return;
   const btn=document.getElementById('btnSubmit');
   btn.classList.add('loading');btn.disabled=true;
   toast('جاري معالجة طلبك...','info');
-
   const companyName=document.getElementById('companyName').value.trim();
   const contactPhone=document.getElementById('contactPhone').value.trim();
   const adText=document.getElementById('adText').value.trim();
   const adLink=document.getElementById('adLink').value.trim();
   const startDate=document.getElementById('startDate').value;
-  const endDate=new Date(startDate);
-  endDate.setDate(endDate.getDate()+selectedDays-1);
-  const pricePerDay=selectedType==='strip'?PRICE_STRIP:PRICE_SPOTLIGHT;
-  const amount=selectedDays*pricePerDay;
-
+  const endDate=new Date(startDate);endDate.setDate(endDate.getDate()+selectedDays-1);
+  const p=selectedType==='strip'?PRICE_STRIP:PRICE_SPOTLIGHT;
+  const amount=selectedDays*p;
   try{
+    // ١ — حفظ الإعلان في Supabase أولاً
     const {data:ad,error}=await sb.from('paid_ads').insert({
-      company_name:companyName,
-      ad_text:adText,
-      ad_link:adLink||null,
-      start_date:startDate,
-      end_date:endDate.toISOString().split('T')[0],
-      days:selectedDays,
-      amount,
-      status:'pending',
-      is_paid:false,
-      contact_phone:contactPhone,
-      ad_type:selectedType,
+      company_name:companyName,ad_text:adText,ad_link:adLink||null,
+      start_date:startDate,end_date:endDate.toISOString().split('T')[0],
+      days:selectedDays,amount,status:'pending',is_paid:false,
+      contact_phone:contactPhone,ad_type:selectedType,
     }).select().single();
-
     if(error)throw new Error(error.message);
 
-    showSuccess();
+    // رفع الصورة إن وجدت
+    if(adImgFile){
+      const imgUrl = await uploadAdImg(ad.id);
+      if(imgUrl){
+        await sb.from('paid_ads').update({ad_image:imgUrl}).eq('id',ad.id);
+        adImgUrl = imgUrl;
+      }
+    }
+
+    // ٢ — التحويل لـ Stripe
+    toast('جاري التحويل للدفع...','info');
+    const res=await fetch(AD_EDGE_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBva3Bkd3ZxZWN3amZ4b3JhcWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NDIzNzMsImV4cCI6MjA5MzMxODM3M30.O4ux4H4hQcUwMIyErQHIP5fAErXgru4wnTR4sOtvPUI'},
+      body:JSON.stringify({
+        ad_id:ad.id,
+        ad_type:selectedType,
+        days:selectedDays,
+        company_name:companyName,
+      })
+    });
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    if(data.url){
+      sessionStorage.setItem('pending_ad_id',ad.id);
+      window.location.href=data.url;
+    }
   }catch(err){
     toast('❌ '+err.message,'err');
     btn.classList.remove('loading');btn.disabled=false;
   }
 }
 
-function showSuccess(){
-  document.getElementById('successOv').classList.add('show');
+async function checkAdPaymentReturn(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('ad_paid')==='true'){
+    const adId=params.get('ad_id')||sessionStorage.getItem('pending_ad_id');
+    if(adId){
+      await sb.from('paid_ads').update({is_paid:true,status:'pending'}).eq('id',adId);
+      sessionStorage.removeItem('pending_ad_id');
+    }
+    window.history.replaceState({},'',window.location.pathname);
+    document.getElementById('successOv').classList.add('show');
+  }else if(params.get('ad_paid')==='false'){
+    window.history.replaceState({},'',window.location.pathname);
+    toast('تم إلغاء الدفع — يمكنك المحاولة مجدداً','info');
+  }
 }
 
 function toast(msg,type='ok'){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.className=`show ${type}`;
+  const t=document.getElementById('toast');t.textContent=msg;t.className=`show ${type}`;
   clearTimeout(t._t);t._t=setTimeout(()=>t.className='',3200);
 }
 </script>
